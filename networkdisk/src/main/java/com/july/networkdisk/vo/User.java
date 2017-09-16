@@ -2,7 +2,7 @@ package com.july.networkdisk.vo;
 
 import java.sql.*;
 
-public class Users
+public class User
 {
     private String id;
     private String name;

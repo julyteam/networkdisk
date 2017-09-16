@@ -7,7 +7,7 @@ import com.july.networkdisk.service.*;
 public class UserAction extends ActionSupport
 {
     private static final long serialVersionUID = 1L;
-    private Users user;
+    private User user;
     private IUserService iUserService;
     
     public void setiUserService(final IUserService iUserService) {
@@ -18,11 +18,11 @@ public class UserAction extends ActionSupport
         return this.iUserService;
     }
     
-    public void setUser(final Users user) {
+    public void setUser(final User user) {
         this.user = user;
     }
     
-    public Users getUser() {
+    public User getUser() {
         return this.user;
     }
     

@@ -5,7 +5,7 @@
 
 <struts>
 	<package name="networkdisk.struts2" namespace="/" extends="struts-default">
-		  <action name="user" class="usersAction" >
+		  <action name="user" class="userAction" >
 			<result name="success">/WEB-INF/welcome.jsp</result>
 			<result name="error">/error.jsp</result>
 		  </action>

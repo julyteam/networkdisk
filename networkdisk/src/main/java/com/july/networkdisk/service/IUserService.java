@@ -2,6 +2,6 @@ package com.july.networkdisk.service;
 
 import com.july.networkdisk.vo.*;
 
-public interface IUserService extends IBaseService<Users>
+public interface IUserService extends IBaseService<User>
 {
 }
