@@ -2,7 +2,7 @@ package com.july.networkdisk.vo;
 
 import java.sql.Timestamp;
 
-public class ListFile {
+public class NetFile {
 	private Integer id;
 	private String name;
 	private String uid;
@@ -11,9 +11,19 @@ public class ListFile {
 	private Timestamp addtime;
 	private String type;
 	private Integer downum;
+	private Integer deletesign;
 	
-	public ListFile(){
+	
+	public NetFile(){
 		
+	}
+	
+	public Integer getDeletesign() {
+		return deletesign;
+	}
+
+	public void setDeletesign(Integer deletesign) {
+		this.deletesign = deletesign;
 	}
 
 	public Integer getId() {

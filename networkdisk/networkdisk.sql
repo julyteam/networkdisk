@@ -1,5 +1,5 @@
 
-			文件夹（categories）数据表
+			文件夹（categorie）数据表
                           
 字段		类型			Null		默认		注释
 cat_id 		varchar(50)		否				主键id
@@ -23,7 +23,7 @@ addtime 	timestamp 		否		添加时间
 not_id 			int(10)			否				主键id
 not_title 		varchar(255)		否				新闻公告名称
 not_content 		text			否				新闻公告内容
-not_time 		date			否				发布时间
+not_time 		timestamp		否				发布时间
    
 
 			分享（share）数据表
@@ -38,7 +38,7 @@ sh_retain	int(2)			是		-1（代表永久）  保留时长
 
 
 
-			文件列表（listfile）数据表
+			文件列表（file）数据表
                             
 字段			类型			Null	默认	注释
 list_id 		int(11)			否		主键（自增）
@@ -47,12 +47,13 @@ list_uid 		varchar(50)		否		上传用户id（外键）
 list_catid		varchar(50)		是		所属文件夹id(外键)
 list_path		varchar(255)		否		文件路径
 list_addtime 		timestamp 		否		上传时间
-list_type			varchar(20)		否		文件类型
-list_downum			int(11)			否	0	下载次数
+list_type		varchar(20)		否		文件类型
+list_downum		int(11)			否	0	下载次数
+list_deletesign		int(1)			否		文件删除标志
 
 
 
-			用户（users）数据表
+			用户（user）数据表
                 
 字段				类型			Null		默认		注释
 user_id 			varchar(50)		否				主键
@@ -75,7 +76,7 @@ create database networkdisk charset utf8;
 use networkdisk;
 
 #创建用户表
-create table users(
+create table user(
 			user_id        varchar(50) PRIMARY KEY,
 			user_name      varchar(255) NOT NULL UNIQUE,
 			user_password  varchar(255) NOT NULL,
@@ -89,7 +90,7 @@ create table users(
 			user_photo     varchar(255) NOT NULL
 );
 #文件夹表
-create table categories
+create table categorie
 (
 			cat_id varchar(50) not null,
 			cat_name varchar(255) not null unique,
@@ -99,15 +100,16 @@ create table categories
 );
 
 #创建文件表
-create table listfile(
-			list_id  int(11) PRIMARY KEY auto_increment,
-			list_name varchar(255) not null,
-			list_uid varchar(50) not null,
-			list_catid varchar(50) ,
-			list_path varchar(255) not null,
-			list_addtime timestamp not null DEFAULT CURRENT_TIMESTAMP,
-			list_type  varchar(20) not null,
-			list_downum		int(11)  not null DEFAULT 0,
+create table file(
+			list_id		int(11) PRIMARY KEY auto_increment,
+			list_name	varchar(255) not null,
+			list_uid	varchar(50) not null,
+			list_catid	varchar(50) ,
+			list_path	varchar(255) not null,
+			list_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			list_type	varchar(20) not null,
+			list_downum	int(11)  not null DEFAULT 0,
+			list_deletesign	int(1) not null,
 			FOREIGN key (list_uid) REFERENCES users(user_id),
 			FOREIGN key (list_catid) REFERENCES categories(cat_id)
 	
@@ -138,7 +140,7 @@ create table notice
 );
 
 #分享表
-create table shares
+create table share
 (
 	sh_id varchar(50) not null,
 	sh_uid varchar(50) not null,
