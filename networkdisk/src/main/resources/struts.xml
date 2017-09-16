@@ -24,16 +24,16 @@
         </action>  
         
          <!-- 下载 -->  
-      <!--   <action name="downloadAction" class="upload.DownloadAction">  
+        <action name="filedownload" class="upload.DownloadAction">  
             <result type="stream">  
-               			 文件类型 —— application/octet-stream 表示无限制  
+               			 <!-- 文件类型 —— application/octet-stream 表示无限制   -->
                 <param name="contentType">application/octet-stream</param>  
-            		  	  流对象名 —— 去找Action中的getInputStream方法  
+            		  	 <!--  流对象名 —— 去找Action中的getInputStream方法   -->
                 <param name="inputName">inputStream</param>  
-             			   文件名 —— 将调用该Action中的getFileName方法  
+             			  <!--  文件名 —— 将调用该Action中的getFileName方法   -->
                 <param name="contentDisposition">attachment;filename="${fileName}"</param>  
                 <param name="bufferSize">4096</param>  
             </result>  
-        </action>   -->
+        </action>  
 	</package>
 </struts>
