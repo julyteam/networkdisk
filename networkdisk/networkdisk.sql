@@ -86,8 +86,8 @@ create table users(
 			user_sex       int(1)       NOT NULL DEFAULT 1,
 			user_about     varchar(255) ,
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
-)			user_photo     varchar(255) NOT NULL
-
+			user_photo     varchar(255) NOT NULL
+);
 #文件夹表
 create table categories
 (
@@ -95,8 +95,8 @@ create table categories
 			cat_name varchar(255) not null unique,
 			cat_reid varchar(50),
 			primary key(cat_id),
-			foreign key(`cat_reid`) references categories(cat_id)
-)
+			foreign key(cat_reid) references categories(cat_id)
+);
 
 #创建文件表
 create table listfile(
@@ -111,7 +111,7 @@ create table listfile(
 			FOREIGN key (list_uid) REFERENCES users(user_id),
 			FOREIGN key (list_catid) REFERENCES categories(cat_id)
 	
-)
+);
 
 
 
@@ -125,7 +125,7 @@ create table friend
 	primary key(fri_id),
 	foreign key(fri_uid) references users(user_id),
 	foreign key(fri_fid) references users(user_id)
-)
+);
 
 #消息公告
 create table notice
@@ -135,7 +135,7 @@ create table notice
 	not_content text not null,
 	not_time timestamp not null default current_timestamp,
 	primary key(not_id)
-)
+);
 
 #分享表
 create table shares
@@ -148,4 +148,4 @@ create table shares
 	sh_retaintime int(2) not null default -1,
 	primary key(sh_id),
 	foreign key(sh_uid) references users(user_id)
-)
+);
