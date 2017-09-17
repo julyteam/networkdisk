@@ -26,11 +26,6 @@
 		}
 	</script>
 
-	<form action="${pageContext.request.contextPath}/findAllByUser"
-		method="post">
-
-		<input type="submit" value="查找" />
-
-	</form>
+	
 </body>
 </html>
