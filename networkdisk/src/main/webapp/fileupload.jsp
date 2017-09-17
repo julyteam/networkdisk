@@ -11,9 +11,7 @@
 	<script type="text/javascript">
 		function test() {
 			var form = new FormData(document.getElementById("tf"));
-			//         var req = new XMLHttpRequest();
-			//         req.open("post", "${pageContext.request.contextPath}/public/testupload", false);
-			//         req.send(form);
+		
 			$.ajax({
 				url : "${pageContext.request.contextPath}/fileupload",
 				type : "post",
