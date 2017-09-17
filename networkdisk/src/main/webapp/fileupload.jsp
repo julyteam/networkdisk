@@ -11,9 +11,7 @@
 	<script type="text/javascript">
 		function test() {
 			var form = new FormData(document.getElementById("tf"));
-			//         var req = new XMLHttpRequest();
-			//         req.open("post", "${pageContext.request.contextPath}/public/testupload", false);
-			//         req.send(form);
+		
 			$.ajax({
 				url : "${pageContext.request.contextPath}/fileupload",
 				type : "post",
@@ -35,12 +33,6 @@
 	</form>
 	
 	
-	<form id="tf">
-
-		上传文件：<input type="file" name="file"><br /> <input
-			type="button" value="提交" onclick="test()"/>
-
-	</form>
 	
 	
 	<form action="${pageContext.request.contextPath}/findAllByUser"
