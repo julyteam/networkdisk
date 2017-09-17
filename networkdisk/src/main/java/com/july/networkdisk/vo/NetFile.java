@@ -3,13 +3,14 @@ package com.july.networkdisk.vo;
 import java.sql.Timestamp;
 
 public class NetFile {
-	private Integer id;
+	private String id;
 	private String name;
 	private String uid;
 	private String catid;
 	private String path;
 	private Timestamp addtime;
 	private String type;
+	private Long size;
 	private Integer downum;
 	private Integer deletesign;
 	
@@ -26,11 +27,12 @@ public class NetFile {
 		this.deletesign = deletesign;
 	}
 
-	public Integer getId() {
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -81,7 +83,12 @@ public class NetFile {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	public void setSize(Long size) {
+		this.size = size;
+	}
+	public Long getSize() {
+		return size;
+	}
 	public Integer getDownum() {
 		return downum;
 	}

@@ -24,10 +24,10 @@ public class UserServiceImpl implements IUserService
     public void update( User user) {
     }
     
-    public void delete( Integer id) {
+    public void delete( String id) {
     }
     
-    public User get( Integer id) {
+    public User get( String id) {
         return null;
     }
     

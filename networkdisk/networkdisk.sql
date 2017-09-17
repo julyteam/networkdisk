@@ -41,15 +41,16 @@ sh_retain	int(2)			是		-1（代表永久）  保留时长
 			文件列表（file）数据表
                             
 字段			类型			Null	默认	注释
-list_id 		int(11)			否		主键（自增）
-list_name 		varchar(255)		否		文件名称
-list_uid 		varchar(50)		否		上传用户id（外键）
-list_catid		varchar(50)		是		所属文件夹id(外键)
-list_path		varchar(255)		否		文件路径
-list_addtime 		timestamp 		否		上传时间
-list_type		varchar(20)		否		文件类型
-list_downum		int(11)			否	0	下载次数
-list_deletesign		int(1)			否		文件删除标志
+file_id 		int(11)			否		主键（自增）
+file_name 		varchar(255)		否		文件名称
+file_uid 		varchar(50)		否		上传用户id（外键）
+file_catid		varchar(50)		是		所属文件夹id(外键)
+file_path		varchar(255)		否		文件路径
+file_addtime 		timestamp 		否		上传时间
+file_type		varchar(20)		否		文件类型
+file_size		int(11)			否		文件字节
+file_downum		int(11)			否	0	下载次数
+file_deletesign		int(1)			否		文件删除标志
 
 
 
@@ -101,17 +102,18 @@ create table categorie
 
 #创建文件表
 create table file(
-			list_id		int(11) PRIMARY KEY auto_increment,
-			list_name	varchar(255) not null,
-			list_uid	varchar(50) not null,
-			list_catid	varchar(50) ,
-			list_path	varchar(255) not null,
-			list_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP,
-			list_type	varchar(20) not null,
-			list_downum	int(11)  not null DEFAULT 0,
-			list_deletesign	int(1) not null,
-			FOREIGN key (list_uid) REFERENCES user(user_id),
-			FOREIGN key (list_catid) REFERENCES categorie(cat_id)
+			file_id		varchar(50) PRIMARY KEY,
+			file_name	varchar(255) not null,
+			file_uid	varchar(50) not null,
+			file_catid	varchar(50) ,
+			file_path	varchar(255) not null,
+			file_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			file_type	varchar(20) not null,
+			file_size   int(20)  not null,
+			file_downum	int(11)  not null DEFAULT 0,
+			file_deletesign	int(1) not null,
+			FOREIGN key (file_uid) REFERENCES user(user_id),
+			FOREIGN key (file_catid) REFERENCES categorie(cat_id)
 	
 );
 

@@ -5,21 +5,22 @@
 	<!-- resultMap标签：映射实体与表 type：表示实体全路径名 id属性：为实体与表的映射取一个唯一的编号 -->
 	<resultMap type="com.july.networkdisk.vo.NetFile" id="fileMap">
 		<!-- id标签：映射主键属性 property属性：实体的属性名 column属性：表的字段名 -->
-		<id property="id" column="list_id" />
-		<result property="name" column="list_name" />
-		<result property="uid" column="list_uid" />
-		<result property="catid" column="list_catid" />
-		<result property="path" column="list_path" />
-		<result property="addtime" column="list_addtime" />
-		<result property="type" column="list_type" />
-		<result property="downum" column="list_downum" />
-		<result property="deletesign" column="list_deletesign" />
+		<id property="id" column="file_id" />
+		<result property="name" column="file_name" />
+		<result property="uid" column="file_uid" />
+		<result property="catid" column="file_catid" />
+		<result property="path" column="file_path" />
+		<result property="addtime" column="file_addtime" />
+		<result property="type" column="file_type" />
+		<result property="size" column="file_size" />
+		<result property="downum" column="file_downum" />
+		<result property="deletesign" column="file_deletesign" />
 	</resultMap>
 	
 	<!-- 增加文件 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.NetFile">
-		insert into file(list_name,list_uid,list_catid,list_path,list_type,list_downum,list_deletesign) 
-		values (#{name},#{uid},#{catid},#{path},#{type},#{downum},#{deletesign})
+		insert into file(file_id,file_name,file_uid,file_catid,file_path,file_type,file_size,file_downum,file_deletesign) 
+		values (#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
 	</insert>
 </mapper>
 

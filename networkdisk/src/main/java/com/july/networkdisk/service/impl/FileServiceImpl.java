@@ -19,17 +19,23 @@ public class FileServiceImpl implements IFileService {
 		fileDao.save(file);
 	}
 
+	public List<NetFile> findAllByUser(String userID) {
+		return fileDao.findAllByUser(userID);
+	}
+	
+	
+	
 	public void update(NetFile file) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void delete(Integer p0) {
+	public void delete(String p0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public NetFile get(Integer p0) {
+	public NetFile get(String p0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

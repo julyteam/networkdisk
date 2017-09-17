@@ -22,16 +22,16 @@ public class FileUtil {
 	public static NetFile layFile(File file, String fileName,
 			String fileContentType, User user, NetFile netFile)
 			throws Exception {
-
+		netFile.setId(CommonUtil.createUUID());
 		netFile.setUid(user.getId());
 		String[] str = fileName.split("\\.");
-		netFile.setName(str[0]); // 截取文件名
+		netFile.setName(fileName); // 截取文件名
 	
 		if(str[1] == null){
 			netFile.setType((fileContentType.split("/"))[0]); // 截取文件类型
 		}
 		netFile.setType(str[1]);
-		
+		netFile.setSize(file.length());
 		OutputStream os = null;
 		InputStream is = null;
 

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/networkdisk/user.action" method="POST">
+	<form action="${pageContext.request.contextPath}/user.action" method="POST">
 		<table border="2" align="center">
 			<tr>
 				<th>编号</th>

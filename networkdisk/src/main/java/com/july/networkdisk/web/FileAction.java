@@ -1,6 +1,7 @@
 package com.july.networkdisk.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import com.july.networkdisk.service.IFileService;
@@ -18,8 +19,20 @@ public class FileAction extends ActionSupport {
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
 	private IFileService fileService;
+	private List<NetFile> listFile; // 返回查询的文件列表
 
-	
+	ActionContext actionContext = ActionContext.getContext(); // 获取session
+	Map session = actionContext.getSession();
+	User user = (User) session.get("user");
+
+	public List<NetFile> getListFile() {
+		return listFile;
+	}
+
+	public void setListFile(List<NetFile> listFile) {
+		this.listFile = listFile;
+	}
+
 	public IFileService getFileService() {
 		return fileService;
 	}
@@ -52,25 +65,32 @@ public class FileAction extends ActionSupport {
 		this.fileContentType = fileContentType;
 	}
 
+	/**
+	 * 根据用户查找用户的所有文件
+	 * 
+	 * @return
+	 */
+	public String findAllByUser() {
+
+		listFile = fileService.findAllByUser("1");
+		
+		return SUCCESS;
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @return
+	 */
 	public String fileUpLoad() {
 		if (file == null) {
 			return ERROR;
 		} else {
-			ActionContext actionContext = ActionContext.getContext(); // 获取session
-			Map session = actionContext.getSession();
-
-			User user0 = new User();
-			user0.setName("laozhu");
-			user0.setId("1");
-			session.put("user", user0);
-
-			User user = (User) session.get("user");
-
 			NetFile netFile = new NetFile();
-
 			try {
 
-				netFile = FileUtil.layFile(file, fileFileName, fileContentType,user, netFile);
+				netFile = FileUtil.layFile(file, fileFileName, fileContentType,
+						user, netFile);
 				fileService.save(netFile);
 			} catch (Exception e) {
 				return ERROR;

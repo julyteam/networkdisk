@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <form action="${pageContext.request.contextPath}/networkdisk/fileupload" enctype="multipart/form-data" method="post" >  
+ <form action="${pageContext.request.contextPath}/fileupload" enctype="multipart/form-data" method="post" >  
           
                上传文件：<input type="file" name="file"><br/>  
               <input type="submit" value="提交"/>  
