@@ -14,7 +14,7 @@
 		<result property="isadmin" column="user_isadmin" />
 		<result property="sex" column="user_sex" />
 		<result property="about" column="user_about" />
-		<result property="timeStamp" column="user_cTime" />
+		<result property="addtime" column="user_cTime" />
 		<result property="photo" column="user_photo" />
 	</resultMap>
 	
