@@ -31,6 +31,12 @@
 			type="button" value="提交" onclick="test()"/>
 
 	</form>
+	<form id="tf">
+
+		上传文件：<input type="file" name="file"><br /> <input
+			type="button" value="提交" onclick="test()"/>
+
+	</form>
 	<form action="${pageContext.request.contextPath}/findAllByUser"
 		method="post">
 
