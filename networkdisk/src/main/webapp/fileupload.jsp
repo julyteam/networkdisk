@@ -31,6 +31,23 @@
 			type="button" value="提交" onclick="test()"/>
 
 	</form>
+<<<<<<< HEAD
+=======
+	
+	<form id="tf">
+
+		上传文件：<input type="file" name="file"><br /> <input
+			type="button" value="提交" onclick="test()"/>
+
+	</form>
+	<form action="${pageContext.request.contextPath}/findAllByUser"
+		method="post">
+
+		<input type="submit" value="查找" />
+
+	</form>
+	
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 	<form action="${pageContext.request.contextPath}/findAllByUser"
 		method="post">
 
