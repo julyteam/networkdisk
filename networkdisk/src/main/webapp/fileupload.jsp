@@ -38,7 +38,12 @@
 			type="button" value="提交" onclick="test()"/>
 
 	</form>
-	
+	<form action="${pageContext.request.contextPath}/findAllByUser"
+		method="post">
+
+		<input type="submit" value="查找" />
+
+	</form>
 	
 	<form action="${pageContext.request.contextPath}/findAllByUser"
 		method="post">
