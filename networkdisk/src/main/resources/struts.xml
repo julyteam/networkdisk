@@ -4,28 +4,34 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<!-- 开发模式(修改struts.xml不用重启服务器） -->
+	<constant name="struts.devMode" value="true" />
+	
 	<package name="networkdisk.user" namespace="/" extends="struts-default">
-		  <action name="user" class="userAction" >
+		<action name="user" class="userAction">
 			<result name="success">/WEB-INF/welcome.jsp</result>
 			<result name="error">/error.jsp</result>
-		  </action>
+		</action>
 	</package>
-	<package name="networkdisk.file" namespace="/" extends="struts-default">
+	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
-		  <action name="fileupload" class="fileAction" method="fileUpLoad">  
-            <interceptor-ref name="fileUpload">  
-               <!-- 允许上传的文件大小 -->
-                <param name="maximumSize">4024000</param>    
-            </interceptor-ref>  
-            <interceptor-ref name="defaultStack" />  
-            
-            <result name="success">/WEB-INF/welcome.jsp</result>  
-  			<result name="error">/error.jsp</result>
-        </action>  
-        
-        <!-- 根据用户id查找所有的文件 -->
-        <action name="findAllByUser" class="fileAction" method="findAllByUser">
+		<action name="fileupload" class="fileAction" method="fileUpLoad">
+			<interceptor-ref name="fileUpload">
+				<!-- 允许上传的文件大小 -->
+				<param name="maximumSize">4024000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			
+		</action>
+
+		<!-- 根据用户id查找所有的文件 -->
+		<action name="findAllByUser" class="fileAction" method="findAllByUser">
 			<result name="success">/WEB-INF/listFile.jsp</result>
-		  </action>
+		</action>
 	</package>
 </struts>

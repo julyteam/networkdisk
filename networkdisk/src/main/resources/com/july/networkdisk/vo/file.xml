@@ -22,6 +22,10 @@
 		insert into file(file_id,file_name,file_uid,file_catid,file_path,file_type,file_size,file_downum,file_deletesign) 
 		values (#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
 	</insert>
+	<!-- 查找文件 -->
+	<select id="findAllByUser" parameterType="String" resultMap="fileMap">
+			select * from file where file_uid = #{userID}
+	</select>
 </mapper>
 
 

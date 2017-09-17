@@ -1,6 +1,7 @@
 package com.july.networkdisk.web;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class FileAction extends ActionSupport {
 	 */
 	public String findAllByUser() {
 
-		listFile = fileService.findAllByUser("1");
+		listFile = fileService.findAllByUser(user.getId());
 		
 		return SUCCESS;
 	}
@@ -83,21 +84,28 @@ public class FileAction extends ActionSupport {
 	 * @return
 	 */
 	public String fileUpLoad() {
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (file == null) {
-			return ERROR;
+			map.put("message", "上传文件失败!");
 		} else {
 			NetFile netFile = new NetFile();
 			try {
-
+				
+				User user = new User();
+				user.setId("1");
+				user.setName("laozhang");
+				
 				netFile = FileUtil.layFile(file, fileFileName, fileContentType,
 						user, netFile);
 				fileService.save(netFile);
 			} catch (Exception e) {
-				return ERROR;
+				map.put("message", "上传文件失败!");
 			}
 
 		}
-		return SUCCESS;
+		map.put("message", "上传文件成功");
+		actionContext.getContext().put("map", map);
+		return "json";
 	}
 
 }
