@@ -2,7 +2,7 @@ package com.july.networkdisk.vo;
 
 import java.sql.*;
 
-public class Users
+public class User
 {
     private String id;
     private String name;
@@ -13,7 +13,7 @@ public class Users
     private Integer isadmin;
     private Integer sex;
     private String about;
-    private Timestamp timeStamp;
+    private Timestamp addtime;
     private String photo;
     
     public String getId() {
@@ -88,13 +88,12 @@ public class Users
         this.about = about;
     }
     
-    public Timestamp getTimeStamp() {
-        return this.timeStamp;
-    }
-    
-    public void setTimeStamp(final Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+    public Timestamp getAddtime() {
+		return addtime;
+	}
+    public void setAddtime(Timestamp addtime) {
+		this.addtime = addtime;
+	}
     
     public void setPhoto(final String photo) {
         this.photo = photo;

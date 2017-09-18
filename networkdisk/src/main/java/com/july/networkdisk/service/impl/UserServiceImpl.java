@@ -7,31 +7,31 @@ import java.util.*;
 
 public class UserServiceImpl implements IUserService
 {
-    private UsersDao usersDao;
+    private UserDao userDao;
     
-    public UsersDao getUsersDao() {
-        return this.usersDao;
+    public UserDao getUserDao() {
+        return this.userDao;
     }
     
-    public void setUsersDao(final UsersDao usersDao) {
-        this.usersDao = usersDao;
+    public void setUserDao( UserDao userDao) {
+        this.userDao = userDao;
     }
     
-    public void save(final Users user) {
-        this.usersDao.save(user);
+    public void save( User user) {
+        this.userDao.save(user);
     }
     
-    public void update(final Users user) {
+    public void update( User user) {
     }
     
-    public void delete(final Integer id) {
+    public void delete( String id) {
     }
     
-    public Users get(final Integer id) {
+    public User get( String id) {
         return null;
     }
     
-    public List<Users> getAll() {
+    public List<User> getAll() {
         return null;
     }
 }

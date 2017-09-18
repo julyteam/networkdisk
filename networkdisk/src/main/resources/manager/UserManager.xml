@@ -13,11 +13,11 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
-	<bean id="usersDao" class="com.july.networkdisk.dao.UsersDao" parent="baseDao"></bean>
-	<bean id="usersService" class="com.july.networkdisk.service.impl.UserServiceImpl">
-		<property name="usersDao" ref="usersDao"></property>
+	<bean id="userDao" class="com.july.networkdisk.dao.UserDao" parent="baseDao"></bean>
+	<bean id="userService" class="com.july.networkdisk.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
 	</bean>
-	<bean id="usersAction" class="com.july.networkdisk.web.UserAction" scope="prototype">
-		<property name="iUserService" ref="usersService"></property>
+	<bean id="userAction" class="com.july.networkdisk.web.UserAction" scope="prototype">
+		<property name="iUserService" ref="userService"></property>
 	</bean>
 </beans>

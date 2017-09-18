@@ -1,81 +1,83 @@
 
-			ÎÄ¼ş¼Ğ£¨categories£©Êı¾İ±í
+			æ–‡ä»¶å¤¹ï¼ˆcategorieï¼‰æ•°æ®è¡¨
                           
-×Ö¶Î		ÀàĞÍ			Null		Ä¬ÈÏ		×¢ÊÍ
-cat_id 		varchar(50)		·ñ				Ö÷¼üid
-cat_name 	varchar(255)		·ñ				·ÖÀàÃû³Æ
-cat_reid 	varchar(255)		ÊÇ				ÉÏ¼¶·ÖÀàid
+å­—æ®µ		ç±»å‹			Null		é»˜è®¤		æ³¨é‡Š
+cat_id 		varchar(50)		å¦				ä¸»é”®id
+cat_name 	varchar(255)		å¦				åˆ†ç±»åç§°
+cat_reid 	varchar(255)		æ˜¯				ä¸Šçº§åˆ†ç±»id
 
 
-			ºÃÓÑ£¨friend£©Êı¾İ±í
+			å¥½å‹ï¼ˆfriendï¼‰æ•°æ®è¡¨
                          
-×Ö¶Î		ÀàĞÍ			Null	Ä¬ÈÏ	×¢ÊÍ
-fri_id 		int(15)			·ñ		Ö÷¼ü£¨×ÔÔö£©
-fri_uid 	varchar(50)		·ñ		ÓÃ»§id£¨Íâ¼ü£©
-fri_fid 	varchar(50)		ÊÇ		ºÃÓÑid£¨Íâ¼ü£©
-addtime 	timestamp 		·ñ		Ìí¼ÓÊ±¼ä
+å­—æ®µ		ç±»å‹			Null	é»˜è®¤	æ³¨é‡Š
+fri_id 		int(15)			å¦		ä¸»é”®ï¼ˆè‡ªå¢ï¼‰
+fri_uid 	varchar(50)		å¦		ç”¨æˆ·idï¼ˆå¤–é”®ï¼‰
+fri_fid 	varchar(50)		æ˜¯		å¥½å‹idï¼ˆå¤–é”®ï¼‰
+addtime 	timestamp 		å¦		æ·»åŠ æ—¶é—´
 	
 
 
-			ÏûÏ¢¹«¸æ£¨notice£©
+			æ¶ˆæ¯å…¬å‘Šï¼ˆnoticeï¼‰
                         
-×Ö¶Î			ÀàĞÍ			Null		Ä¬ÈÏ		×¢ÊÍ
-not_id 			int(10)			·ñ				Ö÷¼üid
-not_title 		varchar(255)		·ñ				ĞÂÎÅ¹«¸æÃû³Æ
-not_content 		text			·ñ				ĞÂÎÅ¹«¸æÄÚÈİ
-not_time 		date			·ñ				·¢²¼Ê±¼ä
+å­—æ®µ			ç±»å‹			Null		é»˜è®¤		æ³¨é‡Š
+not_id 			int(10)			å¦				ä¸»é”®id
+not_title 		varchar(255)		å¦				æ–°é—»å…¬å‘Šåç§°
+not_content 		text			å¦				æ–°é—»å…¬å‘Šå†…å®¹
+not_time 		timestamp		å¦				å‘å¸ƒæ—¶é—´
    
 
-			·ÖÏí£¨share£©Êı¾İ±í
+			åˆ†äº«ï¼ˆshareï¼‰æ•°æ®è¡¨
                         
-×Ö¶Î			ÀàĞÍ				Null		Ä¬ÈÏ		×¢ÊÍ
-sh_id 		varchar(50)		·ñ				Ö÷¼ü
-sh_uid		varchar(50)		·ñ				·ÖÏíÈËid(Íâ¼ü)
-sh_url 		varchar(255)		·ñ				·ÖÏíÁ´½ÓµØÖ·
-sh_pwd		varchar(255)		ÊÇ				·ÖÏíÃÜÂë
-sh_startTime	timestamp 		ÊÇ				·ÖÏíÊ±¼ä
-sh_retain	int(2)			ÊÇ		-1£¨´ú±íÓÀ¾Ã£©  ±£ÁôÊ±³¤	
+å­—æ®µ			ç±»å‹				Null		é»˜è®¤		æ³¨é‡Š
+sh_id 		varchar(50)		å¦				ä¸»é”®
+sh_uid		varchar(50)		å¦				åˆ†äº«äººid(å¤–é”®)
+sh_url 		varchar(255)		å¦				åˆ†äº«é“¾æ¥åœ°å€
+sh_pwd		varchar(255)		æ˜¯				åˆ†äº«å¯†ç 
+sh_startTime	timestamp 		æ˜¯				åˆ†äº«æ—¶é—´
+sh_retain	int(2)			æ˜¯		-1ï¼ˆä»£è¡¨æ°¸ä¹…ï¼‰  ä¿ç•™æ—¶é•¿	
 
 
 
-			ÎÄ¼şÁĞ±í£¨listfile£©Êı¾İ±í
+			æ–‡ä»¶åˆ—è¡¨ï¼ˆfileï¼‰æ•°æ®è¡¨
                             
-×Ö¶Î			ÀàĞÍ			Null	Ä¬ÈÏ	×¢ÊÍ
-list_id 		int(11)			·ñ		Ö÷¼ü£¨×ÔÔö£©
-list_name 		varchar(255)		·ñ		ÎÄ¼şÃû³Æ
-list_uid 		varchar(50)		·ñ		ÉÏ´«ÓÃ»§id£¨Íâ¼ü£©
-list_catid		varchar(50)		ÊÇ		ËùÊôÎÄ¼ş¼Ğid(Íâ¼ü)
-list_path		varchar(255)		·ñ		ÎÄ¼şÂ·¾¶
-list_addtime 		timestamp 		·ñ		ÉÏ´«Ê±¼ä
-list_type			varchar(20)		·ñ		ÎÄ¼şÀàĞÍ
-list_downum			int(11)			·ñ	0	ÏÂÔØ´ÎÊı
+å­—æ®µ			ç±»å‹			Null	é»˜è®¤	æ³¨é‡Š
+file_id 		int(11)			å¦		ä¸»é”®ï¼ˆè‡ªå¢ï¼‰
+file_name 		varchar(255)		å¦		æ–‡ä»¶åç§°
+file_uid 		varchar(50)		å¦		ä¸Šä¼ ç”¨æˆ·idï¼ˆå¤–é”®ï¼‰
+file_catid		varchar(50)		æ˜¯		æ‰€å±æ–‡ä»¶å¤¹id(å¤–é”®)
+file_path		varchar(255)		å¦		æ–‡ä»¶è·¯å¾„
+file_addtime 		timestamp 		å¦		ä¸Šä¼ æ—¶é—´
+file_type		varchar(20)		å¦		æ–‡ä»¶ç±»å‹
+file_size		int(11)			å¦		æ–‡ä»¶å­—èŠ‚
+file_downum		int(11)			å¦	0	ä¸‹è½½æ¬¡æ•°
+file_deletesign		int(1)			å¦		æ–‡ä»¶åˆ é™¤æ ‡å¿—
 
 
 
-			ÓÃ»§£¨users£©Êı¾İ±í
+			ç”¨æˆ·ï¼ˆuserï¼‰æ•°æ®è¡¨
                 
-×Ö¶Î				ÀàĞÍ			Null		Ä¬ÈÏ		×¢ÊÍ
-user_id 			varchar(50)		·ñ				Ö÷¼ü
-user_name 			varchar(255)		·ñ				ÓÃ»§Ãû
-user_password			varchar(255)		·ñ				µÇÂ¼ÃÜÂë
-user_truename			varchar(255)		·ñ				ÕæÊµĞÕÃû
-user_email 			varchar(255)		·ñ				email
-user_phone			varchar(20)		·ñ				×¢²áÊÖ»úºÅ
-user_isadmin 			int(1)			·ñ		0		ÊÇ·ñ¹ÜÀíÔ±
-user_sex			int(1)			·ñ		0		ĞÔ±ğ
-user_about 			varchar(255)		ÊÇ				¸öÈË½éÉÜ
-user_cTime 			timestamp 		·ñ				×¢²áÊ±¼ä
-user_photo			varchar(255)            ·ñ                              ¸öÈËÍ·Ïñ
+å­—æ®µ				ç±»å‹			Null		é»˜è®¤		æ³¨é‡Š
+user_id 			varchar(50)		å¦				ä¸»é”®
+user_name 			varchar(255)		å¦				ç”¨æˆ·å
+user_password			varchar(255)		å¦				ç™»å½•å¯†ç 
+user_truename			varchar(255)		å¦				çœŸå®å§“å
+user_email 			varchar(255)		å¦				email
+user_phone			varchar(20)		å¦				æ³¨å†Œæ‰‹æœºå·
+user_isadmin 			int(1)			å¦		0		æ˜¯å¦ç®¡ç†å‘˜
+user_sex			int(1)			å¦		0		æ€§åˆ«
+user_about 			varchar(255)		æ˜¯				ä¸ªäººä»‹ç»
+user_cTime 			timestamp 		å¦				æ³¨å†Œæ—¶é—´
+user_photo			varchar(255)            å¦                              ä¸ªäººå¤´åƒ
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#sqlÓï¾ä²Ù×÷:
+#sqlè¯­å¥æ“ä½œ:
 
 create database networkdisk charset utf8;
 use networkdisk;
 
-#´´½¨ÓÃ»§±í
-create table users(
+#åˆ›å»ºç”¨æˆ·è¡¨
+create table user(
 			user_id        varchar(50) PRIMARY KEY,
 			user_name      varchar(255) NOT NULL UNIQUE,
 			user_password  varchar(255) NOT NULL,
@@ -88,34 +90,36 @@ create table users(
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
 			user_photo     varchar(255) NOT NULL
 );
-#ÎÄ¼ş¼Ğ±í
-create table categories
+#æ–‡ä»¶å¤¹è¡¨
+create table categorie
 (
 			cat_id varchar(50) not null,
 			cat_name varchar(255) not null unique,
 			cat_reid varchar(50),
 			primary key(cat_id),
-			foreign key(cat_reid) references categories(cat_id)
+			foreign key(cat_reid) references categorie(cat_id)
 );
 
-#´´½¨ÎÄ¼ş±í
-create table listfile(
-			list_id  int(11) PRIMARY KEY auto_increment,
-			list_name varchar(255) not null,
-			list_uid varchar(50) not null,
-			list_catid varchar(50) ,
-			list_path varchar(255) not null,
-			list_addtime timestamp not null DEFAULT CURRENT_TIMESTAMP,
-			list_type  varchar(20) not null,
-			list_downum		int(11)  not null DEFAULT 0,
-			FOREIGN key (list_uid) REFERENCES users(user_id),
-			FOREIGN key (list_catid) REFERENCES categories(cat_id)
+#åˆ›å»ºæ–‡ä»¶è¡¨
+create table file(
+			file_id		varchar(50) PRIMARY KEY,
+			file_name	varchar(255) not null,
+			file_uid	varchar(50) not null,
+			file_catid	varchar(50) ,
+			file_path	varchar(255) not null,
+			file_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			file_type	varchar(20) not null,
+			file_size   int(20)  not null,
+			file_downum	int(11)  not null DEFAULT 0,
+			file_deletesign	int(1) not null,
+			FOREIGN key (file_uid) REFERENCES user(user_id),
+			FOREIGN key (file_catid) REFERENCES categorie(cat_id)
 	
 );
 
 
 
-#ºÃÓÑ±í
+#å¥½å‹è¡¨
 create table friend
 (
 	fri_id int(15) not null,
@@ -123,11 +127,11 @@ create table friend
 	fri_fid varchar(50) not null,
 	fri_addtime timestamp not null default current_timestamp,
 	primary key(fri_id),
-	foreign key(fri_uid) references users(user_id),
-	foreign key(fri_fid) references users(user_id)
+	foreign key(fri_uid) references user(user_id),
+	foreign key(fri_fid) references user(user_id)
 );
 
-#ÏûÏ¢¹«¸æ
+#æ¶ˆæ¯å…¬å‘Š
 create table notice
 (
 	not_id int(10) not null auto_increment,
@@ -137,8 +141,8 @@ create table notice
 	primary key(not_id)
 );
 
-#·ÖÏí±í
-create table shares
+#åˆ†äº«è¡¨
+create table share
 (
 	sh_id varchar(50) not null,
 	sh_uid varchar(50) not null,
@@ -147,5 +151,5 @@ create table shares
 	sh_starttime timestamp not null default current_timestamp,
 	sh_retaintime int(2) not null default -1,
 	primary key(sh_id),
-	foreign key(sh_uid) references users(user_id)
+	foreign key(sh_uid) references user(user_id)
 );

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="usersSpace">
+<mapper namespace="userSpace">
 	<!-- resultMap标签：映射实体与表 type：表示实体全路径名 id属性：为实体与表的映射取一个唯一的编号 -->
-	<resultMap type="com.july.networkdisk.vo.Users" id="usersMap">
+	<resultMap type="com.july.networkdisk.vo.User" id="userMap">
 		<!-- id标签：映射主键属性 property属性：实体的属性名 column属性：表的字段名 -->
 		<id property="id" column="user_id" />
 		<result property="name" column="user_name" />
@@ -14,13 +14,13 @@
 		<result property="isadmin" column="user_isadmin" />
 		<result property="sex" column="user_sex" />
 		<result property="about" column="user_about" />
-		<result property="timeStamp" column="user_cTime" />
+		<result property="addtime" column="user_cTime" />
 		<result property="photo" column="user_photo" />
 	</resultMap>
 	
 	<!-- 增加员工 -->
-	<insert id="add" parameterType="com.july.networkdisk.vo.Users">
-		insert into users(user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_photo) 
+	<insert id="add" parameterType="com.july.networkdisk.vo.User">
+		insert into user(user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_photo) 
 		values (#{id},#{name},#{passWord},#{trueName},#{email},#{phone},#{isadmin},#{sex},#{about},#{photo})
 	</insert>
 </mapper>
