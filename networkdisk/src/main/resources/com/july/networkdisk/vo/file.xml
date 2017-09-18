@@ -16,20 +16,64 @@
 		<result property="downum" column="file_downum" />
 		<result property="deletesign" column="file_deletesign" />
 	</resultMap>
-	
+
 	<!-- 增加文件 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.NetFile">
-		insert into file(file_id,file_name,file_uid,file_catid,file_path,file_type,file_size,file_downum,file_deletesign) 
-		values (#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
+		insert into
+		file(file_id,file_name,file_uid,file_catid,file_path,file_type,file_size,file_downum,file_deletesign)
+		values
+		(#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
 	</insert>
-	<!-- 查找文件 -->
-	<select id="findAllByUser" parameterType="String" resultMap="fileMap">
-			select * from file where file_uid = #{userID}
+	<!-- 根据用户查找文件 -->
+	<select id="findAllByUser" parameterType="map" resultMap="fileMap">
+		select * from file 
+		<where>
+			<if test="userID != null">
+				and file_uid = #{userID}
+			</if>
+			<if test="file_catID == null">
+				and file_catid is null
+			</if>
+			<if test="file_catID != null">
+				and file_catid =#{file_catID}
+			</if>
+		</where>
 	</select>
-	<!-- 下载文件 -->
+	<!-- 查找文件所有信息-->
 	<select id="get" parameterType="String" resultMap="fileMap">
-			select * from file where file_id = #{file_id}
+		select * from file where file_id = #{file_id}
 	</select>
+	<!-- 删除一个文件 -->
+	<delete id="deleteOne" parameterType="String">
+		delete from file where file_id = #{file_id}
+	</delete>
+	<!-- 删除一批文件 -->
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from file where file_id in
+		<foreach item="file_id"  index="index" collection="list" open="("
+			separator="," close=")">
+			#{file_id}
+		</foreach>
+	</delete>
+	
+	<update id="updateFile" parameterType="map" >
+		update file
+		<set>
+			<if test=" file_name != null">
+				filn_name= #{file_name}
+			</if>
+			<if test=" file_catid != null">
+				file_catid= #{file_catid}
+			</if>
+			<if test=" file_downum != null">
+				file_downum= #{file_downum}
+			</if>
+			<if test=" file_deletesign != null">
+				file_deletesign= #{file_deletesign}
+			</if>
+			where file_id = #{file_id}
+		</set>
+	</update>
 </mapper>
 
 
