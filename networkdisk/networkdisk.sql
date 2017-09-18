@@ -1,15 +1,15 @@
 
 			文件夹（categorie）数据表
                           
-字段		类型			Null		默认		注释
-cat_id 		varchar(50)		否				主键id
-cat_name 	varchar(255)		否				分类名称
-cat_reid 	varchar(255)		是				上级分类id
+字段		         类型			Null		默认		注释
+cat_id 		varchar(50)		    否				   主键id
+cat_name 	varchar(255)		否				  分类名称
+cat_reid 	varchar(255)		是				  上级分类id
 
 
 			好友（friend）数据表
                          
-字段		类型			Null	默认	注释
+字段		类型			Null	默认	       注释
 fri_id 		int(15)			否		主键（自增）
 fri_uid 	varchar(50)		否		用户id（外键）
 fri_fid 	varchar(50)		是		好友id（外键）
@@ -19,55 +19,55 @@ addtime 	timestamp 		否		添加时间
 
 			消息公告（notice）
                         
-字段			类型			Null		默认		注释
-not_id 			int(10)			否				主键id
+字段			      类型			   Null		默认		注释
+not_id 			int(10)			    否				主键id
 not_title 		varchar(255)		否				新闻公告名称
 not_content 		text			否				新闻公告内容
-not_time 		timestamp		否				发布时间
+not_time 		timestamp		    否				发布时间
    
 
 			分享（share）数据表
                         
-字段			类型				Null		默认		注释
-sh_id 		varchar(50)		否				主键
-sh_uid		varchar(50)		否				分享人id(外键)
-sh_url 		varchar(255)		否				分享链接地址
-sh_pwd		varchar(255)		是				分享密码
-sh_startTime	timestamp 		是				分享时间
-sh_retain	int(2)			是		-1（代表永久）  保留时长	
+字段			类型				    Null		默认		    注释
+sh_id 		varchar(50)		    否				        主键
+sh_uid		varchar(50)		    否				    分享人id(外键)
+sh_url 		varchar(255)		否				    分享链接地址
+sh_pwd		varchar(255)		是				      分享密码
+sh_startTime	timestamp 		是				       分享时间
+sh_retain	int(2)			    是		-1（代表永久）  保留时长	
 
 
 
-			文件列表（file）数据表
+			文件（file）数据表
                             
-字段			类型			Null	默认	注释
-file_id 		int(11)			否		主键（自增）
-file_name 		varchar(255)		否		文件名称
-file_uid 		varchar(50)		否		上传用户id（外键）
-file_catid		varchar(50)		是		所属文件夹id(外键)
-file_path		varchar(255)		否		文件路径
-file_addtime 		timestamp 		否		上传时间
-file_type		varchar(20)		否		文件类型
-file_size		int(11)			否		文件字节
-file_downum		int(11)			否	0	下载次数
-file_deletesign		int(1)			否		文件删除标志
+字段			        类型			    Null	默认	          注释
+file_id 		varchar(50)			否		           主键（自增）
+file_name 		varchar(255)		否		            文件名称
+file_uid 		varchar(50)		    否		        上传用户id（外键）
+file_catid		varchar(50)		    是	          	所属文件夹id(外键)
+file_path		varchar(255)		否		            文件路径
+file_addtime 		timestamp 		否		            上传时间
+file_type		varchar(20)		    否		            文件类型
+file_size		int(11)			    否		            文件字节
+file_downum		int(11)			    否	      0	        下载次数
+file_deletesign		int(1)			否		           文件删除标志
 
 
 
 			用户（user）数据表
                 
-字段				类型			Null		默认		注释
-user_id 			varchar(50)		否				主键
-user_name 			varchar(255)		否				用户名
-user_password			varchar(255)		否				登录密码
-user_truename			varchar(255)		否				真实姓名
-user_email 			varchar(255)		否				email
-user_phone			varchar(20)		否				注册手机号
-user_isadmin 			int(1)			否		0		是否管理员
-user_sex			int(1)			否		0		性别
-user_about 			varchar(255)		是				个人介绍
-user_cTime 			timestamp 		否				注册时间
-user_photo			varchar(255)            否                              个人头像
+字段				        类型			    Null		默认		  注释
+user_id 			varchar(50)		     否				      主键
+user_name 			varchar(255)		 否				     用户名
+user_password			varchar(255)	 否				    登录密码
+user_truename			varchar(255)	 否				    真实姓名
+user_email 			varchar(255)		 否				     email
+user_phone			varchar(20)	         否				   注册手机号
+user_isadmin 			int(1)			 否		    0		是否管理员
+user_sex			int(1)			     否		    0		性别
+user_about 			varchar(255)		 是				    个人介绍
+user_cTime 			timestamp 		     否				    注册时间
+user_photo			varchar(255)         否                  个人头像
 
 ---------------------------------------------------------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@ package com.july.networkdisk.service.impl;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import com.july.networkdisk.dao.FileDao;
 import com.july.networkdisk.service.IFileService;
@@ -25,8 +26,8 @@ public class FileServiceImpl implements IFileService {
 		fileDao.save(file);
 	}
 
-	public List<NetFile> findAllByUser(String userID) {
-		return fileDao.findAllByUser(userID);
+	public List<NetFile> findAllByUser(Map<String, String> map) {
+		return fileDao.findAllByUser(map);
 	}
 
 	public NetFile get(String file_id) {

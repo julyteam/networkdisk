@@ -1,26 +1,20 @@
 package com.july.networkdisk.web;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.july.networkdisk.service.IFileService;
-import com.july.networkdisk.service.impl.FileServiceImpl;
 import com.july.networkdisk.util.CommonUtil;
-import com.july.networkdisk.util.FileUtil;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class FileAction extends ActionSupport {
@@ -30,10 +24,19 @@ public class FileAction extends ActionSupport {
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
 	private IFileService fileService;
+	
 	private List<NetFile> listFile; // 返回查询的文件列表
 	private String netFileID; // 得到下载文件的ID
-	private User user = CommonUtil.getSessionUser();
-
+	private User user = CommonUtil.getSessionUser(); //获取session中的User
+	
+	private String categorie_id; //当前目录的id;
+	
+	public void setCategorie_id(String categorie_id) {
+		this.categorie_id = categorie_id;
+	}
+	public String getCategorie_id() {
+		return categorie_id;
+	}
 	public void setNetFileID(String netFileID) {
 		this.netFileID = netFileID;
 	}
@@ -88,9 +91,10 @@ public class FileAction extends ActionSupport {
 	 * @return
 	 */
 	public String findAllByUser() {
-
-		listFile = fileService.findAllByUser(user.getId());
-
+		Map<String, String> map =new HashMap<String, String>();
+		map.put("userID", user.getId());
+		map.put("file_catID",categorie_id);
+		listFile = fileService.findAllByUser(map);
 		return SUCCESS;
 	}
 
