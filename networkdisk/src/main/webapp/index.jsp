@@ -102,32 +102,32 @@
 				<div class="row">
 					<div class="span12">
 						<ul style="padding: 0px;" id="tabs">
+							<li>
+								<a href="/networkdisk/index.jsp#tw1" class="act"><i class="batch home"></i><br>全部文件</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw2"><i class="batch stream"></i><br>图片</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw3"><i class="batch plane"></i><br>文档</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw4"><i class="batch calendar"></i><br>视频</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw5"><i class="batch quill"></i><br>种子</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw6"><i class="batch forms"></i><br>音乐</a>
+							</li>
+							<li>
+								<a href="/networkdisk/index.jsp#tw7"><i class="batch settings"></i><br>其他</a>
+							</li>
 							<li class="active">
-								<a href="#tw1" class="act"><i class="batch home"></i><br>全部文件</a>
+								<a href="/networkdisk/myshare.jsp"><i class="batch share"></i><br>我的分享</a>
 							</li>
 							<li>
-								<a href="#tw2"><i class="batch stream"></i><br>图片</a>
-							</li>
-							<li>
-								<a href="#tw3"><i class="batch plane"></i><br>文档</a>
-							</li>
-							<li>
-								<a href="#tw4"><i class="batch calendar"></i><br>视频</a>
-							</li>
-							<li>
-								<a href="#tw5"><i class="batch quill"></i><br>种子</a>
-							</li>
-							<li>
-								<a href="#tw6"><i class="batch forms"></i><br>音乐</a>
-							</li>
-							<li>
-								<a href="#tw7"><i class="batch settings"></i><br>其他</a>
-							</li>
-							<li>
-								<a href="myshare.html"><i class="batch share"></i><br>我的分享</a>
-							</li>
-							<li>
-								<a href="recycle.html"><i class="batch barbage"></i><br>回收站</a>
+								<a href="/networkdisk/recyle.jsp"><i class="batch barbage"></i><br>回收站</a>
 							</li>
 						</ul>
 					</div>

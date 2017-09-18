@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.july.networkdisk.service.ICateService;
+import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 
 public class TestDao {
@@ -16,8 +18,10 @@ public class TestDao {
 	ApplicationContext ac = new ClassPathXmlApplicationContext(
 			"applicationcontext.xml");
 	FileDao fileDao = ac.getBean("fileDao", FileDao.class);
-
-	@Test
+	CategorieDao cateDao=ac.getBean("cateDao",CategorieDao.class);
+	ICateService cateService=ac.getBean("cateService",ICateService.class);
+	
+	/*@Test
 	public void testdeleteOne() throws Exception {
 		String file_id = "17722329-3888-43a4-bb83-3ae399364735";
 		Boolean a = fileDao.deleteOne(file_id);
@@ -53,5 +57,11 @@ public class TestDao {
 		map.put("file_catID", null);
 		List<NetFile> netFiles=fileDao.findAllByUser(map);
 		System.out.println(netFiles.size());
+	}*/
+	@Test
+	public void testcate() throws Exception{
+		Categorie cate=new Categorie("1234","1231344","1234");		
+		cateService.save(cate);
+		System.out.println(123);
 	}
 }
