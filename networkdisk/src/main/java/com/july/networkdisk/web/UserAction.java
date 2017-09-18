@@ -30,4 +30,7 @@ public class UserAction extends ActionSupport
         this.iUserService.save(this.user);
         return "success";
     }
+    
+    
+    
 }
