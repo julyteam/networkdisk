@@ -128,7 +128,7 @@
 								<a href="/networkdisk/myshare.jsp"><i class="batch share"></i><br>我的分享</a>
 							</li>
 							<li>
-								<a href="/networkdisk/recyle.jsp"><i class="batch barbage"></i><br>回收站</a>
+								<a href="/networkdisk/recycle.jsp"><i class="batch barbage"></i><br>回收站</a>
 							</li>
 						</ul>
 					</div>
