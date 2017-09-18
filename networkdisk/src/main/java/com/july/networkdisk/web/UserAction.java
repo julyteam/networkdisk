@@ -84,6 +84,7 @@ public class UserAction extends ActionSupport
     	}
     	
     }
+
     /*用户注册*/
     public String register() throws Exception{
     	String id = CommonUtil.createUUID();
@@ -101,4 +102,5 @@ public class UserAction extends ActionSupport
     		
     	}
     }*/
+
 }
