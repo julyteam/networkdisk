@@ -38,11 +38,6 @@ public class UserAction extends ActionSupport
         this.iUserService.save(this.user);
         return "success";
     }
-<<<<<<< HEAD
-    
-   
-    
-=======
 
 /*    管理员登陆*/
     public String findOne() throws Exception{
@@ -83,5 +78,5 @@ public class UserAction extends ActionSupport
     	}
     }
 
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+
 }
