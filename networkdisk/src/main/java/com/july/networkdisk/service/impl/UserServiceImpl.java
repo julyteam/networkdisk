@@ -32,6 +32,10 @@ public class UserServiceImpl implements IUserService
     }
     
     public List<User> getAll() {
-        return null;
+        return this.userDao.getAll();
     }
+
+	public User findOne(User user) {
+		return this.userDao.findOne(user);
+	}
 }

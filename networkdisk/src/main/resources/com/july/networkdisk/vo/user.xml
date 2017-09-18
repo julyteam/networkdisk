@@ -23,6 +23,15 @@
 		insert into user(user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_photo) 
 		values (#{id},#{name},#{passWord},#{trueName},#{email},#{phone},#{isadmin},#{sex},#{about},#{photo})
 	</insert>
+	<!-- 查找一个用户信息 -->
+	<select id="findOne" resultMap="userMap">
+		select * from `user` where user_name=#{name} and user_password=#{passWord}
+	</select>
+	<!-- 查找所有用户信息 -->
+	<select id="getAll" resultMap="userMap">
+		select * from `user`
+	</select>
+	
 </mapper>
 
 

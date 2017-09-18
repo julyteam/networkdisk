@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.july.networkdisk.vo.NetFile;
+import com.july.networkdisk.vo.User;
 
 public class FileDao extends BaseDao {
 	/**

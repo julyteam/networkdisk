@@ -12,7 +12,14 @@
 			<result name="success">/WEB-INF/welcome.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
+		<!-- 用户登录 -->
+		<action name="userlogin" class="userAction" method="login">
+			<result name="success">/user/home.jsp</result>
+			<result name="error">/user/login.jsp</result>
+		</action>
 	</package>
+
+	
 
 
 	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
@@ -20,6 +27,7 @@
 		scope="default" optional="true" />
 	<constant name="struts.multipart.parser" value="requestParser" />
 	<constant name="struts.multipart.maxSize" value="2147483648" />
+
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
 		<action name="fileupload" class="fileAction" method="fileUpLoad">
@@ -55,4 +63,16 @@
 
 
 	</package>
+	
+	<!-- 管理员 -->
+	<package name="struts.admin" namespace="/" extends="struts-default">
+		<action name="adminlogin" class="userAction" method="findOne">
+			<result name="success">/manager/home.jsp</result>
+			<result name="error">/manager/login.jsp</result>
+		</action>
+		<action name="getUserAll" class="userAction" method="getAll">
+			<result name="success">/manager/user.jsp</result>
+		</action>
+	</package>
+	
 </struts>
