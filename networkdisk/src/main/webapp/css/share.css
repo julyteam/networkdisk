@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+.share_all
+{
+	height:612px;
+	background-color:#333333;
+	border: 1px solid #333333;
+}
+.share_content
+{
+	margin-top: 10px;
+	margin-left:195px;
+	height: 590px;
+	width:1000px;
+}
+.share_content_left
+{
+	float: left;
+	border-radius: 3px;
+	height: 590px;
+	width:280px;
+	background-color: white;
+}
+.share_content_right
+{
+	float:right;
+	border-radius: 3px;
+	height: 590px;
+	background-color: white;
+	width: 710px;
+	margin-left: 1px;
+}
+.moud{
+	width:280px;
+	padding: 0;
+	margin: 0;
+	height: 50px;
+}
+#share_tab{
+	width:280px;
+	padding: 0;
+	
+}
+#share_tab li{
+	display: block;
+	float: left;
+	list-style: none;
+	text-align: center;
+	width: 140px;	
+	height: 50px;
+	line-height: 50px;
+	cursor: pointer;
+	border-bottom: 1px solid lightgrey;
+}
+#share_tab li:first-child{
+	border-right: 1px solid darkgray;
+	
+}
+#share_tab li.active a{
+	text-decoration: none;
+	background: #3C3C3C;
+	color: #FFFFFF;
+}
+
+#share_tab li a{
+	display: block;
+	text-decoration: none;
+	color:darkgray;
+}
+#session_content
+{
+	position: relative;
+	top: 2px;
+}
+#session_content a
+{
+	text-decoration: none;
+
+}
+.session_table
+{	
+	border-bottom: 1px solid lightgray;
+	height: 60px;
+	width: 280px;
+
+}
+.session_table:hover
+{
+	background:lavender;
+}
+
+.session_user
+{
+	padding-left: 8px;
+	
+}
+.session_time
+{
+	padding-left:85px;
+	color: gray;
+}
+.session_other
+{
+	padding-left:8px;
+	color: black;
+}
+
+#user_content a
+{
+	text-decoration: none;
+	color: black;
+}
+#user_content a:hover
+{
+	background-color: lavender;
+}
+.user_table
+{
+	
+	border-bottom: 1px solid lavender;
+	width: 280px;	
+	height: 60px;
+
+}
+.user_name 
+{
+ color:black;
+ padding-right: 130px;
+}
