@@ -1,127 +1,153 @@
-#head{
-	width:100%;
-	
+#head {
+	width: 100%;
 }
-#head-left{
+
+#head-left {
 	margin-top: -20px;
 	border: #101010 1px hidden;
-	width:400px;
+	width: 400px;
 	height: 150px;
-	margin-left: 180px;	
-	float:left;
+	margin-left: 180px;
+	float: left;
 }
-#head-left img{
-	width:200px;
-	transform:scale(0.9);
-	display: inline;  
-	float:left;                   
+
+#head-left img {
+	width: 200px;
+	transform: scale(0.9);
+	display: inline;
+	float: left;
 }
-#head-left span{
+
+#head-left span {
 	float: left;
 	margin-top: 58px;
 	font-family: arial;
 	font-size: 17px;
 }
-#head-right{
-	float:left;
+
+#head-right {
+	float: left;
 	margin-left: 350px;
 	margin-top: 40px;
 }
-#head-right span{
+
+#head-right span {
 	font-size: 14px;
 }
-.login-buttom{
+
+.login-buttom {
 	border: 1px #DDDDDD solid;
-	width:50px;
-	height:25px;
+	width: 50px;
+	height: 25px;
 	background-color: #F7F7F7;
 	text-align: center;
 	float: right;
 	margin-left: 20px;
-	border-radius:5px;
+	border-radius: 5px;
 }
-.login-buttom a{
+
+.login-buttom a {
 	text-decoration: none;
-	margin-top:-10px;
+	margin-top: -10px;
 	color: #666666;
 }
 
-
-.reg_content
-{
-   width:100%;
-   clear: both;
-	height:660px;
+.reg_content {
+	width: 100%;
+	clear: both;
+	height: 660px;
 	margin-left: 20px;
 	margin-right: 60px;
 }
 
-.register_form
-{
+.register_form {
 	margin-left: 200px;
-	
-	
 }
-.reg_username input
-{
+
+.reg_username input {
 	margin-top: 10px;
+	height: 35px;
+	width: 350px;
+	margin-left:7px;
+}
+
+.reg_realname input {
+	margin-top: 20px;
 	height: 35px;
 	width: 350px;
 	margin-left: 5px;
 	
 }
-.reg_email input
+.reg_sex 
 {
+	margin-top: 20px;
+	
+	margin-left:5px;
+}
+.reg_sex input
+{
+	margin-left: 120px;
+	padding-left: 20px;
+}
+.reg_tel input {
+	margin-top: 20px;
+	height: 35px;
+	width: 350px;
+	margin-left: 7px;
+}
+
+.reg_email input {
 	height: 35px;
 	width: 350px;
 	margin-left: 7px;
 	margin-top: 20px;
 }
-.reg_code input
-{
+
+.reg_code input {
 	height: 35px;
 	width: 350px;
-	margin-left:5px;
+	margin-left: 7px;
 	margin-top: 20px;
 }
-.reg_password input
-{
+
+.reg_password input {
 	height: 35px;
 	width: 350px;
-	margin-left:7px;
+	margin-left: 7px;
 	margin-top: 20px;
 }
-.reg_check
-{
-	margin-left:52px;
+
+.reg_check {
+	margin-left: 54px;
 	margin-top: 15px;
 }
-.reg_check a
-{
+
+.reg_check a {
 	text-decoration: none;
 	color: dodgerblue;
 }
-.reg_check a:hover
-{
+
+.reg_check a:hover {
 	text-decoration: underline;
 }
-.reg_btn input
-{
+
+.reg_btn input {
 	margin-top: 20px;
 	height: 35px;
 	width: 350px;
-	margin-left:52px;
+	margin-left: 52px;
 	color: white;
 	font: 15px "微软雅黑" bold;
 	background-color: #5d98f9;
-	border: 1px solid #cccccc; 
+	border: 1px solid #cccccc;
 	border-radius: 4px;
 }
-.hr{
+
+.hr {
 	clear: both;
 	margin-left: 220px;
 	margin-top: -50px;
 	margin-bottom: 30px;
-	width:900px;
-	size:4px;
+	width: 900px;
+	size: 4px;
 }
