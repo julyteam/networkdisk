@@ -16,7 +16,7 @@
         $("#progressbar").progressbar({        
              value: 0    
         });  
-        time = window.setInterval(progress,1000);  
+        time = window.setInterval(progress,100);  
         $.ajaxFileUpload  
         (  
             {  
@@ -40,7 +40,7 @@
             dataType: 'json',  
             success:function(data){  
             	/* alert(data.rate) */
-                $("#loading").html(data.rate);  
+                /* $("#loading").html(data.rate);   */
                 $( "#progressbar" ).progressbar({        
                      value: data.rate     
                 });  

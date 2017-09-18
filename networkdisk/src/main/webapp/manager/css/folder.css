@@ -1,0 +1,36 @@
+.head{
+	width: 30%;
+	height: 60px;
+	float: left;
+}
+.search{
+	width: 30%;
+	height: 60px;
+	float: left;
+	margin-top: 15px;
+	margin-left: 30%;
+}
+.cont{
+	width: 95%;
+	height: 800px;
+	float: left;
+	margin-left: 2.5%;
+	
+}
+a{
+	text-decoration: none;
+	color: dimgray;
+}
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+tr{
+	width: 100%;
+}
+td{
+	width: 25%;
+	height: 60px;
+	text-align: center;
+	font-size: 18px;
+}
