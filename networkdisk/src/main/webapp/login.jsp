@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +13,6 @@
 		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
 		<script src="/networkdisk/user/js/login.js"></script>
 	    <script src="/networkdisk/user/js/bootstrap.min.js"></script>
-	
 	</head>
 <body>
 <div class="login-container">
@@ -79,20 +80,22 @@
 		</div>
 	</div>
 </div> 
-  <div class="logo"><img src="/networkdisk/user/img/logo.png"></div>
-
+<div class="logo"><img src="/networkdisk/user/img/logo.png"></div>
 			<div id="login-middle">
 			<div class="login_title">
 				<h4>账号密码登录</h4>
 			</div>
+			 
 			<div class="login_form">
-			  <form action="" method="">
+			  <form action="${pageContext.request.contextPath}/userlogin" method="post" >
+			  	
 				<div class="form_user">
-					<input type="text" placeholder="   手机/邮箱/用户名" />
+					<input type="text" placeholder="   手机/邮箱/用户名" name="user.name" />
 				</div>
 				<div class="form_password">
-					<input type="text" placeholder="   密 码" />
+					<input type="text" placeholder="   密 码" name="user.passWord" />
 				</div>
+				<div style="float:left; color:red; "><c:if test="${message != null }">${message }</c:if></div>
 				<div class="form_check">
 					<input type="checkbox" />
 					<span>下次自动登陆</span>
@@ -108,13 +111,14 @@
 				</div>
               </form>
 			</div>
+			
 			<div class="login_bottom">
 				<div class="bottom_href">
 					<ul>	
 				    	<li><input type="submit" value="扫一扫登录" id="scan_login"/></a></li>
 				    	<li> <a href="#"><img src="/networkdisk/user/img/weibo.png"/></a></li>
 				    	<li> <a href="#"><img src="/networkdisk/user/img/qq.png"/></a></li>
-				    	<li><a href="register.jsp"><input type="submit" value="立即注册"/></a></li>
+				    	<li><a href="/networkdisk/user/register.jsp"><input type="submit" value="立即注册"/></a></li>
 					</ul>
 				</div>
 			</div>

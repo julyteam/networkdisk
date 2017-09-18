@@ -10,7 +10,7 @@ public class UserDao extends BaseDao
 {
     public void save( User user) {
         final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-        sqlSession.insert("userSpace.add", user);
+        sqlSession.insert("userSpace.save", user);
         sqlSession.close();
     }
 

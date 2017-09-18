@@ -31,7 +31,11 @@
 	<select id="getAll" resultMap="userMap">
 		select * from `user`
 	</select>
-	
+	<!-- 用户注册 -->
+	<insert id="save" parameterType="com.july.networkdisk.vo.User">
+		insert into user(user_id,user_name,user_password,user_truename,user_email,user_phone,user_sex,user_about,user_photo) 
+		values (#{id},#{name},#{passWord},#{trueName},#{email},#{phone},#{sex},#{about},#{photo})
+	</insert>
 </mapper>
 
 
