@@ -1,12 +1,22 @@
 package com.july.networkdisk.web;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.service.impl.FileServiceImpl;
+import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.util.FileUtil;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
@@ -21,10 +31,16 @@ public class FileAction extends ActionSupport {
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
 	private IFileService fileService;
 	private List<NetFile> listFile; // 返回查询的文件列表
+	private String netFileID; // 得到下载文件的ID
+	private User user = CommonUtil.getSessionUser();
 
-	ActionContext actionContext = ActionContext.getContext(); // 获取session
-	Map session = actionContext.getSession();
-	User user = (User) session.get("user");
+	public void setNetFileID(String netFileID) {
+		this.netFileID = netFileID;
+	}
+
+	public String getNetFileID() {
+		return netFileID;
+	}
 
 	public List<NetFile> getListFile() {
 		return listFile;
@@ -74,7 +90,7 @@ public class FileAction extends ActionSupport {
 	public String findAllByUser() {
 
 		listFile = fileService.findAllByUser(user.getId());
-		
+
 		return SUCCESS;
 	}
 
@@ -82,30 +98,62 @@ public class FileAction extends ActionSupport {
 	 * 文件上传
 	 * 
 	 * @return
+	 * @throws Exception 
 	 */
-	public String fileUpLoad() {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public String fileUpLoad() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		String jsonString;
+		PrintWriter out =response.getWriter();
+
 		if (file == null) {
-			map.put("message", "上传文件失败!");
+			jsonString = "上传文件失败！";
 		} else {
 			NetFile netFile = new NetFile();
 			try {
-				
-				User user = new User();
-				user.setId("1");
-				user.setName("laozhang");
-				
-				netFile = FileUtil.layFile(file, fileFileName, fileContentType,
-						user, netFile);
-				fileService.save(netFile);
+
+				fileService.fileUpLoad(netFile, file, fileFileName,
+						fileContentType, user);
+
 			} catch (Exception e) {
-				map.put("message", "上传文件失败!");
+				jsonString = "上传文件失败！";
+				out.println(jsonString);
+				out.flush();
+				out.close();
 			}
 
+			jsonString = "上传文件成功！";
 		}
-		map.put("message", "上传文件成功");
-		actionContext.getContext().put("map", map);
-		return "json";
+		out.println(jsonString);
+		out.flush();
+		out.close();
+		return null;
 	}
 
+	/**
+	 * 文件下载
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private InputStream in;
+
+	public InputStream getDownloadFile() throws Exception {
+
+		return in;
+	}
+
+	public String execute() throws Exception {
+		in = fileService.fileDownLoad(netFileID);
+		if (in == null) {
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	/* 文件名称乱码 */
+	public String getFileName() throws Exception {
+		return new String(fileFileName.getBytes("GBK"), "Iso8859-1");
+
+	}
 }

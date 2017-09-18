@@ -3,7 +3,6 @@ package com.july.networkdisk.service.impl;
 import com.july.networkdisk.service.*;
 import com.july.networkdisk.dao.*;
 import com.july.networkdisk.vo.*;
-
 import java.util.*;
 
 public class UserServiceImpl implements IUserService
@@ -26,7 +25,6 @@ public class UserServiceImpl implements IUserService
     }
     
     public void delete( String id) {
-    	
     }
     
     public User get( String id) {

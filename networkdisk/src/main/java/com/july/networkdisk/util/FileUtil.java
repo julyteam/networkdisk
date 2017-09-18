@@ -61,4 +61,16 @@ public class FileUtil {
 
 		return netFile;
 	}
+	
+	/**
+	 * 文件下载
+	 */
+	public static InputStream downFile(String file_path)throws Exception{
+		File file = new File(file_path);
+		if(!file.exists()){
+			return null;
+		}
+		InputStream inputStream = new FileInputStream(file);
+		return inputStream;
+	}
 }

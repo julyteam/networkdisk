@@ -6,7 +6,7 @@
 <struts>
 	<!-- 开发模式(修改struts.xml不用重启服务器） -->
 	<constant name="struts.devMode" value="true" />
-	
+
 	<package name="networkdisk.user" namespace="/" extends="struts-default">
 		<action name="user" class="userAction">
 			<result name="success">/WEB-INF/welcome.jsp</result>
@@ -18,27 +18,50 @@
 			<result name="error">/user/login.jsp</result>
 		</action>
 	</package>
+
 	
+
+
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
+		scope="default" optional="true" />
+	<constant name="struts.multipart.parser" value="requestParser" />
+	<constant name="struts.multipart.maxSize" value="2147483648" />
+
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
 		<action name="fileupload" class="fileAction" method="fileUpLoad">
+			
 			<interceptor-ref name="fileUpload">
-				<!-- 允许上传的文件大小 -->
-				<param name="maximumSize">4024000</param>
+				<param name="maximumSize">2147483647</param>
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack" />
-
-			<result name="json" type="json">
-				<param name="root">#map</param>
-				<param name="excludeNullProperties">true</param>
-			</result>
 			
+		</action>
+
+		<!-- 进度条进度 -->
+		<action name="progress" class="com.july.networkdisk.web.FileProgressAction">
+			<result name="json" type="json">
+				<param name="root">state</param>
+			</result>
 		</action>
 
 		<!-- 根据用户id查找所有的文件 -->
 		<action name="findAllByUser" class="fileAction" method="findAllByUser">
 			<result name="success">/WEB-INF/listFile.jsp</result>
 		</action>
+
+		<!-- 文件下载 -->
+		<action name="fileDownload" class="fileAction">
+			<result name="success" type="stream">
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="inputName">downloadFile</param>
+				<!-- 下载缓冲区的大小 -->
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+
 	</package>
 	
 	<!-- 管理员 -->

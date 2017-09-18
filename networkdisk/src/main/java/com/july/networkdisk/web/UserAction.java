@@ -38,6 +38,7 @@ public class UserAction extends ActionSupport
         this.iUserService.save(this.user);
         return "success";
     }
+
 /*    管理员登陆*/
     public String findOne() throws Exception{
     	User user = this.iUserService.findOne(this.user);
@@ -76,4 +77,5 @@ public class UserAction extends ActionSupport
         	return SUCCESS;
     	}
     }
+
 }

@@ -25,6 +25,7 @@
 			<th>${file.name}</th>
 			<th>${file.size}</th>
 			<th>${file.addtime}</th>
+			<th> <a href="${pageContext.request.contextPath}/fileDownload?netFileID=${file.id}&fileFileName=${file.name}" >下载</a> </th>
 		</tr>
 		</c:forEach>
 		</tbody>

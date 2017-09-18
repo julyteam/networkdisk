@@ -26,6 +26,10 @@
 	<select id="findAllByUser" parameterType="String" resultMap="fileMap">
 			select * from file where file_uid = #{userID}
 	</select>
+	<!-- 下载文件 -->
+	<select id="get" parameterType="String" resultMap="fileMap">
+			select * from file where file_id = #{file_id}
+	</select>
 </mapper>
 
 

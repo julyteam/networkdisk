@@ -21,4 +21,11 @@ public class FileDao extends BaseDao {
 		sqlSession.close();
 		return list;
 	}
+	
+	public NetFile get(String file_id){
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		NetFile netFile=sqlSession.selectOne("fileSpace.get", file_id);
+		sqlSession.close();
+		return netFile;
+	}
 }
