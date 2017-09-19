@@ -9,6 +9,13 @@ public class Categorie {
 		
 	}
 
+	public Categorie(String id, String name, String reid) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reid = reid;
+	}
+
 	public String getId() {
 		return id;
 	}
