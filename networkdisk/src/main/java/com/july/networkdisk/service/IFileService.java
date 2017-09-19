@@ -9,10 +9,14 @@ import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
 
 public interface IFileService extends IBaseService<NetFile> {
-	List<NetFile> findAllByUser(Map<String, String> map);
+	List<NetFile> findAllByUser(String file_uid,Map<String, Object> map);
 
 	void fileUpLoad(NetFile netFile,File file, String fileFileName,
 			String fileContentType, User user) throws Exception;
 	
 	InputStream fileDownLoad(String netFileID) throws Exception;
+	
+	boolean deleteBatch(String[] netFile_ids);
+	boolean layRecyle(String netFile_id);
+	boolean layBatchRecyle(String[] netFile_ids);
 }

@@ -24,56 +24,79 @@
 		values
 		(#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
 	</insert>
+	
 	<!-- 根据用户查找文件 -->
 	<select id="findAllByUser" parameterType="map" resultMap="fileMap">
-		select * from file 
+		select * from file
 		<where>
-			<if test="userID != null">
-				and file_uid = #{userID}
+			<if test="file_uid != null">
+				and file_uid = #{file_uid}
 			</if>
-			<if test="file_catID == null">
+			<if test="file_catid == null">
 				and file_catid is null
 			</if>
-			<if test="file_catID != null">
-				and file_catid =#{file_catID}
+			<if test="file_catid != null">
+				and file_catid =#{file_catid}
+			</if>
+			<if test="file_deletesign != null">
+				and file_deletesign =#{file_deletesign}
 			</if>
 		</where>
 	</select>
-	<!-- 查找文件所有信息-->
-	<select id="get" parameterType="String" resultMap="fileMap">
-		select * from file where file_id = #{file_id}
+	<!-- 查找一个文件所有信息 区分是否已经回收-->
+	<select id="get" parameterType="map" resultMap="fileMap">
+		select * from
+		file where file_id = #{file_id}
+		<if test="file_deletesign != null">
+			 and file_deletesign=#{file_deletesign}
+		</if>
 	</select>
+	
 	<!-- 删除一个文件 -->
 	<delete id="deleteOne" parameterType="String">
-		delete from file where file_id = #{file_id}
+		delete from file where 
+		file_id = #{file_id}
 	</delete>
 	<!-- 删除一批文件 -->
 	<delete id="deleteBatch" parameterType="java.util.List">
 		delete from file where file_id in
-		<foreach item="file_id"  index="index" collection="list" open="("
+		<foreach item="file_id" index="index" collection="list" open="("
 			separator="," close=")">
 			#{file_id}
 		</foreach>
 	</delete>
 	
-	<update id="updateFile" parameterType="map" >
+	
+	<!-- 修改文件属性 -->
+	<update id="updateFile" parameterType="map">
 		update file
 		<set>
 			<if test=" file_name != null">
-				filn_name= #{file_name}
+				file_name= #{file_name},
 			</if>
 			<if test=" file_catid != null">
-				file_catid= #{file_catid}
+				file_catid= #{file_catid},
+			</if>
+			<if test=" file_catid == null">
+				file_catid = null,
 			</if>
 			<if test=" file_downum != null">
-				file_downum= #{file_downum}
+				file_downum= #{file_downum},
 			</if>
 			<if test=" file_deletesign != null">
-				file_deletesign= #{file_deletesign}
+				file_deletesign=#{file_deletesign},
 			</if>
-			where file_id = #{file_id}
 		</set>
+		where file_id = #{file_id}
 	</update>
+	<!-- 把一批文件放入回收站 -->
+	<update id="updateDeleteSingBatch" parameterType="java.util.List">
+		update file set file_deletesign = 1 where file_id in
+		<foreach collection="list" index="index" item="file_id" open="(" separator="," close=")" >    
+            #{file_id}    
+        </foreach>  
+	</update>
+	
 </mapper>
 
 

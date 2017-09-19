@@ -19,30 +19,34 @@ public class FileDao extends BaseDao {
 		sqlSession.close();
 	}
 	/**
-	 * 查询用户的所有文件
-	 * @param userID
+	 * 查询所有文件
+	 * 
 	 * @return
 	 */
-	public List<NetFile> findAllByUser(Map<String, String> map) {
+	public List<NetFile> findAllByUser(Map<String, Object> map) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		List<NetFile> list = sqlSession.selectList("fileSpace.findAllByUser",map);
 		sqlSession.close();
 		return list;
 	}
 	/**
-	 * 查询一个文件
-	 * @param file_id
+	 * 根据ID查询一个文件，区分是否有deleteSign ，0 ，1；
 	 * @return
 	 */
-	public NetFile get(String file_id) {
+	public NetFile get(String netFile_id, Integer deleteSign) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		NetFile netFile = sqlSession.selectOne("fileSpace.get", file_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_id", netFile_id);
+		if(deleteSign != null){  // 区分前台和后台查找文件。
+			map.put("file_deletesign", deleteSign);
+		}
+		NetFile netFile = sqlSession.selectOne("fileSpace.get", map);
 		sqlSession.close();
 		return netFile;
 	}
 
 	/**
-	 * 删除一个文件
+	 * 在回收站删除一个文件
 	 * 
 	 * @param file_id
 	 * @return
@@ -58,7 +62,7 @@ public class FileDao extends BaseDao {
 	}
 
 	/**
-	 * 删除一批文件
+	 * 在回收站删除一批文件
 	 * 
 	 * @param file_id
 	 * @return
@@ -79,9 +83,10 @@ public class FileDao extends BaseDao {
 	 * @param map
 	 * @return
 	 */
-	public boolean updateFile(Map<String, String> map){
+	public boolean updateFile(String netFile_id,Map<String, Object> map){
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		int row =sqlSession.update("fileSpace.updateFileName", map);
+		map.put("file_id", netFile_id);
+		int row =sqlSession.update("fileSpace.updateFile", map);
 		sqlSession.close();
 		if(row > 0)
 		{
@@ -89,5 +94,17 @@ public class FileDao extends BaseDao {
 		}
 		return false;
 	}
-
+	/**
+	 * 把一批文件放入回收站
+	 * @return
+	 */
+	public boolean updateDeleteSingBatch(List file_ids){
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		int row = sqlSession.delete("fileSpace.updateDeleteSingBatch", file_ids);
+		sqlSession.close();
+		if (row == file_ids.size()) {
+			return true;
+		}
+		return false;
+	}
 }
