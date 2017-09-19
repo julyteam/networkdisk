@@ -82,13 +82,13 @@
 									</div>
 								</div>
 							</li>
-							<li style="width: 100px;">
+							<li style="width: 100px; margin-top:5px;">
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
 							</li>
 						</ul>
@@ -585,6 +585,47 @@
 			</div>
 		</div>
 		<script src="/networkdisk/js/canvas.js"></script>
+		<script src="/networkdisk/js/jquery.contextify.js"></script>
+		<script>
+			var options = {
+				items: [{
+						text: '打开',
+						href: '#'
+					},
+					{
+						text: '下载',
+						onclick: function() {
+							alert("你点击了第2个链接")
+						}
+					},
+					{
+						text: '复制到',
+						onclick: function() {
+							alert("你点击了第3个链接")
+						}
+					},
+					{
+						text: '移动到',
+						onclick: function() {
+							alert("你点击了第4个链接")
+						}
+					},
+					{
+						text: '重命名',
+						onclick: function() {
+							alert("你点击了第5个链接")
+						}
+					},
+					{
+						text: '删除',
+						onclick: function() {
+							alert("你点击了第6个链接")
+						}
+					}
+				]
+			}
+			$('table').contextify(options);
+		</script>
 	</body>
 
 </html>

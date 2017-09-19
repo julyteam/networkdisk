@@ -83,13 +83,13 @@
 									</div>
 								</div>
 							</li>
-							<li style="width: 100px;">
+							<li style="width: 100px;margin-top:5px;">
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
 							</li>
 						</ul>
@@ -124,10 +124,10 @@
 							<li>
 								<a href="/networkdisk/index.jsp#tw7"><i class="batch settings"></i><br>其他</a>
 							</li>
-							<li class="active">
+							<li>
 								<a href="/networkdisk/myshare.jsp"><i class="batch share"></i><br>我的分享</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="/networkdisk/recycle.jsp"><i class="batch barbage"></i><br>回收站</a>
 							</li>
 						</ul>

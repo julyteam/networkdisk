@@ -453,7 +453,7 @@ img.userpic {
 .equip_1{
 	width: 380px;
 	position: absolute;
-	margin-top: -20px;
+	margin-top: 0px;
 	margin-left: 355px;
 	display: none;
 	float: left;	
@@ -908,6 +908,10 @@ img.userpic {
 	margin: 0;
 	
 }
+.table td:first-child:hover{
+	cursor: pointer;
+	color: #31B0D5;
+}
 .upload_header div,.upload_body div{
 	float: left;
 	display: inline-block;
@@ -991,7 +995,7 @@ img.userpic {
 	display: inline-block;
 	border: 1px solid #262626;
 	border-radius: 5px;
-	line-height: 30px;
+	padding-top:7px;
 	margin-left:300px; 
 	cursor: pointer;
 	text-align: center;

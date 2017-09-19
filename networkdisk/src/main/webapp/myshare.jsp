@@ -82,13 +82,13 @@
 									</div>
 								</div>
 							</li>
-							<li style="width: 100px;">
+							<li style="width: 100px;margin-top:5px;">
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
-							<li>
+							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
 							</li>
 						</ul>
