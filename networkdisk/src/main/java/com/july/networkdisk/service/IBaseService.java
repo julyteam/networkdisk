@@ -8,7 +8,7 @@ public interface IBaseService<T>
     
     void update( T p0);
     
-    void delete( String p0);
+    boolean delete( String p0);
     
     T get( String p0);
     

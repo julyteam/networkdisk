@@ -24,7 +24,8 @@ public class UserServiceImpl implements IUserService
     public void update( User user) {
     }
     
-    public void delete( String id) {
+    public boolean delete( String id) {
+		return false;
     }
     
     public User get( String id) {
