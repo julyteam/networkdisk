@@ -87,21 +87,14 @@
 			</div>
 			 
 			<div class="login_form">
-<<<<<<< HEAD
+
 			  <form action="${pageContext.request.contextPath}/userlogin" method="post" >
-			
-=======
-			  <form action="userlogin" method="post">
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+
 				<div class="form_user">
 					<input type="text" placeholder="   手机/邮箱/用户名" name="name"/>
 				</div>
 				<div class="form_password">
-<<<<<<< HEAD
 					<input type="password" placeholder="   密 码"  name="passWord"/>
-=======
-					<input type="password" placeholder="   密 码"  name="user.passWord"/>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 				</div>
 				<div style="float:left; color:red; "><c:if test="${message != null }">${message }</c:if></div>
 				<div class="form_check">
