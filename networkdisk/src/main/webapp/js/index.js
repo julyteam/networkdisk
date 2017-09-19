@@ -149,6 +149,7 @@ $(document).ready(function() {
 					$('.sure').click(function() {
 						$(this).prev().val();
 						$('.filename').css('border', 'none');
+						$('.filename').attr('readonly','true');
 						var d = new Date();
 						var month = d.getMonth() + 1;
 						var day = d.getDate();

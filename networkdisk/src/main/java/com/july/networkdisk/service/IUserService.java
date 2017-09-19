@@ -8,4 +8,8 @@ public interface IUserService extends IBaseService<User>
 {
 	User findOne(User user);
 	List<User> getAll();
+	User selectUserByName(String name);
+	User selectUserByTel(String phone);
+	User selectUserByEmail(String email);
+	
 }
