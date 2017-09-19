@@ -6,7 +6,13 @@
 <struts>
 	<!-- 开发模式(修改struts.xml不用重启服务器） -->
 	<constant name="struts.devMode" value="true" />
-
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
+		scope="default" optional="true" />
+	<constant name="struts.multipart.parser" value="requestParser" />
+	<constant name="struts.multipart.maxSize" value="2147483648" />
+	
+	<!-- 用户模块 -->
 	<package name="networkdisk.user" namespace="/" extends="struts-default">
 		<action name="user" class="userAction">
 			<result name="success">/WEB-INF/welcome.jsp</result>
@@ -20,14 +26,7 @@
 	</package>
 
 	
-
-
-	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
-		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
-		scope="default" optional="true" />
-	<constant name="struts.multipart.parser" value="requestParser" />
-	<constant name="struts.multipart.maxSize" value="2147483648" />
-
+	<!-- 文件模块 -->
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
 		<action name="fileupload" class="fileAction" method="fileUpLoad">
@@ -60,11 +59,19 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-
-
 	</package>
 	
-	<!-- 管理员 -->
+	
+	<!-- 文件夹模块 -->
+	<package name="struts.categories" namespace="/" extends="struts-default">
+		<action name="bulidcate" class="cateAction" method="bulidCate">
+		
+		</action>
+		
+		
+	</package>
+	
+	<!--后台管理模块 -->
 	<package name="struts.admin" namespace="/" extends="struts-default">
 		<action name="adminlogin" class="userAction" method="findOne">
 			<result name="success">/manager/home.jsp</result>

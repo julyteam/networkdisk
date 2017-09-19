@@ -37,9 +37,7 @@ public class FileDao extends BaseDao {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("file_id", netFile_id);
-		if(deleteSign != null){  // 区分前台和后台查找文件。
-			map.put("file_deletesign", deleteSign);
-		}
+		map.put("file_deletesign", deleteSign);
 		NetFile netFile = sqlSession.selectOne("fileSpace.get", map);
 		sqlSession.close();
 		return netFile;

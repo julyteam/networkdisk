@@ -24,6 +24,7 @@ public class FileServiceImpl implements IFileService {
 	public void setFileDao(FileDao fileDao) {
 		this.fileDao = fileDao;
 	}
+
 	/**
 	 * 保存文件
 	 */
@@ -32,9 +33,9 @@ public class FileServiceImpl implements IFileService {
 	}
 
 	/**
-	 * 根据用户查找所有文件 区分在不在回收站
+	 * 根据用户查找每个目录下所有文件 区分在不在回收站
 	 */
-	public List<NetFile> findAllByUser(String file_uid,Map<String, Object> map) {
+	public List<NetFile> findAllByUser(String file_uid, Map<String, Object> map) {
 		map.put("file_uid", file_uid);
 		return fileDao.findAllByUser(map);
 	}
@@ -43,11 +44,10 @@ public class FileServiceImpl implements IFileService {
 	 * 得到在或者不在回收站的一个文件,当flag为空时，就忽略是否在回收站中。
 	 */
 	public NetFile get(String netFile_id, Integer flag) {
-		NetFile netfile= fileDao.get(netFile_id, flag);
+		NetFile netfile = fileDao.get(netFile_id, flag);
 		return netfile;
 	}
 
-	
 	/**
 	 * 文件上传
 	 */
@@ -64,34 +64,37 @@ public class FileServiceImpl implements IFileService {
 	public InputStream fileDownLoad(String netFile_id) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		NetFile netfile = get(netFile_id, 0);
-		map.put("file_downum", netfile.getDownum()+1);
+		map.put("file_downum", netfile.getDownum() + 1);
 		fileDao.updateFile(netFile_id, map);
 		return FileUtil.downFile(netfile.getPath());
 	}
-	
+
 	/**
 	 * 把一个文件放入到回收站中
+	 * 
 	 * @param netFile_id
 	 * @return
 	 */
-	public boolean layRecyle(String netFile_id){
+	public boolean layRecyle(String netFile_id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("file_deletesign", 1);
 		fileDao.updateFile(netFile_id, map);
 		return true;
 	}
+
 	/**
 	 * 把一批文件放入到回收站中
+	 * 
 	 * @param netFile_ids
 	 * @return
 	 */
-	public boolean layBatchRecyle(String[] netFile_ids){
+	public boolean layBatchRecyle(String[] netFile_ids) {
 		List<String> list = new ArrayList<String>();
 		list = Arrays.asList(netFile_ids);
 		fileDao.updateDeleteSingBatch(list);
 		return false;
 	}
-	
+
 	/**
 	 * 在回收站中删除数据库中的文件
 	 */
@@ -109,20 +112,35 @@ public class FileServiceImpl implements IFileService {
 		return true;
 	}
 
-	public List<NetFile> getAll() {
-
-		return null;
+	/**
+	 * 移动文件
+	 */
+	public boolean moveFile(String netFile_id, String cat_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_catid", cat_id);
+		fileDao.updateFile(netFile_id, map);
+		return true;
 	}
-
-
-
-	public void update(NetFile file) {
-		
+	/**
+	 * 从回收站还原文件
+	 */
+	public boolean recyleFile(String netFile_id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_deletesign", 0);
+		fileDao.updateFile(netFile_id, map);
+		return true;
 	}
 	
+	
+
+	public void update(NetFile file) {
+
+	}
+
 	public NetFile get(String netFile_id) {
 
 		return null;
 	}
+
 
 }

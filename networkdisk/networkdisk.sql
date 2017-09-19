@@ -5,7 +5,9 @@
 cat_id 		varchar(50)		    否				   主键id
 cat_name 	varchar(255)		否				  分类名称
 cat_reid 	varchar(255)		是				  上级分类id
-
+cat_uid		varchar(50)         否                 用户id,
+cat_state   int(1)              否                 文件夹是否删除（1表示删除）
+cat_addtime	timestamp			否					文件创建时间
 
 			好友（friend）数据表
                          
@@ -50,7 +52,7 @@ file_addtime 		timestamp 		否		            上传时间
 file_type		varchar(20)		    否		            文件类型
 file_size		int(11)			    否		            文件字节
 file_downum		int(11)			    否	      0	        下载次数
-file_deletesign		int(1)			否		           文件删除标志
+file_deletesign		int(1)			否		           文件删除标志(1,表示在回收站)
 
 
 
@@ -94,12 +96,14 @@ create table user(
 create table categorie
 (
 			cat_id varchar(50) not null,
-			cat_name varchar(255) not null unique,
+			cat_name varchar(255) not null ,
 			cat_reid varchar(50),
-			cat_times timestamp not null DEFAULT CURRENT_TIMESTAMP,
-			cat_status int(1) not null,
+			cat_uid varchar(50)not null,
+			cat_addtime timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			cat_state int(1) not null ,
 			primary key(cat_id),
-			foreign key(cat_reid) references categorie(cat_id)
+			foreign key(cat_reid) references categorie(cat_id),
+			foreign key(cat_uid) references user(user_id)
 );
 
 #创建文件表

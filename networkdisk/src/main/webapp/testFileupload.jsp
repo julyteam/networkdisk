@@ -63,11 +63,19 @@
             <input type="button" value="上传" onclick="ajaxFileUpload()"/>  
         </form>  
         <div id="progressbar"></div>  
-        
+------------------------------------------------------------------------        
         <form action="${pageContext.request.contextPath}/findAllByUser"
 		method="post">
 
 		<input type="submit" value="查找" />
+		</form>
+		
+		-----------------------------------------------------
+		<form action="${pageContext.request.contextPath}/bulidcate"
+		method="post">
+		文件名称<input  type="text" name ="categorie.name"/>
+		文件所属用户<input  type="text" name ="categorie.uid"/>
+		<input type="submit" value="保存" />
 
 	</form>
     </body>  

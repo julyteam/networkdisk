@@ -12,5 +12,4 @@ public interface IBaseService<T>
     
     T get( String p0);
     
-    List<T> getAll();
 }
