@@ -17,7 +17,7 @@
 		
 		<!-- 用户登录 -->
 		<action name="userlogin" class="userAction" method="login">
-		    <result name="success"type="redirect">/index.jsp</result>
+		    <result name="success" type="redirect">/index.jsp</result>
 			<result name="error">/login.jsp</result>
 		</action>
 
