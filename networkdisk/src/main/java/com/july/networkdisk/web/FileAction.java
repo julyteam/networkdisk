@@ -23,20 +23,32 @@ public class FileAction extends ActionSupport {
 	private File file; // 上传的文件，对应表单的file的name属性
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
+
 	private IFileService fileService;
-	
-	private List<NetFile> listFile; // 返回查询的文件列表
+	private User user = CommonUtil.getSessionUser(); // 获取session中的User
+
+	private List<NetFile> listFile; // 返回查询的文件列表到前台
 	private String netFileID; // 得到下载文件的ID
-	private User user = CommonUtil.getSessionUser(); //获取session中的User
-	
-	private String categorie_id; //当前目录的id;
-	
+
+	private String categorie_id; // 当前目录的id;
+	private Integer recycleflag; // 判断是否在回收站
+
+	public Integer getRecycleflag() {
+		return recycleflag;
+	}
+
+	public void setRecycleflag(Integer recycleflag) {
+		this.recycleflag = recycleflag;
+	}
+
 	public void setCategorie_id(String categorie_id) {
 		this.categorie_id = categorie_id;
 	}
+
 	public String getCategorie_id() {
 		return categorie_id;
 	}
+
 	public void setNetFileID(String netFileID) {
 		this.netFileID = netFileID;
 	}
@@ -91,10 +103,11 @@ public class FileAction extends ActionSupport {
 	 * @return
 	 */
 	public String findAllByUser() {
-		Map<String, String> map =new HashMap<String, String>();
-		map.put("userID", user.getId());
-		map.put("file_catID",categorie_id);
-		listFile = fileService.findAllByUser(map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_catid", categorie_id);  //判断所在的目录
+		recycleflag = 0;   //用作测试
+		map.put("file_deletesign", recycleflag);  //判断是否在回收站；
+		listFile = fileService.findAllByUser(user.getId(),map);
 		return SUCCESS;
 	}
 
@@ -102,13 +115,13 @@ public class FileAction extends ActionSupport {
 	 * 文件上传
 	 * 
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public String fileUpLoad() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		String jsonString;
-		PrintWriter out =response.getWriter();
+		PrintWriter out = response.getWriter();
 
 		if (file == null) {
 			jsonString = "上传文件失败！";

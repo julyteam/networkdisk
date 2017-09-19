@@ -24,9 +24,9 @@ public class FileUtil {
 			throws Exception {
 		netFile.setId(CommonUtil.createUUID());
 		netFile.setUid(user.getId());
-		String[] str = fileName.split("\\.");
 		netFile.setName(fileName); // 截取文件名
 	
+		String[] str = fileName.split("\\.");
 		if(str[1] == null){
 			netFile.setType((fileContentType.split("/"))[0]); // 截取文件类型
 		}
@@ -36,14 +36,15 @@ public class FileUtil {
 		InputStream is = null;
 
 		is = new FileInputStream(file);
-		String path = "D:" + File.separatorChar + "networkdiskFile"
+		String folderpath = "D:" + File.separatorChar + "networkdiskFile"
 				+ File.separatorChar + user.getName();
-		File newFile = new File(path);// 构造一个存储路径 D：\networkdiskFile\用户名
+		File newFile = new File(folderpath);// 构造一个存储路径 D：\networkdiskFile\用户名
 
 		if (!newFile.exists()) {
 			newFile.mkdirs();
 		}
-		os = new FileOutputStream(path+File.separatorChar+fileName);
+		String turePath = folderpath+File.separatorChar+netFile.getId()+"."+netFile.getType(); //真实的文件存储路径
+		os = new FileOutputStream(turePath);
 
 		byte[] buf = new byte[1024];
 		int length = 0;
@@ -54,7 +55,7 @@ public class FileUtil {
 		os.close();
 		is.close();
 		
-		netFile.setPath(path+File.separatorChar+fileName);
+		netFile.setPath(turePath);
 		netFile.setDownum(0);
 		netFile.setDeletesign(0);
 		
@@ -72,5 +73,17 @@ public class FileUtil {
 		}
 		InputStream inputStream = new FileInputStream(file);
 		return inputStream;
+	}
+	/**
+	 * 删除文件
+	 * @param file_path
+	 * @return
+	 * @throws Exception
+	 */
+	public static void deleteFile(String file_path) throws Exception{
+		File newFile = new File(file_path);
+		if(newFile.exists()){
+			newFile.delete();
+		}
 	}
 }

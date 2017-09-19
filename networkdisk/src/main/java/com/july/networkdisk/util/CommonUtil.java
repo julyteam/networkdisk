@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.july.networkdisk.vo.User;
-import com.opensymphony.xwork2.ActionContext;
+
 
 public class CommonUtil {
 	public static String createUUID(){

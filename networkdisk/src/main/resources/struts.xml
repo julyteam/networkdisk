@@ -17,6 +17,7 @@
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="error">/login.jsp</result>
 		</action>
+
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
 			<result name="success" type="redirect">/index.jsp</result>
@@ -29,6 +30,24 @@
 			<result name="success" type="redirect">/login.jsp</result>
 			<result name="input">/register.jsp</result>
 		</action>
+
+		
+		
+		
+		<action name="checkUserName" class="userAction" method="checkUserName">
+			
+		</action>
+		<action name="checkPhone" class="userAction" method="checkPhone">
+			
+		</action>
+		<action name="checkEmail" class="userAction" method="checkEmail">
+			
+		</action>
+		
+		
+		
+		
+		
 		
 	</package>
 

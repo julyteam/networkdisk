@@ -3,11 +3,14 @@ package com.july.networkdisk.web;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
+
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -21,6 +24,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	
     private static final long serialVersionUID = 1L;
     private User user = new User();
+
     private IUserService iUserService;
     private String message;
     HttpSession session = CommonUtil.createSession();
@@ -48,15 +52,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public User getUser() {
         return this.user;
     }
-
+  public User getModel() {
+		
+		return user;
+	}
 
 	public String execute() throws Exception {
         this.iUserService.save(this.user);
         return "success";
     }
-	public User getModel() {
-		return user;
-	}
+
 	 /*MD5加密密码*/
 		public static String getMD5(String str) throws Exception {
 			 // 生成一个MD5加密计算摘要
@@ -153,5 +158,59 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     		this.addActionError("用户名不合法！");
     	}
     }*/
+    
+    
+    public String checkUserName() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userName=this.iUserService.selectUserByName(user.getName());
+		if(userName!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+		return null;
+	
+    }
+    
+    public String checkPhone() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userPhone=this.iUserService.selectUserByTel(user.getPhone());
+		if(userPhone!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+		return null;
+    }
+    public String checkEmail() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userEmail=this.iUserService.selectUserByEmail(user.getEmail());
+		if(userEmail!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+	
+		return null;
+    }
+
 
 }

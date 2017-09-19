@@ -96,6 +96,8 @@ create table categorie
 			cat_id varchar(50) not null,
 			cat_name varchar(255) not null unique,
 			cat_reid varchar(50),
+			cat_times timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			cat_status int(1) not null,
 			primary key(cat_id),
 			foreign key(cat_reid) references categorie(cat_id)
 );

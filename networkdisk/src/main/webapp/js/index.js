@@ -38,10 +38,10 @@ $(document).ready(function() {
 	var toggle = true;
 	$(".large").click(function() {
 		if(toggle) {
-			$(this).children("img").attr("src", "img/row.png");
+			$(this).children("img").attr("src", "/networkdisk/img/row.png");
 			toggle = false;
 		} else {
-			$(this).children("img").attr("src", "img/other.png");
+			$(this).children("img").attr("src", "/networkdisk/img/other.png");
 			toggle = true;
 		}
 	});
@@ -149,6 +149,7 @@ $(document).ready(function() {
 					$('.sure').click(function() {
 						$(this).prev().val();
 						$('.filename').css('border', 'none');
+						$('.filename').attr('readonly','true');
 						var d = new Date();
 						var month = d.getMonth() + 1;
 						var day = d.getDate();

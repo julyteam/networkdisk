@@ -12,7 +12,7 @@
 	
 	<!-- 增加文件夹 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
-		insert into categories(cat_id,cat_name,cat_reid) values(#{id},#{cat_name},#{cat_reid})
+		insert into categories(cat_id,cat_name,cat_reid) values(#{id},#{name},#{reid})
 	</insert>
 	<!-- 查找文件夹-->
 	<select id="findAllByCate" parameterType="String" resultMap="categorieMap">

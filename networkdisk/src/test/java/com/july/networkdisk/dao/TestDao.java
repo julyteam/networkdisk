@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.july.networkdisk.service.ICateService;
+import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 
 public class TestDao {
@@ -16,7 +18,9 @@ public class TestDao {
 	ApplicationContext ac = new ClassPathXmlApplicationContext(
 			"applicationcontext.xml");
 	FileDao fileDao = ac.getBean("fileDao", FileDao.class);
-
+	CategorieDao cateDao=ac.getBean("cateDao",CategorieDao.class);
+	ICateService cateService=ac.getBean("cateService",ICateService.class);
+	
 	@Test
 	public void testdeleteOne() throws Exception {
 		String file_id = "17722329-3888-43a4-bb83-3ae399364735";
@@ -39,7 +43,7 @@ public class TestDao {
 	
 	@Test
 	public void testfindAllByUser() throws Exception {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userID", "1");
 		map.put("file_catID", null);
 		List<NetFile> netFiles=fileDao.findAllByUser(map);
@@ -48,10 +52,24 @@ public class TestDao {
 	
 	@Test
 	public void testUpdataFile() throws Exception {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userID", "1");
-		map.put("file_catID", null);
-		List<NetFile> netFiles=fileDao.findAllByUser(map);
-		System.out.println(netFiles.size());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_id", "17e2102a-e38f-4dcb-aecf-cc71dd18f379");
+		map.put("file_name", "柳培岳.pdf");
+		map.put("file_catid", null);
+		/*map.put("file_downum", 2);
+		map.put("file_deletesign", 1);*/
+		//fileDao.updateFile(map);
+		System.out.println("----------");
 	}
+	@Test
+	public void testDeleteSignBatch() throws Exception {
+		String file_id = "17e2102a-e38f-4dcb-aecf-cc71dd18f379";
+		String file_id1 = "55a48859-275c-4b71-add6-3b1bf5c1f7b4";
+		List<String> list = new ArrayList<String>();
+		list.add(file_id);
+		list.add(file_id1);
+		fileDao.updateDeleteSingBatch(list);
+		System.out.println("----------");
+	}
+	
 }
