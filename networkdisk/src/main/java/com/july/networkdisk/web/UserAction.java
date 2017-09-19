@@ -1,9 +1,14 @@
 package com.july.networkdisk.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
+
+
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -11,10 +16,10 @@ import com.opensymphony.xwork2.*;
 import com.july.networkdisk.vo.*;
 import com.july.networkdisk.service.*;
 
-public class UserAction extends ActionSupport
+public class UserAction extends ActionSupport implements ModelDriven<User>
 {
     private static final long serialVersionUID = 1L;
-    private User user;
+    private User user=new User();
     private IUserService iUserService;
 
     public void setiUserService(final IUserService iUserService) {
@@ -32,7 +37,10 @@ public class UserAction extends ActionSupport
     public User getUser() {
         return this.user;
     }
-    
+  public User getModel() {
+		
+		return user;
+	}
 
 	public String execute() throws Exception {
         this.iUserService.save(this.user);
@@ -76,6 +84,58 @@ public class UserAction extends ActionSupport
         	session.put("user", user);
         	return SUCCESS;
     	}
+    }
+    
+    public String checkUserName() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userName=this.iUserService.selectUserByName(user.getName());
+		if(userName!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+		return null;
+	
+    }
+    
+    public String checkPhone() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userPhone=this.iUserService.selectUserByTel(user.getPhone());
+		if(userPhone!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+		return null;
+    }
+    public String checkEmail() throws Exception
+    {
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		User userEmail=this.iUserService.selectUserByEmail(user.getEmail());
+		if(userEmail!=null)
+		{
+			out.print(false);
+		}
+		else
+		{
+			out.print(true);
+		}
+	
+		return null;
     }
 
 

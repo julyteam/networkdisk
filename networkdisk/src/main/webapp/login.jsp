@@ -86,16 +86,16 @@
 				<h4>账号密码登录</h4>
 			</div>
 			<div class="login_form">
-			  <form action="userAction" method="post">
+			  <form action="userlogin" method="post">
 				<div class="form_user">
 					<input type="text" placeholder="   手机/邮箱/用户名" name="user.name"/>
 				</div>
 				<div class="form_password">
-					<input type="text" placeholder="   密 码"  name="user.passWord"/>
+					<input type="password" placeholder="   密 码"  name="user.passWord"/>
 				</div>
 				<div class="form_check">
 					<input type="checkbox" />
-					<span>下次自动登陆</span>
+					<span>下次自动登录</span>
 				</div>
 				<div class="form_login">
 					<input type="submit" value="登录" />

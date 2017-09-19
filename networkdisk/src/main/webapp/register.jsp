@@ -46,16 +46,19 @@ padding-left:15px;
 		<form class="register_form" action="" id="registerForm">
 			<fieldset>
 				<div class="reg_username">
-					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="username" id="username"  />
-				</div>
+					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="name" id="username"  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
+					/>
+				</div> 
 				<div class="reg_realname">
-					<label>真实姓名</label><input type="text" name="realname" id="realname"  />
+					<label>真实姓名</label><input type="text" name="trueName" id="realname" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
+					 />
 				</div>
 				<div class="reg_sex">
-				&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex"  id="sex" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" id="sex" checked="checked" /> 女
+				&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex"  id="sex" checked="checked" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" id="sex" /> 女
 				</div>
 				<div class="reg_tel">
-					&nbsp;&nbsp;&nbsp;<label>手机号</label><input type="text" name="telphone" id="telphone" />
+					&nbsp;&nbsp;&nbsp;<label>手机号</label><input type="text" name="phone" id="telphone" onkeyup="value=value.replace(/[^0-9]/g,'')"
+					/>
 				</div>
 				<div class="reg_email">
 					&nbsp;&nbsp;&nbsp;&nbsp;<label>邮&nbsp;&nbsp;&nbsp;箱</label><input type="email" name="email"
@@ -65,11 +68,14 @@ padding-left:15px;
 					&nbsp;&nbsp;&nbsp;<label>验证码</label><input type="text" name="code" id="code" />
 				</div>
 				<div class="reg_password">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label><label>密&nbsp;&nbsp;&nbsp;码</label><input type="password" name="password"
+					&nbsp;&nbsp;&nbsp;&nbsp;<label><label>密&nbsp;&nbsp;&nbsp;码</label><input type="password" name="passWord"
 						id="password" />
 				</div>
+				<div class="repassword">
+					<label>确认密码</label><input type="password" name="repassword" id="repassword"  />
+				</div>
 				<div class="reg_check">
-					<input type="checkbox" id="agree" name="agree"/><font size="2">阅读并接受<a
+					<input type="checkbox" id="agree" name="agree" checked="checked"/><font size="2">阅读并接受<a
 						href="#">《百度用户协议》</a> 及<a href="#">《百度隐私权保护生命》</a></font>
 				</div>
 				<div class="reg_btn">

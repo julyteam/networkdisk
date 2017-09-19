@@ -14,9 +14,27 @@
 		</action>
 		<!-- 用户登录 -->
 		<action name="userlogin" class="userAction" method="login">
-			<result name="success">/user/home.jsp</result>
+			<result name="success">/index.jsp</result>
 			<result name="error">/user/login.jsp</result>
 		</action>
+		
+		
+		
+		<action name="checkUserName" class="userAction" method="checkUserName">
+			
+		</action>
+		<action name="checkPhone" class="userAction" method="checkPhone">
+			
+		</action>
+		<action name="checkEmail" class="userAction" method="checkEmail">
+			
+		</action>
+		
+		
+		
+		
+		
+		
 	</package>
 
 	

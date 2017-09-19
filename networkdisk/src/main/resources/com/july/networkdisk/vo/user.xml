@@ -32,6 +32,18 @@
 		select * from `user`
 	</select>
 	
+	<select id="selectUserByname" resultMap="userMap">
+	 select * from user where user_name=#{name}
+	</select>
+	
+	<select id="selectUserBytel" resultMap="userMap">
+	 select * from user where user_phone=#{phone}
+	</select>
+	
+	<select id="selectUserByemail" resultMap="userMap">
+	 select * from user where user_email=#{email}
+	</select>
+	
 </mapper>
 
 
