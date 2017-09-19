@@ -87,25 +87,13 @@
 			</div>
 			 
 			<div class="login_form">
-<<<<<<< HEAD
 			  <form action="${pageContext.request.contextPath}/userlogin" method="post" >
-			  	
-=======
-			  <form action="userAction" method="post">
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+			
 				<div class="form_user">
-<<<<<<< HEAD
-					<input type="text" placeholder="   手机/邮箱/用户名" name="user.name" />
-=======
-					<input type="text" placeholder="   手机/邮箱/用户名" name="user.name"/>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+					<input type="text" placeholder="   手机/邮箱/用户名" name="name"/>
 				</div>
 				<div class="form_password">
-<<<<<<< HEAD
-					<input type="text" placeholder="   密 码" name="user.passWord" />
-=======
-					<input type="text" placeholder="   密 码"  name="user.passWord"/>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+					<input type="password" placeholder="   密 码"  name="passWord"/>
 				</div>
 				<div style="float:left; color:red; "><c:if test="${message != null }">${message }</c:if></div>
 				<div class="form_check">
@@ -127,10 +115,10 @@
 			<div class="login_bottom">
 				<div class="bottom_href">
 					<ul>	
-				    	<li><input type="submit" value="扫一扫登录" id="scan_login"/></a></li>
+				    	<li> <a href="#"><input type="submit" value="扫一扫登录" id="scan_login"/></a></li>
 				    	<li> <a href="#"><img src="/networkdisk/user/img/weibo.png"/></a></li>
 				    	<li> <a href="#"><img src="/networkdisk/user/img/qq.png"/></a></li>
-				    	<li><a href="/networkdisk/user/register.jsp"><input type="submit" value="立即注册"/></a></li>
+				    	<li><a href="/networkdisk/register.jsp"><input type="submit" value="立即注册"/></a></li>
 					</ul>
 				</div>
 			</div>

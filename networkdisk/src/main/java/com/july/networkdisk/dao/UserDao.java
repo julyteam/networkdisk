@@ -28,5 +28,11 @@ public class UserDao extends BaseDao
 		return u;
 	}
 
+	public void update(User user) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		sqlSession.update("userSpace.update", user);
+        sqlSession.close();
+	}
+
 	
 }

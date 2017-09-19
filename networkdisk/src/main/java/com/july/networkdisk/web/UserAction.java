@@ -1,24 +1,30 @@
 package com.july.networkdisk.web;
 
 
-import java.sql.Timestamp;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.Map;
 
-import com.mysql.fabric.xmlrpc.base.Data;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.*;
 import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.vo.*;
 import com.july.networkdisk.service.*;
 
-public class UserAction extends ActionSupport
+public class UserAction extends ActionSupport implements ModelDriven<User>
 {
+	
     private static final long serialVersionUID = 1L;
-    private User user;
+    private User user = new User();
     private IUserService iUserService;
     private String message;
-    ActionContext actionContext = ActionContext.getContext();
-	Map session = actionContext.getSession();
+    HttpSession session = CommonUtil.createSession();
+    
     
     public String getMessage() {
 		return message;
@@ -42,22 +48,91 @@ public class UserAction extends ActionSupport
     public User getUser() {
         return this.user;
     }
-    
+
 
 	public String execute() throws Exception {
         this.iUserService.save(this.user);
         return "success";
     }
+	public User getModel() {
+		return user;
+	}
+	 /*MD5加密密码*/
+		public static String getMD5(String str) throws Exception {
+			 // 生成一个MD5加密计算摘要
+			 MessageDigest md = MessageDigest.getInstance("MD5");
+			 // 计算md5函数
+			 md.update(str.getBytes());
+			 // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+			 // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+			 return new BigInteger(1, md.digest()).toString(16);
+		}
 
-/*    管理员登陆*/
+
+   
+  /*  用户登陆*/
+    public String login() throws Exception{
+    	System.out.println("~~~~~~~~~~~~~~~~~~");
+    	String password = getMD5(this.user.getPassWord());
+    	this.user.setPassWord(password);
+    	User user = this.iUserService.findOne(this.user);
+    	session.setAttribute("user", user);
+    	if(user == null){
+    		this.setMessage("用户名或者密码错误！");
+    		return ERROR;
+    	}else{
+        	return SUCCESS;
+    	}
+    	
+    }
+    /*用户个人资料修改*/
+    public String update() throws Exception{
+    	this.iUserService.update(this.user);
+    	User u = CommonUtil.getSessionUser();
+    	u.setEmail(this.user.getEmail());
+    	u.setPhone(this.user.getPhone());
+    	u.setSex(this.user.getSex());
+    	u.setAbout(this.user.getAbout());
+    	session.setAttribute("user", u);
+    	return SUCCESS;
+    }
+    /*修改验证*/
+    public void validateUpdate() {
+    	String email = this.user.getEmail();
+    	String phone = this.user.getPhone();
+    	String about = this.user.getAbout();
+    	int sex = this.user.getSex();
+    	int flag = 0;
+    	for(int i=0;i<email.length();i++){
+    		if(email.charAt(i) == '@'){
+    			flag=1;
+    		}
+    	}
+    	if(flag==0){
+    		this.addActionError("邮箱不合法！");
+    	}
+    	if(phone.length()!=11){
+    		this.addActionError("手机号不合法！");
+    	}
+    	if(sex!=1 && sex!=0){
+    		this.addActionError("性别不合法！");
+    	}
+    	if(about.length()>20){
+    		this.addActionError("签名不得超过20个字符！");
+    	}
+    }
+    
+    
+    
+    
+    /*    管理员登陆*/
     public String findOne() throws Exception{
     	User user = this.iUserService.findOne(this.user);
     	if(user == null){
     		return ERROR;
     	}
     	if(user.getIsadmin()==1){
-    		
-        	session.put("user", user);
+        	session.setAttribute("user", user);
         	return SUCCESS;
     	}else{
     		return ERROR;
@@ -68,38 +143,14 @@ public class UserAction extends ActionSupport
     public String getAll()throws Exception{
     	List<User> users = this.iUserService.getAll();
     	//System.out.println(users.get(0).getName());
-    	session.put("users", users);
+    	session.setAttribute("users", users);
     	return SUCCESS;
     }
-   
-  /*  用户登陆*/
-    public String login() throws Exception{
-    	
-    	User user = this.iUserService.findOne(this.user);
-    	if(user == null){
-    		this.setMessage("用户名或者密码错误！");
-    		return ERROR;
-    	}else{
-        	return SUCCESS;
-    	}
-    	
-    }
-
-    /*用户注册*/
-    public String register() throws Exception{
-    	String id = CommonUtil.createUUID();
-    	this.user.setId(id);
-    	this.user.setPhoto("aaa");
-    	this.iUserService.save(this.user);
-    	return SUCCESS;
-    }
-	
-/*    @Override
+   /* @Override
     public void validate() {
-    	int sex = this.user.getSex();
-    	if(sex<0 || sex>1){
-    		this.addActionError("性别不合法！");
-    		
+    	String name = this.user.getName();
+    	if(name.length()<10){
+    		this.addActionError("用户名不合法！");
     	}
     }*/
 
