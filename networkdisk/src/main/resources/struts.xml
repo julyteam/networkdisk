@@ -107,4 +107,15 @@
 		</action>
 	</package>
 	
+	<package name="networkdisk.friend" namespace="/" extends="struts-default">
+		<!-- 好友列表 -->
+		<action name="findAll" class="friendAction" method="getAll">			
+			<result name="success">share.jsp</result>			
+		</action>
+		
+		<action name="findOne" class="friendAction" method="findafriend">			
+			<result name="success">share.jsp</result>			
+		</action>
+	</package>
+	
 </struts>
