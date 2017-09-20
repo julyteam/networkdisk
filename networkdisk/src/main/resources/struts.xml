@@ -60,16 +60,13 @@
 		</action>
 
 		<!-- 进度条进度 -->
-		<action name="progress" class="com.july.networkdisk.web.FileProgressAction">
+		<action name="progress" class="fileProgressAction">
 			<result name="json" type="json">
 				<param name="root">state</param>
 			</result>
 		</action>
 
-		<!-- 根据用户id查找所有的文件 -->
-		<action name="findAllByUser" class="fileAction" method="findAllByUser">
-			<result name="success">/WEB-INF/listFile.jsp</result>
-		</action>
+		
 
 		<!-- 文件下载 -->
 		<action name="fileDownload" class="fileAction">
@@ -78,6 +75,13 @@
 				<param name="inputName">downloadFile</param>
 				<!-- 下载缓冲区的大小 -->
 				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<!-- 根据用户id显示文件和文件夹 -->
+		<action name="showFileAndCate" class="fileAndCateAction" method="showFileAndCate">
+			<result name="json" type="json">
+				<param name="root">map</param>
 			</result>
 		</action>
 	</package>

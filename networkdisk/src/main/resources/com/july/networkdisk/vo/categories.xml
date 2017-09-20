@@ -17,7 +17,7 @@
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
 		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_status) values(#{id},#{name},#{reid},#{uid},#{state})
 	</insert>
-	<!-- 根据用户查找文件夹 -->
+	<!-- 根据条件查找文件夹 -->
 	<select id="findAllCateByUser" parameterType="map" resultMap="categorieMap">
 		select * from categorie
 		<where>
@@ -36,6 +36,23 @@
 		</where>
 	</select>
 	
+	<!-- 根据父级文件夹的id查找子级文件夹id -->
+	<select id="findCateByCatereid" parameterType="map" resultType="string">
+		select cat_id from categorie
+		<where>
+			<if test="cat_reid == null">
+				and cat_reid is null
+			</if>
+			<if test="cat_reid != null">
+				and cat_reid =#{cat_reid}
+			</if>
+			<if test="cat_state != null">
+				and cat_state =#{cat_state}
+			</if>
+		</where>
+	</select>
+	
+	
 	<!-- 查找一个文件夹所有信息 区分是否已经回收-->
 	<select id="get" parameterType="map" resultMap="categorieMap">
 		select * from
@@ -51,18 +68,12 @@
 		cat_id = #{cat_id}
 	</delete>
 	
-	<!-- 修改文件夹属性 -->
+	<!-- 修改文件夹名称或者是否进入回收站 -->
 	<update id="updateCate" parameterType="map">
 		update categorie
 		<set>
 			<if test=" cat_name != null">
 				cat_name= #{cat_name},
-			</if>
-			<if test=" cat_reid != null">
-				cat_reid= #{cat_reid},
-			</if>
-			<if test=" cat_reid == null">
-				cat_reid = null,
 			</if>
 			<if test=" cat_state != null">
 				cat_state= #{cat_state},
@@ -70,4 +81,17 @@
 		</set>
 		where cat_id = #{cat_id}
 	</update>
+	
+	<!-- 移动文件夹-->
+	<update id="updateCatereid" parameterType="map">
+		update categorie set
+			<if test=" cat_reid != null">
+				cat_reid= #{cat_reid}
+			</if>
+			<if test=" cat_reid == null">
+				cat_reid = null
+			</if>
+		where cat_id = #{cat_id}
+	</update>
+	
 </mapper>

@@ -20,6 +20,7 @@
 	
 	<bean id="cateService" class="com.july.networkdisk.service.impl.CateServiceImpl">
 		<property name="cateDao" ref="cateDao"></property>
+		<property name="iFileService" ref="fileService"></property>
 	</bean>
 	<bean id="cateDao" class="com.july.networkdisk.dao.CategorieDao" parent="baseDao">
 	</bean>

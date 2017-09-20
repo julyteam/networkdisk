@@ -63,12 +63,15 @@ public class TestDao {
 	}
 	@Test
 	public void testDeleteSignBatch() throws Exception {
-		String file_id = "17e2102a-e38f-4dcb-aecf-cc71dd18f379";
-		String file_id1 = "55a48859-275c-4b71-add6-3b1bf5c1f7b4";
+		String file_id = "123";
+		String file_id1 = "234";
 		List<String> list = new ArrayList<String>();
 		list.add(file_id);
 		list.add(file_id1);
-		fileDao.updateDeleteSingBatch(list);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("file_deletesign", 1);
+		fileDao.updateDeleteSingBatch(map);
 		System.out.println("----------");
 	}
 	

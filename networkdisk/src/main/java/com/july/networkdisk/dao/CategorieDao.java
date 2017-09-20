@@ -32,6 +32,22 @@ public class CategorieDao extends BaseDao {
 		return list;
 	}
 	/**
+	 * 根据cat_reid 和 cat_state 来查找文件夹ID
+	 * @param cat_reid
+	 * @param cat_state
+	 * @return
+	 */
+	public List<String> findCateByCatereid(String cat_reid,Integer cat_state){
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("cat_reid", cat_reid);
+		map.put("cat_state", cat_state);
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<String> list = sqlSession.selectList("cateSpace.findCateByCatereid",map);
+		sqlSession.close();
+		return list;
+	}
+	
+	/**
 	 * 根据ID查询一个文件夹，区分是否有deleteSign ，0 ，1；
 	 * @return
 	 */
@@ -45,12 +61,11 @@ public class CategorieDao extends BaseDao {
 		return cate;
 	}
 
-	
+
 	
 	
 	/**
 	 * 在回收站删除一个文件夹
-	 * 在业务层需要处理关联
 	 * @param cat_id
 	 * @return
 	 */
@@ -67,7 +82,7 @@ public class CategorieDao extends BaseDao {
 
 	
 	/**
-	 * 根据文件夹cat_id 修改cat_name或者cat_reid或者cat_state
+	 * 根据文件夹cat_id 修改cat_name或者cat_reid
 	 * @param map
 	 * @return
 	 */
@@ -83,16 +98,23 @@ public class CategorieDao extends BaseDao {
 		return false;
 	}
 	/**
-	 * 把一批文件放入回收站
+	 * 移动文件夹
+	 * @param cate_id
+	 * @param catereID
 	 * @return
 	 */
-	public boolean updateDeleteSingBatch(List file_ids){
+	public boolean updateCatereid(String cate_id,String catereID){
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		int row = sqlSession.delete("fileSpace.updateDeleteSingBatch", file_ids);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cat_id", cate_id);
+		map.put("cat_reid", catereID);
+		int row =sqlSession.update("cateSpace.updateCatereid", map);
 		sqlSession.close();
-		if (row == file_ids.size()) {
+		if(row > 0)
+		{
 			return true;
 		}
 		return false;
 	}
+	
 }
