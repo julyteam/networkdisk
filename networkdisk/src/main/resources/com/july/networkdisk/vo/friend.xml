@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="friendSpace">
+	<!-- resultMap标签：映射实体与表 type：表示实体全路径名 id属性：为实体与表的映射取一个唯一的编号 -->
+	<resultMap type="com.july.networkdisk.vo.Friend" id="friendMap">
+		<!-- id标签：映射主键属性 property属性：实体的属性名 column属性：表的字段名 -->
+		<id property="id" column="fri_id" />
+		<result property="uid" column="fri_uid" />
+		<result property="fid" column="fri_fid" />
+		<result property="addtime" column="fri_addtime" />
+	</resultMap>
+	
+	<!-- 增加员工 -->
+	<insert id="addfriend" parameterType="com.july.networkdisk.vo.Friend">
+		insert into friend(fri_id,fri_uid,fri_fid)values(#{id},#{uid},#{rid})
+	</insert>
+	<!-- 查找一个用户信息 -->
+	<select id="findOne" resultMap="friendMap">
+		select * from user where user_name=#{name} or user_phone=#{name}
+	</select>
+	<!-- 查找所有好友信息 -->
+	<select id="getAll" resultMap="friendMap">
+		select * from user where user_id = (select fri_fid from friend where fri_uid=#{0})
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

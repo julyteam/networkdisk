@@ -103,10 +103,26 @@ body h6 {
 	top: 0px !important;
 }
 
+.admin{
+	width: 220px;
+	height: 30px;
+	text-align: left;
+}
+.username{	
+	width: 110px;
+	height: 30px;
+	display: inline-block;
+	line-height: 30px;
+	text-align: left;
+	white-space:nowrap;
+	overflow:hidden;
+	font-size:14px;
+	text-overflow: ellipsis;
+}
+
 .user {
-	position: relative;
+	position: absolute;
 	float: right;
-	left: 20px;
 	text-align: left;
 	display: none;
 	z-index: 22;
@@ -141,8 +157,15 @@ body h6 {
 	padding-top: 20px;
 	padding-left: 15px;
 }
-
-.userpan_4 p {
+.userpan_4 span{
+	display: block;
+	color: #000000;
+}
+.userpan_4 span:hover{
+	color: #FFFFFF;
+}
+.userpan_4 p{
+	display: block;
 	margin: 0px;
 	padding-left: 15px;
 	text-align: left;
@@ -151,8 +174,7 @@ body h6 {
 }
 
 .userpan_4 p:hover {
-	background-color:#888888;
-	color: #FFFFFF;
+	background-color:#888888;	
 }
 
 img.userpic {

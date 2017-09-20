@@ -60,8 +60,6 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-
-
 	</package>
 	
 	<!-- 管理员 -->
@@ -72,6 +70,18 @@
 		</action>
 		<action name="getUserAll" class="userAction" method="getAll">
 			<result name="success">/manager/user.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="networkdisk.friend" namespace="/" extends="struts-default">
+		<!-- 好友列表 -->
+		<action name="findAll" class="friendAction" method="getAll">			
+			<result name="success">share.jsp</result>			
+		</action>
+		
+		<action name="findOne" class="friendAction" method="findafriend">			
+			<result name="success">share.jsp</result>			
 		</action>
 	</package>
 	

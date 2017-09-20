@@ -49,20 +49,23 @@
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">admin12345123&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c"/></em>
+									<div class="admin">
+										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 20px;" />
+										<a href="#" style="display: inline-block;">
+											<div class="username">我们的修改会事倍功半</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:20px ;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 20px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
-									</span>
+										</span>
 										<div class="userpan">
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
 														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin12345123</a>
+														<a href="">admin</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -71,19 +74,19 @@
 												<span>
 												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-											</span>
+												</span>
 											</div>
 											<div class="userpan_4">
-												<p href="">个人资料</p>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
+												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a href=""><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</li>
-							<li style="width: 100px;margin-top:5px;">
+							<li style="width: 100px; margin-top:5px;">
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
 							<li style="margin-top:5px;">
