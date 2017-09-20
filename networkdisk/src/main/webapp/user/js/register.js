@@ -43,7 +43,7 @@ $(document).ready(function(){
 					      repassword: {
 						        required: true,
 						        rangelength:[6,14],
-						        equalTo:"#passWord"
+						        equalTo:"#password"
 						      },
 					      code: {
 					        required: true
