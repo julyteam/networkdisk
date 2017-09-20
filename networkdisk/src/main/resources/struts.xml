@@ -19,9 +19,6 @@
 		</action>
 	</package>
 
-	
-
-
 	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
 		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
 		scope="default" optional="true" />

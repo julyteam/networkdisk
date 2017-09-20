@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -40,19 +41,21 @@ public class FriendAction extends ActionSupport{
     	return SUCCESS;
     }
 	/**
-     * 添加好友
+     * 查询好友
      * @return
      * @throws Exception
      */
 	
 	public String findafriend() throws Exception{
 		HttpServletRequest request =ServletActionContext.getRequest();
+		HttpServletResponse resp=ServletActionContext.getResponse();
 		String friendname= request.getParameter("friendname");
 		System.out.println(friendname);
 		List<User> thefriend = this.iFriendService.findOne(friendname);
     	ActionContext actionContext = ActionContext.getContext();
     	Map<String, Object> session = actionContext.getSession();
     	session.put("thefriend", thefriend);
+    	resp.getWriter().write("true");
 		return SUCCESS;		
 	}
 
