@@ -47,19 +47,14 @@
 					<div class="span2">
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
-								<div class="sev">
+							<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 20px;" />
+										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
 											<div class="username">我们的修改会事倍功半</div>
-											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:20px ;" />
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 20px;"/></em>
-=======
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">${user.name }&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c"/></em>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
@@ -70,9 +65,7 @@
 													<a href="#">
 														<img src="/networkdisk/img/pic3.png" class="userpic" />
 														<a href="">admin</a>
-=======
-														<a href="">${user.name }</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
 													</a>
 												</div>
 											</div>
@@ -87,10 +80,6 @@
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
 												<p><a href=""><span>退出</span></a></p>
-												<a href="/networkdisk/user/update.jsp" style="color:#000;"><p>个人资料</p></a>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
 											</div>
 										</div>
 									</div>

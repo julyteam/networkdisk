@@ -49,12 +49,12 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 20px;" />
+										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
 											<div class="username">我们的修改会事倍功半</div>
-											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:20px ;" />
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 20px;"/></em>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
