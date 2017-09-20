@@ -62,7 +62,7 @@ padding-left:15px;
 					<label>真实姓名</label><input type="text" name="trueName" id="realname" value="${user.trueName }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div>
 				<div class="reg_sex">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex" checked="checked" /> 女
+					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" checked="checked"/>男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex"  /> 女
 				</div>
 				<div class="reg_tel">
 

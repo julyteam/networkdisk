@@ -73,7 +73,7 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<a href="/networkdisk/user/update.jsp" style="color:#000;"><p>个人资料</p></a>
+												<a href="/networkdisk/per-center.jsp" style="color:#000;"><p>个人资料</p></a>
 												<p href="">帮助中心</p>
 												<p href="">设置</p>
 												<p href="">退出</p>

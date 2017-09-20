@@ -42,18 +42,24 @@
 		UPDATE `user` SET user_email=#{email},user_phone=#{phone},user_sex=#{sex},user_about=#{about} WHERE user_id=#{id}
 	</update>
 
-	
+	<!-- 用户名验证查找 -->
 	<select id="selectUserByname" resultMap="userMap">
 	 select * from user where user_name=#{name}
 	</select>
-	
+	<!-- 手机号验证查找 -->
 	<select id="selectUserBytel" resultMap="userMap">
 	 select * from user where user_phone=#{phone}
 	</select>
-	
+	<!-- 邮箱验证查找 -->
 	<select id="selectUserByemail" resultMap="userMap">
 	 select * from user where user_email=#{email}
 	</select>
+	
+	<update id="updatePassword" parameterType="com.july.networkdisk.vo.User">
+	
+	update user set user_password=#{passWord} where user_id=#{id}
+	
+	</update>
 
 </mapper>
 

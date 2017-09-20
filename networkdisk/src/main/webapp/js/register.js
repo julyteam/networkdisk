@@ -46,7 +46,7 @@ $(document).ready(function(){
 					  
 					    messages: {
 					      name: {
-					    	remote: "用户名已存在",
+					    	  remote: "用户名已存在",
 					        required: "请输入用户名",
 					        minlength: "用户名最长为14个英文组成"
 					        

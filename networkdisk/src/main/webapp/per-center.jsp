@@ -20,7 +20,7 @@
 <style>
 
 .error {
-padding-left:15px;
+    padding-left:15px;
 	color: red;
 }
 </style>
@@ -78,20 +78,9 @@ $().ready(function() {
 		 
 		 
 		 
-	 });
+	 })
 	 
 })
-	      
-
-	
-	
-	
-	
-	
-	
-	
-
-	
 
 </script>
 
@@ -222,12 +211,14 @@ $().ready(function() {
 						<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input type="text" id="u_about"><li>
 					</ol>
 					</fieldset>
-		  </form>
+		  
 		  <br/>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
+                <button type="submit" class="btn btn-primary">提交更改</button>
             </div>
+            <input type="hidden" name="id" value="${user.id}">
+           </form> 
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     </div>
@@ -240,10 +231,10 @@ $().ready(function() {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-lock"></span>  修改密码</h4>
             </div>
-            <form action="regiser.html" onsubmit="return  check()">
+            <form action="updatePassAction"  id="updatePassForm" method="post">
 					<ol  class="right-03">
-						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value=""><span class="msg1"></span></li>
-						<li>确认密码:</span><input type= "password"  id="u_pwd2" value=""><span class="msg2"></span></li>
+						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value="" name="passWord"><span class="msg1"></span></li>
+						<li>确认密码:</span><input type= "password"  id="u_pwd2" value="" name="repassword"><span class="msg2"></span></li>
 					</ol>
 		  
 		  <br/>
@@ -251,6 +242,7 @@ $().ready(function() {
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary" >提交更改</button>
             </div>
+            <input type="hidden" name="id" value="${user.id}">
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -259,25 +251,7 @@ $().ready(function() {
 		
 
 <script>	
-	/*两次密码是否相同*/
-	function check(){
-	var pwd1 = document.getElementById("u_pwd1").value;
-	var pwd2 = document.getElementById("u_pwd2").value;
-	
-	if(pwd1==""){
-		$(".msg1").html("密码不能空");
-		if(pwd2==""){
-		$(".msg2").html("请输入密码");
-		return false;
-	};
-	};
-	
-	if(pwd2!=pwd1){
-		$(".msg2").html("两次密码不一致");
-		return false;
-	}else{ return true;}
-	    
-	};
+
        /*修改头像*/
 		$('.change-head').hover(function(e){
 			$('.head-content').animate({ "height":"75px"});
@@ -286,6 +260,62 @@ $().ready(function() {
 		});
 			
 		$(document).ready(function() { 
+			
+		//密码修改验证	
+		$("#updatePassForm").validate({
+			rules:{
+				 passWord: {
+				        required: true,
+				        rangelength:[6,14]
+				      },
+				      repassword: {
+					        required: true,
+					        rangelength:[6,14],
+					        equalTo:"#u_pwd1"
+					      }
+				 
+			 },
+			 messages: {
+				  passWord: {
+				        required: "请输入密码",
+				        rangelength: "密码长度为6-14个字符"
+				      },
+				      repassword: {
+					        required: "请输入密码",
+					        rangelength:"密码长度为6-14个字符",
+					        equalTo:"两次密码不一致"
+					      }
+				 
+			 }
+			 
+			 
+			 
+		 })
+			
+			
+			
+			
+			
+			
+			
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			/* 弹框*/
 			$(function() {

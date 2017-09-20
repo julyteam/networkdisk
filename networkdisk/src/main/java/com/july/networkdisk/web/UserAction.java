@@ -159,7 +159,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	}
     }*/
     
-    
+ /*    前台验证用户名注册*/
     public String checkUserName() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
@@ -177,7 +177,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		return null;
 	
     }
-    
+  /*  前台验证手机号*/
     public String checkPhone() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
@@ -194,6 +194,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		}
 		return null;
     }
+    /*前台验证邮箱*/
     public String checkEmail() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
@@ -210,6 +211,18 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		}
 	
 		return null;
+    }
+   /*密码修改*/
+    public String updatePassword()throws Exception
+    {
+    	String password = getMD5(this.user.getPassWord());
+    	this.user.setPassWord(password);
+    	this.iUserService.updatePassword(user);
+    	User u = CommonUtil.getSessionUser();
+    	u.setPassWord(password);
+    	session.setAttribute("user", u);
+    	
+    	return SUCCESS;
     }
 
 
