@@ -116,7 +116,13 @@
 	margin-left: 7px;
 	margin-top: 20px;
 }
-
+.repassword input {
+	margin-top: 20px;
+	height: 35px;
+	width: 350px;
+	margin-left: 5px;
+	
+}
 .reg_check {
 	margin-left: 54px;
 	margin-top: 15px;

@@ -17,6 +17,10 @@ public interface IFileService extends IBaseService<NetFile> {
 	InputStream fileDownLoad(String netFileID) throws Exception;
 	
 	boolean deleteBatch(String[] netFile_ids);
+	
 	boolean layRecyle(String netFile_id);
+	
 	boolean layBatchRecyle(String[] netFile_ids);
+	
+	boolean moveFile(String netFile_id,String cat_id);
 }

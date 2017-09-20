@@ -43,6 +43,7 @@
 			</if>
 		</where>
 	</select>
+	
 	<!-- 查找一个文件所有信息 区分是否已经回收-->
 	<select id="get" parameterType="map" resultMap="fileMap">
 		select * from
@@ -86,9 +87,13 @@
 			<if test=" file_deletesign != null">
 				file_deletesign=#{file_deletesign},
 			</if>
+			<if test=" file_type != null">
+				file_type=#{file_type},
+			</if>
 		</set>
 		where file_id = #{file_id}
 	</update>
+	
 	<!-- 把一批文件放入回收站 -->
 	<update id="updateDeleteSingBatch" parameterType="java.util.List">
 		update file set file_deletesign = 1 where file_id in

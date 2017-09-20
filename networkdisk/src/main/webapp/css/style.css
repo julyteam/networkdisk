@@ -157,6 +157,7 @@ body h6 {
 	padding-top: 20px;
 	padding-left: 15px;
 }
+<<<<<<< HEAD
 .userpan_4 span{
 	display: block;
 	color: #000000;
@@ -166,6 +167,9 @@ body h6 {
 }
 .userpan_4 p{
 	display: block;
+=======
+ .userpan_4 a {
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 	margin: 0px;
 	padding-left: 15px;
 	text-align: left;
@@ -173,8 +177,14 @@ body h6 {
 	line-height: 37.5px;
 }
 
+<<<<<<< HEAD
 .userpan_4 p:hover {
 	background-color:#888888;	
+=======
+.userpan_4 a:hover {
+	background-color:#888888;
+	color: #FFFFFF;
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 }
 
 img.userpic {
