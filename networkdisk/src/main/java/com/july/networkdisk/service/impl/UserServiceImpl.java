@@ -23,6 +23,7 @@ public class UserServiceImpl implements IUserService
     }
     
     public void update( User user) {
+    	this.userDao.update(user);
     }
     
     public boolean delete( String id) {

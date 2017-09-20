@@ -1,20 +1,39 @@
 package com.july.networkdisk.vo;
 
+import java.sql.Timestamp;
+
 public class Categorie {
 	private String id;
 	private String name;
 	private String reid;
+	private String uid;
+	private Integer state;
+	private Timestamp addtime;
+	
 	
 	public Categorie(){
 		
 	}
 
-	public Categorie(String id, String name, String reid) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.reid = reid;
+	
+	public String getUid() {
+		return uid;
 	}
+
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 
 	public String getId() {
 		return id;
@@ -38,6 +57,16 @@ public class Categorie {
 
 	public void setReid(String reid) {
 		this.reid = reid;
+	}
+
+
+	public Timestamp getAddtime() {
+		return addtime;
+	}
+
+
+	public void setAddtime(Timestamp addtime) {
+		this.addtime = addtime;
 	}
 
 	

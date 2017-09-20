@@ -11,7 +11,7 @@ public class UserDao extends BaseDao
 {
     public void save( User user) {
         final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-        sqlSession.insert("userSpace.add", user);
+        sqlSession.insert("userSpace.save", user);
         sqlSession.close();
     }
 
@@ -28,6 +28,15 @@ public class UserDao extends BaseDao
         sqlSession.close();
 		return u;
 	}
+
+
+	public void update(User user) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		sqlSession.update("userSpace.update", user);
+        sqlSession.close();
+	}
+
+
 	//前台用户名注册判断
 	public User selectUserByName(String name)
 	{
@@ -66,6 +75,6 @@ public class UserDao extends BaseDao
 		return 1;
 	}*/
    
-	
+
 	
 }

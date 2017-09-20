@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +18,9 @@
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
+<script type="text/javascript">
 
+</script>
 <style>
 
 .error {
@@ -43,33 +47,40 @@ padding-left:15px;
 		<hr />
 	</div>
 	<div class="reg_content">
-		<form class="register_form" action="" id="registerForm">
+		<!-- <form action="register.action" method="post">
+			<input type="submit" value="submit" />
+		</form> -->
+	
+	
+	
+		<form action="register.action" method="post" id="registerForm" class="register_form" >
 			<fieldset>
 				<div class="reg_username">
-					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="name" id="username"  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
-					/>
+					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="name"  id="username" value="${user.name }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div> 
 				<div class="reg_realname">
-					<label>真实姓名</label><input type="text" name="trueName" id="realname" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
-					 />
+					<label>真实姓名</label><input type="text" name="trueName" id="realname" value="${user.trueName }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div>
 				<div class="reg_sex">
-				&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex"  id="sex" checked="checked" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" id="sex" /> 女
+					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex" checked="checked" /> 女
 				</div>
 				<div class="reg_tel">
-					&nbsp;&nbsp;&nbsp;<label>手机号</label><input type="text" name="phone" id="telphone" onkeyup="value=value.replace(/[^0-9]/g,'')"
-					/>
+
+					&nbsp;&nbsp;&nbsp;<label>手机号</label><input type="text" name="phone" id="telphone" value="${user.phone }" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
 				</div>
 				<div class="reg_email">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>邮&nbsp;&nbsp;&nbsp;箱</label><input type="email" name="email"
+					&nbsp;&nbsp;&nbsp;&nbsp;<label>邮&nbsp;&nbsp;&nbsp;箱</label><input type="email" name="email" value="${user.email }"
 						id="email" />
+						<label style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
 					&nbsp;&nbsp;&nbsp;<label>验证码</label><input type="text" name="code" id="code" />
 				</div>
 				<div class="reg_password">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label><label>密&nbsp;&nbsp;&nbsp;码</label><input type="password" name="passWord"
-						id="password" />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;<label>密&nbsp;&nbsp;&nbsp;码</label><input type="password" name="passWord" value="${user.passWord }"
+						id="password" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
+
 				</div>
 				<div class="repassword">
 					<label>确认密码</label><input type="password" name="repassword" id="repassword"  />
@@ -83,7 +94,7 @@ padding-left:15px;
 				</div>
 			</fieldset>
 		</form>
-
+		
 	</div>
 </body>
 </html>

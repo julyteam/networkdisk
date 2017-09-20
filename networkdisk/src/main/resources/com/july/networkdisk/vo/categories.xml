@@ -8,14 +8,66 @@
 		<id property="id" column="cat_id" />
 		<result property="name" column="cat_name" />
 		<result property="reid" column="cat_reid" />
+		<result property="uid" column="cat_uid" />
+		<result property="state" column="cat_state" />
+		<result property="addtime" column="cat_addtime" />
 	</resultMap>
 	
 	<!-- 增加文件夹 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
-		insert into categories(cat_id,cat_name,cat_reid) values(#{id},#{name},#{reid})
+		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_status) values(#{id},#{name},#{reid},#{uid},#{state})
 	</insert>
-	<!-- 查找文件夹-->
-	<select id="findAllByCate" parameterType="String" resultMap="categorieMap">
-			select * from categories where cat_reid = #{cat_reid}
+	<!-- 根据用户查找文件夹 -->
+	<select id="findAllCateByUser" parameterType="map" resultMap="categorieMap">
+		select * from categorie
+		<where>
+			<if test="cat_uid != null">
+				and cat_uid = #{cat_uid}
+			</if>
+			<if test="cat_reid == null">
+				and cat_reid is null
+			</if>
+			<if test="cat_reid != null">
+				and cat_reid =#{cat_reid}
+			</if>
+			<if test="cat_state != null">
+				and cat_state =#{cat_state}
+			</if>
+		</where>
 	</select>
+	
+	<!-- 查找一个文件夹所有信息 区分是否已经回收-->
+	<select id="get" parameterType="map" resultMap="categorieMap">
+		select * from
+		categorie where cat_id = #{cat_id}
+		<if test="cat_state != null">
+			 and cat_state=#{cat_state}
+		</if>
+	</select>
+	
+	<!--删除一个文件夹 -->
+	<delete id="deleteOneCate" parameterType="String">
+		delete from categorie where 
+		cat_id = #{cat_id}
+	</delete>
+	
+	<!-- 修改文件夹属性 -->
+	<update id="updateCate" parameterType="map">
+		update categorie
+		<set>
+			<if test=" cat_name != null">
+				cat_name= #{cat_name},
+			</if>
+			<if test=" cat_reid != null">
+				cat_reid= #{cat_reid},
+			</if>
+			<if test=" cat_reid == null">
+				cat_reid = null,
+			</if>
+			<if test=" cat_state != null">
+				cat_state= #{cat_state},
+			</if>
+		</set>
+		where cat_id = #{cat_id}
+	</update>
 </mapper>

@@ -3,19 +3,26 @@ package com.july.networkdisk.util;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.july.networkdisk.vo.User;
-import com.opensymphony.xwork2.ActionContext;
+
 
 public class CommonUtil {
 	public static String createUUID(){
 		String strID=UUID.randomUUID().toString();
 		return strID;
 	}
+	public static HttpSession createSession(){
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		return session;
+		
+	}
 	public static User getSessionUser(){
-		ActionContext actionContext = ActionContext.getContext(); // 获取session
-		Map<String, Object> session = actionContext.getSession();
-		session.put("user", test());
-		return (User) session.get("user");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		return (User)session.getAttribute("user");
 	}
 	
 	public static User test(){

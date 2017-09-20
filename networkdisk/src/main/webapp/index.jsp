@@ -50,7 +50,7 @@
 								<div class="sev">
 									<div class="admin" style="width: 220px; height: 30px;">
 										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">admin12345123&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
+										<a href="#" style="display: inline;">${user.name }&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c"/></em>
 									</div>
 									<div class="user">
@@ -61,7 +61,7 @@
 												<div class="u1">
 													<a href="#">
 														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin12345123</a>
+														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -73,7 +73,7 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<p href="">个人资料</p>
+												<a href="/networkdisk/user/update.jsp" style="color:#000;"><p>个人资料</p></a>
 												<p href="">帮助中心</p>
 												<p href="">设置</p>
 												<p href="">退出</p>
