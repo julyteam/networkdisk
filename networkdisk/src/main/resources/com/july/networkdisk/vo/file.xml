@@ -25,13 +25,29 @@
 		(#{id},#{name},#{uid},#{catid},#{path},#{type},#{size},#{downum},#{deletesign})
 	</insert>
 	
-	<!-- 根据用户查找文件 -->
+	<!-- 根据条件查找文件 -->
 	<select id="findAllByUser" parameterType="map" resultMap="fileMap">
 		select * from file
 		<where>
 			<if test="file_uid != null">
 				and file_uid = #{file_uid}
 			</if>
+			<if test="file_catid == null">
+				and file_catid is null
+			</if>
+			<if test="file_catid != null">
+				and file_catid =#{file_catid}
+			</if>
+			<if test="file_deletesign != null">
+				and file_deletesign =#{file_deletesign}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据文件夹ID查找文件ID -->
+	<select id="findFileIDByCateID" parameterType="map" resultType="String">
+		select file_id from file
+		<where>
 			<if test="file_catid == null">
 				and file_catid is null
 			</if>
@@ -75,12 +91,6 @@
 			<if test=" file_name != null">
 				file_name= #{file_name},
 			</if>
-			<if test=" file_catid != null">
-				file_catid= #{file_catid},
-			</if>
-			<if test=" file_catid == null">
-				file_catid = null,
-			</if>
 			<if test=" file_downum != null">
 				file_downum= #{file_downum},
 			</if>
@@ -94,9 +104,21 @@
 		where file_id = #{file_id}
 	</update>
 	
-	<!-- 把一批文件放入回收站 -->
-	<update id="updateDeleteSingBatch" parameterType="java.util.List">
-		update file set file_deletesign = 1 where file_id in
+	<!-- 移动一个文件的目录 -->
+	<update id="updateFileCate" parameterType="map">
+		update file set
+			<if test=" file_catid != null">
+				file_catid= #{file_catid}
+			</if>
+			<if test=" file_catid == null">
+				file_catid = null
+			</if>
+		where file_id = #{file_id}
+	</update>
+	
+	<!-- 把一批文件放入或放出回收站 -->
+	<update id="updateDeleteSingBatch" parameterType="map">
+		update file set file_deletesign = #{file_deletesign} where file_id in
 		<foreach collection="list" index="index" item="file_id" open="(" separator="," close=")" >    
             #{file_id}    
         </foreach>  

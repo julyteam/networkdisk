@@ -19,13 +19,25 @@ public class FileDao extends BaseDao {
 		sqlSession.close();
 	}
 	/**
-	 * 查询所有文件
+	 * 查询所有文件的信息
 	 * 
 	 * @return
 	 */
 	public List<NetFile> findAllByUser(Map<String, Object> map) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		List<NetFile> list = sqlSession.selectList("fileSpace.findAllByUser",map);
+		sqlSession.close();
+		return list;
+	}
+	
+	/**
+	 * 根据文件id查询所有文件的id
+	 * 
+	 * @return
+	 */
+	public List<String> findFileIDByCateID(Map<String, Object> map) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<String> list = sqlSession.selectList("fileSpace.findFileIDByCateID",map);
 		sqlSession.close();
 		return list;
 	}
@@ -92,15 +104,34 @@ public class FileDao extends BaseDao {
 		}
 		return false;
 	}
+	
 	/**
-	 * 把一批文件放入回收站
+	 * 移动文件的目录
 	 * @return
 	 */
-	public boolean updateDeleteSingBatch(List file_ids){
+	public boolean updateFileCate(String file_id,String file_catid){
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		int row = sqlSession.delete("fileSpace.updateDeleteSingBatch", file_ids);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("file_id", file_id);
+		map.put("file_catid", file_catid);
+		int row = sqlSession.delete("fileSpace.updateFileCate", map);
 		sqlSession.close();
-		if (row == file_ids.size()) {
+		
+		return true;
+	}
+	
+	
+	
+	/**
+	 * 把一批文件放入或者放出回收站
+	 * 参数为文件的id(list)和sate
+	 * @return
+	 */
+	public boolean updateDeleteSingBatch(Map<String, Object> map){
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		int row = sqlSession.delete("fileSpace.updateDeleteSingBatch", map);
+		sqlSession.close();
+		if (row == ((List<String>)(map.get("list"))).size()) {
 			return true;
 		}
 		return false;

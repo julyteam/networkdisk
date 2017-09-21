@@ -37,7 +37,7 @@
 								<a href="#">网盘</a>
 							</li>
 							<li>
-								<a href="#">分享</a>
+								<a href="findAll?uid=12134">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -47,22 +47,25 @@
 					<div class="span2">
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
-								<div class="sev">
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">${user.name }&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c"/></em>
+							<div class="sev">
+									<div class="admin">
+										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<a href="#" style="display: inline-block;">
+											<div class="username">我们的修改会事倍功半</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
-									</span>
+										</span>
 										<div class="userpan">
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
 														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">${user.name }</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+														<a href="">admin</a>
+														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
 													</a>
 												</div>
 											</div>
@@ -70,13 +73,13 @@
 												<span>
 												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-											</span>
+												</span>
 											</div>
 											<div class="userpan_4">
-												<a href="/networkdisk/per-center.jsp" style="color:#000;"><p>个人资料</p></a>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
+												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a href=""><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -220,7 +223,8 @@
 												<tbody>
 													<tr>
 														<td id="t1">
-															<input type="checkbox" class="chk_2" />产品1
+															<input type="checkbox" class="chk_2" />
+															<a>产品1</a>
 															<span id="more">
 															<span class="fa fa-share-alt" title="分享"></span>
 															<span class="fa fa-download" title="下载"></span>
