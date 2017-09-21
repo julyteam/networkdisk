@@ -49,7 +49,7 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
 											<div class="username">我们的修改会事倍功半</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
@@ -63,7 +63,7 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="showphoto"  width="30px"  class="userpic" />
+														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
 														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>

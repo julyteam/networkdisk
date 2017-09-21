@@ -36,7 +36,7 @@
 		<action name="showphoto" class="userAction" method="showphoto"></action>
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="success" type="redirect">per-center</result>
 			<result name="error">/per-center.jsp</result>
 			<result name="input">/per-center.jsp</result>
 		</action>

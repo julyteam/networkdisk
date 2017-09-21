@@ -110,7 +110,7 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
 											<div class="username">我们的修改会事倍功半</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
@@ -124,8 +124,8 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
+														<img src="${pageContext.request.contextPath}/showphoto"  width="30px" class="userpic" />
+														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -166,7 +166,7 @@
 					<div class="person-left">
 						<ol>
 							<li><a class="change-head"><div class="change-h">
-										<img src="" class="img-head" />
+										<img src="${pageContext.request.contextPath}/showphoto" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
@@ -192,7 +192,7 @@
 									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${user.name }</span></li>
 									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${user.email}</span></li>
 									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${user.phone}</span></li>
-									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==0?"男":"女" }</span></li>
+									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==1?"男":"女" }</span></li>
 									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${user.about }</span></li>
 									<li><input class="btn btn-default" type="button"
 										value="修 改" data-toggle="modal" data-target="#editInfo"
@@ -220,7 +220,7 @@
 						<span class="glyphicon glyphicon-edit"></span> 修改信息
 					</h4>
 				</div>
-				<form id="updateForm" action="">
+				<form id="updateForm" action="${pageContext.request.contextPath}/userUpdate">
 					<fieldset>
 						<ol class="right-02">
 							<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input
@@ -230,24 +230,27 @@
 								type="text" id="u_email" value="${user.email}" name="email"></li>
 							<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input
 								type="text" id="u_phone" value="${user.phone }" name="phone"></li>
-							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input
-								type="radio" name="radiobutton"
+							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span>
+							<input
+								type="radio" name="sex" value="1"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==0}">checked="checked"</c:if>>男<input
-								type="radio" name="radiobutton"
+								<c:if test="${user.sex==1}">checked="checked"</c:if>>男
+							<input
+								type="radio" name="sex" value="0"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==1}">checked="checked"</c:if>>女</li>
+								<c:if test="${user.sex==2}">checked="checked"</c:if>>女</li>
 							<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input
-								type="text" id="u_about">
+								type="text" id="u_about" value="${user.about }" name="about">
 							<li>
 						</ol>
 					</fieldset>
-				</form>
+					
 				<br />
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
+					<button type="submit" class="btn btn-primary">提交更改</button>
 				</div>
+			</form>
 			</div>
 			<!-- /.modal-content -->
 		</div>

@@ -93,8 +93,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     }
     /*用户个人资料修改*/
     public String update() throws Exception{
-    	this.iUserService.update(this.user);
     	User u = CommonUtil.getSessionUser();
+    	this.user.setId(u.getId());
+    	this.iUserService.update(this.user);
     	u.setEmail(this.user.getEmail());
     	u.setPhone(this.user.getPhone());
     	u.setSex(this.user.getSex());
@@ -142,6 +143,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String showphoto() throws Exception{
     	User u = CommonUtil.getSessionUser();
 	   User user = iUserService.get(u.getId());
+	   System.out.println(user.getPhoto()+"~~~~~~~~~~~~~~~~~~~~~~");
 	   HttpServletResponse response = null;
 	   ServletOutputStream out = null;
 	   response = ServletActionContext.getResponse();
