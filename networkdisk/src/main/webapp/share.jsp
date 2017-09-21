@@ -3,22 +3,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>分享界面</title>
-	<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
+		<title>分享界面</title>
+		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
 		<link href="/networkdisk/css/share.css" rel="stylesheet" />
-		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
-		
+		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>		
 		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
+		<script src="/networkdisk/js/index.js"></script>
 </head>
 <body>
 	<div id="in-nav">
 			<div class="container">
 				<div class="row">
 					<div class="logo">
-						<a id="logo" href="index.html">
-							<img src="img/LOGO.png" />
+						<a id="logo" href="/networkdisk/index.jsp">
+							<img src="/networkdisk/img/LOGO.png" />
 							<a class="logotitle" href="">July</a>
 						</a>
 					</div>
@@ -28,7 +28,7 @@
 								<a href="#">网盘</a>
 							</li>
 							<li>
-								<a href="#">分享</a>
+								<a href="findAll?uid=12134">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -38,22 +38,25 @@
 					<div class="span2">
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
-								<div class="sev">
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">admin12345123124&nbsp;<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="img/downchoose.png" class="c"/></em>
+							<div class="sev">
+									<div class="admin">
+										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<a href="#" style="display: inline-block;">
+											<div class="username">我们的修改会事半功倍</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
-									</span>
+										</span>
 										<div class="userpan">
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="img/pic3.png" class="userpic" />
-														<a href="">admin12345123124</a>
-														<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+														<img src="/networkdisk/img/pic3.png" class="userpic" />
+														<a href="">admin</a>
+														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
 													</a>
 												</div>
 											</div>
@@ -61,26 +64,26 @@
 												<span>
 												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-											</span>
+												</span>
 											</div>
 											<div class="userpan_4">
-												<p href="">个人资料</p>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
+												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a href=""><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</li>
-							<li style="width: 100px;">
+							<li style="width: 100px; margin-top:5px;">
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
-							<li>
-								<a href="#"><img src="img/notice.png" /></a>
+							<li style="margin-top:5px;">
+								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
-							<li>
-								<a href="#"><img src="img/serve.png" /></a>
+							<li style="margin-top:5px;">
+								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
 							</li>
 						</ul>
 					</div>
@@ -201,58 +204,7 @@
 			</div>
 		</div>
 	</body>
-	<script>
-		$(document).ready(function() {
-			//子导航展开收缩
-			$(".admin").mouseenter(function() {
-				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
-				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
-			});
-			/*鼠标离开下拉框关闭*/
-			$(".sev").mouseleave(function() {
-				$(".user").hide();
-				$(this).children(".admin").find(".c").addClass("lbaxztop2");
-			});
-			$(".file").mouseenter(function() {
-				$(this).next(".upload").toggle().parents(".upfile").siblings().find(".upload").hide();
-			});
-			$(".upfile").mouseleave(function() {
-				$(".upload").hide();
-			});
-			$("#g_button").mouseenter(function() {
-				$(this).next(".equi").toggle().parents(".equip").siblings().find(".equi").hide();
-			});
-			$(".equip").mouseleave(function() {
-				$(".equi").hide();
-			});
-			$(".list").mouseenter(function() {
-				$(this).next(".listpal").toggle().parents(".ch").siblings().find(".listpal").hide();
-			});
-			$(".lp").mouseleave(function() {
-				$(".listpal").hide();
-			});
-			$('.listpal li').click(function() {
-				$(this).siblings().find('.active').removeClass();
-				$(this).children('img').addClass("active");
-			});
-			var toggle = true;
-			$(".large").click(function() {
-				if (toggle) {
-					$(this).children("img").attr("src", "img/row.png");
-					toggle = false;
-				} else {
-					$(this).children("img").attr("src", "img/other.png");
-					toggle = true;
-				}
-			});
-		});
-	</script>
 
 </body>
-<<<<<<< HEAD
 
 </html>
-=======
-
-</html>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git

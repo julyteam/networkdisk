@@ -24,8 +24,7 @@
 .share_content_right
 {
 	float:right;
-	border-radius: 3px;
-	
+	border-radius: 3px;	
 	background-color: white;
 	height: 590px;
 	width: 710px;
@@ -130,10 +129,7 @@
 }
 #user_content
 {
-	height:490px;
-	
-	overflow-y:auto;
-	overflow-x: hidden;
+	height:490px;	
 }
 
 	
