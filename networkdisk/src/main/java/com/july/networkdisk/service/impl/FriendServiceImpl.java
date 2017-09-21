@@ -53,6 +53,11 @@ public class FriendServiceImpl implements IFriendService{
 		this.friendDao = friendDao;
 	}
 
+	public int insertfriend(Friend friend) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 
 }

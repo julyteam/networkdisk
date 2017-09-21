@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
     <title>文件上传</title>  
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-ui.css" />    
-    <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>    
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.2.min.js"></script>    
     <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>    
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script>  
     <script type="text/javascript">  

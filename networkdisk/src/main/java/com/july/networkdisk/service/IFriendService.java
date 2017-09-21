@@ -14,4 +14,5 @@ public interface IFriendService{
 	
 	List<User> getAll(String uid);
 	List<User> findOne(String friendname);
+	int insertfriend(Friend friend);
 }
