@@ -78,9 +78,23 @@ $().ready(function() {
 		 
 		 
 		 
-	 })
+	 });
 	 
-})
+	 
+	 $("input[type='file']").change(function(){   
+		 var file = this.files[0];
+		   if (window.FileReader) {    
+		            var reader = new FileReader();    
+		            reader.readAsDataURL(file);    
+		            //监听文件读取结束后事件    
+		          reader.onloadend = function (e) {
+		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
+		            };    
+		       }
+		});
+
+	 
+});
 
 </script>
 
@@ -165,7 +179,7 @@ $().ready(function() {
 					<div class="person-info">
 						<div class="person-left">
 							<ol>
-								<li><a class="change-head"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
+								<li><a class="change-head"  data-toggle="modal"  data-target="#edittouxiang"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
 								<li class="time"><img src="/networkdisk/user/img/person-time.png"> <span class="time">注册时间:<fmt:formatDate  value="${user.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
 								<li class="real-name"><img src="/networkdisk/user/img/person-relName.png"> <span class="real-name">真实姓名:${user.trueName }</span></li>
 							    <li class="re-pwd"><a  data-toggle="modal"  data-target="#editPwd" ><img src="/networkdisk/user/img/person-pwd.png"><span class="re-pwd"> 修改密码</span></a></li>
@@ -246,6 +260,41 @@ $().ready(function() {
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+</div>
+
+
+
+
+<!-- 修改头像弹框 -->
+<div class="modal fade" id="edittouxiang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span>  修改头像</h4>
+            </div>
+            <div class="modal-body">
+            
+            <div class="modal_body_left">
+            <img alt="" src="" class="img-head" id="img" />
+            
+            </div>
+									<div class="modal_body_right">
+									
+										<a href="javascript:" class="update_btn"><input type="file" name="file"  /></a>
+									
+								</div>
+			
+								
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" >提交更改</button>
+            </div>
+           
+         
+        </div>
+    </div>
 </div>
 
 		
