@@ -3,9 +3,6 @@ package com.july.networkdisk.web;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,31 +20,11 @@ public class FileAction extends ActionSupport {
 	private File file; // 上传的文件，对应表单的file的name属性
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
+	private String netFileID; // 得到下载文件的ID
 
 	private IFileService fileService;
 	private User user = CommonUtil.getSessionUser(); // 获取session中的User
 
-	private List<NetFile> listFile; // 返回查询的文件列表到前台
-	private String netFileID; // 得到下载文件的ID
-
-	private String categorie_id; // 当前目录的id;
-	private Integer recycleflag; // 判断是否在回收站
-
-	public Integer getRecycleflag() {
-		return recycleflag;
-	}
-
-	public void setRecycleflag(Integer recycleflag) {
-		this.recycleflag = recycleflag;
-	}
-
-	public void setCategorie_id(String categorie_id) {
-		this.categorie_id = categorie_id;
-	}
-
-	public String getCategorie_id() {
-		return categorie_id;
-	}
 
 	public void setNetFileID(String netFileID) {
 		this.netFileID = netFileID;
@@ -57,13 +34,6 @@ public class FileAction extends ActionSupport {
 		return netFileID;
 	}
 
-	public List<NetFile> getListFile() {
-		return listFile;
-	}
-
-	public void setListFile(List<NetFile> listFile) {
-		this.listFile = listFile;
-	}
 
 	public IFileService getFileService() {
 		return fileService;
@@ -97,19 +67,7 @@ public class FileAction extends ActionSupport {
 		this.fileContentType = fileContentType;
 	}
 
-	/**
-	 * 根据用户查找用户的所有文件
-	 * 
-	 * @return
-	 */
-	public String findAllByUser() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("file_catid", categorie_id);  //判断所在的目录
-		recycleflag = 0;   //用作测试
-		map.put("file_deletesign", recycleflag);  //判断是否在回收站；
-		listFile = fileService.findAllByUser(user.getId(),map);
-		return SUCCESS;
-	}
+	
 
 	/**
 	 * 文件上传

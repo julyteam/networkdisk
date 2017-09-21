@@ -17,6 +17,8 @@
 	<bean id="fileAction" class="com.july.networkdisk.web.FileAction" scope="prototype">
 		<property name="fileService" ref="fileService"></property>
 	</bean>
+	<bean id="fileProgressAction" class="com.july.networkdisk.web.FileProgressAction" scope="prototype">
+	</bean>
 	<bean id="fileService" class="com.july.networkdisk.service.impl.FileServiceImpl">
 		<property name="fileDao" ref="fileDao"></property>
 	</bean>

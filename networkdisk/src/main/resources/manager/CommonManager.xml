@@ -17,4 +17,8 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
 	</bean>
 	
+	<bean id="fileAndCateAction" class="com.july.networkdisk.web.FileAndCateAction">
+		<property name="iFileService" ref="fileService"></property>
+		<property name="iCateService" ref="cateService"></property>
+	</bean>
 </beans>

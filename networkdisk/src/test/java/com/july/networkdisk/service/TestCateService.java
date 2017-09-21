@@ -21,4 +21,15 @@ public class TestCateService {
 		categorie.setState(0);
 		cateService.save(categorie);
 	}
+	
+	@Test
+	public void testREcyleCate(){
+		
+		cateService.recyleCate("1",0);
+	}
+	
+	@Test
+	public void testDeleteCate(){
+		cateService.deleteCate("1");
+	}
 }
