@@ -11,7 +11,7 @@
 		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
-		<link href="/networkdisk/css/share.css" rel="stylesheet" />
+		
 		<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
@@ -51,7 +51,7 @@
 									<div class="admin">
 										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
+											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>

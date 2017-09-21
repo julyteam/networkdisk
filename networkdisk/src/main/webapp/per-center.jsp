@@ -18,6 +18,7 @@
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
+<script src="/networkdisk/js/index.js"></script>
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <style>
 .error {
@@ -77,17 +78,19 @@
 			}
 
 		});
-		$("input[type='file']").change(function(){   
-		 var file = this.files[0];
-		   if (window.FileReader) {    
-		            var reader = new FileReader();    
-		            reader.readAsDataURL(file);    
-		            //监听文件读取结束后事件    
-		          reader.onloadend = function (e) {
-		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
-		            };    
-		       }
+		$("input[type='file']").change(function() {
+			var file = this.files[0];
+			if (window.FileReader) {
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				//监听文件读取结束后事件    
+				reader.onloadend = function(e) {
+					$("#img").attr("src", e.target.result); //e.target.result就是最后的路径地址
+				};
+			}
 		});
+
+		var img = $("#img1").val();
 
 	});
 </script>
@@ -97,78 +100,79 @@
 	<div id="in-nav">
 		<div class="container">
 			<div class="row">
-					<div class="logo">
-						<a id="logo" href="/networkdisk/index.jsp">
-							<img src="/networkdisk/img/LOGO.png" />
-							<a class="logotitle" href="">July</a>
-						</a>
-					</div>
-					<div class="span1" style="display: inline;">
-						<ul class="pull-left">
-							<li class="active">
-								<a href="#">网盘</a>
-							</li>
-							<li>
-								<a href="#">分享</a>
-							</li>
-							<li>
-								<a href="#">更多</a>
-							</li>
-						</ul>
-					</div>
-					<div class="span2">
-						<ul class="right">
-							<li class="chos" style="width: 220px;">
-								<div class="sev">
-									<div class="admin">
-										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
-										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
-											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
-										</a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
-									</div>
-									<div class="user">
-										<span id="triangle-up">								
-										</span>
-										<div class="userpan">
-											<div class="userpan_2">
-												<div class="u1">
-													<a href="#">
-														<img src="${pageContext.request.contextPath}/showphoto"  width="30px" class="userpic" />
-														<a href="">${user.name }</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
-													</a>
-												</div>
+				<div class="logo">
+					<a id="logo" href="/networkdisk/index.jsp"> <img
+						src="/networkdisk/img/LOGO.png" /> <a class="logotitle" href="">July</a>
+					</a>
+				</div>
+				<div class="span1" style="display: inline;">
+					<ul class="pull-left">
+						<li class="active"><a href="#">网盘</a></li>
+						<li><a href="#">分享</a></li>
+						<li><a href="#">更多</a></li>
+					</ul>
+				</div>
+				<div class="span2">
+					<ul class="right">
+						<li class="chos" style="width: 220px;">
+							<div class="sev">
+								<div class="admin">
+									<img src="${pageContext.request.contextPath}/showphoto"
+										width="30px" style="border-radius: 30px; margin-bottom: 22px;" />
+									<a href="#" style="display: inline-block;">
+										<div class="username">${user.name }</div> <img
+										src="/networkdisk/img/VIP1.png"
+										style="display: inline; margin-bottom: 22px;" />
+									</a> <em style="display: inline-block;"><img
+										src="/networkdisk/img/downchoose.png" class="c"
+										style="margin-bottom: 22px;" /></em>
+								</div>
+								<div class="user">
+									<span id="triangle-up"> </span>
+									<div class="userpan">
+										<div class="userpan_2">
+											<div class="u1">
+												<a href="#"> <img
+													src="${pageContext.request.contextPath}/showphoto"
+													width="30px" class="userpic" id="img1" /> <a href="">${user.name }</a>
+													<img src="/networkdisk/img/VIP1.png"
+													style="display: inline; margin-bottom: 5px;" />
+												</a>
 											</div>
-											<div class="userpan_3">
-												<span>
-												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
+										</div>
+										<div class="userpan_3">
+											<span> <a href=""
+												style="color: #000; font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-												</span>
-											</div>
-											<div class="userpan_4">
-												<p><a href=""><span>个人资料</span></a></p>
-												<p><a href=""><span>帮助中心</span></a></p>
-												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
-											</div>
+											</span>
+										</div>
+										<div class="userpan_4">
+											<p>
+												<a href=""><span>个人资料</span></a>
+											</p>
+											<p>
+												<a href=""><span>帮助中心</span></a>
+											</p>
+											<p>
+												<a href=""><span>设置</span></a>
+											</p>
+											<p>
+												<a href=""><span>退出</span></a>
+											</p>
 										</div>
 									</div>
 								</div>
-							</li>
-							<li style="width: 100px; margin-top:5px;">
-								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
-							</li>
-						</ul>
-					</div>
+							</div>
+						</li>
+						<li style="width: 100px; margin-top: 5px;"><a href="#"
+							style="font-size: 13px;">&nbsp;客户端下载</a></li>
+						<li style="margin-top: 5px;"><a href="#"><img
+								src="/networkdisk/img/notice.png" /></a></li>
+						<li style="margin-top: 5px;"><a href="#"><img
+								src="/networkdisk/img/serve.png" /></a></li>
+					</ul>
 				</div>
+			</div>
 		</div>
 
 		<div class="person">
@@ -177,7 +181,8 @@
 					<div class="person-left">
 						<ol>
 							<li><a class="change-head"><div class="change-h">
-										<img src="${pageContext.request.contextPath}/showphoto" class="img-head" />
+										<img src="${pageContext.request.contextPath}/showphoto"
+											class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
@@ -231,7 +236,8 @@
 						<span class="glyphicon glyphicon-edit"></span> 修改信息
 					</h4>
 				</div>
-				<form id="updateForm" action="${pageContext.request.contextPath}/userUpdate">
+				<form id="updateForm"
+					action="${pageContext.request.contextPath}/userUpdate">
 					<fieldset>
 						<ol class="right-02">
 							<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input
@@ -242,26 +248,24 @@
 							<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input
 								type="text" id="u_phone" value="${user.phone }" name="phone"></li>
 							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span>
-							<input
-								type="radio" name="sex" value="1"
+								<input type="radio" name="sex" value="1"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==1}">checked="checked"</c:if>>男
-							<input
+								<c:if test="${user.sex==1}">checked="checked"</c:if>>男 <input
 								type="radio" name="sex" value="0"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==2}">checked="checked"</c:if>>女</li>
+								<c:if test="${user.sex==0}">checked="checked"</c:if>>女</li>
 							<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input
 								type="text" id="u_about" value="${user.about }" name="about">
 							<li>
 						</ol>
 					</fieldset>
-					
-				<br />
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary">提交更改</button>
-				</div>
-			</form>
+
+					<br />
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary">提交更改</button>
+					</div>
+				</form>
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -303,75 +307,6 @@
 
 
 	<script>
-	/*修改头像*/
-		$('.change-head').hover(function(e){
-			$('.head-content').animate({ "height":"75px"});
-		},function(){
-			$('.head-content').css("display","none");
-		});
-			
-		$(document).ready(function() { 
-			
-		//密码修改验证	
-		$("#updatePassForm").validate({
-			rules:{
-				 passWord: {
-				        required: true,
-				        rangelength:[6,14]
-				      },
-				      repassword: {
-					        required: true,
-					        rangelength:[6,14],
-					        equalTo:"#u_pwd1"
-					      }
-				 
-			 },
-			 messages: {
-				  passWord: {
-				        required: "请输入密码",
-				        rangelength: "密码长度为6-14个字符"
-				      },
-				      repassword: {
-					        required: "请输入密码",
-					        rangelength:"密码长度为6-14个字符",
-					        equalTo:"两次密码不一致"
-					      }
-			 } 
-		 })
-
-			/* 弹框*/
-			$(function() {
-   				 $('#myModal').modal('hide')
-			});
-			      
-			//子导航展开收缩
-			$(".admin").mouseenter(function() {
-				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
-				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
-			});
-		/*两次密码是否相同*/
-		function check() {
-			var pwd1 = document.getElementById("u_pwd1").value;
-			var pwd2 = document.getElementById("u_pwd2").value;
-
-			if (pwd1 == "") {
-				$(".msg1").html("密码不能空");
-				if (pwd2 == "") {
-					$(".msg2").html("请输入密码");
-					return false;
-				}
-				;
-			}
-			;
-
-			if (pwd2 != pwd1) {
-				$(".msg2").html("两次密码不一致");
-				return false;
-			} else {
-				return true;
-			}
-
-		};
 		/*修改头像*/
 		$('.change-head').hover(function(e) {
 			$('.head-content').animate({
@@ -384,27 +319,70 @@
 		$(document).ready(
 				function() {
 
-					/* 弹框*/
-					$(function() {
-						$('#myModal').modal('hide')
+					//密码修改验证	
+					$("#updatePassForm").validate({
+						rules : {
+							passWord : {
+								required : true,
+								rangelength : [ 6, 14 ]
+							},
+							repassword : {
+								required : true,
+								rangelength : [ 6, 14 ],
+								equalTo : "#u_pwd1"
+							}
+
+						},
+						messages : {
+							passWord : {
+								required : "请输入密码",
+								rangelength : "密码长度为6-14个字符"
+							},
+							repassword : {
+								required : "请输入密码",
+								rangelength : "密码长度为6-14个字符",
+								equalTo : "两次密码不一致"
+							}
+						}
+					})
+
+					/*两次密码是否相同*/
+					function check() {
+						var pwd1 = document.getElementById("u_pwd1").value;
+						var pwd2 = document.getElementById("u_pwd2").value;
+
+						if (pwd1 == "") {
+							$(".msg1").html("密码不能空");
+							if (pwd2 == "") {
+								$(".msg2").html("请输入密码");
+								return false;
+							}
+							;
+						}
+						;
+
+						if (pwd2 != pwd1) {
+							$(".msg2").html("两次密码不一致");
+							return false;
+						} else {
+							return true;
+						}
+
+					}
+					;
+					/*修改头像*/
+					$('.change-head').hover(function(e) {
+						$('.head-content').animate({
+							"height" : "75px"
+						});
+					}, function() {
+						$('.head-content').css("display", "none");
 					});
 
-					//子导航展开收缩
-					$(".admin").mouseenter(
-							function() {
-								$(this).find(".c").removeClass("lbaxztop2")
-										.addClass("lbaxztop");
-								$(this).next(".user").toggle().parents(".sev")
-										.siblings().find(".user").hide();
-							});
-
-					/*鼠标离开下拉框关闭*/
-					$(".sev").mouseleave(
-							function() {
-								$(".user").hide();
-								$(this).children(".admin").find(".c").addClass(
-										"lbaxztop2");
-							});
+					/* 弹框*/
+					$(function() {
+						$('#myModal').modal('hide');
+					});
 					/* 当没有头像时，为默认头像*/
 					if ($('.img-head').attr("src") == "") {
 						$('.img-head').attr("src",
@@ -415,7 +393,6 @@
 					for (var i = 0; i < str.length; i++) {
 						str[i].style.margin = '10px';
 					}
-
 				});
 	</script>
 
