@@ -48,15 +48,15 @@
 	<update id="photoup" parameterType="com.july.networkdisk.vo.User">
 		UPDATE `user` SET user_photo=#{photo} WHERE user_id=#{id}
 	</update>
-	
+	<!-- 用户名验证查找 -->
 	<select id="selectUserByname" resultMap="userMap">
 	 select * from user where user_name=#{name}
 	</select>
-	
+	<!-- 手机号验证查找 -->
 	<select id="selectUserBytel" resultMap="userMap">
 	 select * from `user` where user_phone=#{phone}
 	</select>
-	
+	<!-- 邮箱验证查找 -->
 	<select id="selectUserByemail" resultMap="userMap">
 	 select * from user where user_email=#{email}
 	</select>

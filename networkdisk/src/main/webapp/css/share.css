@@ -25,8 +25,9 @@
 {
 	float:right;
 	border-radius: 3px;
-	height: 590px;
+	
 	background-color: white;
+	height: 590px;
 	width: 710px;
 	margin-left: 1px;
 }
@@ -58,27 +59,48 @@
 }
 #share_tab li.active a{
 	text-decoration: none;
-	background: #3C3C3C;
-	color: #FFFFFF;
+    color: black;
 }
 
-#share_tab li a{
+#share_tab a{
 	display: block;
 	text-decoration: none;
 	color:darkgray;
 }
+#share_tab li a:hover
+{
+	color: black;
+}
+.table{
+	margin-left:0px;
+}
+.table tr{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-bottom: 1px solid #E6E6FA;
+}
+#share_content{
+	height: 490px;
+}
 #session_content
 {
-	position: relative;
-	top: 2px;
+	overflow-y:auto;
+	overflow-x: hidden;
+	text-align: left;
+
 }
 #session_content a
 {
 	text-decoration: none;
+	cursor: pointer;
+	
 
 }
-.session_table
-{	
+.session_table 
+{
+	
 	border-bottom: 1px solid lightgray;
 	height: 60px;
 	width: 280px;
@@ -87,7 +109,9 @@
 .session_table:hover
 {
 	background:lavender;
+	cursor: pointer;
 }
+
 
 .session_user
 {
@@ -96,7 +120,7 @@
 }
 .session_time
 {
-	padding-left:85px;
+	padding-left:65px;
 	color: gray;
 }
 .session_other
@@ -104,26 +128,284 @@
 	padding-left:8px;
 	color: black;
 }
+#user_content
+{
+	height:490px;
+	
+	overflow-y:auto;
+	overflow-x: hidden;
+}
 
+	
 #user_content a
 {
 	text-decoration: none;
 	color: black;
+	cursor: pointer;
 }
-#user_content a:hover
+
+#user_content .user_table:hover
 {
 	background-color: lavender;
+	cursor: pointer;
 }
+
 .user_table
 {
 	
 	border-bottom: 1px solid lavender;
 	width: 280px;	
 	height: 60px;
+	cursor: pointer;
 
 }
 .user_name 
 {
  color:black;
  padding-right: 130px;
+}
+.session_bottom
+{
+	border-top: 1px solid gainsboro;
+	height: 40px;
+	
+}
+.session_bottom ul
+{
+	list-style: none;
+}
+.session_bottom ul li
+{
+	float: left;
+	line-height: 40px;
+	text-align: center;
+	padding-right: 15px;
+	
+}
+.session_bottom ul li a
+{
+	text-decoration: none;
+	color: black;
+	outline: none;
+	cursor: pointer;
+}
+.session_bottom ul li a:hover
+{
+	color: gray;
+}
+#default_a
+{
+	height: 100px;
+	width: 150px;
+	margin-top: 70px;
+	cursor: pointer;
+}
+
+#default_a  button
+{
+	height: 50px;
+	width: 150px;
+	background-color: black;
+	color: white;
+	border: 0;
+	border-radius: 2px;
+	outline: none;
+	cursor: pointer;
+	
+}
+#default_a a:hover
+{
+	opacity: 0.9;
+}
+.friend_info
+{
+	
+    margin-top: 40px;
+    text-align: center;
+    
+    
+}
+.friend_touxiang img
+{
+	height: 120px;
+	width: 120px;
+}
+.friend_name
+{
+	border-bottom: 1px dotted gray;
+}
+
+.option_one
+{
+	padding-top: 10px;
+}
+
+#active_button 
+{
+ background-color: black;
+ cursor: pointer;
+}
+.option_two a:hover
+{
+	opacity: 0.8;
+}
+.option_two button
+{
+	border: 0;
+	height: 35px;
+	width: 250px;
+     background-color: gray;
+	border-radius: 3px;
+	color:white;
+	margin-top: 20px;
+	outline: none;
+	cursor: pointer;
+}
+
+.table_new_friend
+{
+	border-bottom: 1px solid lightgray;
+	height: 60px;
+	width: 280px;
+}
+.friend_user img
+{
+	height: 46px;
+	width: 55px;
+	padding-left: 8px;
+	
+}
+.new_friend_name
+{
+	color: gray;
+}
+
+.new_friend_header
+{
+	height: 60px;
+	text-align: center;
+	background-color: gray;
+	color: white;
+	line-height: 60px;
+	width:100%;
+}
+.new_friend_listitem
+{
+	margin-top: 30px;
+	height: 70px;
+	background-color: gray;
+	
+}
+.listitem_left
+{
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-left: 5px;
+}
+.listitem_right
+{
+	float: right;
+	padding-right: 20px;
+	text-align: center;
+	line-height: 70px;
+	cursor: pointer;
+}
+
+.listitem_right button
+{
+	border:0;
+	height: 30px;
+	width: 100px;
+	background-color: ;
+	margin-right: 20px;
+	border-radius: 3px;
+	text-align: center;
+	outline: none;
+	cursor: pointer;
+	
+}
+.listitem_right a button:hover
+{
+	background-color: black;
+	color: white;
+}
+.listitem_right span
+{
+	padding-right: 30px;
+	padding-left: 10px;
+}
+
+.modal-body_item 
+{
+	margin-left: 20px;
+	
+}
+.modal-body_item  input
+{
+	width: 290px;
+	border-radius: 3px;
+	height: 30px;
+	border: 1px solid #cccccc; 
+    
+}
+.modal-body_item  button
+{
+	width:50px;
+	border-radius: 3px;
+	height: 30px;
+	background-color: gray;
+	margin-left: 4px;
+	color: white;
+	border: 1px solid #cccccc; 
+	outline: none;
+    
+}
+.search_result
+{
+	margin-top: 20px;
+	margin-left:20px ;
+}
+.result
+{
+	margin-top: 10px;
+	height: 30px;
+	padding-top: 3px;
+	background-color: darkgray;
+	color: white;
+}
+.btn_add 
+{
+	border: 1px solid #cccccc; 
+	outline: none;
+	background-color: gray;
+	color: white;
+	border-radius: 3px;
+	height: 30px;
+		
+}
+
+.modal-footer
+{
+	text-align: center;
+}
+.confirm
+{
+	border: 1px solid #cccccc; 
+	outline: none;
+	background-color: gray;
+	color: white;
+	border-radius: 3px;
+	height: 30px;
+		
+}
+.cancle
+{
+	border: 1px solid #cccccc; 
+	outline: none;
+	background-color: gray;
+	color: white;
+	border-radius: 3px;
+	height: 30px;
+		
 }

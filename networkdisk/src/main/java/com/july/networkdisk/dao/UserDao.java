@@ -77,16 +77,14 @@ public class UserDao extends BaseDao
 			sqlSession.close();
 		}
 	
-	
-	//修改个人信息
-	/*public int updateUser(User user)
-	{
-		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		 int i=sqlSession.update(arg0)
-		
-		return 1;
-	}*/
+	//密码修改
+		public void updatePassword(User user)
+		{
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			sqlSession.update("userSpace.updatePassword",user);
+			sqlSession.close();
+		}
    
-
+	
 	
 }

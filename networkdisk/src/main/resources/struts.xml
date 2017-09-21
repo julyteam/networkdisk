@@ -44,7 +44,12 @@
 		<action name="per-center" class="userAction" method="percenter">
 			<result name="success" type="redirect">/per-center.jsp</result>
 		</action>
-		
+		<!--密码修改  -->
+		<action name="updatePassAction" class="userAction" method="updatePassword">
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			
+		</action>
 		<!-- 用户注册 -->
 		<action name="register"  class="userRegister" method="register">
 			<result name="success" type="redirect">/login.jsp</result>

@@ -12,5 +12,6 @@ public interface IUserService extends IBaseService<User>
 	User selectUserByTel(String phone);
 	User selectUserByEmail(String email);
 	void photoup(User user);
+	void updatePassword(User user);
 	
 }

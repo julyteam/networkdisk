@@ -51,6 +51,7 @@
 	height: 150px;
 	border-radius: 50%;
 	margin-top:52px;
+	cursor: pointer;
 }
 .head-shade{
 	height:75px;
@@ -75,6 +76,7 @@
 .head-content p{
 	margin-top: 25px;
 	text-align:center;
+	cursor: pointer;
 	
 
 	}
@@ -92,6 +94,7 @@ ol{
 }
 .re-pwd{
 	margin-top: 20px;
+	cursor: pointer;
 }
 a:hover{
 	text-decoration: none;
@@ -159,4 +162,47 @@ a{
 .msg1,.msg2{
 	color:red;
 	margin-top: 10px;
+}
+
+
+.modal_body_left
+{
+	height:150px;
+	width:150px;
+	margin-left:200px;
+	
+	
+}
+.modal_body_left img
+{
+	border:1px red hidden ;
+	width:150px;
+	height:150px;
+	border-radius: 50%;
+	
+}
+.modal_body_right 
+{
+	 height:80px;
+      width:200px;
+	margin-left:175px;
+	
+
+	
+}
+
+
+.update_btn
+{
+	display:inline-block; 
+	background:url("/networkdisk/user/img/update.png");
+	background-repeat:no-repeat;
+	height:80px;
+	width:200px;  
+	overflow:hidden; 
+	cursor:pointer;
+}
+.update_btn input
+{
+	opacity:0;
 }

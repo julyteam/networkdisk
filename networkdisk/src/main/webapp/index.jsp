@@ -37,7 +37,7 @@
 								<a href="#">网盘</a>
 							</li>
 							<li>
-								<a href="#">分享</a>
+								<a href="findAll?uid=12134">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>

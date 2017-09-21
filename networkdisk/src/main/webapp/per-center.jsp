@@ -77,8 +77,19 @@
 			}
 
 		});
+		$("input[type='file']").change(function(){   
+		 var file = this.files[0];
+		   if (window.FileReader) {    
+		            var reader = new FileReader();    
+		            reader.readAsDataURL(file);    
+		            //监听文件读取结束后事件    
+		          reader.onloadend = function (e) {
+		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
+		            };    
+		       }
+		});
 
-	})
+	});
 </script>
 
 </head>
@@ -292,6 +303,52 @@
 
 
 	<script>
+	/*修改头像*/
+		$('.change-head').hover(function(e){
+			$('.head-content').animate({ "height":"75px"});
+		},function(){
+			$('.head-content').css("display","none");
+		});
+			
+		$(document).ready(function() { 
+			
+		//密码修改验证	
+		$("#updatePassForm").validate({
+			rules:{
+				 passWord: {
+				        required: true,
+				        rangelength:[6,14]
+				      },
+				      repassword: {
+					        required: true,
+					        rangelength:[6,14],
+					        equalTo:"#u_pwd1"
+					      }
+				 
+			 },
+			 messages: {
+				  passWord: {
+				        required: "请输入密码",
+				        rangelength: "密码长度为6-14个字符"
+				      },
+				      repassword: {
+					        required: "请输入密码",
+					        rangelength:"密码长度为6-14个字符",
+					        equalTo:"两次密码不一致"
+					      }
+			 } 
+		 })
+
+			/* 弹框*/
+			$(function() {
+   				 $('#myModal').modal('hide')
+			});
+			      
+			//子导航展开收缩
+			$(".admin").mouseenter(function() {
+				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
+				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
+			});
 		/*两次密码是否相同*/
 		function check() {
 			var pwd1 = document.getElementById("u_pwd1").value;

@@ -59,6 +59,10 @@ public class UserServiceImpl implements IUserService
 
 	public void photoup(User user) {
 		this.userDao.photoup(user);
+	}
+	public void updatePassword(User user) {
+		
+		 this.userDao.updatePassword(user);
 		
 	}
 }
