@@ -27,6 +27,10 @@
 	<select id="findOne" resultMap="userMap">
 		select * from `user` where user_name=#{name} and user_password=#{passWord}
 	</select>
+	<!-- 通过id查找用户信息 -->
+	<select id="get" parameterType="String" resultMap="userMap">
+		select * from `user` where user_id=#{id}
+	</select>
 	<!-- 查找所有用户信息 -->
 	<select id="getAll" resultMap="userMap">
 		select * from `user`
@@ -41,14 +45,16 @@
 	<update id="update" parameterType="com.july.networkdisk.vo.User">
 		UPDATE `user` SET user_email=#{email},user_phone=#{phone},user_sex=#{sex},user_about=#{about} WHERE user_id=#{id}
 	</update>
-
+	<update id="photoup" parameterType="com.july.networkdisk.vo.User">
+		UPDATE `user` SET user_photo=#{photo} WHERE user_id=#{id}
+	</update>
 	
 	<select id="selectUserByname" resultMap="userMap">
 	 select * from user where user_name=#{name}
 	</select>
 	
 	<select id="selectUserBytel" resultMap="userMap">
-	 select * from user where user_phone=#{phone}
+	 select * from `user` where user_phone=#{phone}
 	</select>
 	
 	<select id="selectUserByemail" resultMap="userMap">

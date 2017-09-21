@@ -31,7 +31,8 @@ public class UserServiceImpl implements IUserService
     }
     
     public User get( String id) {
-        return null;
+    	
+        return this.userDao.get(id);
     }
     
     public List<User> getAll() {
@@ -48,12 +49,16 @@ public class UserServiceImpl implements IUserService
 	}
 
 	public User selectUserByTel(String phone) {
-		
-		return this.userDao.selectUserByName(phone);
+		return this.userDao.selectUserByTel(phone);
 	}
 
 	public User selectUserByEmail(String email) {
 		
-		return this.userDao.selectUserByName(email);
+		return this.userDao.selectUserByEmail(email);
+	}
+
+	public void photoup(User user) {
+		this.userDao.photoup(user);
+		
 	}
 }

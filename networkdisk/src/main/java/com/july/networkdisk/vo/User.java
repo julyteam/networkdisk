@@ -14,7 +14,7 @@ public class User
     private Integer sex;
     private String about;
     private Timestamp addtime;
-    private String photo;
+    private byte[] photo;
     
     public String getId() {
         return this.id;
@@ -94,12 +94,14 @@ public class User
     public void setAddtime(Timestamp addtime) {
 		this.addtime = addtime;
 	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
     
-    public void setPhoto(final String photo) {
-        this.photo = photo;
-    }
-    
-    public String getPhoto() {
-        return this.photo;
-    }
+  
 }

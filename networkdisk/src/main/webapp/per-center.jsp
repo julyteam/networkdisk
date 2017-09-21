@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,27 +72,11 @@ $().ready(function() {
 			      email:{
 			    	    remote: "邮箱已注册",
 				        required: "请输入邮箱",
-				        email: "请输入一个正确的邮箱"
+				       email: "请输入一个正确的邮箱" 
 				      }
-			 
 		 }
-		 
-		 
-		 
 	 });
-	 
-})
-	      
-
-	
-	
-	
-	
-	
-	
-	
-
-	
+});
 
 </script>
 
@@ -124,7 +109,7 @@ $().ready(function() {
 							<li class="chos" style="width: 220px;">
 							<div class="sev">
 								<div class="admin" style="width: 220px; height: 30px;">
-									<img src="img/pic3.png" width="30px" style="border-radius: 30px;" />
+									<img src="showphoto" width="30px" style="border-radius: 60px;" />
 									<a href="#" style="display: inline;">${user.name }&nbsp;<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
 									<em style="display: inline-block;"><img src="img/downchoose.png" class="c"/></em>
 								</div>
@@ -135,7 +120,7 @@ $().ready(function() {
 										<div class="userpan_2">
 											<div class="u1">
 												<a href="#">
-													<img src="img/pic3.png" class="userpic" />
+													<img src="showphoto" class="userpic"width="30px" style="border-radius: 60px;"/>
 													<a href="">${user.name }</a>
 													<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 												</a>
@@ -176,7 +161,24 @@ $().ready(function() {
 					<div class="person-info">
 						<div class="person-left">
 							<ol>
-								<li><a class="change-head"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
+								<li>
+									<a class="change-head">
+										<div class="change-h"><img src="showphoto" class="img-head"/>
+											<div class="head-shade">
+												<span class="head-content">
+													
+												<form action="${pageContext.request.contextPath}/photoup" method="post"  enctype="multipart/form-data">
+														<input type="file" name="file"/>
+														<input type="submit" value="更改头像" style="float:left;" />
+												</form>
+												</span>
+											</div>
+										</div>
+									</a>
+									
+								</li>
+								
+								
 								<li class="time"><img src="/networkdisk/user/img/person-time.png"> <span class="time">注册时间:<fmt:formatDate  value="${user.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
 								<li class="real-name"><img src="/networkdisk/user/img/person-relName.png"> <span class="real-name">真实姓名:${user.trueName }</span></li>
 							    <li class="re-pwd"><a  data-toggle="modal"  data-target="#editPwd" ><img src="/networkdisk/user/img/person-pwd.png"><span class="re-pwd"> 修改密码</span></a></li>
@@ -190,10 +192,11 @@ $().ready(function() {
 								<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${user.name }</span></li>
 								<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${user.email}</span></li>
 								<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${user.phone}</span></li>
-								<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==0?"男":"女" }</span></li>
+								<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==1?"男":"女" }</span></li>
 								<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${user.about }</span></li>
 								<li><input class="btn btn-default"   type="button" value="修 改"  data-toggle="modal"  data-target="#editInfo" style="font-size: 16px;" ></li>
 							</ol>
+							<s:actionerror/>
 							</form>
 							</div>
 						
@@ -206,31 +209,35 @@ $().ready(function() {
 <!--修改基本信息弹框-->
 
 <div class="modal fade" id="editInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-edit"></span>  修改信息</h4>
             </div>
-            <form id="updateForm" action="">
-            <fieldset>
+            <form id="updateForm" action="userUpdate" method="post">
+            	<fieldset>
 					<ol  class="right-02">
-						<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input type="text" id="u_name" value="${user.name }" readonly="readonly"></li>
+						<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input type="text" id="u_name" value="${user.name }" name="name" readonly="readonly" style="background:gray;opacity:0.6;"></li>
 						<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:</span><input  type= "text"  id="u_email" value="${user.email}" name="email" ></li>
-						<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input type="text" id="u_phone" value="${user.phone }" name="phone"></li>
-						<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input type="radio" name="radiobutton" style="width:14px;height:14px;" <c:if test="${user.sex==0}">checked="checked"</c:if>>男<input type="radio" name="radiobutton" style="width:14px;height:14px;"<c:if test="${user.sex==1}">checked="checked"</c:if>>女 </li>
-						<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input type="text" id="u_about"><li>
+						<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span>&nbsp;<input type="text" id="u_phone" value="${user.phone }" name="phone"  onkeyup="value=value.replace(/[^0-9]/g,'')"/></li>
+						<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input type="radio" name="sex" value="1" style="width:14px;height:14px;" <c:if test="${user.sex==1}">checked="checked"</c:if>>男<input type="radio" name="sex" value="0" style="width:14px;height:14px;"<c:if test="${user.sex==0}">checked="checked"</c:if>>女 </li>
+						<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input type="text" id="u_about" name="about" value="${user.about} "/><li>
 					</ol>
-					</fieldset>
-		  </form>
-		  <br/>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
-            </div>
+				</fieldset>
+		 		<input type="hidden" name="id" value="${user.id }" />
+		 			 <br/>
+		        <div class="modal-footer">
+		             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		             <button type="submit" class="btn btn-primary">提交更改</button>
+		        </div>
+		        
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-    </div>
+
+</div>
     
  <!--修改密码弹框-->
 <div class="modal fade" id="editPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

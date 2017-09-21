@@ -53,7 +53,7 @@ $(document).ready(function(){
 					      },
 					      email: {
 					        required: true,
-					         email: true,
+					        email: true,
 					        remote: {
 					            url: "checkEmail",     
 					            type: "post",              

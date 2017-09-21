@@ -17,12 +17,29 @@
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="error">/login.jsp</result>
 		</action>
-
+		
+		<!-- 头像 -->
+		<action name="photoup" class="userAction" method="photoup">
+			<interceptor-ref name="fileUpload">
+				<!-- <param name="allowedTypes">.bmp,.pcx,.tiff,.gif,.jpeg,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.png,.hdri,.raw,.jpg</param> -->
+				<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg</param>
+				<param name="maximumSize">2097152</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="chain">per-center</result>
+			<result name="input">/per-center.jsp</result>
+		</action>
+		<!-- 显示图片 -->
+		<action name="showphoto" class="userAction" method="showphoto"></action>
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">/index.jsp</result>
-			<result name="error">/user/update.jsp</result>
-			<result name="input">/user/update.jsp</result>
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			<result name="input">/per-center.jsp</result>
+		</action>
+		<!-- 页面跳转 -->
+		<action name="per-center" class="userAction" method="percenter">
+			<result name="success" type="redirect">/per-center.jsp</result>
 		</action>
 		
 		<!-- 用户注册 -->
@@ -31,8 +48,6 @@
 			<result name="input">/register.jsp</result>
 		</action>
 
-		
-		
 		
 		<action name="checkUserName" class="userAction" method="checkUserName">
 			

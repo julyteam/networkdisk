@@ -141,14 +141,16 @@ body h6 {
 	padding-top: 20px;
 	padding-left: 15px;
 }
- .userpan_4 a {
+
+.userpan_4 a{
+	display:block;
 	margin: 0px;
-	padding-left: 15px;
+	padding-left:15px;
 	text-align: left;
 	height: 37.5px;
 	line-height: 37.5px;
+	color:#000;
 }
-
 .userpan_4 a:hover {
 	background-color:#888888;
 	color: #FFFFFF;
