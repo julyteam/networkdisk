@@ -41,12 +41,12 @@
 			<result name="input">/register.jsp</result>
 		</action>
 
-		<!--ajax验证 -->
-		<action name="checkUserName" class="userAction" method="checkUserName">			
+	    <!--ajax验证 -->
+		<action name="checkUserName" class="userAction" method="checkUserName">
 		</action>
-		<action name="checkPhone" class="userAction" method="checkPhone">			
+		<action name="checkPhone" class="userAction" method="checkPhone">
 		</action>
-		<action name="checkEmail" class="userAction" method="checkEmail">			
+		<action name="checkEmail" class="userAction" method="checkEmail">
 		</action>
 	</package>
 
@@ -69,6 +69,8 @@
 				<param name="root">state</param>
 			</result>
 		</action>
+
+
 
 		<!-- 文件下载 -->
 		<action name="fileDownload" class="fileAction">
