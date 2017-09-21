@@ -474,7 +474,6 @@ img.userpic {
 .equip_1{
 	width: 380px;
 	position: absolute;
-	margin-top: -20px;
 	margin-left: 355px;
 	display: none;
 	float: left;	
@@ -635,6 +634,8 @@ img.userpic {
 	background: #F8F8F8;
 	width: 90%;
 	float: right;
+	height:450px;
+	overflow-y: scroll;
 	margin-top: 50px;
 	border-top: 1px solid #ADADAD;
 	border-left: 1px solid #ADADAD;
