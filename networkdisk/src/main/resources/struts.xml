@@ -23,9 +23,16 @@
 
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">/index.jsp</result>
-			<result name="error">/user/update.jsp</result>
-			<result name="input">/user/update.jsp</result>
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			<result name="input">/per-center.jsp</result>
+		</action>
+		
+		<!--密码修改  -->
+		<action name="updatePassAction" class="userAction" method="updatePassword">
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			
 		</action>
 		
 		<!-- 用户注册 -->
@@ -35,14 +42,11 @@
 		</action>
 
 		<!--ajax验证 -->
-		<action name="checkUserName" class="userAction" method="checkUserName">
-			
+		<action name="checkUserName" class="userAction" method="checkUserName">			
 		</action>
-		<action name="checkPhone" class="userAction" method="checkPhone">
-			
+		<action name="checkPhone" class="userAction" method="checkPhone">			
 		</action>
-		<action name="checkEmail" class="userAction" method="checkEmail">
-			
+		<action name="checkEmail" class="userAction" method="checkEmail">			
 		</action>
 	</package>
 
@@ -60,15 +64,10 @@
 		</action>
 
 		<!-- 进度条进度 -->
-		<action name="progress" class="com.july.networkdisk.web.FileProgressAction">
+		<action name="progress" class="fileProgressAction">
 			<result name="json" type="json">
 				<param name="root">state</param>
 			</result>
-		</action>
-
-		<!-- 根据用户id查找所有的文件 -->
-		<action name="findAllByUser" class="fileAction" method="findAllByUser">
-			<result name="success">/WEB-INF/listFile.jsp</result>
 		</action>
 
 		<!-- 文件下载 -->
@@ -78,6 +77,13 @@
 				<param name="inputName">downloadFile</param>
 				<!-- 下载缓冲区的大小 -->
 				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<!-- 根据用户id显示文件和文件夹 -->
+		<action name="showFileAndCate" class="fileAndCateAction" method="showFileAndCate">
+			<result name="json" type="json">
+				<param name="root">map</param>
 			</result>
 		</action>
 	</package>
@@ -108,9 +114,12 @@
 		<action name="findAll" class="friendAction" method="getAll">			
 			<result name="success">share.jsp</result>			
 		</action>
-		
-		<action name="findOne" class="friendAction" method="findafriend">			
-			<result name="success">share.jsp</result>			
+		<action name="getList" class="friendAction" method="getAll">						
+		</action>		
+		<action name="findOne" class="friendAction" method="findafriend">							
+		</action>
+		<action name="intertOne" class="friendAction" method="addfriend">
+			<result name="chain">getList</result>							
 		</action>
 	</package>
 	
