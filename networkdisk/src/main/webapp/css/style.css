@@ -1013,7 +1013,7 @@ img.userpic {
 	display: inline-block;
 	border: 1px solid #262626;
 	border-radius: 5px;
-	line-height: 30px;
+	padding-top:7px;
 	margin-left:300px; 
 	cursor: pointer;
 	text-align: center;

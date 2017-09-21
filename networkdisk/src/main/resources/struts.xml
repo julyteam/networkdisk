@@ -41,7 +41,7 @@
 			<result name="input">/register.jsp</result>
 		</action>
 
-		<!--ajax验证 -->
+	    <!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">
 		</action>
 		<action name="checkPhone" class="userAction" method="checkPhone">
@@ -70,8 +70,6 @@
 			</result>
 		</action>
 
-		
-
 		<!-- 文件下载 -->
 		<action name="fileDownload" class="fileAction">
 			<result name="success" type="stream">
@@ -88,6 +86,7 @@
 				<param name="root">map</param>
 			</result>
 		</action>
+
 	</package>
 	
 	
@@ -116,9 +115,12 @@
 		<action name="findAll" class="friendAction" method="getAll">			
 			<result name="success">share.jsp</result>			
 		</action>
-		
-		<action name="findOne" class="friendAction" method="findafriend">			
-			<result name="success">share.jsp</result>			
+		<action name="getList" class="friendAction" method="getAll">						
+		</action>		
+		<action name="findOne" class="friendAction" method="findafriend">							
+		</action>
+		<action name="intertOne" class="friendAction" method="addfriend">
+			<result name="chain">getList</result>							
 		</action>
 	</package>
 	

@@ -249,5 +249,10 @@
 	</script>
 
 </body>
+<<<<<<< HEAD
 
 </html>
+=======
+
+</html>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git

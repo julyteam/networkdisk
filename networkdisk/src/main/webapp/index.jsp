@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="span12">
 						<ul style="padding: 0px;" id="tabs">
-							<li>
+							<li class="active">
 								<a href="/networkdisk/index.jsp#tw1" class="act"><i class="batch home"></i><br>全部文件</a>
 							</li>
 							<li>
@@ -126,7 +126,7 @@
 							<li>
 								<a href="/networkdisk/index.jsp#tw7"><i class="batch settings"></i><br>其他</a>
 							</li>
-							<li class="active">
+							<li>
 								<a href="/networkdisk/myshare.jsp"><i class="batch share"></i><br>我的分享</a>
 							</li>
 							<li>

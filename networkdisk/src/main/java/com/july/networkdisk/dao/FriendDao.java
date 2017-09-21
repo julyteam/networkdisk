@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.july.networkdisk.vo.Friend;
 import com.july.networkdisk.vo.User;
 
 /**
@@ -24,6 +25,7 @@ public class FriendDao extends BaseDao{
 		sqlSession.close();
 		return list;
 	}
+	
 	/**
 	 * @author Administrator
 	 * 根据input框中输入的昵称或者手机号查找好友
@@ -34,6 +36,18 @@ public class FriendDao extends BaseDao{
 		List<User> list = sqlSession.selectList("userSpace.getOnefriend",friendname);
 		sqlSession.close();
 		return list;
+	}
+	
+	/**
+	 * @author Administrator
+	 * 添加好友
+	 * 
+	 */	
+	
+	public void addfriend(Friend friend){
+		 final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+	     sqlSession.insert("friendSpace.addfriend",friend);
+	     sqlSession.close();
 	}
 
 }
