@@ -21,7 +21,11 @@
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <style>
 .error {
+<<<<<<< HEAD
+    padding-left:15px;
+=======
 	padding-left: 15px;
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 	color: red;
 }
 </style>
@@ -59,13 +63,46 @@
 					}
 				}
 
+<<<<<<< HEAD
+			      },
+			     
+			      email:{
+			    	    remote: "邮箱已注册",
+				        required: "请输入邮箱",
+				        email: "请输入一个正确的邮箱"
+				      }
+			 
+		 }
+		 
+		 
+		 
+	 });
+	 
+	 
+	 $("input[type='file']").change(function(){   
+		 var file = this.files[0];
+		   if (window.FileReader) {    
+		            var reader = new FileReader();    
+		            reader.readAsDataURL(file);    
+		            //监听文件读取结束后事件    
+		          reader.onloadend = function (e) {
+		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
+		            };    
+		       }
+		});
+=======
 			},
 			messages : {
 				phone : {
 					remote : "手机号已注册",
 					required : "请输入手机号",
 					rangelength : "电话号码为11位数"
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
+<<<<<<< HEAD
+	 
+});
+=======
 				},
 
 				email : {
@@ -73,6 +110,7 @@
 					required : "请输入邮箱",
 					email : "请输入一个正确的邮箱"
 				}
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
 			}
 
@@ -158,7 +196,27 @@
 						</ul>
 					</div>
 				</div>
+<<<<<<< HEAD
+			</div>
+			
+			<div class="person">
+				<div class="person-content">
+					<div class="person-info">
+						<div class="person-left">
+							<ol>
+								<li><a class="change-head"  data-toggle="modal"  data-target="#edittouxiang"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
+								<li class="time"><img src="/networkdisk/user/img/person-time.png"> <span class="time">注册时间:<fmt:formatDate  value="${user.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
+								<li class="real-name"><img src="/networkdisk/user/img/person-relName.png"> <span class="real-name">真实姓名:${user.trueName }</span></li>
+							    <li class="re-pwd"><a  data-toggle="modal"  data-target="#editPwd" ><img src="/networkdisk/user/img/person-pwd.png"><span class="re-pwd"> 修改密码</span></a></li>
+							</ol>
+						</div>
+						<div class="person-right">
+							<div class="right-info">
+						 <form action=""  >
+							<ol  class="right-0l">
+=======
 		</div>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
 		<div class="person">
 			<div class="person-content">
@@ -242,6 +300,32 @@
 							<li>
 						</ol>
 					</fieldset>
+<<<<<<< HEAD
+		  
+		  <br/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">提交更改</button>
+            </div>
+            <input type="hidden" name="id" value="${user.id}">
+           </form> 
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div>
+    
+ <!--修改密码弹框-->
+<div class="modal fade" id="editPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-lock"></span>  修改密码</h4>
+            </div>
+            <form action="updatePassAction"  id="updatePassForm" method="post">
+					<ol  class="right-03">
+						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value="" name="passWord"><span class="msg1"></span></li>
+						<li>确认密码:</span><input type= "password"  id="u_pwd2" value="" name="repassword"><span class="msg2"></span></li>
+=======
 				</form>
 				<br />
 				<div class="modal-footer">
@@ -272,8 +356,61 @@
 							value=""><span class="msg1"></span></li>
 						<li>确认密码:</span><input type="password" id="u_pwd2" value=""><span
 							class="msg2"></span></li>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 					</ol>
+<<<<<<< HEAD
+		  
+		  <br/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" >提交更改</button>
+            </div>
+            <input type="hidden" name="id" value="${user.id}">
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+=======
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
+<<<<<<< HEAD
+
+
+
+<!-- 修改头像弹框 -->
+<div class="modal fade" id="edittouxiang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span>  修改头像</h4>
+            </div>
+            <div class="modal-body">
+            
+            <div class="modal_body_left">
+            <img alt="" src="" class="img-head" id="img" />
+            
+            </div>
+									<div class="modal_body_right">
+									
+										<a href="javascript:" class="update_btn"><input type="file" name="file"  /></a>
+									
+								</div>
+			
+								
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" >提交更改</button>
+            </div>
+           
+         
+        </div>
+    </div>
+</div>
+
+		
+=======
 					<br />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -285,7 +422,88 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
+<<<<<<< HEAD
+<script>	
+
+       /*修改头像*/
+		$('.change-head').hover(function(e){
+			$('.head-content').animate({ "height":"75px"});
+		},function(){
+			$('.head-content').css("display","none");
+		});
+			
+		$(document).ready(function() { 
+			
+		//密码修改验证	
+		$("#updatePassForm").validate({
+			rules:{
+				 passWord: {
+				        required: true,
+				        rangelength:[6,14]
+				      },
+				      repassword: {
+					        required: true,
+					        rangelength:[6,14],
+					        equalTo:"#u_pwd1"
+					      }
+				 
+			 },
+			 messages: {
+				  passWord: {
+				        required: "请输入密码",
+				        rangelength: "密码长度为6-14个字符"
+				      },
+				      repassword: {
+					        required: "请输入密码",
+					        rangelength:"密码长度为6-14个字符",
+					        equalTo:"两次密码不一致"
+					      }
+				 
+			 }
+			 
+			 
+			 
+		 })
+			
+			
+			
+			
+			
+			
+			
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/* 弹框*/
+			$(function() {
+   				 $('#myModal').modal('hide')
+			});
+			      
+			//子导航展开收缩
+			$(".admin").mouseenter(function() {
+				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
+				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
+			});
+=======
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
 
 	<script>

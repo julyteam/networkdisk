@@ -23,9 +23,16 @@
 
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">/index.jsp</result>
-			<result name="error">/user/update.jsp</result>
-			<result name="input">/user/update.jsp</result>
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			<result name="input">/per-center.jsp</result>
+		</action>
+		
+		<!--密码修改  -->
+		<action name="updatePassAction" class="userAction" method="updatePassword">
+			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="error">/per-center.jsp</result>
+			
 		</action>
 		
 		<!-- 用户注册 -->
@@ -36,13 +43,10 @@
 
 		<!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">
-			
 		</action>
 		<action name="checkPhone" class="userAction" method="checkPhone">
-			
 		</action>
 		<action name="checkEmail" class="userAction" method="checkEmail">
-			
 		</action>
 	</package>
 

@@ -31,6 +31,35 @@
 	<select id="getAll" resultMap="userMap">
 		select * from `user`
 	</select>
+
+	<!-- 用户注册 -->
+	<insert id="save" parameterType="com.july.networkdisk.vo.User">
+		insert into user(user_id,user_name,user_password,user_truename,user_email,user_phone,user_sex,user_photo) 
+		values (#{id},#{name},#{passWord},#{trueName},#{email},#{phone},#{sex},#{photo})
+	</insert>
+	<!-- 用户个人资料修改 -->
+	<update id="update" parameterType="com.july.networkdisk.vo.User">
+		UPDATE `user` SET user_email=#{email},user_phone=#{phone},user_sex=#{sex},user_about=#{about} WHERE user_id=#{id}
+	</update>
+
+	<!-- 用户名验证查找 -->
+	<select id="selectUserByname" resultMap="userMap">
+	 select * from user where user_name=#{name}
+	</select>
+	<!-- 手机号验证查找 -->
+	<select id="selectUserBytel" resultMap="userMap">
+	 select * from user where user_phone=#{phone}
+	</select>
+	<!-- 邮箱验证查找 -->
+	<select id="selectUserByemail" resultMap="userMap">
+	 select * from user where user_email=#{email}
+	</select>
+	
+	<update id="updatePassword" parameterType="com.july.networkdisk.vo.User">
+	
+	update user set user_password=#{passWord} where user_id=#{id}
+	
+	</update>
 	
 	<!--此处为好友信息-->
 	<!-- 查找所有好友信息 -->
@@ -41,6 +70,7 @@
 	<select id="getOnefriend" resultMap="userMap">
 		select * from user where user_name=#{0} or user_phone=#{0}
 	</select>
+
 </mapper>
 
 
