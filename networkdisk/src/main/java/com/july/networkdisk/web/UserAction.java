@@ -93,7 +93,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     }
     /*用户个人资料修改*/
     public String update() throws Exception{
-    	System.out.println("~~~~~~~");
     	this.iUserService.update(this.user);
     	User u = CommonUtil.getSessionUser();
     	u.setEmail(this.user.getEmail());

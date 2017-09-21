@@ -5,7 +5,6 @@ import java.util.List;
 import com.july.networkdisk.vo.*;
 
 import org.apache.ibatis.session.*;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 
 public class UserDao extends BaseDao
 {

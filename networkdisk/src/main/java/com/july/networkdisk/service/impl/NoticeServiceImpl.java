@@ -45,11 +45,6 @@ public class NoticeServiceImpl implements INoticeService {
 		return null;
 	}
 
-	public List<Notice> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 
 

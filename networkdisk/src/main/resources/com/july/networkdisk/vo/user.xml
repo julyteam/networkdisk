@@ -60,7 +60,15 @@
 	<select id="selectUserByemail" resultMap="userMap">
 	 select * from user where user_email=#{email}
 	</select>
-
+	<!--此处为好友信息-->
+	<!-- 查找所有好友信息 -->
+	<select id="getAllfriend" resultMap="userMap">
+		select * from user where user_id = (select fri_fid from friend where fri_uid=#{0})
+	</select>
+	
+	<select id="getOnefriend" resultMap="userMap">
+		select * from user where user_name=#{0} or user_phone=#{0}
+	</select>
 </mapper>
 
 

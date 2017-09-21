@@ -6,12 +6,15 @@
 <struts>
 	<!-- 开发模式(修改struts.xml不用重启服务器） -->
 	<constant name="struts.devMode" value="true" />
-
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
+		scope="default" optional="true" />
+	<constant name="struts.multipart.parser" value="requestParser" />
+	<constant name="struts.multipart.maxSize" value="2147483648" />
+	
+	<!-- 用户模块 -->
 	<package name="networkdisk.user" namespace="/" extends="struts-default">
-		<action name="user" class="userAction">
-			<result name="success">/WEB-INF/welcome.jsp</result>
-			<result name="error">/error.jsp</result>
-		</action>
+		
 		<!-- 用户登录 -->
 		<action name="userlogin" class="userAction" method="login">
 			<result name="success" type="redirect">/index.jsp</result>
@@ -48,7 +51,7 @@
 			<result name="input">/register.jsp</result>
 		</action>
 
-		
+		<!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">
 			
 		</action>
@@ -58,21 +61,10 @@
 		<action name="checkEmail" class="userAction" method="checkEmail">
 			
 		</action>
-		
-		
-		
-		
-		
-		
 	</package>
 
 
-	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
-		name="requestParser" class="com.july.networkdisk.util.MyMultipartRequest"
-		scope="default" optional="true" />
-	<constant name="struts.multipart.parser" value="requestParser" />
-	<constant name="struts.multipart.maxSize" value="2147483648" />
-
+	<!-- 文件模块 -->
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
 		<action name="fileupload" class="fileAction" method="fileUpLoad">
@@ -85,16 +77,13 @@
 		</action>
 
 		<!-- 进度条进度 -->
-		<action name="progress" class="com.july.networkdisk.web.FileProgressAction">
+		<action name="progress" class="fileProgressAction">
 			<result name="json" type="json">
 				<param name="root">state</param>
 			</result>
 		</action>
 
-		<!-- 根据用户id查找所有的文件 -->
-		<action name="findAllByUser" class="fileAction" method="findAllByUser">
-			<result name="success">/WEB-INF/listFile.jsp</result>
-		</action>
+		
 
 		<!-- 文件下载 -->
 		<action name="fileDownload" class="fileAction">
@@ -105,11 +94,26 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-
-
+		
+		<!-- 根据用户id显示文件和文件夹 -->
+		<action name="showFileAndCate" class="fileAndCateAction" method="showFileAndCate">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
 	</package>
 	
-	<!-- 管理员 -->
+	
+	<!-- 文件夹模块 -->
+	<package name="struts.categories" namespace="/" extends="struts-default">
+		<action name="bulidcate" class="cateAction" method="bulidCate">
+		
+		</action>
+		
+		
+	</package>
+	
+	<!--后台管理模块 -->
 	<package name="struts.admin" namespace="/" extends="struts-default">
 		<action name="adminlogin" class="userAction" method="findOne">
 			<result name="success">/manager/home.jsp</result>
@@ -117,6 +121,17 @@
 		</action>
 		<action name="getUserAll" class="userAction" method="getAll">
 			<result name="success">/manager/user.jsp</result>
+		</action>
+	</package>
+	
+	<package name="networkdisk.friend" namespace="/" extends="struts-default">
+		<!-- 好友列表 -->
+		<action name="findAll" class="friendAction" method="getAll">			
+			<result name="success">share.jsp</result>			
+		</action>
+		
+		<action name="findOne" class="friendAction" method="findafriend">			
+			<result name="success">share.jsp</result>			
 		</action>
 	</package>
 	

@@ -1,4 +1,4 @@
-	@charset "utf-8";
+@charset "utf-8";
 html {
 	margin: 0;
 	padding: 0;
@@ -104,12 +104,11 @@ body h6 {
 }
 
 .user {
-	position: relative;
-	float: right;
-	left: 20px;
+	position: absolute;
+	margin: 0px auto;
 	text-align: left;
 	display: none;
-	z-index: 22;
+	z-index: 222;
 }
 
 #triangle-up {
@@ -141,19 +140,24 @@ body h6 {
 	padding-top: 20px;
 	padding-left: 15px;
 }
-
-.userpan_4 a{
-	display:block;
+.userpan_4 span{
+	display: block;
+	color: #000000;
+}
+.userpan_4 span:hover{
+	color: #FFFFFF;
+}
+.userpan_4 p{
+	display: block;
 	margin: 0px;
-	padding-left:15px;
+	padding-left: 15px;
 	text-align: left;
 	height: 37.5px;
 	line-height: 37.5px;
-	color:#000;
 }
-.userpan_4 a:hover {
-	background-color:#888888;
-	color: #FFFFFF;
+
+.userpan_4 p:hover {
+	background-color:#888888;	
 }
 
 img.userpic {
@@ -370,8 +374,24 @@ img.userpic {
 	from{transform: rotate(180deg);}
 	to{transform: rotate(0deg);}
 }
+.admin{
+	width: 220px;
+	height: 30px;
+	text-align: left;
+}
+.username{	
+	font-size: 14px;
+	width: 110px;
+	height: 30px;
+	display: inline-block;
+	line-height: 30px;
+	text-align: left;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
 .sev{
-	position: absolute;
+	position: relative;
 	vertical-align: middle;
 }
 .span3{
@@ -454,7 +474,7 @@ img.userpic {
 .equip_1{
 	width: 380px;
 	position: absolute;
-	margin-top: 0px;
+	margin-top: -20px;
 	margin-left: 355px;
 	display: none;
 	float: left;	
@@ -542,7 +562,7 @@ img.userpic {
 .search span{
 	display: inline-block;
 	position: relative;
-	top: 0px;
+	top: 4px;
 	left: -8px;
 }
 #ser{
@@ -909,10 +929,6 @@ img.userpic {
 	margin: 0;
 	
 }
-.table td:first-child:hover{
-	cursor: pointer;
-	color: #31B0D5;
-}
 .upload_header div,.upload_body div{
 	float: left;
 	display: inline-block;
@@ -996,7 +1012,7 @@ img.userpic {
 	display: inline-block;
 	border: 1px solid #262626;
 	border-radius: 5px;
-	padding-top:7px;
+	line-height: 30px;
 	margin-left:300px; 
 	cursor: pointer;
 	text-align: center;
@@ -1004,4 +1020,226 @@ img.userpic {
 .cleanbox:hover{
 	border: 1px solid #269ABC;
 	color: #269ABC;
+}
+.table td:first-child:hover{
+	cursor: pointer;
+	color: #31B0D5;
+}
+.dropdown-menu li{
+	border-bottom:1px solid #F2F6FD;
+	color: #222222;
+}
+.dropdown-menu li a:hover{
+	background: #269ABC;
+	color: #FFFFFF;
+}
+
+/*接收文件界面*/
+.receivepage{
+	width: 980px;
+	min-height: 534px;
+	margin: auto;
+	background-color: #FFF;
+	border-radius: 6px;
+	border-bottom: 14px solid #f6f9fd;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+	font-family: "微软雅黑";
+}
+.page2,.page3{
+	padding: 0px;
+	min-height: 534px;
+}
+.page3{
+	background: #f6f9fd;
+}
+.page2_1{
+	width: 100%;
+	height: 110px;
+	border-bottom: 1px solid #f6f9fd;
+}
+.page2_1 .slide-show-left h2 {
+    color: #424e67;
+    width: 300px;
+    font-size: 14px;
+    font-weight: 200;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 32px;
+    text-transform: none;
+}
+.slide-show-left h2 {
+    padding-top: 5px;
+    width: 300px;
+}
+.slide-show-left em{
+	font-size: 24px;
+	color: #269ABC;
+	margin-right: 10px;
+}
+.slide-show-left{
+	float: left;
+}
+.page2_1 .slide-show-right {
+    float: right;
+    margin: 30px 0;
+    width: 370px;
+    text-align: right;
+}
+.g-clearfix:after {
+    content: '.';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+}
+
+.page2_1 .g-button,
+.module-share-file-main .g-button{
+	margin: 5px;
+	font-size: 14px;
+	padding: 7px 12px;
+	border-radius:5px ;
+	border: 1px solid #28A4C9;
+	text-decoration: none;
+}
+.page2_1 .g-button em{
+	font-size: 18px;
+}
+.g-button-blue{
+	background: rgb(59, 140, 255);
+	color: #FFFFFF;
+}
+.g-button:hover{
+	color: rgb(192, 217, 254);
+	border: 1px solid rgb(192, 217, 254);
+}
+.g-button-blue:hover {
+    background: #77afff;
+    border: 1px solid #77afff;
+}
+.cb {
+    width: 0;
+    height: 0;
+    clear: both;
+}
+.slide-show-other-infos {
+    text-align: right;
+    margin-top: 5px;
+    position: relative;
+    z-index: 40;
+}
+.share-file-info ,.share-valid-check {
+	color: #808080;
+	font-size: 13px;
+    float: left;
+    margin-left: 16px;
+}
+.module-share-file-main{
+	width: 100%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	height: 400px;
+}
+.module-share-file-main .share-file-viewer{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    position: relative;
+}
+.module-share-file-main .share-info-default {
+    text-align: center;
+    background: #f6f9fd;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.module-share-file-main .share-info-box {
+    text-align: left;
+    min-height: 400px;
+}
+.module-share-file-main .share-info-default .fa {
+    margin-top: 100px;
+    font-size: 40px;
+}
+.module-share-file-main .fa {
+    position: relative;
+    margin: 0 auto;
+    width: 40px;
+    display: block;
+    height: 42px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin-bottom: 10px;
+    color: #269ABC;
+}
+.module-share-file-main .fa:hover{
+	color: #269ABC;
+	text-decoration: none;
+}
+.share-info-zipdesc{
+	height: 72px;
+	font-size: 13px;
+	color: #777777;
+	text-align: center;
+}
+.module-share-file-main .unzip-box-bar{
+	margin-top: 10px;
+}
+.module-share-person-info .share-person-inner {
+    padding: 10px 0;
+}
+.haha{
+	width: 90%;
+	height: 82px;
+	margin: 0 auto;
+}
+.share-person-avatar{
+	 float: left;
+	 width: 70px;
+}
+.share-person-avatar img{
+	border-radius: 70px;
+}
+.global-clearfix, .g-clearfix {
+    zoom: 1;
+}
+.share-person-data{
+	margin: 3px 0 5px 5px;
+    letter-spacing: 1px;
+    text-align: left;
+    float: left;
+    width: 124px;
+}
+.share-person-data-top{
+	margin-bottom: 4px;
+}
+.share-person-data-top a{
+	text-decoration: none;
+}
+.share-person-data-top em{
+	font-size: 18px;
+	color: #999999;
+}
+
+.share-person-username{
+	font-size: 16px;
+	color: #777777;
+}
+.share-person-username:hover{
+	color: #000000;
+}
+.follow span{
+	padding: 6px 10px;
+	color: #FFFFFF;
+	border-radius:3px ;
+	font-size: 14px;
+	background: rgb(59, 140, 255);
+}
+.share-person-intro{
+	width: 90%;
+	margin: 0 auto;
+	font-size: 13px;
+	color: #777777;
 }

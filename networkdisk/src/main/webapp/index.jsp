@@ -48,10 +48,13 @@
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="showphoto" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">${user.name }&nbsp;<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c"/></em>
+									<div class="admin">
+										<img src="showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<a href="#" style="display: inline-block;">
+											<div class="username">我们的修改会事倍功半</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
@@ -73,10 +76,10 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<a href="${pageContext.request.contextPath}/per-center">个人资料</a>
-												<a href="">帮助中心</a>
-												<a href="">设置</a>
-												<a href="">退出</a>
+												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a href=""><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -220,7 +223,8 @@
 												<tbody>
 													<tr>
 														<td id="t1">
-															<input type="checkbox" class="chk_2" />产品1
+															<input type="checkbox" class="chk_2" />
+															<a>产品1</a>
 															<span id="more">
 															<span class="fa fa-share-alt" title="分享"></span>
 															<span class="fa fa-download" title="下载"></span>
