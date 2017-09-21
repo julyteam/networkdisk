@@ -70,12 +70,6 @@
 			</result>
 		</action>
 
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
 		<!-- 文件下载 -->
 		<action name="fileDownload" class="fileAction">
 			<result name="success" type="stream">
@@ -92,13 +86,7 @@
 				<param name="root">map</param>
 			</result>
 		</action>
-		
-		<!-- 根据用户id显示文件和文件夹 -->
-		<action name="showFileAndCate" class="fileAndCateAction" method="showFileAndCate">
-			<result name="json" type="json">
-				<param name="root">map</param>
-			</result>
-		</action>
+
 	</package>
 	
 	
