@@ -21,17 +21,13 @@
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <style>
 .error {
-<<<<<<< HEAD
     padding-left:15px;
-=======
 	padding-left: 15px;
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 	color: red;
 }
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-
 		$("#updateForm").validate({
 			rules : {
 				phone : {
@@ -62,23 +58,22 @@
 						}
 					}
 				}
-
-<<<<<<< HEAD
 			      },
+			      messages : {
+						phone : {
+							remote : "手机号已注册",
+							required : "请输入手机号",
+							rangelength : "电话号码为11位数"
+						},
 			     
 			      email:{
 			    	    remote: "邮箱已注册",
 				        required: "请输入邮箱",
 				        email: "请输入一个正确的邮箱"
 				      }
-			 
-		 }
-		 
-		 
-		 
-	 });
+	 }
 	 
-	 
+		});
 	 $("input[type='file']").change(function(){   
 		 var file = this.files[0];
 		   if (window.FileReader) {    
@@ -89,31 +84,6 @@
 		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
 		            };    
 		       }
-		});
-=======
-			},
-			messages : {
-				phone : {
-					remote : "手机号已注册",
-					required : "请输入手机号",
-					rangelength : "电话号码为11位数"
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-<<<<<<< HEAD
-	 
-});
-=======
-				},
-
-				email : {
-					remote : "邮箱已注册",
-					required : "请输入邮箱",
-					email : "请输入一个正确的邮箱"
-				}
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-			}
-
 		});
 
 	})
@@ -196,34 +166,14 @@
 						</ul>
 					</div>
 				</div>
-<<<<<<< HEAD
 			</div>
 			
 			<div class="person">
 				<div class="person-content">
-					<div class="person-info">
-						<div class="person-left">
-							<ol>
-								<li><a class="change-head"  data-toggle="modal"  data-target="#edittouxiang"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
-								<li class="time"><img src="/networkdisk/user/img/person-time.png"> <span class="time">注册时间:<fmt:formatDate  value="${user.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
-								<li class="real-name"><img src="/networkdisk/user/img/person-relName.png"> <span class="real-name">真实姓名:${user.trueName }</span></li>
-							    <li class="re-pwd"><a  data-toggle="modal"  data-target="#editPwd" ><img src="/networkdisk/user/img/person-pwd.png"><span class="re-pwd"> 修改密码</span></a></li>
-							</ol>
-						</div>
-						<div class="person-right">
-							<div class="right-info">
-						 <form action=""  >
-							<ol  class="right-0l">
-=======
-		</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-		<div class="person">
-			<div class="person-content">
-				<div class="person-info">
 					<div class="person-left">
 						<ol>
-							<li><a class="change-head"><div class="change-h">
+							<li><a class="change-head"   data-toggle="modal"
+								data-target="#edittouxiang" ><div class="change-h">
 										<img src="" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
@@ -263,8 +213,8 @@
 				</div>
 			</div>
 
-		</div>
-	</div>
+		
+	
 	<!--修改基本信息弹框-->
 
 	<div class="modal fade" id="editInfo" tabindex="-1" role="dialog"
@@ -300,8 +250,6 @@
 							<li>
 						</ol>
 					</fieldset>
-<<<<<<< HEAD
-		  
 		  <br/>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -309,9 +257,14 @@
             </div>
             <input type="hidden" name="id" value="${user.id}">
            </form> 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
     </div>
+    </div>
+    
+    
+    
+    
+    
     
  <!--修改密码弹框-->
 <div class="modal fade" id="editPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -325,7 +278,6 @@
 					<ol  class="right-03">
 						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value="" name="passWord"><span class="msg1"></span></li>
 						<li>确认密码:</span><input type= "password"  id="u_pwd2" value="" name="repassword"><span class="msg2"></span></li>
-=======
 				</form>
 				<br />
 				<div class="modal-footer">
@@ -333,50 +285,10 @@
 					<button type="button" class="btn btn-primary">提交更改</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-
-	<!--修改密码弹框-->
-	<div class="modal fade" id="editPwd" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<span class="glyphicon glyphicon-lock"></span> 修改密码
-					</h4>
-				</div>
-				<form action="regiser.html" onsubmit="return  check()">
-					<ol class="right-03">
-						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1"
-							value=""><span class="msg1"></span></li>
-						<li>确认密码:</span><input type="password" id="u_pwd2" value=""><span
-							class="msg2"></span></li>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-					</ol>
-<<<<<<< HEAD
-		  
-		  <br/>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" >提交更改</button>
-            </div>
-            <input type="hidden" name="id" value="${user.id}">
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-=======
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-<<<<<<< HEAD
-
-
-
+	
+      
 <!-- 修改头像弹框 -->
 <div class="modal fade" id="edittouxiang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
@@ -409,22 +321,10 @@
     </div>
 </div>
 
-		
-=======
-					<br />
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary">提交更改</button>
-					</div>
-				</form>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
 	</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
-<<<<<<< HEAD
+
+
 <script>	
 
        /*修改头像*/
@@ -465,71 +365,27 @@
 			 
 			 
 			 
-		 })
+		 });
+			
+		
+		/* 弹框*/
+		$(function() {
+				 $('#myModal').modal('hide')
+		});	
+		//子导航展开收缩
+		$(".admin").mouseenter(function() {
+			$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
+			$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
+		});	
 			
 			
+		})
 			
-			
-			
-			
-			
-			
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/* 弹框*/
-			$(function() {
-   				 $('#myModal').modal('hide')
-			});
-			      
-			//子导航展开收缩
-			$(".admin").mouseenter(function() {
-				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
-				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
-			});
-=======
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
+</script>			
 
 	<script>
 		/*两次密码是否相同*/
-		function check() {
-			var pwd1 = document.getElementById("u_pwd1").value;
-			var pwd2 = document.getElementById("u_pwd2").value;
-
-			if (pwd1 == "") {
-				$(".msg1").html("密码不能空");
-				if (pwd2 == "") {
-					$(".msg2").html("请输入密码");
-					return false;
-				}
-				;
-			}
-			;
-
-			if (pwd2 != pwd1) {
-				$(".msg2").html("两次密码不一致");
-				return false;
-			} else {
-				return true;
-			}
-
-		};
+	
 		/*修改头像*/
 		$('.change-head').hover(function(e) {
 			$('.head-content').animate({
@@ -568,7 +424,7 @@
 						$('.img-head').attr("src",
 								"/networkdisk/user/img/person-bhead.png");
 					}
-					;
+					
 					var str = document.getElementsByName("radiobutton");
 					for (var i = 0; i < str.length; i++) {
 						str[i].style.margin = '10px';
