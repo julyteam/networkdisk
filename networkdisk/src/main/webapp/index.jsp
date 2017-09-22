@@ -11,7 +11,6 @@
 		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
-	
 		<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
@@ -47,25 +46,25 @@
 					<div class="span2">
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
-							<div class="sev">
+								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
+											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
 									</div>
 									<div class="user">
 										<span id="triangle-up">								
-										</span>
+									</span>
 										<div class="userpan">
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
+														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
+														<a href="">${user.name }</a>
+														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
 											</div>
@@ -73,13 +72,13 @@
 												<span>
 												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-												</span>
+											</span>
 											</div>
 											<div class="userpan_4">
-												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -89,7 +88,7 @@
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
 							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
+								<a href="noticeList"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
 							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/serve.png" /></a>

@@ -1,5 +1,7 @@
 package com.july.networkdisk.service;
 
+import java.util.List;
+
 import com.july.networkdisk.vo.Notice;
 
 public interface INoticeService extends IBaseService<Notice>{
@@ -7,5 +9,6 @@ public interface INoticeService extends IBaseService<Notice>{
 	void save(Notice notice);
 	/*删除消息公告*/
 	void delete(int id);
-
+	/*查找消息公告*/
+    List<Notice> getAll();
 }

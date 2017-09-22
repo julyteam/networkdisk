@@ -1,15 +1,15 @@
 package com.july.networkdisk.web;
 
-
-import java.math.BigInteger;
-import java.security.MessageDigest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
-
-
-
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -24,7 +24,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	
     private static final long serialVersionUID = 1L;
     private User user = new User();
-
+    private File file;
     private IUserService iUserService;
     private String message;
     HttpSession session = CommonUtil.createSession();
@@ -61,24 +61,21 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
         this.iUserService.save(this.user);
         return "success";
     }
-
-	 /*MD5加密密码*/
-		public static String getMD5(String str) throws Exception {
-			 // 生成一个MD5加密计算摘要
-			 MessageDigest md = MessageDigest.getInstance("MD5");
-			 // 计算md5函数
-			 md.update(str.getBytes());
-			 // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
-			 // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
-			 return new BigInteger(1, md.digest()).toString(16);
-		}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
+	
 
 
    
-  /*  用户登陆*/
+	/*  用户登陆*/
     public String login() throws Exception{
     	System.out.println("~~~~~~~~~~~~~~~~~~");
-    	String password = getMD5(this.user.getPassWord());
+    	String password = CommonUtil.getMD5(this.user.getPassWord());
     	this.user.setPassWord(password);
     	User user = this.iUserService.findOne(this.user);
     	session.setAttribute("user", user);
@@ -90,15 +87,20 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	}
     	
     }
+    /*个人资料页面跳转*/
+    public String percenter() throws Exception{
+    	return SUCCESS;
+    }
     /*用户个人资料修改*/
     public String update() throws Exception{
-    	this.iUserService.update(this.user);
     	User u = CommonUtil.getSessionUser();
+    	this.user.setId(u.getId());
+    	this.iUserService.update(this.user);
     	u.setEmail(this.user.getEmail());
     	u.setPhone(this.user.getPhone());
     	u.setSex(this.user.getSex());
     	u.setAbout(this.user.getAbout());
-    	session.setAttribute("user", u);
+    	
     	return SUCCESS;
     }
     /*修改验证*/
@@ -127,7 +129,32 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	}
     }
     
-    
+   /* 头像*/
+    public String photoup() throws Exception{
+    	InputStream in = new FileInputStream(file);	
+    	User u = CommonUtil.getSessionUser();
+    	byte[] photo = new byte[in.available()];
+    	in.read(photo);
+    	in.close();
+    	u.setPhoto(photo);
+    	this.iUserService.photoup(u);
+
+    	return SUCCESS;
+    }
+    public String showphoto() throws Exception{
+    	User u = CommonUtil.getSessionUser();
+	   User user = iUserService.get(u.getId());
+	   System.out.println(user.getPhoto()+"~~~~~~~~~~~~~~~~~~~~~~");
+	   HttpServletResponse response = null;
+	   ServletOutputStream out = null;
+	   response = ServletActionContext.getResponse();
+	   response.setContentType("multipart/form-data");
+	   out = response.getOutputStream();
+	   out.write(user.getPhoto());
+	   out.flush();
+	   out.close();
+	   return null;
+   }
     
     
     /*    管理员登陆*/
@@ -159,7 +186,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	}
     }*/
     
-    
+ /*    前台验证用户名注册*/
     public String checkUserName() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
@@ -177,40 +204,93 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		return null;
 	
     }
-    
+      /*  前台验证手机号*/
     public String checkPhone() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
+		User userPhone = null;
 		PrintWriter out = response.getWriter();
-		User userPhone=this.iUserService.selectUserByTel(user.getPhone());
-		if(userPhone!=null)
-		{
-			out.print(false);
-		}
-		else
-		{
-			out.print(true);
+		User u = CommonUtil.getSessionUser();
+		if(u == null){
+			userPhone=this.iUserService.selectUserByTel(user.getPhone());
+			if(userPhone!=null)
+			{
+				out.print(false);
+			}
+			else
+			{
+				out.print(true);
+			}
+		}else{
+			if(u.getPhone().equals(this.user.getPhone())){
+				out.print(true);
+			}else{
+				userPhone=this.iUserService.selectUserByTel(user.getPhone());
+				if(userPhone!=null)
+				{
+					out.print(false);
+				}
+				else
+				{
+					out.print(true);
+				}
+			}
 		}
 		return null;
     }
+        /*前台验证邮箱*/
     public String checkEmail() throws Exception
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
+		User userEmail;
 		PrintWriter out = response.getWriter();
-		User userEmail=this.iUserService.selectUserByEmail(user.getEmail());
-		if(userEmail!=null)
-		{
-			out.print(false);
+		User u = CommonUtil.getSessionUser();
+		if(u == null){
+			userEmail=this.iUserService.selectUserByEmail(user.getEmail());
+			if(userEmail!=null)
+			{
+				out.print(false);
+			}
+			else
+			{
+				out.print(true);
+			}
+		}else{
+			if(u.getEmail().equals(this.user.getEmail())){
+				out.print(true);
+			}else{
+				userEmail=this.iUserService.selectUserByEmail(user.getEmail());
+				if(userEmail!=null)
+				{
+					out.print(false);
+				}
+				else
+				{
+					out.print(true);
+				}
+			}
 		}
-		else
-		{
-			out.print(true);
-		}
-	
 		return null;
     }
-
+    /*密码修改*/
+    public String updatePassword()throws Exception
+    {
+    	String password = CommonUtil.getMD5(this.user.getPassWord());
+    	User u = CommonUtil.getSessionUser();
+    	this.user.setId(u.getId());
+    	this.user.setPassWord(password);
+    	this.iUserService.updatePassword(user);
+    	u.setPassWord(password);
+    	
+    	
+    	return SUCCESS;
+    }
+    /*登出*/
+    public String logout() throws Exception{
+    	session.invalidate();
+    	return SUCCESS;
+    }
 
 }

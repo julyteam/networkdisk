@@ -18,9 +18,7 @@
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
-<script type="text/javascript">
 
-</script>
 <style>
 
 .error {
@@ -53,7 +51,7 @@ padding-left:15px;
 	
 	
 	
-		<form action="register.action" method="post" id="registerForm" class="register_form" >
+		<form action="${pageContext.request.contextPath}/register" method="post" id="registerForm" class="register_form" >
 			<fieldset>
 				<div class="reg_username">
 					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="name"  id="username" value="${user.name }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
@@ -62,7 +60,7 @@ padding-left:15px;
 					<label>真实姓名</label><input type="text" name="trueName" id="realname" value="${user.trueName }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div>
 				<div class="reg_sex">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" />男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex" checked="checked" /> 女
+					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" checked="checked"/>男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex"  /> 女
 				</div>
 				<div class="reg_tel">
 
@@ -71,7 +69,7 @@ padding-left:15px;
 				<div class="reg_email">
 					&nbsp;&nbsp;&nbsp;&nbsp;<label>邮&nbsp;&nbsp;&nbsp;箱</label><input type="email" name="email" value="${user.email }"
 						id="email" />
-						<label style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
+						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
 					&nbsp;&nbsp;&nbsp;<label>验证码</label><input type="text" name="code" id="code" />
@@ -90,11 +88,27 @@ padding-left:15px;
 						href="#">《百度用户协议》</a> 及<a href="#">《百度隐私权保护生命》</a></font>
 				</div>
 				<div class="reg_btn">
-					<input type="submit" value="注册" />
+					<input type="submit"  value="注册" />
 				</div>
 			</fieldset>
+			
 		</form>
-		
+				<input type="hidden" id="success" value="${massger }" >
+				
 	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var successmassge = $("#success").val();
+			var falsemassge = $("#false").text();
+			if(successmassge != ""){
+				alert(successmassge);
+				location.href="login.jsp";
+			}
+			
+		});
+		
+	</script>
+	
 </body>
 </html>
