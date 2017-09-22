@@ -13,7 +13,7 @@
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
-<script src="/networkdisk/js/jquery-3.1.1.min.js"></script>    
+<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>    
 <script type="text/javascript" src="/networkdisk/js/ajaxfileupload.js"></script>  
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/js/index.js"></script>
