@@ -31,7 +31,8 @@ public class UserServiceImpl implements IUserService
     }
     
     public User get( String id) {
-        return null;
+    	
+        return this.userDao.get(id);
     }
     
     public List<User> getAll() {
@@ -48,7 +49,6 @@ public class UserServiceImpl implements IUserService
 	}
 
 	public User selectUserByTel(String phone) {
-		
 		return this.userDao.selectUserByTel(phone);
 	}
 
@@ -57,6 +57,9 @@ public class UserServiceImpl implements IUserService
 		return this.userDao.selectUserByEmail(email);
 	}
 
+	public void photoup(User user) {
+		this.userDao.photoup(user);
+	}
 	public void updatePassword(User user) {
 		
 		 this.userDao.updatePassword(user);
