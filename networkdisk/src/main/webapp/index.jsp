@@ -11,7 +11,7 @@
 		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
-		<link href="/networkdisk/css/share.css" rel="stylesheet" />
+	
 		<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="span12">
 						<ul style="padding: 0px;" id="tabs">
-							<li>
+							<li class="active">
 								<a href="/networkdisk/index.jsp#tw1" class="act"><i class="batch home"></i><br>全部文件</a>
 							</li>
 							<li>
@@ -126,7 +126,7 @@
 							<li>
 								<a href="/networkdisk/index.jsp#tw7"><i class="batch settings"></i><br>其他</a>
 							</li>
-							<li class="active">
+							<li>
 								<a href="/networkdisk/myshare.jsp"><i class="batch share"></i><br>我的分享</a>
 							</li>
 							<li>
