@@ -26,7 +26,7 @@ public class CommonUtil {
 		return (User)session.getAttribute("user");
 	}
 	
-	public static User test(){
+public static User test(){
 		User user = new User();
 		user.setId("1");
 		user.setName("laozhang");
