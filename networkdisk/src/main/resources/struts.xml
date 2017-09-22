@@ -17,40 +17,62 @@
 		
 		<!-- 用户登录 -->
 		<action name="userlogin" class="userAction" method="login">
-		    <result name="success" type="redirect">/index.jsp</result>
+			<result name="success" type="redirect">/index.jsp</result>
 			<result name="error">/login.jsp</result>
 		</action>
-
-		<!--用户个人资料修改  -->
-		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">/per-center.jsp</result>
-			<result name="error">/per-center.jsp</result>
+		
+		<!-- 头像 -->
+		<action name="photoup" class="userAction" method="photoup">
+			<interceptor-ref name="fileUpload">
+				
+				<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg</param>
+				<param name="maximumSize">2097152</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="chain">per-center</result>
 			<result name="input">/per-center.jsp</result>
 		</action>
-		
+		<!-- 显示图片 -->
+		<action name="showphoto" class="userAction" method="showphoto"></action>
+		<!--用户个人资料修改  -->
+		<action name="userUpdate" class="userAction" method="update">
+			<result name="success" type="redirect">per-center</result>
+			<result name="error" type="redirect">/per-center.jsp</result>
+			<result name="input" type="redirect">/per-center.jsp</result>
+		</action>
+		<!-- 页面跳转 -->
+		<action name="per-center" class="userAction" method="percenter">
+			<result name="success" type="redirect">/per-center.jsp</result>
+		</action>
+		<!-- 登出 -->
+		<action name="logout" class="userAction" method="logout">
+			<result name="success" type="redirect">/login.jsp</result>
+		</action>
 		<!--密码修改  -->
 		<action name="updatePassAction" class="userAction" method="updatePassword">
-			<result name="success" type="redirect">/per-center.jsp</result>
-			<result name="error">/per-center.jsp</result>
+			<result name="success" type="redirect">per-center</result>
+			<result name="error" type="redirect">per-center</result>
 			
 		</action>
-		
 		<!-- 用户注册 -->
 		<action name="register"  class="userRegister" method="register">
-			<result name="success" type="redirect">/login.jsp</result>
+			<result name="success">/register.jsp</result>
 			<result name="input">/register.jsp</result>
 		</action>
 
 	    <!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">
+			
 		</action>
 		<action name="checkPhone" class="userAction" method="checkPhone">
+			
 		</action>
 		<action name="checkEmail" class="userAction" method="checkEmail">
+			
 		</action>
 	</package>
 
-	
+
 	<!-- 文件模块 -->
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->

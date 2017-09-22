@@ -27,6 +27,10 @@
 	<select id="findOne" resultMap="userMap">
 		select * from `user` where user_name=#{name} and user_password=#{passWord}
 	</select>
+	<!-- 通过id查找用户信息 -->
+	<select id="get" parameterType="String" resultMap="userMap">
+		select * from `user` where user_id=#{id}
+	</select>
 	<!-- 查找所有用户信息 -->
 	<select id="getAll" resultMap="userMap">
 		select * from `user`
@@ -41,26 +45,26 @@
 	<update id="update" parameterType="com.july.networkdisk.vo.User">
 		UPDATE `user` SET user_email=#{email},user_phone=#{phone},user_sex=#{sex},user_about=#{about} WHERE user_id=#{id}
 	</update>
-
+	<!-- 头像上传 -->
+	<update id="photoup" parameterType="com.july.networkdisk.vo.User">
+		UPDATE `user` SET user_photo=#{photo} WHERE user_id=#{id}
+	</update>
+	<!-- 密码修改 -->
+	<update id="updatePassword" parameterType="com.july.networkdisk.vo.User">
+		UPDATE `user` SET user_password=#{passWord} WHERE user_id=#{id}
+	</update>
 	<!-- 用户名验证查找 -->
 	<select id="selectUserByname" resultMap="userMap">
 	 select * from user where user_name=#{name}
 	</select>
 	<!-- 手机号验证查找 -->
 	<select id="selectUserBytel" resultMap="userMap">
-	 select * from user where user_phone=#{phone}
+	 select * from `user` where user_phone=#{phone}
 	</select>
 	<!-- 邮箱验证查找 -->
 	<select id="selectUserByemail" resultMap="userMap">
 	 select * from user where user_email=#{email}
 	</select>
-	
-	<update id="updatePassword" parameterType="com.july.networkdisk.vo.User">
-	
-	update user set user_password=#{passWord} where user_id=#{id}
-	
-	</update>
-	
 	<!--此处为好友信息-->
 	<!-- 查找所有好友信息 -->
 	<select id="getAllfriend" parameterType="map" resultMap="userMap">
@@ -70,7 +74,6 @@
 	<select id="getOnefriend" resultMap="userMap">
 		select * from user where user_name=#{0} or user_phone=#{0}
 	</select>
-
 </mapper>
 
 
