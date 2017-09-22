@@ -39,8 +39,6 @@
             url:"${pageContext.request.contextPath}/progress",  
             dataType: 'json',  
             success:function(data){  
-            	/* alert(data.rate) */
-                /* $("#loading").html(data.rate);   */
                 $( "#progressbar" ).progressbar({        
                      value: data.rate     
                 });  

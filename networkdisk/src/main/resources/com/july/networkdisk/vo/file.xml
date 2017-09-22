@@ -32,6 +32,9 @@
 			<if test="file_uid != null">
 				and file_uid = #{file_uid}
 			</if>
+			<if test="file_name != null">
+				and file_name = #{file_name}
+			</if>
 			<if test="file_catid == null">
 				and file_catid is null
 			</if>
