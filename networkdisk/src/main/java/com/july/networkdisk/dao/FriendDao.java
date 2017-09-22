@@ -1,6 +1,7 @@
 package com.july.networkdisk.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -19,13 +20,12 @@ public class FriendDao extends BaseDao{
 	 * @author Administrator
 	 * 查找所有好友
 	 */	
-	public List<User> findAll(String uid) {
+	public List<User> findAll(Map<String, Object> map) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		List<User> list = sqlSession.selectList("userSpace.getAllfriend",uid);
+		List<User> list = sqlSession.selectList("userSpace.getAllfriend",map);
 		sqlSession.close();
 		return list;
 	}
-	
 	/**
 	 * @author Administrator
 	 * 根据input框中输入的昵称或者手机号查找好友

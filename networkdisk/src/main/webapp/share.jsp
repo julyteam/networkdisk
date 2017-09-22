@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
 		<link href="/networkdisk/css/share.css" rel="stylesheet" />
-		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>		
+		<script src="/networkdisk/manager/js/jquery-3.2.1.min.js"></script>		
 		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 		<script src="/networkdisk/js/index.js"></script>
 </head>
@@ -24,11 +25,11 @@
 					</div>
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
-							<li class="active">
+							<li>
 								<a href="#">网盘</a>
 							</li>
-							<li>
-								<a href="findAll?uid=12134">分享</a>
+							<li class="active">
+								<a>分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -133,21 +134,18 @@
 									</tr>
 								</table>
 							</a>
-
 							<a href="friend_info.jsp" target="share_iframe">
 								<table class="user_table">
+								 <c:forEach items="${map.listfriends }" var="friend">							
 									<tr>
 										<td class="session_user" rowspan="2"><img src="img/pic3.png" /></td>
-										<td rowspan="2" class="user_name">慕名玉兰</td>
+										<td rowspan="2" class="user_name">${friend.name}</td>
 									</tr>
+								</c:forEach>
 								</table>
-							</a>
-
-							
+							</a>						
 						</div>
-
 					</div>
-
 					<div class="session_bottom">
 						<ul>
 							<li><a href="#">创建群组</a></li>
@@ -171,8 +169,10 @@
 								<div class="modal-body">
 									<div class="modal-body_item">
 										<p><span>根据百度账号添加好友</span></p>
-										<input type="text" placeholder="用户名/邮箱" />
-										<button>搜索</button>
+										<form>
+										<input type="text" placeholder="用户名/邮箱" name="name" class="b1"/>
+										<input type="button" class="bn" value="搜索">
+										</form>
 									</div>
 									<div class="search_result" style="display: none;">
 										<span>搜索结果：</span>
@@ -181,22 +181,15 @@
 										</div>
 									</div>
 								</div>
+								<div class="friends"></div>
 								<div class="modal-footer">
-
 									<button type="button" data-dismiss="modal" class="btn_add">
 										加好友
-									</button>
-
+									</button>								
 								</div>
 							</div>
 						</div>
 					</div>
-					<script>
-						$(function() {
-							$('#myModal').modal('hide')
-						});
-					</script>
-
 				</div>
 				<div class="share_content_right">
 					<iframe name="share_iframe" src="share_default.jsp" scrolling="auto" height="590px" width="710" border="0" frameborder="no"></iframe>
@@ -204,7 +197,22 @@
 			</div>
 		</div>
 	</body>
-
-</body>
-
+	<script>
+		$(".bn").click(function(){
+			var name = $(".b1").val();		
+		  	$.ajax({
+				type : "POST", //设置请求发送的方式  
+				url : "findOne", //提交的地址  		   
+				data : {'user.name':name},
+				dataType: 'json',
+				beforeSend: function(){}, 
+				success: function(data) {//提交成功的时候执行的函数  
+					$('.friends').append("<img src='"+data.friend[0].photo+"'width='50px'>"+"<a>"+data.friend[0].name+"</a>");//jquery解析map数据						        				       					  	
+			}  
+		});	
+		});
+	 $(function(){
+			$('#myModal').modal('hide')
+		}); 
+	</script>
 </html>

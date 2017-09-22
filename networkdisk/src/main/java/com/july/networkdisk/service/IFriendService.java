@@ -1,6 +1,7 @@
 package com.july.networkdisk.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.july.networkdisk.vo.Friend;
 import com.july.networkdisk.vo.User;
@@ -12,7 +13,7 @@ import com.july.networkdisk.vo.User;
  */
 public interface IFriendService{
 	
-	List<User> getAll(String uid);
+	List<User> getAll(String uid, Map<String, Object> map);
 	List<User> findOne(String friendname);
 	int insertfriend(Friend friend);
 }

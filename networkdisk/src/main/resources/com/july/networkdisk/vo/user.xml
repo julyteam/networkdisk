@@ -63,8 +63,8 @@
 	
 	<!--此处为好友信息-->
 	<!-- 查找所有好友信息 -->
-	<select id="getAllfriend" resultMap="userMap">
-		select * from user where user_id = (select fri_fid from friend where fri_uid=#{0})
+	<select id="getAllfriend" parameterType="map" resultMap="userMap">
+		select * from user where user_id = (select fri_fid from friend where fri_uid=#{user_id})
 	</select>
 	
 	<select id="getOnefriend" resultMap="userMap">

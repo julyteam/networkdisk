@@ -61,7 +61,7 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
     	System.out.println("pqssWord"+password+"~~~~~~~~~~~~~~~~~~~~~~~");
     	user.setPassWord(password);
     	user.setId(id);
-    	user.setPhoto("aaa");
+    	user.setPhoto(new byte[1]);
     	this.iUserService.save(user);
     	return SUCCESS;
     }

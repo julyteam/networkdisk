@@ -36,7 +36,7 @@
 								<a href="#">网盘</a>
 							</li>
 							<li>
-								<a href="findAll?uid=12134">分享</a>
+								<a href="findAll?user.id=12134">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -75,7 +75,7 @@
 												</span>
 											</div>
 											<div class="userpan_4">
-												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href="per-center"><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
 												<p><a href=""><span>退出</span></a></p>
