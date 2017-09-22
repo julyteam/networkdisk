@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<<<<<<< HEAD
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,6 +51,70 @@
 									</a> <em style="display: inline-block;"><img
 										src="/networkdisk/img/downchoose.png" class="c"
 										style="margin-bottom: 22px;" /></em>
+=======
+	<body>
+		<div id="in-nav">
+			<div class="container">
+				<div class="row">
+					<div class="logo">
+						<a id="logo" href="/networkdisk/index.jsp">
+							<img src="/networkdisk/img/LOGO.png" />
+							<a class="logotitle" href="">July</a>
+						</a>
+					</div>
+					<div class="span1" style="display: inline;">
+						<ul class="pull-left">
+							<li class="active">
+								<a href="#">网盘</a>
+							</li>
+							<li>
+								<a href="findAll?uid=12134">分享</a>
+							</li>
+							<li>
+								<a href="#">更多</a>
+							</li>
+						</ul>
+					</div>
+					<div class="span2">
+						<ul class="right">
+							<li class="chos" style="width: 220px;">
+								<div class="sev">
+									<div class="admin">
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<a href="#" style="display: inline-block;">
+											<div class="username">${user.name }</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
+									</div>
+									<div class="user">
+										<span id="triangle-up">								
+									</span>
+										<div class="userpan">
+											<div class="userpan_2">
+												<div class="u1">
+													<a href="#">
+														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
+														<a href="">${user.name }</a>
+														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+													</a>
+												</div>
+											</div>
+											<div class="userpan_3">
+												<span>
+												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
+												<div class="svip">开通超级会员</div>
+											</span>
+											</div>
+											<div class="userpan_4">
+												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
+											</div>
+										</div>
+									</div>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 								</div>
 								<div class="user">
 									<span id="triangle-up"> </span>

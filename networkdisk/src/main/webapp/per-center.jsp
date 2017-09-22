@@ -13,108 +13,24 @@
 <link href="/networkdisk/user/css/per-center.css" rel="stylesheet" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
+<script src="/networkdisk/js/index.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
+<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <style>
 .error {
-<<<<<<< HEAD
     padding-left:15px;
-=======
 	padding-left: 15px;
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 	color: red;
 }
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-
-		$("#updateForm").validate({
-			rules : {
-				phone : {
-					required : true,
-					rangelength : [ 11, 11 ],
-					remote : {
-						url : "checkPhone",
-						type : "post",
-						dataType : "json",
-						data : {
-							phone : function() {
-								return $("#u_phone").val();
-							}
-						}
-					}
-				},
-				email : {
-					required : true,
-					email : true,
-					remote : {
-						url : "checkEmail",
-						type : "post",
-						dataType : "json",
-						data : {
-							email : function() {
-								return $("#u_email").val();
-							}
-						}
-					}
-				}
-
-<<<<<<< HEAD
-			      },
-			     
-			      email:{
-			    	    remote: "邮箱已注册",
-				        required: "请输入邮箱",
-				        email: "请输入一个正确的邮箱"
-				      }
-			 
-		 }
-		 
-		 
-		 
-	 });
+		
 	 
-	 
-	 $("input[type='file']").change(function(){   
-		 var file = this.files[0];
-		   if (window.FileReader) {    
-		            var reader = new FileReader();    
-		            reader.readAsDataURL(file);    
-		            //监听文件读取结束后事件    
-		          reader.onloadend = function (e) {
-		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
-		            };    
-		       }
-		});
-=======
-			},
-			messages : {
-				phone : {
-					remote : "手机号已注册",
-					required : "请输入手机号",
-					rangelength : "电话号码为11位数"
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-<<<<<<< HEAD
-	 
-});
-=======
-				},
-
-				email : {
-					remote : "邮箱已注册",
-					required : "请输入邮箱",
-					email : "请输入一个正确的邮箱"
-				}
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-			}
-
-		});
 
 	})
 </script>
@@ -148,9 +64,9 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
+											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
@@ -162,8 +78,8 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
+														<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -178,7 +94,7 @@
 												<p><a href=""><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -196,35 +112,15 @@
 						</ul>
 					</div>
 				</div>
-<<<<<<< HEAD
 			</div>
 			
 			<div class="person">
 				<div class="person-content">
-					<div class="person-info">
-						<div class="person-left">
-							<ol>
-								<li><a class="change-head"  data-toggle="modal"  data-target="#edittouxiang"><div class="change-h"><img src="" class="img-head"/><div class="head-shade"><span class="head-content"><p>更改头像</p></span></div></div></a></li>
-								<li class="time"><img src="/networkdisk/user/img/person-time.png"> <span class="time">注册时间:<fmt:formatDate  value="${user.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
-								<li class="real-name"><img src="/networkdisk/user/img/person-relName.png"> <span class="real-name">真实姓名:${user.trueName }</span></li>
-							    <li class="re-pwd"><a  data-toggle="modal"  data-target="#editPwd" ><img src="/networkdisk/user/img/person-pwd.png"><span class="re-pwd"> 修改密码</span></a></li>
-							</ol>
-						</div>
-						<div class="person-right">
-							<div class="right-info">
-						 <form action=""  >
-							<ol  class="right-0l">
-=======
-		</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-		<div class="person">
-			<div class="person-content">
-				<div class="person-info">
 					<div class="person-left">
 						<ol>
-							<li><a class="change-head"><div class="change-h">
-										<img src="" class="img-head" />
+							<li><a class="change-head"   data-toggle="modal"
+								data-target="#edittouxiang" ><div class="change-h">
+										<img src="${pageContext.request.contextPath}/showphoto" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
@@ -250,7 +146,7 @@
 									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${user.name }</span></li>
 									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${user.email}</span></li>
 									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${user.phone}</span></li>
-									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==0?"男":"女" }</span></li>
+									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==1?"男":"女" }</span></li>
 									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${user.about }</span></li>
 									<li><input class="btn btn-default" type="button"
 										value="修 改" data-toggle="modal" data-target="#editInfo"
@@ -263,8 +159,8 @@
 				</div>
 			</div>
 
-		</div>
-	</div>
+		
+	
 	<!--修改基本信息弹框-->
 
 	<div class="modal fade" id="editInfo" tabindex="-1" role="dialog"
@@ -278,7 +174,7 @@
 						<span class="glyphicon glyphicon-edit"></span> 修改信息
 					</h4>
 				</div>
-				<form id="updateForm" action="">
+				<form id="updateForm" action="userUpdate" method="post">
 					<fieldset>
 						<ol class="right-02">
 							<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input
@@ -289,29 +185,32 @@
 							<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input
 								type="text" id="u_phone" value="${user.phone }" name="phone"></li>
 							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input
-								type="radio" name="radiobutton"
+								type="radio" name="sex" value="1"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==0}">checked="checked"</c:if>>男<input
-								type="radio" name="radiobutton"
+								<c:if test="${user.sex==1}">checked="checked"</c:if>>男<input
+								type="radio" name="sex" value="0"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==1}">checked="checked"</c:if>>女</li>
+								<c:if test="${user.sex==0}">checked="checked"</c:if>>女</li>
 							<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input
-								type="text" id="u_about">
+								type="text" id="u_about" value="${user.about }" name="about" />
 							<li>
 						</ol>
 					</fieldset>
-<<<<<<< HEAD
-		  
 		  <br/>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary">提交更改</button>
             </div>
-            <input type="hidden" name="id" value="${user.id}">
-           </form> 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+           
+          </form> 
+        </div>
     </div>
+    </div>
+    
+    
+    
+    
+    
     
  <!--修改密码弹框-->
 <div class="modal fade" id="editPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -325,58 +224,17 @@
 					<ol  class="right-03">
 						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value="" name="passWord"><span class="msg1"></span></li>
 						<li>确认密码:</span><input type= "password"  id="u_pwd2" value="" name="repassword"><span class="msg2"></span></li>
-=======
 				</form>
 				<br />
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
+					<button type="submit" class="btn btn-primary">提交更改</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-
-	<!--修改密码弹框-->
-	<div class="modal fade" id="editPwd" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<span class="glyphicon glyphicon-lock"></span> 修改密码
-					</h4>
-				</div>
-				<form action="regiser.html" onsubmit="return  check()">
-					<ol class="right-03">
-						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1"
-							value=""><span class="msg1"></span></li>
-						<li>确认密码:</span><input type="password" id="u_pwd2" value=""><span
-							class="msg2"></span></li>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-					</ol>
-<<<<<<< HEAD
-		  
-		  <br/>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" >提交更改</button>
-            </div>
-            <input type="hidden" name="id" value="${user.id}">
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-=======
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
-<<<<<<< HEAD
-
-
-
+	
+      
 <!-- 修改头像弹框 -->
 <div class="modal fade" id="edittouxiang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
@@ -385,46 +243,43 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span>  修改头像</h4>
             </div>
-            <div class="modal-body">
-            
-            <div class="modal_body_left">
-            <img alt="" src="" class="img-head" id="img" />
-            
-            </div>
-									<div class="modal_body_right">
+            <form action="photoup" method="post" enctype="multipart/form-data">
+	            <div class="modal-body">
+	            <div class="modal_body_left">
+	            <img alt="" src="${pageContext.request.contextPath}/showphoto" class="img-head" id="img" />
+	            
+	            </div>
+										<div class="modal_body_right">
+										
+											<a href="javascript:" class="update_btn"><input type="file" id="change" name="file" style="margin-top:27px;margin-left:10px;"  /></a>
+										
+									</div>
+				
 									
-										<a href="javascript:" class="update_btn"><input type="file" name="file"  /></a>
-									
-								</div>
-			
-								
-			</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" >提交更改</button>
-            </div>
-           
+				</div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="submit" class="btn btn-primary" >提交更改</button>
+	            </div>
+           </form>
          
         </div>
     </div>
 </div>
 
-		
-=======
-					<br />
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary">提交更改</button>
-					</div>
-				</form>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
 	</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 
-<<<<<<< HEAD
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	
+		
+
+
+
+
+
+</script>
 <script>	
 
        /*修改头像*/
@@ -434,102 +289,26 @@
 			$('.head-content').css("display","none");
 		});
 			
-		$(document).ready(function() { 
-			
-		//密码修改验证	
-		$("#updatePassForm").validate({
-			rules:{
-				 passWord: {
-				        required: true,
-				        rangelength:[6,14]
-				      },
-				      repassword: {
-					        required: true,
-					        rangelength:[6,14],
-					        equalTo:"#u_pwd1"
-					      }
-				 
-			 },
-			 messages: {
-				  passWord: {
-				        required: "请输入密码",
-				        rangelength: "密码长度为6-14个字符"
-				      },
-				      repassword: {
-					        required: "请输入密码",
-					        rangelength:"密码长度为6-14个字符",
-					        equalTo:"两次密码不一致"
-					      }
-				 
-			 }
-			 
-			 
-			 
-		 })
+		
+		
+		/* 弹框*/
+		$(function() {
+				 $('#myModal').modal('hide')
+		});	
+		//子导航展开收缩
+		$(".admin").mouseenter(function() {
+			$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
+			$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
+		});	
 			
 			
+		})
 			
-			
-			
-			
-			
-			
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/* 弹框*/
-			$(function() {
-   				 $('#myModal').modal('hide')
-			});
-			      
-			//子导航展开收缩
-			$(".admin").mouseenter(function() {
-				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
-				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
-			});
-=======
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-
+</script>			
 
 	<script>
 		/*两次密码是否相同*/
-		function check() {
-			var pwd1 = document.getElementById("u_pwd1").value;
-			var pwd2 = document.getElementById("u_pwd2").value;
-
-			if (pwd1 == "") {
-				$(".msg1").html("密码不能空");
-				if (pwd2 == "") {
-					$(".msg2").html("请输入密码");
-					return false;
-				}
-				;
-			}
-			;
-
-			if (pwd2 != pwd1) {
-				$(".msg2").html("两次密码不一致");
-				return false;
-			} else {
-				return true;
-			}
-
-		};
+	
 		/*修改头像*/
 		$('.change-head').hover(function(e) {
 			$('.head-content').animate({
@@ -564,17 +343,104 @@
 										"lbaxztop2");
 							});
 					/* 当没有头像时，为默认头像*/
-					if ($('.img-head').attr("src") == "") {
-						$('.img-head').attr("src",
+					if ($('img').attr("src") == "") {
+						$('img').attr("src",
 								"/networkdisk/user/img/person-bhead.png");
 					}
-					;
+					
 					var str = document.getElementsByName("radiobutton");
 					for (var i = 0; i < str.length; i++) {
 						str[i].style.margin = '10px';
 					}
 
 				});
+		$("#change").change(function(){   
+			 var file = this.files[0];
+			   if (window.FileReader) {    
+			            var reader = new FileReader();    
+			            reader.readAsDataURL(file);    
+			            //监听文件读取结束后事件    
+			          reader.onloadend = function (e) {
+			            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
+			            };    
+			       }
+			});
+		
+		
+
+		//密码修改验证	
+		$("#updatePassForm").validate({
+			rules:{
+				 passWord: {
+				        required: true,
+				        rangelength:[6,14]
+				      },
+				      repassword: {
+					        required: true,
+					        rangelength:[6,14],
+					        equalTo:"#u_pwd1"
+					      }
+			 },
+			 messages: {
+				  passWord: {
+				        required: "请输入密码",
+				        rangelength: "密码长度为6-14个字符"
+				      },
+				      repassword: {
+					        required: "请输入密码",
+					        rangelength:"密码长度为6-14个字符",
+					        equalTo:"两次密码不一致"
+					      }
+			 }
+			 
+		 });
+		
+		$("#updateForm").validate({
+			rules : {
+				phone : {
+					required : true,
+					rangelength : [ 11, 11 ],
+					remote : {
+						url : "checkPhone",
+						type : "post",
+						dataType : "json",
+						data : {
+							phone : function() {
+								return $("#u_phone").val();
+							}
+						}
+					}
+				},
+				email : {
+					required : true,
+					email : true,
+					remote : {
+						url : "checkEmail",
+						type : "post",
+						dataType : "json",
+						data : {
+							email : function() {
+								return $("#u_email").val();
+							}
+						}
+					}
+				}
+			      },
+			      messages : {
+						phone : {
+							remote : "手机号已注册",
+							required : "请输入手机号",
+							rangelength : "电话号码为11位数"
+						},
+			     
+			      email:{
+			    	    remote: "邮箱已注册",
+				        required: "请输入邮箱",
+				        email: "请输入一个正确的邮箱"
+				      }
+	 			}
+	 
+		});
 	</script>
 
 
