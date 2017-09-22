@@ -13,12 +13,12 @@
 <link href="/networkdisk/user/css/per-center.css" rel="stylesheet" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
+<script src="/networkdisk/js/index.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
+<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
-<script src="/networkdisk/js/index.js"></script>
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
 <style>
 .error {
@@ -29,63 +29,8 @@
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-		$("#updateForm").validate({
-			rules : {
-				phone : {
-					required : true,
-					rangelength : [ 11, 11 ],
-					remote : {
-						url : "checkPhone",
-						type : "post",
-						dataType : "json",
-						data : {
-							phone : function() {
-								return $("#u_phone").val();
-							}
-						}
-					}
-				},
-				email : {
-					required : true,
-					email : true,
-					remote : {
-						url : "checkEmail",
-						type : "post",
-						dataType : "json",
-						data : {
-							email : function() {
-								return $("#u_email").val();
-							}
-						}
-					}
-				}
-			      },
-			      messages : {
-						phone : {
-							remote : "手机号已注册",
-							required : "请输入手机号",
-							rangelength : "电话号码为11位数"
-						},
-			     
-			      email:{
-			    	    remote: "邮箱已注册",
-				        required: "请输入邮箱",
-				        email: "请输入一个正确的邮箱"
-				      }
-	 }
+		
 	 
-		});
-	 $("input[type='file']").change(function(){   
-		 var file = this.files[0];
-		   if (window.FileReader) {    
-		            var reader = new FileReader();    
-		            reader.readAsDataURL(file);    
-		            //监听文件读取结束后事件    
-		          reader.onloadend = function (e) {
-		            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
-		            };    
-		       }
-		});
 
 	})
 </script>
@@ -119,9 +64,9 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
+											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
@@ -133,8 +78,8 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
+														<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -149,7 +94,7 @@
 												<p><a href=""><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -175,7 +120,7 @@
 						<ol>
 							<li><a class="change-head"   data-toggle="modal"
 								data-target="#edittouxiang" ><div class="change-h">
-										<img src="" class="img-head" />
+										<img src="${pageContext.request.contextPath}/showphoto" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
@@ -201,7 +146,7 @@
 									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${user.name }</span></li>
 									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${user.email}</span></li>
 									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${user.phone}</span></li>
-									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==0?"男":"女" }</span></li>
+									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==1?"男":"女" }</span></li>
 									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${user.about }</span></li>
 									<li><input class="btn btn-default" type="button"
 										value="修 改" data-toggle="modal" data-target="#editInfo"
@@ -229,7 +174,7 @@
 						<span class="glyphicon glyphicon-edit"></span> 修改信息
 					</h4>
 				</div>
-				<form id="updateForm" action="">
+				<form id="updateForm" action="userUpdate" method="post">
 					<fieldset>
 						<ol class="right-02">
 							<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input
@@ -240,14 +185,14 @@
 							<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input
 								type="text" id="u_phone" value="${user.phone }" name="phone"></li>
 							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input
-								type="radio" name="radiobutton"
+								type="radio" name="sex" value="1"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==0}">checked="checked"</c:if>>男<input
-								type="radio" name="radiobutton"
+								<c:if test="${user.sex==1}">checked="checked"</c:if>>男<input
+								type="radio" name="sex" value="0"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==1}">checked="checked"</c:if>>女</li>
+								<c:if test="${user.sex==0}">checked="checked"</c:if>>女</li>
 							<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input
-								type="text" id="u_about">
+								type="text" id="u_about" value="${user.about }" name="about" />
 							<li>
 						</ol>
 					</fieldset>
@@ -256,8 +201,8 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary">提交更改</button>
             </div>
-            <input type="hidden" name="id" value="${user.id}">
-           </form> 
+           
+          </form> 
         </div>
     </div>
     </div>
@@ -283,7 +228,7 @@
 				<br />
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
+					<button type="submit" class="btn btn-primary">提交更改</button>
 				</div>
 			</div>
 		</div>
@@ -298,25 +243,25 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span>  修改头像</h4>
             </div>
-            <div class="modal-body">
-            
-            <div class="modal_body_left">
-            <img alt="" src="" class="img-head" id="img" />
-            
-            </div>
-									<div class="modal_body_right">
+            <form action="photoup" method="post" enctype="multipart/form-data">
+	            <div class="modal-body">
+	            <div class="modal_body_left">
+	            <img alt="" src="${pageContext.request.contextPath}/showphoto" class="img-head" id="img" />
+	            
+	            </div>
+										<div class="modal_body_right">
+										
+											<a href="javascript:" class="update_btn"><input type="file" id="change" name="file" style="margin-top:27px;margin-left:10px;"  /></a>
+										
+									</div>
+				
 									
-										<a href="javascript:" class="update_btn"><input type="file" name="file"  /></a>
-									
-								</div>
-			
-								
-			</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" >提交更改</button>
-            </div>
-           
+				</div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="submit" class="btn btn-primary" >提交更改</button>
+	            </div>
+           </form>
          
         </div>
     </div>
@@ -325,7 +270,16 @@
 	</div>
 
 
+<script type="text/javascript">
+$(document).ready(function() { 
+	
+		
 
+
+
+
+
+</script>
 <script>	
 
        /*修改头像*/
@@ -335,39 +289,7 @@
 			$('.head-content').css("display","none");
 		});
 			
-		$(document).ready(function() { 
-			
-		//密码修改验证	
-		$("#updatePassForm").validate({
-			rules:{
-				 passWord: {
-				        required: true,
-				        rangelength:[6,14]
-				      },
-				      repassword: {
-					        required: true,
-					        rangelength:[6,14],
-					        equalTo:"#u_pwd1"
-					      }
-				 
-			 },
-			 messages: {
-				  passWord: {
-				        required: "请输入密码",
-				        rangelength: "密码长度为6-14个字符"
-				      },
-				      repassword: {
-					        required: "请输入密码",
-					        rangelength:"密码长度为6-14个字符",
-					        equalTo:"两次密码不一致"
-					      }
-				 
-			 }
-			 
-			 
-			 
-		 });
-			
+		
 		
 		/* 弹框*/
 		$(function() {
@@ -421,8 +343,8 @@
 										"lbaxztop2");
 							});
 					/* 当没有头像时，为默认头像*/
-					if ($('.img-head').attr("src") == "") {
-						$('.img-head').attr("src",
+					if ($('img').attr("src") == "") {
+						$('img').attr("src",
 								"/networkdisk/user/img/person-bhead.png");
 					}
 					
@@ -432,6 +354,93 @@
 					}
 
 				});
+		$("#change").change(function(){   
+			 var file = this.files[0];
+			   if (window.FileReader) {    
+			            var reader = new FileReader();    
+			            reader.readAsDataURL(file);    
+			            //监听文件读取结束后事件    
+			          reader.onloadend = function (e) {
+			            $("#img").attr("src",e.target.result);    //e.target.result就是最后的路径地址
+			            };    
+			       }
+			});
+		
+		
+
+		//密码修改验证	
+		$("#updatePassForm").validate({
+			rules:{
+				 passWord: {
+				        required: true,
+				        rangelength:[6,14]
+				      },
+				      repassword: {
+					        required: true,
+					        rangelength:[6,14],
+					        equalTo:"#u_pwd1"
+					      }
+			 },
+			 messages: {
+				  passWord: {
+				        required: "请输入密码",
+				        rangelength: "密码长度为6-14个字符"
+				      },
+				      repassword: {
+					        required: "请输入密码",
+					        rangelength:"密码长度为6-14个字符",
+					        equalTo:"两次密码不一致"
+					      }
+			 }
+			 
+		 });
+		
+		$("#updateForm").validate({
+			rules : {
+				phone : {
+					required : true,
+					rangelength : [ 11, 11 ],
+					remote : {
+						url : "checkPhone",
+						type : "post",
+						dataType : "json",
+						data : {
+							phone : function() {
+								return $("#u_phone").val();
+							}
+						}
+					}
+				},
+				email : {
+					required : true,
+					email : true,
+					remote : {
+						url : "checkEmail",
+						type : "post",
+						dataType : "json",
+						data : {
+							email : function() {
+								return $("#u_email").val();
+							}
+						}
+					}
+				}
+			      },
+			      messages : {
+						phone : {
+							remote : "手机号已注册",
+							required : "请输入手机号",
+							rangelength : "电话号码为11位数"
+						},
+			     
+			      email:{
+			    	    remote: "邮箱已注册",
+				        required: "请输入邮箱",
+				        email: "请输入一个正确的邮箱"
+				      }
+	 			}
+	 
+		});
 	</script>
 
 

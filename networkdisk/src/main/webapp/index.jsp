@@ -79,7 +79,7 @@
 												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>

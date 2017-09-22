@@ -45,8 +45,13 @@
 	<update id="update" parameterType="com.july.networkdisk.vo.User">
 		UPDATE `user` SET user_email=#{email},user_phone=#{phone},user_sex=#{sex},user_about=#{about} WHERE user_id=#{id}
 	</update>
+	<!-- 头像上传 -->
 	<update id="photoup" parameterType="com.july.networkdisk.vo.User">
 		UPDATE `user` SET user_photo=#{photo} WHERE user_id=#{id}
+	</update>
+	<!-- 密码修改 -->
+	<update id="updatePassword" parameterType="com.july.networkdisk.vo.User">
+		UPDATE `user` SET user_password=#{passWord} WHERE user_id=#{id}
 	</update>
 	<!-- 用户名验证查找 -->
 	<select id="selectUserByname" resultMap="userMap">

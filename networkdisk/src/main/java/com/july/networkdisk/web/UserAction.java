@@ -100,7 +100,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	u.setPhone(this.user.getPhone());
     	u.setSex(this.user.getSex());
     	u.setAbout(this.user.getAbout());
-    	session.setAttribute("user", u);
+    	
     	return SUCCESS;
     }
     /*修改验证*/
@@ -138,6 +138,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	in.close();
     	u.setPhoto(photo);
     	this.iUserService.photoup(u);
+
     	return SUCCESS;
     }
     public String showphoto() throws Exception{
@@ -208,10 +209,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     {
     	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
-		User userPhone;
+		User userPhone = null;
 		PrintWriter out = response.getWriter();
 		User u = CommonUtil.getSessionUser();
-		if(u.getId() == null){
+		if(u == null){
 			userPhone=this.iUserService.selectUserByTel(user.getPhone());
 			if(userPhone!=null)
 			{
@@ -246,7 +247,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		User userEmail;
 		PrintWriter out = response.getWriter();
 		User u = CommonUtil.getSessionUser();
-		if(u.getId() == null){
+		if(u == null){
 			userEmail=this.iUserService.selectUserByEmail(user.getEmail());
 			if(userEmail!=null)
 			{
@@ -277,14 +278,19 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String updatePassword()throws Exception
     {
     	String password = CommonUtil.getMD5(this.user.getPassWord());
+    	User u = CommonUtil.getSessionUser();
+    	this.user.setId(u.getId());
     	this.user.setPassWord(password);
     	this.iUserService.updatePassword(user);
-    	User u = CommonUtil.getSessionUser();
     	u.setPassWord(password);
-    	session.setAttribute("user", u);
+    	
     	
     	return SUCCESS;
     }
-
+    /*登出*/
+    public String logout() throws Exception{
+    	session.invalidate();
+    	return SUCCESS;
+    }
 
 }
