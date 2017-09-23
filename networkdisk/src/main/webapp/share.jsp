@@ -246,6 +246,13 @@
 				}
 			});
 		});
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
 	</script>
 
 </body>

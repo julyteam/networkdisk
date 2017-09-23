@@ -63,11 +63,6 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">${user.name }</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
-
 														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
 														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
@@ -82,58 +77,18 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-
-												<p><a href="per-center"><span>个人资料</span></a></p>
-
 												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
 
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-
 												<p><a  onclick="logout()"><span>退出</span></a></p>
-
-												<p><a href="logout"><span>退出</span></a></p>
 
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="user">
-									<span id="triangle-up"> </span>
-									<div class="userpan">
-										<div class="userpan_2">
-											<div class="u1">
-												<a href="#"> <img src="/networkdisk/img/pic3.png"
-													class="userpic" /> <a href="">admin</a> <img
-													src="/networkdisk/img/VIP1.png"
-													style="display: inline; margin-bottom: 5px;" />
-												</a>
-											</div>
-										</div>
-										<div class="userpan_3">
-											<span> <a href=""
-												style="color: #000; font-size: 12px;">超级会员专享特权：</a>
-												<div class="svip">开通超级会员</div>
-											</span>
-										</div>
-										<div class="userpan_4">
-											<p>
-												<a href=""><span>个人资料</span></a>
-											</p>
-											<p>
-												<a href=""><span>帮助中心</span></a>
-											</p>
-											<p>
-												<a href=""><span>设置</span></a>
-											</p>
-											<p>
-												<a href=""><span>退出</span></a>
-											</p>
-										</div>
-									</div>
-							
-							</div>
-						</li>
+
+						</li> 
 						<li style="width: 100px; margin-top: 5px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li style="margin-top: 5px;"><a href="#"><img
@@ -145,7 +100,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 	<div class="clean" style="clear: all;"></div>
 	<div id="in-sub-nav">
 		<div class="container">
