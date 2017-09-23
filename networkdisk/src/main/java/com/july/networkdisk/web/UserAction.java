@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +30,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     private IUserService iUserService;
     private String message;
     HttpSession session = CommonUtil.createSession();
+    HttpServletRequest request=ServletActionContext.getRequest();
+    HttpServletResponse response=ServletActionContext.getResponse();
     
     
     public String getMessage() {
@@ -67,22 +71,31 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	public void setFile(File file) {
 		this.file = file;
 	}
-	
-	
-
-
-   
 	/*  用户登陆*/
     public String login() throws Exception{
     	System.out.println("~~~~~~~~~~~~~~~~~~");
+    	Cookie cookie=null;
+    	String ck=request.getParameter("check");
+    	
     	String password = CommonUtil.getMD5(this.user.getPassWord());
     	this.user.setPassWord(password);
     	User user = this.iUserService.findOne(this.user);
     	session.setAttribute("user", user);
     	if(user == null){
-    		this.setMessage("用户名或者密码错误！");
+    		this.setMessage("error");
     		return ERROR;
     	}else{
+    		this.setMessage("yes");
+    		if("on".equals(ck))
+			{
+				 cookie=new Cookie("username",user.getName());
+				 cookie.setMaxAge(60*60);
+				 response.addCookie(cookie);
+				 cookie=new Cookie("password",user.getPassWord());
+				 cookie.setMaxAge(60*60);
+				 response.addCookie(cookie);
+				
+			}
         	return SUCCESS;
     	}
     	
@@ -91,6 +104,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String percenter() throws Exception{
     	return SUCCESS;
     }
+    
+
     /*用户个人资料修改*/
     public String update() throws Exception{
     	User u = CommonUtil.getSessionUser();
@@ -284,7 +299,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	this.iUserService.updatePassword(user);
     	u.setPassWord(password);
     	
-    	
     	return SUCCESS;
     }
     /*登出*/
@@ -292,5 +306,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	session.invalidate();
     	return SUCCESS;
     }
+    
+    
 
 }

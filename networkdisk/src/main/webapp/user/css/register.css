@@ -1,26 +1,27 @@
 #head {
 	width: 100%;
+	
 }
 
 #head-left {
 	margin-top: -20px;
 	border: #101010 1px hidden;
 	width: 400px;
-	height: 150px;
+	height: 80px;
 	margin-left: 180px;
 	float: left;
+
 }
 
 #head-left img {
-	width: 200px;
 	transform: scale(0.9);
 	display: inline;
 	float: left;
-}
+} 
 
 #head-left span {
 	float: left;
-	margin-top: 58px;
+	margin-top: 18px;
 	font-family: arial;
 	font-size: 17px;
 }
@@ -28,7 +29,8 @@
 #head-right {
 	float: left;
 	margin-left: 350px;
-	margin-top: 40px;
+
+	
 }
 
 #head-right span {
@@ -58,6 +60,7 @@
 	height: 660px;
 	margin-left: 20px;
 	margin-right: 60px;
+	
 }
 
 .register_form {
@@ -152,8 +155,8 @@
 .hr {
 	clear: both;
 	margin-left: 220px;
-	margin-top: -50px;
 	margin-bottom: 30px;
 	width: 900px;
 	size: 4px;
+	
 }

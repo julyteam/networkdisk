@@ -31,8 +31,9 @@ padding-left:15px;
 </head>
 <body>
 	<div id="head">
+	<div style="height:40px"></div>
 		<div id="head-left">
-			<img src="/networkdisk/user/img/logo-2.png"> <span>|&nbsp;&nbsp;注册百度账号</span>
+			<img src="/networkdisk/user/img/register_logo .png"> <span>|&nbsp;&nbsp;注册july云盘账号</span>
 		</div>
 		<div id="head-right">
 			<span>我已注册，现在就</span>
@@ -41,9 +42,9 @@ padding-left:15px;
 			</div>
 		</div>
 	</div>
-	<div class="hr">
+	 <div class="hr">
 		<hr />
-	</div>
+	</div>  
 	<div class="reg_content">
 		<!-- <form action="register.action" method="post">
 			<input type="submit" value="submit" />
@@ -98,6 +99,7 @@ padding-left:15px;
 	</div>
 	
 	<script type="text/javascript">
+	
 		$(document).ready(function(){
 			var successmassge = $("#success").val();
 			var falsemassge = $("#false").text();

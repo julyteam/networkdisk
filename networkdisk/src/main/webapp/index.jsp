@@ -51,7 +51,7 @@
 									<div class="admin">
 										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事倍功半</div>
+											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
@@ -64,7 +64,7 @@
 												<div class="u1">
 													<a href="#">
 														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
+														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
 													</a>
 												</div>
@@ -76,10 +76,10 @@
 												</span>
 											</div>
 											<div class="userpan_4">
-												<p><a href=""><span>个人资料</span></a></p>
+												<p><a href="per-center"><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
+												<p><a  onclick="logout()"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -591,6 +591,13 @@
 		<script src="/networkdisk/js/canvas.js"></script>
 		<script src="/networkdisk/js/jquery.contextify.js"></script>
 		<script>
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
 			var options = {
 				items: [{
 						text: '打开',

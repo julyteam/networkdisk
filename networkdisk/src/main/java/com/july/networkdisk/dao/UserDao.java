@@ -77,7 +77,7 @@ public class UserDao extends BaseDao
 			sqlSession.close();
 		}
 	
-	//密码修改
+	/*密码修改*/
 		public void updatePassword(User user)
 		{
 			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
