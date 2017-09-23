@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<<<<<<< HEAD
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,37 +21,7 @@
 </head>
 
 <body>
-	<div id="in-nav">
-		<div class="container">
-			<div class="row">
-				<div class="logo">
-					<a id="logo" href="/networkdisk/index.jsp"> <img
-						src="/networkdisk/img/LOGO.png" /> <a class="logotitle" href="">July</a>
-					</a>
-				</div>
-				<div class="span1" style="display: inline;">
-					<ul class="pull-left">
-						<li class="active"><a href="#">网盘</a></li>
-						<li><a href="findAll?uid=12134">分享</a></li>
-						<li><a href="#">更多</a></li>
-					</ul>
-				</div>
-				<div class="span2">
-					<ul class="right">
-						<li class="chos" style="width: 220px;">
-							<div class="sev">
-								<div class="admin">
-									<img src="/networkdisk/img/pic3.png" width="30px"
-										style="border-radius: 30px; margin-bottom: 22px;" /> <a
-										href="#" style="display: inline-block;">
-										<div class="username">我们的修改会事倍功半</div> <img
-										src="/networkdisk/img/VIP1.png"
-										style="display: inline; margin-bottom: 22px;" />
-									</a> <em style="display: inline-block;"><img
-										src="/networkdisk/img/downchoose.png" class="c"
-										style="margin-bottom: 22px;" /></em>
-=======
-	<body>
+
 		<div id="in-nav">
 			<div class="container">
 				<div class="row">
@@ -114,7 +83,6 @@
 											</div>
 										</div>
 									</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 								</div>
 								<div class="user">
 									<span id="triangle-up"> </span>
@@ -149,7 +117,7 @@
 											</p>
 										</div>
 									</div>
-								</div>
+							
 							</div>
 						</li>
 						<li style="width: 100px; margin-top: 5px;"><a href="#"
@@ -159,6 +127,7 @@
 						<li style="margin-top: 5px;"><a href="#"><img
 								src="/networkdisk/img/serve.png" /></a></li>
 					</ul>
+				</div>
 				</div>
 			</div>
 		</div>
