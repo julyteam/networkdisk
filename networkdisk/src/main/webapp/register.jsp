@@ -99,7 +99,6 @@ padding-left:15px;
 	</div>
 	
 	<script type="text/javascript">
-	
 		$(document).ready(function(){
 			var successmassge = $("#success").val();
 			var falsemassge = $("#false").text();

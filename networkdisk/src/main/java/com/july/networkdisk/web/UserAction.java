@@ -9,8 +9,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 
@@ -71,6 +74,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	public void setFile(File file) {
 		this.file = file;
 	}
+
+	
+	
+
+
+   
+
 	/*  用户登陆*/
     public String login() throws Exception{
     	System.out.println("~~~~~~~~~~~~~~~~~~");
@@ -104,7 +114,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String percenter() throws Exception{
     	return SUCCESS;
     }
-    
+
+
+
+
 
     /*用户个人资料修改*/
     public String update() throws Exception{
@@ -298,6 +311,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	this.user.setPassWord(password);
     	this.iUserService.updatePassword(user);
     	u.setPassWord(password);
+
     	
     	return SUCCESS;
     }
@@ -306,7 +320,5 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	session.invalidate();
     	return SUCCESS;
     }
-    
-    
 
 }

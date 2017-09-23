@@ -28,7 +28,6 @@
                 {  
                 	alert(data);
                 }  
-                
             }  
         )  
         return false;  
@@ -63,7 +62,7 @@
             <input type="button" value="上传" onclick="ajaxFileUpload()"/>  
         </form>  
         <div id="progressbar"></div>  
-------------------------------------------------------------------------        
+		------------------------------------------------------------------------        
         <form action="${pageContext.request.contextPath}/findAllByUser"
 		method="post">
 

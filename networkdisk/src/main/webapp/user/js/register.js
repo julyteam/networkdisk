@@ -23,7 +23,7 @@ $(document).ready(function(){
 						      },
 					     sex:"required",
 					      phone: {
-						        required: true,
+						       required: true,
 						       rangelength:[11,11],
 						        remote: {
 						            url: "checkPhone",     

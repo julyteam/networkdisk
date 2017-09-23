@@ -11,13 +11,6 @@ $(document).ready(function() {
 		$(this).children(".admin").find(".c").addClass("lbaxztop2");
 	});
 
-	$(".file").mouseenter(function() {
-		$(this).next(".upload").toggle().parents(".upfile").siblings().find(".upload").hide();
-	});
-	$(".upfile").mouseleave(function() {
-		$(".upload").hide();
-	});
-
 	$(".g_1").mouseenter(function() {
 		$(this).next(".equi").toggle().parents(".equip").siblings().find(".equi").hide();
 	});
@@ -117,16 +110,13 @@ $(document).ready(function() {
 			$('table td').mouseleave(function() {
 				$(this).children('#more').css('display', 'none');
 			});
-			$('#up').click(function(){
-				$('#msg').show();
-			});
 			var i = true;
 			$('.fa-window-maximize').click(function() {
 				if(i) {
-					$('#msg').css('bottom', '0');
+					$('#msg').css('bottom', '-300px');
 					i = false;
 				} else {
-					$('#msg').css('bottom', '-300px');
+					$('#msg').css('bottom', '0px');
 					i = true;
 				}
 			});
