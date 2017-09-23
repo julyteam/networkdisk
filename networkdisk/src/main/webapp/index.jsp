@@ -167,12 +167,10 @@
 								<form action="javascript:void(0)" method="post"
 									style="width: 0px; display: block;">
 									<div class="upfile" style="width: 84px; display: block;">
-										<!-- <a href="" class="file" title="请选择文件" style="font-size: 15px;">
-											<img src="/networkdisk/img/upload.png"
-											style="margin-bottom: 3px;" />&nbsp;上传
-										</a> -->
+										<a href="" class="file" title="请选择文件" style="font-size: 15px;">
+											<img src="/networkdisk/img/upload.png" style="margin-bottom: 3px;" />&nbsp;上传
+										</a>
 										<input type="file" name="file" id="upfile" value="上传" />
-
 									</div>
 								</form>
 								<a class="g_button" id="newonefile"><img
@@ -239,14 +237,12 @@
 											<script type="text/javascript">
 												var categorie;
 												var recycle;
-												function show(categorie_id,
-														recycleflag) {
+												function show(categorie_id,recycleflag) {
 													categorie = categorie_id;
 													recycle = recycleflag;
 
 													$(".showTr").remove();
-													$
-															.ajax({
+													$.ajax({
 																type : "post",
 																dataType : "json",
 																url : "showFileAndCate",
@@ -254,14 +250,13 @@
 																	categorie_id : categorie_id,
 																	recycleflag : recycleflag
 																},
-																success : function(
-																		map) {
+																success : function(map) {
 																	var listFile = map.listFiles;
 																	var listCate = map.listCategories;
 
 																	for (var i = 0; i < listCate.length; i++) {
 																		var $str = $("<tr class='showTr'>"
-																				+ "<td id='t1'>"
+																				+ "<td>"
 																				+ "<input type='checkbox' class='chk_2' />"
 																				+ "<span id='listCateID' value="+listCate[i].id+"></span>"
 																				+ "<a id='showFile' class='july_fileName' onclick='show("
@@ -271,47 +266,41 @@
 																				+ ")'>"
 																				+ listCate[i].name
 																				+ "</a>"
-																				+ "<span id='more'>"
+																				+ "<span class='more'>"
 																				+ "<span class='fa fa-share-alt' title='分享'>"
 																				+ "</span> <span class='fa fa-download' title='下载'>"
 																				+ "</span>"
 																				+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
 																				+ "</span></td>"
-																				+ "<td id='t2'>--</td>"
-																				+ "<td id='t3'>"
+																				+ "<td>--</td>"
+																				+ "<td>"
 																				+ listCate[i].addtime
 																				+ "</td>"
 																				+ "</tr>")
-																		$(
-																				"#mytbody")
-																				.append(
-																						$str);
+																		$("#mytbody").append($str);
 																	}
 
 																	for (var i = 0; i < listFile.length; i++) {
 																		var $str = $("<tr class='showTr'>"
-																				+ "<td id='t1'>"
+																				+ "<td>"
 																				+ "<input type='checkbox' class='chk_2' />"
 																				+ "<a class='july_fileName'>"
 																				+ listFile[i].name
 																				+ "</a>"
-																				+ "<span id='more'>"
+																				+ "<span class='more'>"
 																				+ "<span class='fa fa-share-alt' title='分享'>"
 																				+ "</span> <span class='fa fa-download' title='下载'>"
 																				+ "</span>"
 																				+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
 																				+ "</span></td>"
-																				+ "<td id='t2'>"
+																				+ "<td>"
 																				+ listFile[i].size
 																				+ "</td>"
-																				+ "<td id='t3'>"
+																				+ "<td>"
 																				+ listFile[i].addtime
 																				+ "</td>"
 																				+ "</tr>")
-																		$(
-																				"#mytbody")
-																				.append(
-																						$str);
+																		$("#mytbody").append($str);
 																	}
 																},
 																error : function() {
@@ -335,26 +324,19 @@
 
 												function july_fileReader(file) {
 													var flag = 0;
-													$(".july_fileName")
-															.each(
-																	function() {
-																		if ($(
-																				this)
-																				.text() == file.name) {
-																			flag = 1;
-																		}
-																	})
+													$(".july_fileName").each(function() {
+														if ($(this).text() == file.name) {
+																flag = 1;
+														}
+													})
 													if (flag != 1) {
 														if (window.FileReader) {
 															var reader = new FileReader();
-															reader
-																	.readAsDataURL(file);
+															reader.readAsDataURL(file);
 															//监听文件读取结束后事件    
-															reader.onloadend = function(
-																	e) {
+															reader.onloadend = function(e) {
 																ajaxFileUpload();
-																$('#msg')
-																		.show();
+																$('#msg').show();
 															};
 														}
 													} else {
@@ -365,29 +347,21 @@
 												var time = 0;
 												function ajaxFileUpload() {
 													$("#myprogress").width(0);
-													time = window.setInterval(
-															progress, 100);
-													$
-															.ajaxFileUpload({
-																url : '${pageContext.request.contextPath}/fileupload?categorie_id='
-																		+ categorie,
+													time = window.setInterval(progress, 100);
+													$.ajaxFileUpload({
+																url : '${pageContext.request.contextPath}/fileupload?categorie_id='+ categorie,
 																secureuri : false,
 																fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
 																dataType : 'multipart/form-data',
-																success : function(
-																		data) {
+																success : function(data) {
 																	alert(data);
 																	//刷新页面
-																	show(
-																			categorie,
-																			recycle);
+																	show(categorie,recycle);
 																	//需要重新绑定事件
-																	$("#upfile")
-																			.change(
-																					function() {
-																						var file = this.files[0];
-																						july_fileReader(file);
-																					});
+																	$("#upfile").change(function(){
+																			var file = this.files[0];
+																			july_fileReader(file);
+																		});
 																}
 
 															})
@@ -395,17 +369,11 @@
 												}
 
 												function progress() {
-													$
-															.ajax({
+													$.ajax({
 																url : "${pageContext.request.contextPath}/progress",
 																dataType : 'json',
-																success : function(
-																		data) {
-																	$(
-																			"#myprogress")
-																			.width(
-																					data.rate
-																							+ "%");
+																success : function(data) {
+																	$("#myprogress").width(data.rate+"%");
 																	if (data.rate == 100) {
 																		clearInterval(time);
 																	}
@@ -675,7 +643,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/networkdisk/js/canvas.js"></script>
 	<script src="/networkdisk/js/jquery.contextify.js"></script>
 	<script type="text/javascript">
 		var options = {

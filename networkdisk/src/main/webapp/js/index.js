@@ -104,16 +104,17 @@ $(document).ready(function() {
 					$('.donetimeline').css('display', 'none');
 				}
 			});
-			$('table td').mouseenter(function() {
-				$(this).children('#more').css('display', 'inline-block');
+			$('.table td').mouseenter(function() {
+				alert("1");
+				$(this).children('.more').css('display', 'inline-block');
 			});
-			$('table td').mouseleave(function() {
-				$(this).children('#more').css('display', 'none');
+			$('table').mouseleave(function() {
+				$(this).children('.more').css('display', 'none');
 			});
 			var i = true;
 			$('.fa-window-maximize').click(function() {
 				if(i) {
-					$('#msg').css('bottom', '-300px');
+					$('#msg').css('bottom', '300px');
 					i = false;
 				} else {
 					$('#msg').css('bottom', '0px');

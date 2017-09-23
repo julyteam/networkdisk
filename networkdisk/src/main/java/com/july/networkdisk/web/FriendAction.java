@@ -54,7 +54,6 @@ public class FriendAction extends ActionSupport{
 	
 	public String findafriend() throws Exception{
 		map = new HashMap<String, Object>();	
-		System.out.println(this.user.getName()+123);
 		List<User> list = this.iFriendService.findOne(user.getName());
 		map.put("friend", list);	
 		return "json";
@@ -66,14 +65,8 @@ public class FriendAction extends ActionSupport{
      * @throws Exception
      */
 	public void addfriend() throws Exception{
-		HttpServletRequest request =ServletActionContext.getRequest();
-		HttpServletResponse resp=ServletActionContext.getResponse();		
-		String friendId= request.getParameter("friendId");
-		String userId=request.getParameter("userId");
-		friend.setUid(userId);
-		friend.setFid(friendId);
-		int i = this.iFriendService.insertfriend(friend);
-    	resp.getWriter().print("true");		
+		
+		int i = this.iFriendService.insertfriend(friend);	
 	}
 	public Friend getFriend() {
 		return friend;
