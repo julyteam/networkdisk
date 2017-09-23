@@ -121,29 +121,16 @@
 								</table>
 						</div>
 						<div class="tab-pane fade" id="user_content">
-							<a href="new_friend.jsp" target="share_iframe">
-								<table class="table_new_friend">
+							<a href="friend_info.jsp" target="share_iframe"></a>
+							<table class="user_table" align="left">
+   									<c:forEach items="${map.listfriends }" var="friend">							
 									<tr>
-										<td rowspan="2" class="friend_user"><img src="/networkdisk/img/new_user.png" /></td>
-										<td class="friend_new">新好友</td>
-										<td class="friend_time"><font size="1">09-16 10:47</font></td>
+										<td><img src="${pageContext.request.contextPath}/showphoto?id=${friend.id}" width="50px" /></td>
+										<td>${friend.name}</td>
 									</tr>
-									<tr>
-										<td class="new_friend_name"><font size="1">慕名玉兰加你为好友</font></td>
-										<td></td>
-									</tr>
-								</table>
-							</a>
-							<a href="friend_info.jsp" target="share_iframe">
-								<table class="user_table">
-								 <c:forEach items="${map.listfriends }" var="friend">							
-									<tr>
-										<td class="session_user" rowspan="2"><img src="img/pic3.png" /></td>
-										<td rowspan="2" class="user_name">${friend.name}</td>
-									</tr>
+									
 								</c:forEach>
-								</table>
-							</a>						
+							</table>							
 						</div>
 					</div>
 					<div class="session_bottom">
@@ -162,16 +149,17 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
 									</button>
-									<h4 class="modal-title" id="myModalLabel">
+									<h5 class="modal-title" id="myModalLabel">
 										添加好友
-									</h4>
+									</h5>
 								</div>
 								<div class="modal-body">
 									<div class="modal-body_item">
-										<p><span>根据百度账号添加好友</span></p>
+										<p><span>根据July账号添加好友</span></p>
 										<form>
-										<input type="text" placeholder="用户名/邮箱" name="name" class="b1"/>
-										<input type="button" class="bn" value="搜索">
+										<input type="text" placeholder="  用户名/邮箱" 
+										onfocus="this.placeholder=''" onblur="this.placeholder='  用户名/邮箱'" name="name" class="b1" style="width:410px;border-radius:0px;height:30px"/>
+										<a class="bn">搜索</a>
 										</form>
 									</div>
 									<div class="search_result" style="display: none;">
@@ -181,11 +169,10 @@
 										</div>
 									</div>
 								</div>
-								<div class="friends"></div>
+								<div class="friends">
+								</div>
 								<div class="modal-footer">
-									<button type="button" data-dismiss="modal" class="btn_add">
-										加好友
-									</button>								
+									<a class="bn1">加为好友</a>								
 								</div>
 							</div>
 						</div>
@@ -207,12 +194,18 @@
 				dataType: 'json',
 				beforeSend: function(){}, 
 				success: function(data) {//提交成功的时候执行的函数  
-					$('.friends').append("<img src='"+data.friend[0].photo+"'width='50px'>"+"<a>"+data.friend[0].name+"</a>");//jquery解析map数据						        				       					  	
+					$(".friends").show();
+					$('.friends').append("<img src='${pageContext.request.contextPath}/showphoto?id="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据						        				       					  	
 			}  
 		});	
 		});
-	 $(function(){
+	 	$(function(){
 			$('#myModal').modal('hide')
 		}); 
+	 	$('.close').click(function(){
+	 		$(".friends").html("");
+	 		$(".b1").val("");
+	 		$(".friends").hide();
+	 	})
 	</script>
 </html>

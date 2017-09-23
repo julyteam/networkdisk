@@ -2,9 +2,10 @@
 
 .share_all
 {
-	height:612px;
-	background-color:#333333;
-	border: 1px solid #333333;
+	height:100%;
+	background-color: #f6f6f6;
+	font-family: Lato;
+	margin: 0px;
 }
 .share_content
 {
@@ -70,16 +71,6 @@
 {
 	color: black;
 }
-.table{
-	margin-left:0px;
-}
-.table tr{
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	border-bottom: 1px solid #E6E6FA;
-}
 #share_content{
 	height: 490px;
 }
@@ -93,9 +84,7 @@
 #session_content a
 {
 	text-decoration: none;
-	cursor: pointer;
-	
-
+	cursor: pointer;	
 }
 .session_table 
 {
@@ -131,29 +120,35 @@
 {
 	height:490px;	
 }
-
-	
 #user_content a
 {
 	text-decoration: none;
 	color: black;
 	cursor: pointer;
 }
-
-#user_content .user_table:hover
-{
-	background-color: lavender;
-	cursor: pointer;
-}
-
 .user_table
-{
-	
-	border-bottom: 1px solid lavender;
+{	
+	margin-left:0px;
 	width: 280px;	
-	height: 60px;
+	
 	cursor: pointer;
-
+	text-align: left;
+	border-collapse:collapse;
+}
+.user_table tr{
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	font-size:14px;
+	font-family:"微软雅黑";
+	border-bottom: 1px solid #E6E6FA;
+}
+.user_table td:first-child{
+	width:60px;
+	padding-left:5px;
+}
+.user_table tr:hover{
+	background:rgb(229, 245, 255);
 }
 .user_name 
 {
@@ -404,4 +399,59 @@
 	border-radius: 3px;
 	height: 30px;
 		
+}
+.b1{
+	width:410px;
+	height:30px;
+}
+.bn{
+	display:inline-block;
+	width:72px;
+	height:30px;
+	line-height:30px;
+	border-radius:3px;
+	text-align:center;
+	font-size:15px;
+	background:rgb(78, 151, 255);
+	color:#fff;	
+	cursor:pointer;
+}
+.bn:hover{
+	color:#fff;
+	background:rgb(78, 141, 255);
+	text-decoration:none;
+}
+.bn1{
+	display:block;
+	width:100px;
+	height:32px;
+	line-height:32px;
+	border-radius:3px;
+	text-align:center;
+	font-size:15px;
+	background:rgb(78, 151, 255);
+	color:#fff;	
+	cursor:pointer;
+	margin:0px auto;
+}
+.bn1:hover{
+	color:#fff;
+	background:rgb(78, 141, 255);
+	text-decoration:none;
+}
+.friends{
+	width:100%;
+	height: 100px;
+	display:none;
+	background:rgb(247, 247, 247);
+}
+.friends img{
+	margin:5px;
+}
+.friends a{
+	color:#333333;
+	font-size:18px;
+}
+.friends a:hover{
+	text-decoration: none;
 }

@@ -21,7 +21,7 @@
 	</select>
 	<!-- 查找所有好友信息 -->
 	<select id="getAll" resultMap="friendMap">
-		select * from user where user_id = (select fri_fid from friend where fri_uid=#{0})
+		select * from user where user_id in (select fri_fid from friend where fri_uid=#{0})
 	</select>
 	
 </mapper>

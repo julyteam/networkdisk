@@ -20,9 +20,9 @@ public class FriendDao extends BaseDao{
 	 * @author Administrator
 	 * 查找所有好友
 	 */	
-	public List<User> findAll(Map<String, Object> map) {
+	public List<User> findAll(String uid) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		List<User> list = sqlSession.selectList("userSpace.getAllfriend",map);
+		List<User> list = sqlSession.selectList("userSpace.getAllfriend",uid);
 		sqlSession.close();
 		return list;
 	}

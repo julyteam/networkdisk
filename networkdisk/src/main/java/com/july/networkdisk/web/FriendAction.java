@@ -42,7 +42,7 @@ public class FriendAction extends ActionSupport{
      */
 	public String getAll()throws Exception{
 		map = new HashMap<String, Object>();
-		List<User> i = this.iFriendService.getAll(user.getId(),map);
+		List<User> i = this.iFriendService.getAll(user.getId());
 		map.put("listfriends", i);
     	return SUCCESS;
     }

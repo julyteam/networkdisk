@@ -13,7 +13,7 @@ import com.july.networkdisk.vo.User;
  */
 public interface IFriendService{
 	
-	List<User> getAll(String uid, Map<String, Object> map);
+	List<User> getAll(String uid);
 	List<User> findOne(String friendname);
 	int insertfriend(Friend friend);
 }

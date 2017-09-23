@@ -37,10 +37,10 @@ public class FriendServiceImpl implements IFriendService{
 		return null;
 	}
 	/*好友列表*/
-	public List<User> getAll(String uid, Map<String, Object> map) {
+	public List<User> getAll(String uid) {
 		// TODO Auto-generated method stub
-		map.put("user_id", uid);
-		return friendDao.findAll(map);
+		
+		return friendDao.findAll(uid);
 	}
 	/*查询好友*/
 	public List<User> findOne(String friendname) {

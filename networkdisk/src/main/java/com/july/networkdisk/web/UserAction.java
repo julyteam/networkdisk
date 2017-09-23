@@ -142,15 +142,19 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	return SUCCESS;
     }
     public String showphoto() throws Exception{
-    	User u = CommonUtil.getSessionUser();
-	   User user = iUserService.get(u.getId());
-	   System.out.println(user.getPhoto()+"~~~~~~~~~~~~~~~~~~~~~~");
-	   HttpServletResponse response = null;
-	   ServletOutputStream out = null;
-	   response = ServletActionContext.getResponse();
-	   response.setContentType("multipart/form-data");
-	   out = response.getOutputStream();
-	   out.write(user.getPhoto());
+    	User user = new User();
+    	HttpServletResponse response = null;
+    	ServletOutputStream out = null;
+    	response = ServletActionContext.getResponse();
+    	response.setContentType("multipart/form-data");
+    	out = response.getOutputStream();
+    	if(this.user.getId() == null){
+    		User u = CommonUtil.getSessionUser();
+    		user= iUserService.get(u.getId());
+    	}else{
+    		user = iUserService.get(this.user.getId());
+    	}
+    	out.write(user.getPhoto());
 	   out.flush();
 	   out.close();
 	   return null;
