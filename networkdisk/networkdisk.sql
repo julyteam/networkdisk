@@ -69,7 +69,7 @@ user_isadmin 			int(1)			 否		    0		是否管理员
 user_sex			int(1)			     否		    0		性别
 user_about 			varchar(255)		 是				    个人介绍
 user_cTime 			timestamp 		     否				    注册时间
-user_photo			varchar(255)         否                  个人头像
+user_photo			mediumblob           是                  个人头像
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ create table user(
 			user_sex       int(1)       NOT NULL DEFAULT 1,
 			user_about     varchar(255) ,
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
-			user_photo     varchar(255) NOT NULL
+			user_photo     varchar(255) 
 );
 #文件夹表
 create table categorie

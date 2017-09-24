@@ -72,7 +72,7 @@ padding-left:15px;
 						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
-					&nbsp;&nbsp;&nbsp;<label>验证码</label><input type="text" name="code" id="code" />
+					<label>邮箱验证码</label><input type="text" name="code" id="code" />
 				</div>
 				<div class="reg_password">
 

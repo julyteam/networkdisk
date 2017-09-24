@@ -141,10 +141,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 
     	return SUCCESS;
     }
+    /**
+     * 用户头像查找
+     * @return
+     * @throws Exception
+     */
     public String showphoto() throws Exception{
     	User u = CommonUtil.getSessionUser();
 	   User user = iUserService.get(u.getId());
-	   System.out.println(user.getPhoto()+"~~~~~~~~~~~~~~~~~~~~~~");
 	   HttpServletResponse response = null;
 	   ServletOutputStream out = null;
 	   response = ServletActionContext.getResponse();

@@ -80,6 +80,8 @@
 													<a href="#">
 														<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
 														<a href="">${user.name }</a>
+														<input type="hidden" id="userPhoto"  value="${user.photo} "> 
+														
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -268,18 +270,6 @@
 </div>
 
 	</div>
-
-
-<script type="text/javascript">
-$(document).ready(function() { 
-	
-		
-
-
-
-
-
-</script>
 <script>	
 
        /*修改头像*/
@@ -302,7 +292,6 @@ $(document).ready(function() {
 		});	
 			
 			
-		})
 			
 </script>			
 
@@ -343,7 +332,7 @@ $(document).ready(function() {
 										"lbaxztop2");
 							});
 					/* 当没有头像时，为默认头像*/
-					if ($('img').attr("src") == "") {
+					if ($("#userPhoto").text()=="") {
 						$('img').attr("src",
 								"/networkdisk/user/img/person-bhead.png");
 					}
