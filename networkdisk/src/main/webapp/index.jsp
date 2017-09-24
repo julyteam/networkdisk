@@ -66,6 +66,7 @@
 														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
 														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+
 													</a>
 												</div>
 											</div>
@@ -77,49 +78,17 @@
 											</div>
 											<div class="userpan_4">
 												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
+
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href="logout"><span>退出</span></a></p>
+												<p><a  onclick="logout()"><span>退出</span></a></p>
+
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="user">
-									<span id="triangle-up"> </span>
-									<div class="userpan">
-										<div class="userpan_2">
-											<div class="u1">
-												<a href="#"> <img src="/networkdisk/img/pic3.png"
-													class="userpic" /> <a href="">admin</a> <img
-													src="/networkdisk/img/VIP1.png"
-													style="display: inline; margin-bottom: 5px;" />
-												</a>
-											</div>
-										</div>
-										<div class="userpan_3">
-											<span> <a href=""
-												style="color: #000; font-size: 12px;">超级会员专享特权：</a>
-												<div class="svip">开通超级会员</div>
-											</span>
-										</div>
-										<div class="userpan_4">
-											<p>
-												<a href=""><span>个人资料</span></a>
-											</p>
-											<p>
-												<a href=""><span>帮助中心</span></a>
-											</p>
-											<p>
-												<a href=""><span>设置</span></a>
-											</p>
-											<p>
-												<a href=""><span>退出</span></a>
-											</p>
-										</div>
-									</div>
-							
-							</div>
-						</li>
+
+						</li> 
 						<li style="width: 100px; margin-top: 5px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li style="margin-top: 5px;"><a href="#"><img
@@ -131,7 +100,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 	<div class="clean" style="clear: all;"></div>
 	<div id="in-sub-nav">
 		<div class="container">
@@ -629,6 +598,58 @@
 				</div>
 			</div>
 		</div>
+
+		<script src="/networkdisk/js/canvas.js"></script>
+		<script src="/networkdisk/js/jquery.contextify.js"></script>
+		<script>
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
+			var options = {
+				items: [{
+						text: '打开',
+						href: '#'
+					},
+					{
+						text: '下载',
+						onclick: function() {
+							alert("你点击了第2个链接")
+						}
+					},
+					{
+						text: '复制到',
+						onclick: function() {
+							alert("你点击了第3个链接")
+						}
+					},
+					{
+						text: '移动到',
+						onclick: function() {
+							alert("你点击了第4个链接")
+						}
+					},
+					{
+						text: '重命名',
+						onclick: function() {
+							alert("你点击了第5个链接")
+						}
+					},
+					{
+						text: '删除',
+						onclick: function() {
+							alert("你点击了第6个链接")
+						}
+					}
+				]
+			}
+			$('table').contextify(options);
+		</script>
+	</body>
+
 		<div id="msg">
 			<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
 			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
@@ -710,5 +731,6 @@
 		$('table').contextify(options);
 	</script>
 </body>
+
 
 </html>

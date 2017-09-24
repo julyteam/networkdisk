@@ -24,10 +24,10 @@
 					</div>
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
-							<li class="active">
-								<a href="#">网盘</a>
-							</li>
 							<li>
+								<a href="index.jsp">网盘</a>
+							</li>
+							<li class="active">
 								<a href="#">分享</a>
 							</li>
 							<li>
@@ -64,10 +64,10 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<p href="">个人资料</p>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
+												<p><a href="per-center"><span>个人资料</span></a></p>
+												<p><a href=""><span>帮助中心</span></a></p>
+												<p><a href=""><span>设置</span></a></p>
+												<p><a  onclick="logout()"><span>退出</span></a></p>
 											</div>
 										</div>
 									</div>
@@ -246,13 +246,17 @@
 				}
 			});
 		});
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
 	</script>
 
 </body>
-<<<<<<< HEAD
+
 
 </html>
-=======
 
-</html>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git

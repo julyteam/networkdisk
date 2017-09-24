@@ -90,7 +90,7 @@ create table user(
 			user_sex       int(1)       NOT NULL DEFAULT 1,
 			user_about     varchar(255) ,
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
-			user_photo     varchar(255) 
+			user_photo    mediumblob
 );
 #文件夹表
 create table categorie
