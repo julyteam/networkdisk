@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
+<link href="/networkdisk/css/context.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 <script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
@@ -26,11 +27,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="logo">
-					<a id="logo" href="/networkdisk/index.jsp"> 
-					<img src="/networkdisk/img/LOGO.png" />
-					</a> 
-					<a class="logotitle" href="">July</a>
-					
+					<a id="logo" href="/networkdisk/index.jsp"> <img
+						src="/networkdisk/img/LOGO.png" />
+					</a> <a class="logotitle" href="">July</a>
+
 				</div>
 				<div class="span1" style="display: inline;">
 					<ul class="pull-left">
@@ -46,22 +46,25 @@
 								<div class="admin">
 									<img src="${pageContext.request.contextPath}/showphoto"
 										width="30px" style="border-radius: 30px; margin-bottom: 22px;" />
-										<div class="username">${user.name }</div> 
-										<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 22px;" />
-									<em style="display: inline-block;">
-									<img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;" /></em>
+									<div class="username">${user.name }</div>
+									<img src="/networkdisk/img/VIP1.png"
+										style="display: inline; margin-bottom: 22px;" /> <em
+										style="display: inline-block;"> <img
+										src="/networkdisk/img/downchoose.png" class="c"
+										style="margin-bottom: 22px;" /></em>
 								</div>
 								<div class="user">
 									<span id="triangle-up"> </span>
 									<div class="userpan">
 										<div class="userpan_2">
 											<div class="u1">
-												<a href="#"> 
-												<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
-												</a> 
-												<a href="">${user.name }</a>
-												<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
-												
+												<a href="#"> <img
+													src="${pageContext.request.contextPath}/showphoto"
+													width="30px" class="userpic" />
+												</a> <a href="">${user.name }</a> <img
+													src="/networkdisk/img/VIP1.png"
+													style="display: inline; margin-bottom: 5px;" />
+
 											</div>
 										</div>
 										<div class="userpan_3">
@@ -91,9 +94,9 @@
 								<div class="userpan">
 									<div class="userpan_2">
 										<div class="u1">
-											<img src="/networkdisk/img/pic3.png"class="userpic" /> 
-											<a href="">admin</a> 
-											<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
+											<img src="/networkdisk/img/pic3.png" class="userpic" /> <a
+												href="">admin</a> <img src="/networkdisk/img/VIP1.png"
+												style="display: inline; margin-bottom: 5px;" />
 										</div>
 									</div>
 									<div class="userpan_3">
@@ -168,15 +171,17 @@
 									style="width: 0px; display: block;">
 									<div class="upfile" style="width: 84px; display: block;">
 										<a href="" class="file" title="请选择文件" style="font-size: 15px;">
-											<img src="/networkdisk/img/upload.png" style="margin-bottom: 3px;" />&nbsp;上传
-										</a>
-										<input type="file" name="file" id="upfile" value="上传" />
+											<img src="/networkdisk/img/upload.png"
+											style="margin-bottom: 3px;" />&nbsp;上传
+											<input type="file" name="file" id="upfile" value="上传" style="cursor:pointer;"/>
+										</a> 
+										
 									</div>
 								</form>
 								<a class="g_button" id="newonefile"><img
 									src="/networkdisk/img/newfile.png" style="margin-bottom: 3px;" />&nbsp;新建文件夹</a>
-								<a class="g_button"><img src="/networkdisk/img/download.png"
-									style="margin-bottom: 3px;" />&nbsp;离线下载</a>
+								<a class="g_button" id="mydownload">
+								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的下载</a>
 								<div class="equip"
 									style="width: 105px; display: inline-block; position: relative;">
 									<a class="g_button g_1" id="g_button"><img
@@ -188,9 +193,8 @@
 								</div>
 								<div class="equip_1">
 									<ul class="equi_1">
-										<li id="f1"><img src="/networkdisk/img/share.png" />分享</li>
-										<li><img src="/networkdisk/img/download.png" />下载</li>
-										<li><img src="/networkdisk/img/delete.png" />删除</li>
+										<li id="f1"><img src="/networkdisk/img/share.png" style="margin-bottom:3px"/>分享</li>
+										<li><img src="/networkdisk/img/delete.png" style="margin-bottom:3px"/>删除</li>
 										<li>复制到</li>
 										<li id="f2">移动到</li>
 									</ul>
@@ -221,7 +225,7 @@
 							</div>
 							<div class="tw1_body">
 								<div class="Jdh">
-									<span class="j1">全部文件</span> <span class="j2">已加载全部，共8条</span>
+									
 								</div>
 								<div class="Qdh">
 									<ul>
@@ -231,159 +235,20 @@
 										<li>修改日期</li>
 									</ul>
 								</div>
+								<div class="nullfile eefile">
+									<p class="ggflie">
+										您还没上传过文件哦，点击
+										<span class="mlfile upload-wrapper">上传
+											<form action="javascript:void(0);" style="position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;cursor:pointer;">
+												<input title="点击选择文件" multiple="" accept="*/*" type="file" name="uploader" style="position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;cursor:pointer;">
+											</form>
+										</span>
+									</p>
+								</div>
 								<form action="" method="post">
 									<table class="table">
 										<tbody id="mytbody">
-											<script type="text/javascript">
-												var categorie;
-												var recycle;
-												function show(categorie_id,recycleflag) {
-													categorie = categorie_id;
-													recycle = recycleflag;
 
-													$(".showTr").remove();
-													$.ajax({
-																type : "post",
-																dataType : "json",
-																url : "showFileAndCate",
-																data : {
-																	categorie_id : categorie_id,
-																	recycleflag : recycleflag
-																},
-																success : function(map) {
-																	var listFile = map.listFiles;
-																	var listCate = map.listCategories;
-
-																	for (var i = 0; i < listCate.length; i++) {
-																		var $str = $("<tr class='showTr'>"
-																				+ "<td>"
-																				+ "<input type='checkbox' class='chk_2' />"
-																				+ "<span id='listCateID' value="+listCate[i].id+"></span>"
-																				+ "<a id='showFile' class='july_fileName' onclick='show("
-																				+ listCate[i].id
-																				+ ","
-																				+ listCate[i].state
-																				+ ")'>"
-																				+ listCate[i].name
-																				+ "</a>"
-																				+ "<span class='more'>"
-																				+ "<span class='fa fa-share-alt' title='分享'>"
-																				+ "</span> <span class='fa fa-download' title='下载'>"
-																				+ "</span>"
-																				+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-																				+ "</span></td>"
-																				+ "<td>--</td>"
-																				+ "<td>"
-																				+ listCate[i].addtime
-																				+ "</td>"
-																				+ "</tr>")
-																		$("#mytbody").append($str);
-																	}
-
-																	for (var i = 0; i < listFile.length; i++) {
-																		var $str = $("<tr class='showTr'>"
-																				+ "<td>"
-																				+ "<input type='checkbox' class='chk_2' />"
-																				+ "<a class='july_fileName'>"
-																				+ listFile[i].name
-																				+ "</a>"
-																				+ "<span class='more'>"
-																				+ "<span class='fa fa-share-alt' title='分享'>"
-																				+ "</span> <span class='fa fa-download' title='下载'>"
-																				+ "</span>"
-																				+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-																				+ "</span></td>"
-																				+ "<td>"
-																				+ listFile[i].size
-																				+ "</td>"
-																				+ "<td>"
-																				+ listFile[i].addtime
-																				+ "</td>"
-																				+ "</tr>")
-																		$("#mytbody").append($str);
-																	}
-																},
-																error : function() {
-																	alert("查询失败")
-																}
-															});
-
-												}
-
-												$(function() {
-													var categorie_id = "";
-													var recycleflag = 0;
-													show(categorie_id,
-															recycleflag);
-												});
-
-												$("#upfile").change(function() {
-													var file = this.files[0];
-													july_fileReader(file);
-												});
-
-												function july_fileReader(file) {
-													var flag = 0;
-													$(".july_fileName").each(function() {
-														if ($(this).text() == file.name) {
-																flag = 1;
-														}
-													})
-													if (flag != 1) {
-														if (window.FileReader) {
-															var reader = new FileReader();
-															reader.readAsDataURL(file);
-															//监听文件读取结束后事件    
-															reader.onloadend = function(e) {
-																ajaxFileUpload();
-																$('#msg').show();
-															};
-														}
-													} else {
-														alert("文件夹中已经有相同名字的文件！")
-													}
-												}
-
-												var time = 0;
-												function ajaxFileUpload() {
-													$("#myprogress").width(0);
-													time = window.setInterval(progress, 100);
-													$.ajaxFileUpload({
-																url : '${pageContext.request.contextPath}/fileupload?categorie_id='+ categorie,
-																secureuri : false,
-																fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
-																dataType : 'multipart/form-data',
-																success : function(data) {
-																	alert(data);
-																	//刷新页面
-																	show(categorie,recycle);
-																	//需要重新绑定事件
-																	$("#upfile").change(function(){
-																			var file = this.files[0];
-																			july_fileReader(file);
-																		});
-																}
-
-															})
-													return false;
-												}
-
-												function progress() {
-													$.ajax({
-																url : "${pageContext.request.contextPath}/progress",
-																dataType : 'json',
-																success : function(data) {
-																	$("#myprogress").width(data.rate+"%");
-																	if (data.rate == 100) {
-																		clearInterval(time);
-																	}
-																},
-																error : function() {
-																	alert("error");
-																}
-															});
-												}
-											</script>
 										</tbody>
 									</table>
 								</form>
@@ -472,8 +337,8 @@
 										</ul>
 									</div>
 								</form>
-								<a class="g_button"><img src="/networkdisk/img/download.png"
-									style="margin-bottom: 3px;" />&nbsp;离线下载</a>
+								<a class="g_button" id="mydownload">
+								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的下载</a>
 								<div class="equip"
 									style="width: 105px; display: inline-block; position: relative;">
 									<a class="g_button g_1"><img
@@ -528,68 +393,6 @@
 										<li>修改日期</li>
 									</ul>
 								</div>
-								<form action="" method="post">
-									<table class="table">
-										<tbody>
-										<tbody>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品1
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">23/11/2013</td>
-												<td id="t3">待发货</td>
-											</tr>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品2
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">10/11/2013</td>
-												<td id="t3">发货中</td>
-											</tr>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品3
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">20/10/2013</td>
-												<td id="t3">待确认</td>
-											</tr>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品4
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">20/10/2013</td>
-												<td id="t3">已退货</td>
-											</tr>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品3
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">20/10/2013</td>
-												<td id="t3">待确认</td>
-											</tr>
-											<tr>
-												<td id="t1"><input type="checkbox" class="chk_2" />产品4
-													<span id="more"> <span class="fa fa-share-alt"
-														title="分享"></span> <span class="fa fa-download" title="下载"></span>
-														<span class="fa fa-ellipsis-h" title="更多"></span>
-												</span></td>
-												<td id="t2">20/10/2013</td>
-												<td id="t3">已退货</td>
-											</tr>
-										</tbody>
-										</tbody>
-									</table>
-								</form>
 							</div>
 						</div>
 					</div>
@@ -600,6 +403,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="msg">
 			<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
 			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
@@ -627,15 +431,9 @@
 							<div class="file_path">
 								<a title="/" class="server_path" href="#list/path=/">我的文件</a>
 							</div>
-							<div class="file_status"></div>
-							<div class="file_operate">
-								<em class="fa fa-pause"></em> <em class="fa fa-play"></em>
-							</div>
-						</li>
-						<li>
-							<div style="width: 650px; height: 25px">
-								<div id="myprogress"
-									style="background-color: hsl(100, 80%, 60%); height: 25px; width: 0px"></div>
+							<div class="up_status"></div>
+							<div class="probox" style="width: 100%; height:5px;padding-left:0px;display:none;">
+								<div id="myprogress" style="background-color: hsl(100, 80%, 60%); height: 5px;"></div>
 							</div>
 						</li>
 					</ul>
@@ -643,40 +441,216 @@
 			</div>
 		</div>
 	</div>
-	<script src="/networkdisk/js/jquery.contextify.js"></script>
+	<script src="/networkdisk/js/contextMenu.js"></script>
 	<script type="text/javascript">
-		var options = {
-			items : [ {
-				text : '打开',
-				href : '#'
-			}, {
-				text : '下载',
-				onclick : function() {
-					alert("你点击了第2个链接")
+	$(".table").contextMenu({
+		menu: [{
+				text: "打开",
+				callback: function() {
+					alert("打开");
 				}
-			}, {
-				text : '复制到',
-				onclick : function() {
-					alert("你点击了第3个链接")
+			},
+			{
+				text: "下载",
+				callback: function() {
+					alert("下载");
 				}
-			}, {
-				text : '移动到',
-				onclick : function() {
-					alert("你点击了第4个链接")
+			},
+			{
+				text: "分享",
+				callback: function() {
+					alert("分享");
 				}
-			}, {
-				text : '重命名',
-				onclick : function() {
-					alert("你点击了第5个链接")
+			},
+			{
+				text: "复制到",
+				callback: function() {
+					alert("复制到");
 				}
-			}, {
-				text : '删除',
-				onclick : function() {
-					alert("你点击了第6个链接")
+			},
+			{
+				text: "移动到",
+				callback: function() {
+					alert("移动到");
 				}
-			} ]
+			},
+			{
+				text: "删除",
+				callback: function() {
+					alert("删除");
+				}
+			}
+		]
+	});
+	</script>
+	<script type="text/javascript">
+		var categorie;
+		var recycle;
+		function show(categorie_id, recycleflag) {
+			categorie = categorie_id;
+			recycle = recycleflag;
+			$(".showTr").remove();
+			$.ajax({
+						type : "post",
+						dataType : "json",
+						url : "showFileAndCate",
+						data : {
+							categorie_id : categorie_id,
+							recycleflag : recycleflag
+						},
+						success : function(map) {
+							var listFile = map.listFiles;
+							var listCate = map.listCategories;
+							if(listCate==""||listFile==""){
+								$('.nullfile').show();
+							}
+							var sum=parseInt(listCate.length+listFile.length);
+							var $head=$("<span class='j1'>全部文件>"+listCate[1].name+"</span><span class='j2'>已加载全部,共"+sum+"条</span>");
+							$('.Jdh').html($head);
+							for (var i = 0; i < listCate.length; i++) {
+								var $str = $("<tr class='showTr'>"
+										+ "<td>"
+										+ "<input type='checkbox' class='chk_2' />"
+										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
+										+ listCate[i].id
+										+ ">"
+										+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
+										+ listCate[i].name
+										+ ">"
+										+ "<a id='showFile' class='july_fileName' onclick='show("
+										+ listCate[i].id
+										+ ","
+										+ listCate[i].state
+										+ ")'>"
+										+ listCate[i].name
+										+ "</a>"
+										+ "<span class='more'>"
+										+ "<span class='fa fa-share-alt' title='分享'>"
+										+ "</span><span class='fa fa-download' title='下载'>"
+										+ "</span>"
+										+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+										+ "</span></td>" 
+										+ "<td>--</td>"
+										+ "<td>" 
+										+ listCate[i].addtime
+										+ "</td>" 
+										+ "</tr>");
+								$("#mytbody").append($str);
+							}
+							for (var i = 0; i < listFile.length; i++) {
+								var $str = $("<tr class='showTr'>"
+										+ "<td>"
+										+ "<input type='checkbox' class='chk_2' />"
+										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
+										+ listFile[i].id
+										+ ">"
+										+ "<a class='july_fileName'>"
+										+ listFile[i].name
+										+ "</a>"
+										+ "<span class='more'>"
+										+ "<span class='fa fa-share-alt' title='分享'>"
+										+ "</span> <span class='fa fa-download' title='下载'>"
+										+ "</span>"
+										+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+										+ "</span></td>" 
+										+ "<td>"
+										+ Math.round(listFile[i].size/(1024*1024)) 
+										+ "M</td>" 
+										+ "<td>"
+										+ listFile[i].addtime 
+										+ "</td>"
+										+ "</tr>")
+								$("#mytbody").append($str);
+							}
+							$('table').on('click','.fa-download',function(){
+								alert($(this).parent().parent('td').find('.reid').val());
+							});
+						},
+						error : function() {
+							alert("查询失败")
+						}						
+					});
+
 		}
-		$('table').contextify(options);
+		$(function() {
+			var categorie_id = "";
+			var recycleflag = 0;
+			show(categorie_id, recycleflag);
+		});
+		$("#upfile").change(function() {
+			var file = this.files[0];
+			july_fileReader(file);
+		});
+		function july_fileReader(file) {
+			var flag = 0;
+			$(".july_fileName").each(function() {
+				if ($(this).text() == file.name) {
+					flag = 1;
+				}
+			})
+			if (flag != 1) {
+				if (window.FileReader) {
+					var reader = new FileReader();
+					reader.readAsDataURL(file);
+					//监听文件读取结束后事件    
+					reader.onloadend = function(e) {
+						ajaxFileUpload();
+						$('#msg').show();
+					};
+				}
+			} else {
+				alert("文件夹中已经有相同名字的文件！")
+			}
+		}
+
+		var time = 0;
+		function ajaxFileUpload() {
+			$("#myprogress").width(0);
+			time = window.setInterval(progress, 100);
+			$
+					.ajaxFileUpload({
+						url : '${pageContext.request.contextPath}/fileupload?categorie_id='
+								+ categorie,
+						secureuri : false,
+						fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
+						dataType : 'multipart/form-data',
+						success : function(data) {
+							alert(data);
+							//刷新页面
+							show(categorie, recycle);
+							//需要重新绑定事件
+							$("#upfile").change(function() {
+								var file = this.files[0];
+								july_fileReader(file);
+							});
+						}
+
+					})
+			return false;
+		}
+
+		function progress() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/progress",
+				dataType : 'json',
+				success : function(data) {
+					$("#myprogress").width(data.rate + "%");
+					if(data.rate>0){
+						$('.probox').show();
+						alert(data.name);
+						$('.up_status').html("上传中");
+					}
+					if (data.rate == 100) {
+						clearInterval(time);
+						$('.probox').hide();
+						$('.up_status').html("上传成功");
+					}
+				},
+				error : function() {
+					alert("error");
+				}
+			});
+		}
 	</script>
 </body>
 

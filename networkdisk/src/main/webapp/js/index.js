@@ -104,22 +104,24 @@ $(document).ready(function() {
 					$('.donetimeline').css('display', 'none');
 				}
 			});
-			$('.table td').mouseenter(function() {
-				alert("1");
+			$('table').on('mouseenter','td',function() {
 				$(this).children('.more').css('display', 'inline-block');
 			});
-			$('table').mouseleave(function() {
+			$('table').on('mouseleave','td',function() {
 				$(this).children('.more').css('display', 'none');
 			});
 			var i = true;
 			$('.fa-window-maximize').click(function() {
 				if(i) {
-					$('#msg').css('bottom', '300px');
+					$('#msg').css('bottom', '-300px');
 					i = false;
 				} else {
 					$('#msg').css('bottom', '0px');
 					i = true;
 				}
+			});
+			$('#mydownload').click(function(){
+				$('#msg').show();
 			});
 			$('.fa-times').click(function() {
 				$(this).parent('div').hide();
@@ -132,7 +134,7 @@ $(document).ready(function() {
 					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><i class='fa fa-folder'></i><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
 					//将内容循环添加到创建好的TD中
 					$td.appendTo($tr);
-					$tr.appendTo("#tw1 table");
+					$tr.prependTo("#tw1 .table tbody");
 					//执行删除操作
 					$(".dele").click(function() {
 						$(this).parent().parent().remove();
