@@ -1,28 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-		<title>July</title>
-		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
-		<link href="/networkdisk/css/style.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
-		<script src="/networkdisk/js/index.js"></script>
-		<script src="/networkdisk/js/jquery.rotate.min.js"></script>
-	</head>
-
-	<body>
-=======
 <html>
 <head>
 <meta charset="utf-8">
@@ -34,9 +12,10 @@
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
-<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
-<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>    
-<script type="text/javascript" src="/networkdisk/js/ajaxfileupload.js"></script>  
+<link rel="stylesheet"
+	href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
+<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/networkdisk/js/ajaxfileupload.js"></script>
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/js/index.js"></script>
 <script src="/networkdisk/js/jquery.rotate.min.js"></script>
@@ -45,100 +24,101 @@
 <body>
 
 
-		<div id="in-nav">
-			<div class="container">
-				<div class="row">
-					<div class="logo">
-						<a id="logo" href="/networkdisk/index.jsp">
-							<img src="/networkdisk/img/LOGO.png" />
-							<a class="logotitle" href="">July</a>
-						</a>
-					</div>
-					<div class="span1" style="display: inline;">
-						<ul class="pull-left">
-							<li class="active">
-								<a href="#">网盘</a>
-							</li>
-							<li>
-								<a href="findAll?uid=12134">分享</a>
-							</li>
-							<li>
-								<a href="#">更多</a>
-							</li>
-						</ul>
-					</div>
-					<div class="span2">
-						<ul class="right">
-							<li class="chos" style="width: 220px;">
-								<div class="sev">
-									<div class="admin">
-										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
-										<a href="#" style="display: inline-block;">
-											<div class="username">${user.name }</div>
-											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
-										</a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
-									</div>
-									<div class="user">
-										<span id="triangle-up">								
-									</span>
-										<div class="userpan">
-											<div class="userpan_2">
-												<div class="u1">
-													<a href="#">
-														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
-														<a href="">${user.name }</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
+	<div id="in-nav">
+		<div class="container">
+			<div class="row">
+				<div class="logo">
+					<a id="logo" href="/networkdisk/index.jsp"> <img
+						src="/networkdisk/img/LOGO.png" /> <a class="logotitle" href="">July</a>
+					</a>
+				</div>
+				<div class="span1" style="display: inline;">
+					<ul class="pull-left">
+						<li class="active"><a href="#">网盘</a></li>
+						<li><a href="findAll?uid=12134">分享</a></li>
+						<li><a href="#">更多</a></li>
+					</ul>
+				</div>
+				<div class="span2">
+					<ul class="right">
+						<li class="chos" style="width: 220px;">
+							<div class="sev">
+								<div class="admin">
+									<img src="${pageContext.request.contextPath}/showphoto"
+										width="30px" style="border-radius: 30px; margin-bottom: 22px;" />
+									<a href="#" style="display: inline-block;">
+										<div class="username">${user.name }</div> <img
+										src="/networkdisk/img/VIP1.png"
+										style="display: inline; margin-bottom: 22px;" />
+									</a> <em style="display: inline-block;"><img
+										src="/networkdisk/img/downchoose.png" class="c"
+										style="margin-bottom: 22px;" /></em>
+								</div>
+								<div class="user">
+									<span id="triangle-up"> </span>
+									<div class="userpan">
+										<div class="userpan_2">
+											<div class="u1">
+												<a href="#"> <img
+													src="${pageContext.request.contextPath}/showphoto"
+													width="30px" class="userpic" /> <a href="">${user.name }</a>
+													<img src="/networkdisk/img/VIP1.png"
+													style="display: inline; margin-bottom: 5px;" />
 
-													</a>
-												</div>
+												</a>
 											</div>
-											<div class="userpan_3">
-												<span>
-												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
+										</div>
+										<div class="userpan_3">
+											<span> <a href=""
+												style="color: #000; font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
 											</span>
-											</div>
-											<div class="userpan_4">
-												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
+										</div>
+										<div class="userpan_4">
+											<p>
+												<a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a>
+											</p>
 
-												<p><a href=""><span>帮助中心</span></a></p>
-												<p><a href=""><span>设置</span></a></p>
-												<p><a  onclick="logout()"><span>退出</span></a></p>
+											<p>
+												<a href=""><span>帮助中心</span></a>
+											</p>
+											<p>
+												<a href=""><span>设置</span></a>
+											</p>
+											<p>
+												<a onclick="logout()"><span>退出</span></a>
+											</p>
 
-											</div>
 										</div>
 									</div>
 								</div>
-<<<<<<< HEAD
-							</li>
-							<li style="width: 100px; margin-top:5px;">
-								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="noticePage"><img src="/networkdisk/img/notice.png" /></a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
-							</li>
-						</ul>
-					</div>
-=======
-
-						</li> 
+							</div> <<<<<<< HEAD
+						</li>
 						<li style="width: 100px; margin-top: 5px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li style="margin-top: 5px;"><a href="#"><img
+						<li style="margin-top: 5px;"><a href="noticePage"><img
 								src="/networkdisk/img/notice.png" /></a></li>
 						<li style="margin-top: 5px;"><a href="#"><img
 								src="/networkdisk/img/serve.png" /></a></li>
 					</ul>
 				</div>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
-				</div>
+				=======
+
+				</li>
+				<li style="width: 100px; margin-top: 5px;"><a href="#"
+					style="font-size: 13px;">&nbsp;客户端下载</a></li>
+				<li style="margin-top: 5px;"><a href="#"><img
+						src="/networkdisk/img/notice.png" /></a></li>
+				<li style="margin-top: 5px;"><a href="#"><img
+						src="/networkdisk/img/serve.png" /></a></li>
+				</ul>
 			</div>
+			>>>>>>> branch 'master' of
+			https://github.com/julyteam/networkdisk.git
 		</div>
-	
+	</div>
+	</div>
+
 	<div class="clean" style="clear: all;"></div>
 	<div id="in-sub-nav">
 		<div class="container">
@@ -189,8 +169,8 @@
 											<img src="/networkdisk/img/upload.png"
 											style="margin-bottom: 3px;" />&nbsp;上传
 										</a> -->
-									 <input type="file" name="file"  id="upfile" value="上传" />
-										
+										<input type="file" name="file" id="upfile" value="上传" />
+
 									</div>
 								</form>
 								<a class="g_button" id="newonefile"><img
@@ -254,18 +234,19 @@
 								<form action="" method="post">
 									<table class="table">
 										<tbody id="mytbody">
-										
+
 
 											<script type="text/javascript">
-												var categorie ;
+												var categorie;
 												var recycle;
 												function show(categorie_id,
 														recycleflag) {
-													categorie=categorie_id;
-													recycle=recycleflag;
-													
+													categorie = categorie_id;
+													recycle = recycleflag;
+
 													$(".showTr").remove();
-													$.ajax({
+													$
+															.ajax({
 																type : "post",
 																dataType : "json",
 																url : "showFileAndCate",
@@ -273,7 +254,8 @@
 																	categorie_id : categorie_id,
 																	recycleflag : recycleflag
 																},
-																success : function(map) {
+																success : function(
+																		map) {
 																	var listFile = map.listFiles;
 																	var listCate = map.listCategories;
 
@@ -340,85 +322,99 @@
 												}
 
 												$(function() {
-													var categorie_id ="";
+													var categorie_id = "";
 													var recycleflag = 0;
 													show(categorie_id,
 															recycleflag);
 												});
-												
-												
-												$("#upfile").change(function(){  
-													 var file = this.files[0];
-													 july_fileReader(file);
-													});
-												
-												function july_fileReader(file){
+
+												$("#upfile").change(function() {
+													var file = this.files[0];
+													july_fileReader(file);
+												});
+
+												function july_fileReader(file) {
 													var flag = 0;
-													$(".july_fileName").each(function(){
-														if($(this).text() == file.name)
-														{
-														     	flag =1;
-														}	
-													})
-													if(flag != 1){
-													 if (window.FileReader) {    
-													            var reader = new FileReader();    
-													            reader.readAsDataURL(file);    
-													            //监听文件读取结束后事件    
-													          reader.onloadend = function (e) {
-													        	  ajaxFileUpload(); 
-													        	  $('#msg').show();
-													            };    
-													       } 
-													}else{
+													$(".july_fileName")
+															.each(
+																	function() {
+																		if ($(
+																				this)
+																				.text() == file.name) {
+																			flag = 1;
+																		}
+																	})
+													if (flag != 1) {
+														if (window.FileReader) {
+															var reader = new FileReader();
+															reader
+																	.readAsDataURL(file);
+															//监听文件读取结束后事件    
+															reader.onloadend = function(
+																	e) {
+																ajaxFileUpload();
+																$('#msg')
+																		.show();
+															};
+														}
+													} else {
 														alert("文件夹中已经有相同名字的文件！")
 													}
 												}
-												
-												var time = 0;  
-											      function ajaxFileUpload()  
-											    {  
-											    	 $("#myprogress").width(0);
-											        time = window.setInterval(progress,100);  
-											        $.ajaxFileUpload  
-											        (  
-											            {  
-											                url:'${pageContext.request.contextPath}/fileupload?categorie_id='+categorie,  
-											                secureuri:false,  
-											                fileElementId:'upfile',//fileToUpload是input file 标签的id值  
-											                dataType: 'multipart/form-data',  
-											                success: function (data)  
-											                {  
-											                	alert(data);
-											                	//刷新页面
-											                	show(categorie, recycle);
-											                	//需要重新绑定事件
-											                	$("#upfile").change(function(){  
-																	 var file = this.files[0];
-																	 july_fileReader(file);
-																	});
-											                }  
-											                
-											            }  
-											        )  
-											        return false;  
-											    }  
-											      
-											    function progress(){  
-											        $.ajax({  
-											            url:"${pageContext.request.contextPath}/progress",  
-											            dataType: 'json',  
-											            success:function(data){ 
-											            	 $("#myprogress").width(data.rate+"%");
-											                if(data.rate == 100){  
-											                    clearInterval(time);  
-											                }   
-											            },  
-											            error:function(){  
-											                alert("error");  
-											            }  
-											            });  
-													} 
+
+												var time = 0;
+												function ajaxFileUpload() {
+													$("#myprogress").width(0);
+													time = window.setInterval(
+															progress, 100);
+													$
+															.ajaxFileUpload({
+																url : '${pageContext.request.contextPath}/fileupload?categorie_id='
+																		+ categorie,
+																secureuri : false,
+																fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
+																dataType : 'multipart/form-data',
+																success : function(
+																		data) {
+																	alert(data);
+																	//刷新页面
+																	show(
+																			categorie,
+																			recycle);
+																	//需要重新绑定事件
+																	$("#upfile")
+																			.change(
+																					function() {
+																						var file = this.files[0];
+																						july_fileReader(file);
+																					});
+																}
+
+															})
+													return false;
+												}
+
+												function progress() {
+													$
+															.ajax({
+																url : "${pageContext.request.contextPath}/progress",
+																dataType : 'json',
+																success : function(
+																		data) {
+																	$(
+																			"#myprogress")
+																			.width(
+																					data.rate
+																							+ "%");
+																	if (data.rate == 100) {
+																		clearInterval(time);
+																	}
+																},
+																error : function() {
+																	alert("error");
+																}
+															});
+												}
 											</script>
 										</tbody>
 									</table>
@@ -640,134 +636,125 @@
 		<script src="/networkdisk/js/canvas.js"></script>
 		<script src="/networkdisk/js/jquery.contextify.js"></script>
 		<script>
-		function logout()
-		{
-			if(confirm("确定退出？"))
-				{
-				  window.location.href="logout";
+			function logout() {
+				if (confirm("确定退出？")) {
+					window.location.href = "logout";
 				}
-		}
+			}
 			var options = {
-				items: [{
-						text: '打开',
-						href: '#'
-					},
-					{
-						text: '下载',
-						onclick: function() {
-							alert("你点击了第2个链接")
-						}
-					},
-					{
-						text: '复制到',
-						onclick: function() {
-							alert("你点击了第3个链接")
-						}
-					},
-					{
-						text: '移动到',
-						onclick: function() {
-							alert("你点击了第4个链接")
-						}
-					},
-					{
-						text: '重命名',
-						onclick: function() {
-							alert("你点击了第5个链接")
-						}
-					},
-					{
-						text: '删除',
-						onclick: function() {
-							alert("你点击了第6个链接")
-						}
+				items : [ {
+					text : '打开',
+					href : '#'
+				}, {
+					text : '下载',
+					onclick : function() {
+						alert("你点击了第2个链接")
 					}
-				]
+				}, {
+					text : '复制到',
+					onclick : function() {
+						alert("你点击了第3个链接")
+					}
+				}, {
+					text : '移动到',
+					onclick : function() {
+						alert("你点击了第4个链接")
+					}
+				}, {
+					text : '重命名',
+					onclick : function() {
+						alert("你点击了第5个链接")
+					}
+				}, {
+					text : '删除',
+					onclick : function() {
+						alert("你点击了第6个链接")
+					}
+				} ]
 			}
 			$('table').contextify(options);
 		</script>
-	</body>
+</body>
 
-		<div id="msg">
-			<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
-			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
-			<div class="warn">
-				有一个文件上传成功 <span class="fa fa-remove"
-					style="float: right; font-size: 16px; color: #F5F5F5; line-height: 40px; cursor: pointer;"></span>
-			</div>
-			<div class="upmagbox">
-				<div class="upload_header">
-					<div class="file_name">文件（夹）名</div>
-					<div class="file_size">大小</div>
-					<div class="file_path">上传目录</div>
-					<div class="file_status">状态</div>
-				</div>
-				<div class="upload_body">
-					<ul class="container" id="uploaderList">
-						<li class="file-list">
-							<div class="file-name"
-								title="[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4">
-								<span class="fa fa-file-movie-o"
-									style="font-size: 24px; color: purple; position: relative; top: -15px;"></span>
-								<span class="name-text">[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4</span>
-							</div>
-							<div class="file_size">263.1M</div>
-							<div class="file_path">
-								<a title="/" class="server_path" href="#list/path=/">我的文件</a>
-							</div>
-							<div class="file_status">
-								 
-							</div>
-							<div class="file_operate">
-								<em class="fa fa-pause"></em> <em class="fa fa-play"></em>
-							</div>
-						</li>
-						<li>
-						<div style="width:650px;height:25px">
-						 <div id="myprogress" style="background-color:hsl(100,80%,60%);height:25px;width:0px"></div>
-						</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+<div id="msg">
+	<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
+	<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
+	<div class="warn">
+		有一个文件上传成功 <span class="fa fa-remove"
+			style="float: right; font-size: 16px; color: #F5F5F5; line-height: 40px; cursor: pointer;"></span>
+	</div>
+	<div class="upmagbox">
+		<div class="upload_header">
+			<div class="file_name">文件（夹）名</div>
+			<div class="file_size">大小</div>
+			<div class="file_path">上传目录</div>
+			<div class="file_status">状态</div>
+		</div>
+		<div class="upload_body">
+			<ul class="container" id="uploaderList">
+				<li class="file-list">
+					<div class="file-name"
+						title="[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4">
+						<span class="fa fa-file-movie-o"
+							style="font-size: 24px; color: purple; position: relative; top: -15px;"></span>
+						<span class="name-text">[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4</span>
+					</div>
+					<div class="file_size">263.1M</div>
+					<div class="file_path">
+						<a title="/" class="server_path" href="#list/path=/">我的文件</a>
+					</div>
+					<div class="file_status"></div>
+					<div class="file_operate">
+						<em class="fa fa-pause"></em> <em class="fa fa-play"></em>
+					</div>
+				</li>
+				<li>
+					<div style="width: 650px; height: 25px">
+						<div id="myprogress"
+							style="background-color: hsl(100, 80%, 60%); height: 25px; width: 0px"></div>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
-	<script src="/networkdisk/js/canvas.js"></script>
-	<script src="/networkdisk/js/jquery.contextify.js"></script>
-	<script type="text/javascript">
-		var options = {
-			items : [ {
-				text : '打开',
-				href : '#'
-			}, {
-				text : '下载',
-				onclick : function() {
-					alert("你点击了第2个链接")
-				}
-			}, {
-				text : '复制到',
-				onclick : function() {
-					alert("你点击了第3个链接")
-				}
-			}, {
-				text : '移动到',
-				onclick : function() {
-					alert("你点击了第4个链接")
-				}
-			}, {
-				text : '重命名',
-				onclick : function() {
-					alert("你点击了第5个链接")
-				}
-			}, {
-				text : '删除',
-				onclick : function() {
-					alert("你点击了第6个链接")
-				}
-			} ]
-		}
-		$('table').contextify(options);
-	</script>
+</div>
+</div>
+<script src="/networkdisk/js/canvas.js"></script>
+<script src="/networkdisk/js/jquery.contextify.js"></script>
+<script type="text/javascript">
+	var options = {
+		items : [ {
+			text : '打开',
+			href : '#'
+		}, {
+			text : '下载',
+			onclick : function() {
+				alert("你点击了第2个链接")
+			}
+		}, {
+			text : '复制到',
+			onclick : function() {
+				alert("你点击了第3个链接")
+			}
+		}, {
+			text : '移动到',
+			onclick : function() {
+				alert("你点击了第4个链接")
+			}
+		}, {
+			text : '重命名',
+			onclick : function() {
+				alert("你点击了第5个链接")
+			}
+		}, {
+			text : '删除',
+			onclick : function() {
+				alert("你点击了第6个链接")
+			}
+		} ]
+	}
+	$('table').contextify(options);
+</script>
 </body>
 
 
