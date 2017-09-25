@@ -175,4 +175,21 @@
 		</action>
 	</package>
 	
+	
+	<!-- 消息公告模块 -->
+	<package name="networkdisk.notice" namespace="/" extends="struts-default,json-default">	
+		<!-- 消息查询显示 -->
+		<!-- <action name="noticeList" class="noticeAction" method="getAll">
+			<result name="success">/noticeList.jsp</result>
+		</action> -->
+		<!-- 删除公告 -->
+		<action name="noticeDel" class="noticeAction" method="delete">
+		    <result type="chain">/noticeList.jsp</result>
+		</action>
+		<action name="noticePage" class="noticeAction" method="page">
+		    <result name="success">/noticeList.jsp</result>
+		</action>
+	</package>
+	
+	
 </struts>
