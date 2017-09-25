@@ -15,21 +15,20 @@
 </head>
 <body>
 	<div id="in-nav">
-			<div class="container">
-				<div class="row">
-					<div class="logo">
-						<a id="logo" href="/networkdisk/index.jsp">
-							<img src="/networkdisk/img/LOGO.png" />
-							<a class="logotitle" href="">July</a>
-						</a>
-					</div>
+			<div class="logo">
+				<a id="logo" href="/networkdisk/index.jsp">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
+			<div class="container1">
+				<div class="row1">
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
 							<li>
-								<a href="#">网盘</a>
+								<a href="index.jsp">网盘</a>
 							</li>
 							<li class="active">
-								<a>分享</a>
+								<a href="#">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -39,58 +38,88 @@
 					<div class="span2">
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
-							<div class="sev">
+								<div class="sev">
 									<div class="admin">
-										<img src="/networkdisk/img/pic3.png" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
-										<a href="#" style="display: inline-block;">
-											<div class="username">我们的修改会事半功倍</div>
-											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<a href="#" style="display: inline-block;height:50px;">
+											<div class="username">${user.name }</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
 										</a>
-										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 22px;"/></em>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;"/></em>
 									</div>
 									<div class="user">
-										<span id="triangle-up">								
-										</span>
-										<div class="userpan">
-											<div class="userpan_2">
-												<div class="u1">
-													<a href="#">
-														<img src="/networkdisk/img/pic3.png" class="userpic" />
-														<a href="">admin</a>
-														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px;" />
-													</a>
-												</div>
+									<span id="triangle-up"> </span>
+									<div class="userpan">
+										<div class="userpan_2">
+											<div class="u1">
+												<a href="#"> 
+												<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+												</a> 
+												<a href="">${user.name }</a> 
+												<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
 											</div>
-											<div class="userpan_3">
-												<span>
-												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
-												<div class="svip">开通超级会员</div>
-												</span>
-											</div>
-											<div class="userpan_4">
-												<p><a href=""><span>个人资料</span></a></p>
-												<p><a href=""><span>帮助中心</span></a></p>
-												<p><a href=""><span>设置</span></a></p>
-												<p><a href=""><span>退出</span></a></p>
-											</div>
+										</div>
+										<div class="userpan_3">
+											<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
+											<div class="svip">开通超级会员</div>
+										</div>
+										<div class="userpan_4">
+											<p>
+												<a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a>
+											</p>
+											<p>
+												<a href=""><span>帮助中心</span></a>
+											</p>
+											<p>
+												<a href=""><span>设置</span></a>
+											</p>
+											<p>
+												<a href="logout"><span>退出</span></a>
+											</p>
 										</div>
 									</div>
 								</div>
-							</li>
-							<li style="width: 100px; margin-top:5px;">
-								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/notice.png" /></a>
-							</li>
-							<li style="margin-top:5px;">
-								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
-							</li>
-						</ul>
-					</div>
+
+							</div>
+							<div class="user">
+								<span id="triangle-up"> </span>
+								<div class="userpan">
+									<div class="userpan_2">
+										<div class="u1">
+											<img src="/networkdisk/img/pic3.png" class="userpic" /> <a
+												href="">admin</a> <img src="/networkdisk/img/VIP1.png"
+												style="display: inline; margin-bottom: 5px;" />
+										</div>
+									</div>
+									<div class="userpan_3">
+										<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
+										<div class="svip">开通超级会员</div>
+									</div>
+									<div class="userpan_4">
+										<p>
+											<a href=""><span>个人资料</span></a>
+										</p>
+										<p>
+											<a href=""><span>帮助中心</span></a>
+										</p>
+										<p>
+											<a href=""><span>设置</span></a>
+										</p>
+										<p>
+											<a href=""><span>退出</span></a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
+						<li><a href="#"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
+					</ul>
+				</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 		<div class="share_all">
 			<div class="share_content">
 				<div class="share_content_left">
@@ -207,5 +236,13 @@
 	 		$(".b1").val("");
 	 		$(".friends").hide();
 	 	})
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
 	</script>
+</body>
 </html>

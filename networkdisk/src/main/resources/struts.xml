@@ -21,7 +21,7 @@
 			<result name="error">/login.jsp</result>
 		</action>
 		
-		<!-- 头像 -->
+	<!-- 头像 -->
 		<action name="photoup" class="userAction" method="photoup">
 			<interceptor-ref name="fileUpload">
 				
@@ -33,6 +33,18 @@
 			<result name="input">/per-center.jsp</result>
 		</action>
 		<!-- 显示图片 -->
+
+		<action name="showphoto" class="userAction" method="showphoto"></action>
+		<!--用户个人资料修改  -->
+		<action name="userUpdate" class="userAction" method="update">
+			<result name="success" type="redirect">per-center</result>
+			<result name="error" type="redirect">/per-center.jsp</result>
+			<result name="input" type="redirect">/per-center.jsp</result>
+		</action>
+		<!-- 个人页面跳转 -->
+		<action name="per-center" class="userAction" method="percenter">
+			<result name="success" type="redirect">/per-center.jsp</result>
+</action>
 		<action name="showphoto" class="userAction" method="showphoto"></action>
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
@@ -44,16 +56,18 @@
 		<action name="per-center" class="userAction" method="percenter">
 			<result name="success" type="redirect">/per-center.jsp</result>
 		</action>
+
 		<!-- 登出 -->
 		<action name="logout" class="userAction" method="logout">
 			<result name="success" type="redirect">/login.jsp</result>
 		</action>
 		<!--密码修改  -->
 		<action name="updatePassAction" class="userAction" method="updatePassword">
-			<result name="success" type="redirect">per-center</result>
+			<result type="chain">logout</result>
 			<result name="error" type="redirect">per-center</result>
-			
 		</action>
+
+
 		<!-- 用户注册 -->
 		<action name="register"  class="userRegister" method="register">
 			<result name="success">/register.jsp</result>

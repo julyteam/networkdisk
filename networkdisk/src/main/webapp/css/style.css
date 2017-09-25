@@ -11,9 +11,10 @@ html {
 
 
 body {
-	background-color: #f6f6f6;
+	background-color: #dddddd;
 	font-family: Lato;
 	margin: 0px;
+	overflow: hidden;
 }
 
 body p {
@@ -35,20 +36,18 @@ body h6 {
 }
 
 #in-nav {
-	background-color: white;
-	background-repeat: repeat;
+	background:#4d4d4d url(/networkdisk/img/bg-grey.jpg) !important; 
 	height: 50px;
-	padding-top: 10px;
 }
-
 #in-nav ul {
 	position: relative;
 }
 
 #in-nav .span1 ul li {
 	width: 60px;
-	height: 30px;
+	height: 38px;
 	font-size: 16px;
+	line-height:25px;
 	text-align: center;
 	list-style-type: none;
 	display: inline-block;
@@ -56,26 +55,32 @@ body h6 {
 
 #in-nav .span2 ul li{
 	width: 40px;
-	height: 30px;
+	height: 50px;
 	list-style:none;
 	font-size: 16px;
+	line-height:50px;
 	margin-left:10px;
 	display: block;
 	float: left;
 }
 #in-nav .span2{
 	width: 500px;
-	height: 40px;
+	height: 50px;
 	text-align: center;
+	margin-right:80px;
 	float: right;
 }
 #in-nav .span1 ul li.active {
-	border-bottom: 5px solid #222222;
-	border-radius: 8px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	color:#000;
+	background: #e9ebec url(/networkdisk/img/body-bg.png);
 }
-
+#in-nav .span1 ul li.active a{
+	color: #3b3b3b;
+}
 #in-nav ul li a {
-	color: #000000;
+	color: #fff;
 }
 
 #in-nav .span1 ul li a:hover {
@@ -89,11 +94,15 @@ body h6 {
 #in-nav .logo {
 	float: left;
 }
-
+#logo img{
+	position: absolute;
+	left:20px;
+}
 #in-nav .logotitle {
 	display: inline;
 	font-size: 18px;
-	color: #000000;
+	font-family: Lucida Sans Unicode,Verdana;
+	color: #ffffff;
 }
 
 #in-nav .logotitle:hover {
@@ -107,6 +116,7 @@ body h6 {
 .user {
 	position: absolute;
 	margin: 0px auto;
+	top:20px;
 	text-align: left;
 	display: none;
 	z-index: 222;
@@ -116,15 +126,15 @@ body h6 {
 	margin-left: 10px;
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
-	border-bottom: 10px solid #5E5E5E;
+	border-bottom: 10px solid #4e4e4e;
 }
 
 .userpan {
 	width: 240px;
 	height: 300px;
-	margin-top: 6px;
+	margin-top:-8px;
 	border-radius: 5px;
-	background: #FFFFFF;
+	background: #e9ebec url(/networkdisk/img/body-bg.png);
 	box-shadow: 0px 1px 10px #111111;
 }
 
@@ -133,12 +143,12 @@ body h6 {
 	padding-top: 20px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	background: #5E5E5E;
+	background:#4e4e4e url(/networkdisk/img/top-bg.jpg) repeat-x !important;
 }
 
 .userpan_3 {
 	height: 60px;
-	padding-top: 20px;
+	padding-top: 5px;
 	padding-left: 15px;
 }
 .userpan_4 span{
@@ -179,6 +189,7 @@ img.userpic {
 .user .u1 {
 	width: 200px;
 	height: 50px;
+	line-height:50px;
 	margin: 0px auto;
 }
 
@@ -198,15 +209,29 @@ img.userpic {
 	cursor: pointer;
 	background: #C12E2A;
 }
-
-#in-sub-nav {
-	height: 180px;
-	background-color: #333333;
-	-moz-box-shadow: inset 0px 0px 10px #111111;
-	-webkit-box-shadow: inset 0px 0px 10px #111111;
-	box-shadow: inset 0px 0px 10px #111111;
+.container1{
+	width:83%;
+	float:right;
+	height:50px;
+	line-height: 50px;
 }
-
+.container2{
+	width:90%;
+}
+.row2{
+	width:80px;
+	height:100%;
+}
+#in-sub-nav {
+	background:#4d4d4d url(/networkdisk/img/bg-grey.jpg) !important;
+	/* background:#263849 url(/networkdisk/img/bg-navy-blue.jpg) !important;  */
+	/* background:#32C2CD url(/networkdisk/img/bg-default.jpg) !important;  */
+	/* background:url(/networkdisk/img/pink.jpg) !important; */
+	/* background:url(/networkdisk/img/orange.jpg) !important; */
+	height:600px;
+	width:136px;
+	float: left;	
+}
 #in-sub-nav ul {
 	text-align: center;
 	margin-top: 5px;
@@ -214,24 +239,25 @@ img.userpic {
 
 #in-sub-nav li {
 	list-style-type: none;
-	display: inline-block;
+	display: block;
 }
 
 #in-sub-nav li a {
 	display: block;
 	border-radius: 6px;
-	padding-top: 15px;
-	height: 80px;
-	width: 80px;
-	margin-top: 15px;
-	margin-left: 10px;
+	padding-top: 5px;
+	height: 60px;
+	width: 60px;
+	margin-top: 20px;
+	margin-left: 30px;
 	color: #FFF;
 	font-weight: 100;
 }
-
-#in-sub-nav li a:hover,
-#in-sub-nav li a.active {
-	background-color: #555;
+#in-sub-nav li a.active{
+	background: url("/networkdisk/img/side-bar-list-bg.png");
+}
+#in-sub-nav li a:hover{
+	background: url("/networkdisk/img/side-bar-list-bg.png");
 	text-decoration: none;
 }
 
@@ -297,37 +323,10 @@ img.userpic {
 }
 
 .page {
-	width: 980px;
-	min-height: 600px;
-	margin: auto;
-	background-color: #FFF;
-	border-radius: 6px;
-	margin-top: -70px;
-	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-}
-@media (min-width: 1200px) {
-	.page {
-		width: 1210px;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-	.page {
-		width: 764px;
-	}
-}
-
-@media (max-width: 767px) {
-	body {
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.page {
-		width: 100%;
-	}
-	.page-container {
-		padding: 0px 20px;
-	}
+	width: 1230px;
+	height: 600px;
+	float: right;
+	background: #e9ebec url(/networkdisk/img/body-bg.png);
 }
 .admin .lbaxztop{
 	animation: rotatete 0.3s linear forwards;
@@ -345,15 +344,15 @@ img.userpic {
 }
 .admin{
 	width: 220px;
-	height: 30px;
+	height: 50px;
 	text-align: left;
 }
 .username{	
-	font-size: 14px;
 	width: 110px;
-	height: 30px;
+	height: 50px;
+	margin-left:40px;
 	display: inline-block;
-	line-height: 30px;
+	line-height: 50px;
 	text-align: left;
 	white-space:nowrap;
 	overflow:hidden;
@@ -418,7 +417,7 @@ img.userpic {
 	margin-left: 15px;
 	top: 28px;
 	padding-top: 3px;
-	background: #FFFFFF;
+	background: #e9ebec url(/networkdisk/img/body-bg.png);
 	border: 1px solid #3C3C3C;
 	border-top: none;
 	border-bottom-left-radius:5px ;
@@ -529,11 +528,12 @@ img.userpic {
 	height: 28px;
 	font-size: 12px;
 	color: #555555;
+	background: none;
 }
 .search span{
 	display: inline-block;
 	position: relative;
-	top: 4px;
+	top: 2px;
 	left: -8px;
 }
 #ser{
@@ -596,19 +596,18 @@ img.userpic {
 }
 #tw1,#tw3,#tw4,#tw5,#tw6,#tw7{
 	margin-top:50px ;
-	min-height: 500px;
+	height: 500px;
 }
 #tw2{
 	margin-top:10px ;
 	min-height: 500px;
 }
 .tw1_body{
-	background: #F8F8F8;
 	width: 90%;
 	margin:0px auto;
-	height:450px;
+	height:550px;
 	overflow-y: scroll;
-	margin-top: 50px;
+	margin-top: 30px;
 	border-top: 1px solid #ADADAD;
 	border-left: 1px solid #ADADAD;
     border-top-left-radius: 30px;
@@ -648,6 +647,13 @@ img.userpic {
 	width: 95%;
 	margin: 0px auto;
 }
+.table td a{
+	color:#777;
+	text-decoration: none;
+}
+.table td i{
+	color:#000;
+}
 .table td:first-child{
 	width: 575px;
 }
@@ -658,7 +664,7 @@ img.userpic {
 	background-color: rgba(220, 200, 200, 0.4);
 }
 #tabs .active a {
-	background-color: #5E5E5E;
+	background: url("/networkdisk/img/side-bar-list-bg.png");;
 	border-radius: 6px;
 }
 .moudle{
@@ -1295,4 +1301,32 @@ img.userpic {
 	margin: 0 5px;
     cursor: pointer;
     position: relative;
+}
+.menu {
+    position: absolute;
+    display: block;
+    width: 96px;
+    visibility: hidden;
+    border: .5px solid rgb(38, 154, 188);
+    font-size: 13px;
+    text-align: center;
+    background: #fff;
+    left:780px;
+    z-index: 111;
+}
+.menu .g-button-menu {
+    position: relative;
+    top: 0px;
+    display: block;
+    height: 32px;
+    padding: 0 12px;
+    line-height: 32px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    color: rgb(38, 154, 188);
+    margin: 0;
+}
+.menu .g-button-menu:hover{
+	color: #FFFFFF;
+	background: rgb(38, 154, 188);
 }

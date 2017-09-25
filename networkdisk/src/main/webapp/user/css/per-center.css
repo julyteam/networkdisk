@@ -45,6 +45,8 @@
 	border-radius: 50%;
 	margin-top:50px;
 }
+
+
 .change-head img{
 	border:1px red hidden ;
 	width:150px;
@@ -205,4 +207,15 @@ a{
 .update_btn input
 {
 	opacity:0;
+}
+#pass_btn
+{
+	text-align: center;
+}
+#pass_btn input
+{
+	
+	height:34px;
+	width:54px;
+	text-align: center;
 }

@@ -49,7 +49,8 @@
 						bgColor : "#fff",
 						color : "#333",
 						fontSize : 14,
-						hoverBgColor : "#f5f5f5"
+						hoverBgColor : "rgb(66, 129, 244)",
+						hoverColor : "#fff"
 					}, this.opts = e.extend(!0, {}, this.defaults, n),
 							this.random = (new Date).getTime()
 									+ parseInt(1e3 * Math.random()), this
@@ -60,11 +61,8 @@
 					if (!(e(n).length > 0)) {
 						var t = this, i = '<ul class="ul-context-menu" id="uiContextMenu_'
 								+ this.random + '">';
-								e
-										.each(
-												this.opts.menu,
-												function(t, n) {
-													n.icon ? i += '<li class="ui-context-menu-item"><a href="javascript:void(0);"><img class="icon" src="'
+								e.each(this.opts.menu,function(t, n) {
+											n.icon ? i += '<li class="ui-context-menu-item"><a href="javascript:void(0);"><img class="icon" src="'
 															+ n.icon
 															+ '" /><span>'
 															+ n.text
@@ -112,8 +110,8 @@
 				},
 				setPosition : function(t) {
 					e("#uiContextMenu_" + this.random).css({
-						left : t.clientX + 2,
-						top : t.clientY + 2
+						left : t.clientX,
+						top : t.clientY
 					}).show()
 				},
 				eventBind : function() {

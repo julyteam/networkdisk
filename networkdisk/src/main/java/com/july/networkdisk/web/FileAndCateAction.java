@@ -63,6 +63,7 @@ public class FileAndCateAction  extends ActionSupport{
 			map.put("cat_reid",categorie_id );
 		}
 		map.put("file_deletesign", recycleflag);  //判断是否在回收站；
+		map.put("cat_state", recycleflag);
 		List<NetFile> listFiles = iFileService.findAllByUser(user.getId(), map);
 		List<Categorie> listCategories = iCateService.findAllCate(user.getId(), map);
 		map.put("listFiles", listFiles);

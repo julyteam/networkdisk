@@ -23,48 +23,49 @@
 </head>
 
 <body>
-	<div id="in-nav">
-		<div class="container">
-			<div class="row">
-				<div class="logo">
-					<a id="logo" href="/networkdisk/index.jsp"> <img
-						src="/networkdisk/img/LOGO.png" />
-					</a> <a class="logotitle" href="">July</a>
-
-				</div>
-				<div class="span1" style="display: inline;">
-					<ul class="pull-left">
-						<li class="active"><a href="#">网盘</a></li>
-						<li><a href="findAll?user.id=12134">分享</a></li>
-						<li><a href="#">更多</a></li>
-					</ul>
-				</div>
-				<div class="span2">
-					<ul class="right">
-						<li class="chos" style="width: 220px;">
-							<div class="sev">
-								<div class="admin">
-									<img src="${pageContext.request.contextPath}/showphoto"
-										width="30px" style="border-radius: 30px; margin-bottom: 22px;" />
-									<div class="username">${user.name }</div>
-									<img src="/networkdisk/img/VIP1.png"
-										style="display: inline; margin-bottom: 22px;" /> <em
-										style="display: inline-block;"> <img
-										src="/networkdisk/img/downchoose.png" class="c"
-										style="margin-bottom: 22px;" /></em>
-								</div>
-								<div class="user">
+		<div id="in-nav">
+			<div class="logo">
+				<a id="logo" href="/networkdisk/index.jsp">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
+			<div class="container1">
+				<div class="row1">
+					<div class="span1" style="display: inline;">
+						<ul class="pull-left">
+							<li class="active">
+								<a href="index.jsp">网盘</a>
+							</li>
+							<li>
+								<a href="share.jsp">分享</a>
+							</li>
+							<li>
+								<a href="#">更多</a>
+							</li>
+						</ul>
+					</div>
+					<div class="span2">
+						<ul class="right">
+							<li class="chos" style="width: 220px;">
+								<div class="sev">
+									<div class="admin">
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<a href="#" style="display: inline-block;height:50px;">
+											<div class="username">${user.name }</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;"/></em>
+									</div>
+									<div class="user">
 									<span id="triangle-up"> </span>
 									<div class="userpan">
 										<div class="userpan_2">
 											<div class="u1">
-												<a href="#"> <img
-													src="${pageContext.request.contextPath}/showphoto"
-													width="30px" class="userpic" />
-												</a> <a href="">${user.name }</a> <img
-													src="/networkdisk/img/VIP1.png"
-													style="display: inline; margin-bottom: 5px;" />
-
+												<a href="#"> 
+												<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+												</a> 
+												<a href="">${user.name }</a> 
+												<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
 											</div>
 										</div>
 										<div class="userpan_3">
@@ -120,21 +121,18 @@
 								</div>
 							</div>
 						</li>
-						<li style="width: 100px; margin-top: 5px;"><a href="#"
-							style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li style="margin-top: 5px;"><a href="#"><img
-								src="/networkdisk/img/notice.png" /></a></li>
-						<li style="margin-top: 5px;"><a href="#"><img
-								src="/networkdisk/img/serve.png" /></a></li>
+						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
+						<li><a href="#"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
 					</ul>
 				</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		</div>	
 	<div class="clean" style="clear: all;"></div>
 	<div id="in-sub-nav">
-		<div class="container">
-			<div class="row">
+		<div class="container2">
+			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
 						<li class="active"><a href="/networkdisk/index.jsp#tw1"
@@ -145,10 +143,6 @@
 								class="batch plane"></i><br>文档</a></li>
 						<li><a href="/networkdisk/index.jsp#tw4"><i
 								class="batch calendar"></i><br>视频</a></li>
-						<li><a href="/networkdisk/index.jsp#tw5"><i
-								class="batch quill"></i><br>种子</a></li>
-						<li><a href="/networkdisk/index.jsp#tw6"><i
-								class="batch forms"></i><br>音乐</a></li>
 						<li><a href="/networkdisk/index.jsp#tw7"><i
 								class="batch settings"></i><br>其他</a></li>
 						<li><a href="/networkdisk/myshare.jsp"><i
@@ -256,7 +250,7 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="tw2">
-						<div class="row" style="width: 95%; float: right;">
+						<div class="row" style="width: 95%; float: left;">
 							<div class="moudle">
 								<ul id='mou_1' class="tab">
 									<li class="active"><a href="#tb1">最近上传</a></li>
@@ -321,80 +315,6 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="tw3">
-						<div class="row">
-							<div class="span3">
-								<form action="javascript:void(0)" method="post"
-									style="width: 0px; display: block;">
-									<div class="upfile" style="width: 84px; display: block;">
-										<a href="" class="file" title="请选择文件" style="font-size: 15px;">
-											<img src="/networkdisk/img/upload.png"
-											style="margin-bottom: 3px;" />&nbsp;上传 <input type="file"
-											id="up" value="上传" />
-										</a>
-										<ul class="upload">
-											<li title="请上传文件">上传文件</li>
-											<li title="请上传文件夹">上传文件夹</li>
-										</ul>
-									</div>
-								</form>
-								<a class="g_button" id="mydownload">
-								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的下载</a>
-								<div class="equip"
-									style="width: 105px; display: inline-block; position: relative;">
-									<a class="g_button g_1"><img
-										src="/networkdisk/img/iphone.png" style="margin-bottom: 3px;" />&nbsp;我的设备</a>
-									<ul class="equi">
-										<li title="推送任务列表">推送任务列表</li>
-										<li title="添加设备">添加设备</li>
-									</ul>
-								</div>
-								<div class="equip_1">
-									<ul class="equi_1">
-										<li id="f1"><img src="/networkdisk/img/share.png" />分享</li>
-										<li><img src="/networkdisk/img/download.png" />下载</li>
-										<li><img src="/networkdisk/img/delete.png" />删除</li>
-										<li>复制到</li>
-										<li id="f2">移动到</li>
-									</ul>
-								</div>
-								<div class="span5">
-									<div class="cs" style="display: inline-block;">
-										<form action="" method="post">
-											<a class="search"> <input type="text" value=""
-												placeholder="搜索您的文件" class="search_input"
-												onfocus="this.placeholder=''"
-												onblur="this.placeholder='搜索您的文件'" /> <span
-												class="glyphicon glyphicon-search" id="ser"></span>
-											</a>
-										</form>
-									</div>
-									<div class="ch">
-										<div class="lp">
-											<a class="list"><img src="img/list.png" /></a>
-											<ul class="listpal">
-												<li><img src="/networkdisk/img/OK.png" class="active" />&nbsp;文件名</li>
-												<li><img src="/networkdisk/img/OK.png" />&nbsp;大小</li>
-												<li><img src="/networkdisk/img/OK.png" />&nbsp;修改日期</li>
-											</ul>
-										</div>
-										<a class="large"><img src="/networkdisk/img/other.png" /></a>
-									</div>
-								</div>
-							</div>
-							<div class="tw1_body">
-								<div class="Jdh">
-									<span class="j1">全部文件</span> <span class="j2">已加载全部，共8条</span>
-								</div>
-								<div class="Qdh">
-									<ul>
-										<li style="width: 60%; margin-left: -40px;"><input
-											type="checkbox" class="chk_1" /><span id="n1">文件名</span></li>
-										<li>大小</li>
-										<li>修改日期</li>
-									</ul>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div class="tab-pane fade" id="tw4">内容同上</div>
 					<div class="tab-pane fade" id="tw5">内容同上</div>
@@ -403,7 +323,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div id="msg">
 			<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
 			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
@@ -510,7 +429,8 @@
 							for (var i = 0; i < listCate.length; i++) {
 								var $str = $("<tr class='showTr'>"
 										+ "<td>"
-										+ "<input type='checkbox' class='chk_2' />"
+										+ "<input type='checkbox' class='chk_2'/>"
+										+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
 										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
 										+ listCate[i].id
 										+ ">"
@@ -538,9 +458,62 @@
 								$("#mytbody").append($str);
 							}
 							for (var i = 0; i < listFile.length; i++) {
+								var type;
+								switch(listFile[i].type){
+									case("zip"):
+										type="/networkdisk/img/ZIP_2.png";
+									break;
+									case("mp4"):
+									case("rmvb"):
+									case("avi"):
+									case("mkv"):	
+									case("wmv"):
+									case("3gp"):	
+									case("mov"):
+										type="/networkdisk/img/video.png";
+									break;
+									case("png"):
+										type="/networkdisk/img/png.png";
+									break;
+									case("jpg"):
+										type="/networkdisk/img/jpg.png";
+									break;
+									case("gif"):
+									case("bmp"):
+									case("psd"):
+									case("ai"):
+									case("svg"):
+										type="/networkdisk/img/picture1.png";
+									break;
+									case("doc"):
+										type="/networkdisk/img/word.png";
+									break;
+									case("txt"):
+										type="/networkdisk/img/text.png";
+									break;
+									case("xls"):
+										type="/networkdisk/img/xls.png";
+									break;
+									case("pdf"):
+										type="/networkdisk/img/pdf.png";
+									break;
+									case("html"):
+										type="/networkdisk/img/html.png";
+									break;
+									case("mp3"):
+									case("wav"):
+									case("mod"):	
+										type="/networkdisk/img/music.png";
+									break;
+									default:
+										type="/networkdisk/img/others.png";
+								}
 								var $str = $("<tr class='showTr'>"
 										+ "<td>"
 										+ "<input type='checkbox' class='chk_2' />"
+										+ "<img src='"
+										+ type
+										+ "'width='28px' style='margin:0 5px 5px 10px;'>"
 										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
 										+ listFile[i].id
 										+ ">"
@@ -549,9 +522,15 @@
 										+ "</a>"
 										+ "<span class='more'>"
 										+ "<span class='fa fa-share-alt' title='分享'>"
-										+ "</span> <span class='fa fa-download' title='下载'>"
+										+ "</span><span class='fa fa-download' title='下载'>"
 										+ "</span>"
 										+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+										+ "</span>"
+										+ "<span class='menu' style='width: 96px;'>"
+										+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
+										+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
+										+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
+										+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu' href='javascript:void(0);'>删除</a>"
 										+ "</span></td>" 
 										+ "<td>"
 										+ Math.round(listFile[i].size/(1024*1024)) 
@@ -637,8 +616,7 @@
 					$("#myprogress").width(data.rate + "%");
 					if(data.rate>0){
 						$('.probox').show();
-						alert(data.name);
-						$('.up_status').html("上传中");
+						$('.up_status').html("上传中···");
 					}
 					if (data.rate == 100) {
 						clearInterval(time);
@@ -652,6 +630,13 @@
 			});
 		}
 	</script>
+	<script type="text/javascript">
+		$('table').on('click','.fa-ellipsis-h',function(){
+			$(this).parent().parent('td').find('.menu').css('visibility','visible');
+		});
+		$('table').on('mouseleave','.menu',function(){
+			$('.menu').css('visibility','hidden');
+		});
+	</script>
 </body>
-
 </html>
