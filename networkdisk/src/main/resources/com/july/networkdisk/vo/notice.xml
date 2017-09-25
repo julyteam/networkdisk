@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeSpace">
    <!-- resultMap标签：映射实体与表 type：表示实体全路径名 id属性：为实体与表的映射取一个唯一的编号 -->
-	<resultMap type="com.july.networkdisk.vo.User" id="userMap">
+	<resultMap type="com.july.networkdisk.vo.Notice" id="noticeMap">
 		<!-- id标签：映射主键属性 property属性：实体的属性名 column属性：表的字段名 -->
 		<id property="id" column="not_id" />
 		<result property="title" column="not_title" />
@@ -18,6 +18,20 @@
 	</insert>
 	<!-- 删除消息公告 -->
 	<select id="delete" parameterType="int">
-		delete from notice where not_id=#{id}
+		delete from notice where not_id=#{0} 
+	</select>
+	
+	<!--查找所有消息公告  -->
+	<select id="getAll" resultMap="noticeMap">
+			select * from notice order by not_time DESC
+	</select>
+	
+	<!--数据总数  -->
+	<select id="sum" resultType="int">
+	        select count(*) from notice
+	</select>
+	<!--分页  -->
+	<select id="page" parameterType="int" resultMap="noticeMap">
+	     select * from notice where not_id limit #{beginRow},#{pageSize}
 	</select>
 </mapper>

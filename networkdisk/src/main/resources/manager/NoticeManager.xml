@@ -16,11 +16,11 @@
 	<bean id="noticeDao" class="com.july.networkdisk.dao.NoticeDao" parent="baseDao">
 	</bean>
 	
-	<bean id="noticeService" class="com.july.networkdisk.service.impl.NoticeServiceImpl">
+	<bean id="iNoticeService" class="com.july.networkdisk.service.impl.NoticeServiceImpl">
 		<property name="noticeDao" ref="noticeDao"></property>
 	</bean>
 	
 	 <bean id="noticeAction" class="com.july.networkdisk.web.NoticeAction" scope="prototype">
-		<property name="iNoticeService" ref="noticeService"></property>
+		<property name="iNoticeService" ref="iNoticeService"></property>
 	</bean>  
 </beans>

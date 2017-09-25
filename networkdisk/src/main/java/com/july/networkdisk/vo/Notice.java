@@ -1,15 +1,17 @@
 package com.july.networkdisk.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Notice {
 	private Integer id;
 	private String title;
 	private String text;
 	private Timestamp time;
-	public Notice(){
-		
-	}
+	private int sumPage;
+	private int nowPage;
+
+	
 	public Integer getId() {
 		return id;
 	}
@@ -34,5 +36,16 @@ public class Notice {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	
+	public int getSumPage() {
+		return sumPage;
+	}
+	public void setSumPage(int sumPage) {
+		this.sumPage = sumPage;
+	}
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
 }
