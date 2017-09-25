@@ -22,9 +22,30 @@
 <script type="text/javascript">
 var countdown=60; 
 function settime(obj) { 
+	if(countdown == 60){
+			    var email = $("#email").val();
+			    if(email ==""){
+			    	alert("请填写邮箱！")
+			    	return;
+			    }
+		        $.ajax({  
+		            url:"${pageContext.request.contextPath}/sendEmail",  
+		            dataType: 'json',  
+		            data:{"email":email},
+		            success:function(data){ 
+		            	if(data == true)
+		            	alert("发送成功，请到邮箱查看验证码！");
+		            	if(data == false)
+		            	alert("发送失败！");
+		             },  
+		            error:function(){  
+		                alert("发送失败！");  
+		            }  
+				}); 
+	}
     if (countdown == 0) { 
         obj.removeAttribute("disabled");    
-        obj.value="免费获取验证码"; 
+        obj.value="获取验证码"; 
         countdown = 60; 
         return;
     } else { 
@@ -33,7 +54,8 @@ function settime(obj) {
         countdown--; 
     } 
 setTimeout(function() { 
-    settime(obj) }
+    settime(obj)
+    }
     ,1000) 
 }
 
@@ -88,13 +110,14 @@ padding-left:15px;
 					<span>手机号</span><input type="text" name="phone" id="telphone" value="${user.phone }" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
 				</div>
 				<div class="reg_email">
-					<span>邮&nbsp;&nbsp;&nbsp;箱</span><input type="email" name="email" value="${user.email }"
+					<span>邮&nbsp;&nbsp;&nbsp;箱</span><input type="email" name="email"  value="${user.email }"
 						id="email" />
-						<input type="button" id="btn" value="获取验证码" onclick="settime(this)" /> 
+					
 						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
 					&nbsp;<label>邮箱验证码</label><input type="text" name="code" id="code" />
+						<input type="button" id="btn" value="获取验证码" onclick="settime(this)" /> 
 				</div>
 				<div class="reg_password">
 

@@ -128,31 +128,32 @@
 .reg_email input {
 	margin-top:20px;
 	height: 35px;
-	width: 250px;
+	width: 350px;
 	margin-left: 7px;
-	border-right:none;
-	border: 1px solid #a9a9a9;
-	margin-right: -11px;
+	
+	
 	
 }
-.reg_email #btn
+
+.reg_code input {
+	margin-top:20px;
+	height: 35px;
+	width: 260px;
+	margin-left:8px;
+	border-right:none;
+	border: 1px solid #a9a9a9;
+	margin-right: -13px;
+	
+}
+.reg_code #btn
 {
-	height:36px;
-	width:100px;
+	
+	height:35px;
+	width:90px;
 	color: white;
 	font: 15px "微软雅黑" bold;
 	background-color: #5d98f9;
 	border: 1px solid #a9a9a9;
-
-	
-
-}
-.reg_code input {
-	margin-top:20px;
-	height: 35px;
-	width: 350px;
-	margin-left:8px;
-	
 }
 .reg_password span
 {

@@ -84,6 +84,12 @@
 		<action name="checkEmail" class="userAction" method="checkEmail">
 			
 		</action>
+		<action name="sendEmail"  class="userAction"  method="sendEmail">
+		
+		</action>
+		<action name="checkVCode"  class="userAction"  method="verCode">
+			
+		</action>
 	</package>
 
 
