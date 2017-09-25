@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>July</title>
+		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
+		<link href="/networkdisk/css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
+		<script src="/networkdisk/js/index.js"></script>
+		<script src="/networkdisk/js/jquery.rotate.min.js"></script>
+	</head>
+
+	<body>
+=======
 <html>
 <head>
 <meta charset="utf-8">
@@ -21,6 +43,7 @@
 </head>
 
 <body>
+
 
 		<div id="in-nav">
 			<div class="container">
@@ -87,6 +110,20 @@
 										</div>
 									</div>
 								</div>
+<<<<<<< HEAD
+							</li>
+							<li style="width: 100px; margin-top:5px;">
+								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
+							</li>
+							<li style="margin-top:5px;">
+								<a href="noticePage"><img src="/networkdisk/img/notice.png" /></a>
+							</li>
+							<li style="margin-top:5px;">
+								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
+							</li>
+						</ul>
+					</div>
+=======
 
 						</li> 
 						<li style="width: 100px; margin-top: 5px;"><a href="#"
@@ -97,6 +134,7 @@
 								src="/networkdisk/img/serve.png" /></a></li>
 					</ul>
 				</div>
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 				</div>
 			</div>
 		</div>
