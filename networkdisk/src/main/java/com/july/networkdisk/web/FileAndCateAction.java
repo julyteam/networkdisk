@@ -57,8 +57,13 @@ public class FileAndCateAction  extends ActionSupport{
 	public String showFileAndCate() {
 		map = new HashMap<String, Object>();
 		User user = CommonUtil.getSessionUser();
-		map.put("file_catid", categorie_id);  //判断所在的目录
+		if(!"".equals(categorie_id))
+		{
+			map.put("file_catid", categorie_id);  //判断所在的目录
+			map.put("cat_reid",categorie_id );
+		}
 		map.put("file_deletesign", recycleflag);  //判断是否在回收站；
+		map.put("cat_state", recycleflag);
 		List<NetFile> listFiles = iFileService.findAllByUser(user.getId(), map);
 		List<Categorie> listCategories = iCateService.findAllCate(user.getId(), map);
 		map.put("listFiles", listFiles);

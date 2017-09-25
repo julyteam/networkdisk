@@ -13,6 +13,29 @@
 		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
 		<script src="/networkdisk/user/js/login.js"></script>
 	    <script src="/networkdisk/user/js/bootstrap.min.js"></script>
+	    
+	    <%
+  String un="";
+  String up="";
+  Cookie cookie[]=request.getCookies();
+  if(cookie!=null)
+  {
+	  for(Cookie ck:cookie)
+	  {
+		  if("username".equals(ck.getName()))
+		  {
+			  un=ck.getValue();
+		  }
+		  if("password".equals(ck.getName()))
+		  {
+			  up=ck.getValue();
+		  }
+	  }
+  }
+
+
+
+%>
 	</head>
 <body>
 <div class="login-container">
@@ -80,7 +103,7 @@
 		</div>
 	</div>
 </div> 
-<div class="logo"><img src="/networkdisk/user/img/logo.png"></div>
+<div class="logo"><img src="/networkdisk/user/img/login_logo.png"><span> july云盘</span></div>
 			<div id="login-middle">
 			<div class="login_title">
 				<h4>账号密码登录</h4>
@@ -91,26 +114,29 @@
 			  <form action="${pageContext.request.contextPath}/userlogin" method="post" >
 
 				<div class="form_user">
-					<input type="text" placeholder="   手机/邮箱/用户名" name="name"/>
+					<input type="text" placeholder="   手机/邮箱/用户名" name="name"  value="<%=un%>"/>
 				</div>
 				<div class="form_password">
-					<input type="password" placeholder="   密 码"  name="passWord"/>
+					<input type="password" placeholder="   密 码"  name="passWord" value="<%=up%>"/>
 				</div>
-				<div style="float:left; color:red; "><c:if test="${message != null }">${message }</c:if></div>
+				
 				<div class="form_check">
-					<input type="checkbox" />
+					<input type="checkbox"  name="check"/>
 					<span>下次自动登录</span>
 				</div>
 				<div class="form_login">
-					<input type="submit" value="登录" />
+				 
+					<input type="submit" value="登录"  />
 				</div>
 				<div class="form_href" id="question">
-					<a href="#">登录遇到问题</a>
+					<a href="#">忘记密码？</a>
 				</div>
 				<div class="form_href" id="number">
 					<a href="#">海外手机号</a>
 				</div>
+			   <input type="hidden" id="success" value="${message}" > 
               </form>
+             
 			</div>
 			
 			<div class="login_bottom">
@@ -126,5 +152,24 @@
 
 		</div>
 </div>
+<script type="text/javascript">
+     
+              /*   登录验证 */
+		
+              
+              
+		$(document).ready(function(){
+			var successmassge = $("#success").val();
+		
+			if(successmassge=="yes"){
+				window.location.href="index.jsp";	
+			}
+			else if(successmassge=="error"){
+				alert("用户名或密码错误！");
+				location.href="login.jsp";
+			}
+		});
+              
+	</script>
 </body>
 </html>
