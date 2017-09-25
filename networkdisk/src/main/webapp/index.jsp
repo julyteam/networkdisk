@@ -88,7 +88,7 @@
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
 							<li style="margin-top:5px;">
-								<a href="noticeList"><img src="/networkdisk/img/notice.png" /></a>
+								<a href="noticePage"><img src="/networkdisk/img/notice.png" /></a>
 							</li>
 							<li style="margin-top:5px;">
 								<a href="#"><img src="/networkdisk/img/serve.png" /></a>
