@@ -86,7 +86,7 @@ public class CateServiceImpl implements ICateService{
 			}
 		}
 		List<String> listcate = cateDao.findCateByCatereid(cat_id, state);
-		if( listcate != null && listfile.size() !=0 ){
+		if( listcate != null && listcate.size() !=0 ){
 			for (String newcat_id : listcate) {
 				recyleCate(newcat_id, state);
 			}
@@ -111,7 +111,7 @@ public class CateServiceImpl implements ICateService{
 			iFileService.deleteBatch(listfile);
 		}
 		List<String> listcate = cateDao.findCateByCatereid(cat_id, state);
-		if( listcate != null && listfile.size() !=0 ){
+		if( listcate != null && listcate.size() !=0 ){
 			for (String newcat_id : listcate) {
 				deleteCate(newcat_id);
 			}

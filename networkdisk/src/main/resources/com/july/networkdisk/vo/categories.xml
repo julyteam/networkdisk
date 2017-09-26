@@ -15,7 +15,7 @@
 	
 	<!-- 增加文件夹 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
-		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_status) values(#{id},#{name},#{reid},#{uid},#{state})
+		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_state) values(#{id},#{name},#{reid},#{uid},#{state})
 	</insert>
 	<!-- 根据条件查找文件夹 -->
 	<select id="findAllCateByUser" parameterType="map" resultMap="categorieMap">

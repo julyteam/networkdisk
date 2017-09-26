@@ -128,29 +128,36 @@ $(document).ready(function() {
 			});
 			
 			$("#newonefile").click(function() {
+					
 					//创建tr节点
 					var $tr = $("<tr></tr>");
 					//遍历获取输入的内容
-					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><i class='fa fa-folder'></i><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
+					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
 					//将内容循环添加到创建好的TD中
 					$td.appendTo($tr);
 					$tr.prependTo("#tw1 .table tbody");
+					$('.nullfile').hide();
 					//执行删除操作
 					$(".dele").click(function() {
 						$(this).parent().parent().remove();
 					});
 					$('.sure').click(function() {
-						$(this).prev().val();
-						$('.filename').css('border', 'none');
-						$('.filename').attr('readonly','true');
-						var d = new Date();
-						var month = d.getMonth() + 1;
-						var day = d.getDate();
-						var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-						var output = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day + ' ' + time;
-						$(this).parent('td').siblings('td:last').append(output);
-						$(this).next('i').remove();
-						$(this).remove();
+					    var name=$(this).prev().val();
+						$(this).parent().parent().remove();
+						/*保存文件夹*/
+						$.ajax({
+							url : "${pageContext.request.contextPath}/bulidcate",
+							dataType : 'json',
+							data:{categorieName:name,categorieReid:categorie},
+							async: false,                   
+							success : function(data) {
+								/*alert(data);*/
+							},
+							error : function() {
+								alert("新建文件夹失败！");
+							}
+						});		
+						showchild(categorie,recycle);
 					});
 				});
 });

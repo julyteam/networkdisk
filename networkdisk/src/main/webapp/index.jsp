@@ -219,8 +219,13 @@
 							</div>
 							<div class="tw1_body">
 								<div class="Jdh">
-									
+									<table id="july_allFile" style="display:inline">
+										<tr>
+										</tr>
+									</table>
+									<span class="Sdh" style="float:right;display:inline-block;"></span>
 								</div>
+								
 								<div class="Qdh">
 									<ul>
 										<li style="width: 60%; margin-left: -40px;"><input
@@ -360,202 +365,274 @@
 			</div>
 		</div>
 	</div>
-	<script src="/networkdisk/js/contextMenu.js"></script>
 	<script type="text/javascript">
-	$(".table").contextMenu({
-		menu: [{
-				text: "打开",
-				callback: function() {
-					alert("打开");
-				}
-			},
-			{
-				text: "下载",
-				callback: function() {
-					alert("下载");
-				}
-			},
-			{
-				text: "分享",
-				callback: function() {
-					alert("分享");
-				}
-			},
-			{
-				text: "复制到",
-				callback: function() {
-					alert("复制到");
-				}
-			},
-			{
-				text: "移动到",
-				callback: function() {
-					alert("移动到");
-				}
-			},
-			{
-				text: "删除",
-				callback: function() {
-					alert("删除");
-				}
-			}
-		]
-	});
-	</script>
-	<script type="text/javascript">
-		var categorie;
-		var recycle;
-		function show(categorie_id, recycleflag) {
+		var categorie =null;
+		var recycle =null;
+		var cateName = null;
+		var caterid = null;
+		function show(categorie_id, recycleflag ) {
 			categorie = categorie_id;
 			recycle = recycleflag;
-			$(".showTr").remove();
-			$.ajax({
-						type : "post",
-						dataType : "json",
-						url : "showFileAndCate",
-						data : {
-							categorie_id : categorie_id,
-							recycleflag : recycleflag
-						},
-						success : function(map) {
-							var listFile = map.listFiles;
-							var listCate = map.listCategories;
-							if(listCate==""||listFile==""){
-								$('.nullfile').show();
-							}
-							var sum=parseInt(listCate.length+listFile.length);
-							var $head=$("<span class='j1'>全部文件>"+listCate[1].name+"</span><span class='j2'>已加载全部,共"+sum+"条</span>");
-							$('.Jdh').html($head);
-							for (var i = 0; i < listCate.length; i++) {
-								var $str = $("<tr class='showTr'>"
-										+ "<td>"
-										+ "<input type='checkbox' class='chk_2'/>"
-										+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
-										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
-										+ listCate[i].id
-										+ ">"
-										+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
-										+ listCate[i].name
-										+ ">"
-										+ "<a id='showFile' class='july_fileName' onclick='show("
-										+ listCate[i].id
-										+ ","
-										+ listCate[i].state
-										+ ")'>"
-										+ listCate[i].name
-										+ "</a>"
-										+ "<span class='more'>"
-										+ "<span class='fa fa-share-alt' title='分享'>"
-										+ "</span><span class='fa fa-download' title='下载'>"
-										+ "</span>"
-										+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-										+ "</span></td>" 
-										+ "<td>--</td>"
-										+ "<td>" 
-										+ listCate[i].addtime
-										+ "</td>" 
-										+ "</tr>");
-								$("#mytbody").append($str);
-							}
-							for (var i = 0; i < listFile.length; i++) {
-								var type;
-								switch(listFile[i].type){
-									case("zip"):
-										type="/networkdisk/img/ZIP_2.png";
-									break;
-									case("mp4"):
-									case("rmvb"):
-									case("avi"):
-									case("mkv"):	
-									case("wmv"):
-									case("3gp"):	
-									case("mov"):
-										type="/networkdisk/img/video.png";
-									break;
-									case("png"):
-										type="/networkdisk/img/png.png";
-									break;
-									case("jpg"):
-										type="/networkdisk/img/jpg.png";
-									break;
-									case("gif"):
-									case("bmp"):
-									case("psd"):
-									case("ai"):
-									case("svg"):
-										type="/networkdisk/img/picture1.png";
-									break;
-									case("doc"):
-										type="/networkdisk/img/word.png";
-									break;
-									case("txt"):
-										type="/networkdisk/img/text.png";
-									break;
-									case("xls"):
-										type="/networkdisk/img/xls.png";
-									break;
-									case("pdf"):
-										type="/networkdisk/img/pdf.png";
-									break;
-									case("html"):
-										type="/networkdisk/img/html.png";
-									break;
-									case("mp3"):
-									case("wav"):
-									case("mod"):	
-										type="/networkdisk/img/music.png";
-									break;
-									default:
-										type="/networkdisk/img/others.png";
-								}
-								var $str = $("<tr class='showTr'>"
-										+ "<td>"
-										+ "<input type='checkbox' class='chk_2' />"
-										+ "<img src='"
-										+ type
-										+ "'width='28px' style='margin:0 5px 5px 10px;'>"
-										+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
-										+ listFile[i].id
-										+ ">"
-										+ "<a class='july_fileName'>"
-										+ listFile[i].name
-										+ "</a>"
-										+ "<span class='more'>"
-										+ "<span class='fa fa-share-alt' title='分享'>"
-										+ "</span><span class='fa fa-download' title='下载'>"
-										+ "</span>"
-										+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-										+ "</span>"
-										+ "<span class='menu' style='width: 96px;'>"
-										+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
-										+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
-										+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
-										+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu' href='javascript:void(0);'>删除</a>"
-										+ "</span></td>" 
-										+ "<td>"
-										+ Math.round(listFile[i].size/(1024*1024)) 
-										+ "M</td>" 
-										+ "<td>"
-										+ listFile[i].addtime 
-										+ "</td>"
-										+ "</tr>")
-								$("#mytbody").append($str);
-							}
-							$('table').on('click','.fa-download',function(){
-								alert($(this).parent().parent('td').find('.reid').val());
-							});
-						},
-						error : function() {
-							alert("查询失败")
-						}						
-					});
+			
+			 if(cateName != null){
+				var $head=$("<td><a id='"+caterid+"' class='aa'  style='cursor:pointer;'> >"+cateName+"</a></td>"); 
+				$("#july_allFile tr").append($head)
+			}else{
+				var $head=$("<td><a id='null' class='aa' style='cursor:pointer;' >全部文件</a></td>"); 
+				$("#july_allFile tr").append($head)
+			} 			 
+			 showchild(categorie_id,recycleflag)
 
 		}
-		$(function() {
-			var categorie_id = "";
-			var recycleflag = 0;
-			show(categorie_id, recycleflag);
+		
+		function showchild(categorie_id,recycleflag){
+			$(".showTr").remove();
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url : "${pageContext.request.contextPath}/showFileAndCate?Time="+new Date().getSeconds(),
+				data : {
+					categorie_id : categorie_id,
+					recycleflag : recycleflag
+				},
+				success : function(map) {
+					var listFile = map.listFiles;
+					var listCate = map.listCategories;
+					if(listCate=="" && listFile==""){
+						$('.nullfile').show();
+					}else{
+						$('.nullfile').hide();
+					}
+			    var sum=parseInt(listCate.length+listFile.length);
+				var $sumhead=$("<span class='j2'>已加载全部,共"+sum+"条</span>");
+				$('.Sdh').html($sumhead);   
+					for (var i = 0; i < listCate.length; i++) {
+						//分割时间字符串
+						var time = listCate[i].addtime;
+						var newTime = time.split("T");
+						
+						var $str = $("<tr class='showTr'>"
+								+ "<td>"
+								+ "<input type='checkbox' class='chk_2'/>"
+								+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
+								+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
+								+ listCate[i].id
+								+ ">"
+								+ "<input id='listCateState' class='restate' type='text' style='display:none' value="
+								+ listCate[i].state
+								+ ">"
+								+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
+								+ listCate[i].name
+								+ ">"
+								+ "<a id='showFile' class='july_cateName' >"
+								+ listCate[i].name
+								+ "</a>"
+								+ "<div class='more'>"
+								+ "<span class='fa fa-share-alt' title='分享'>"
+								+ "</span>"
+								+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+								+ "<span class='menu' style='width: 96px;'>"
+								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelecate' id='"+listCate[i].id+"' >删除</a>"
+								+ "</span></div></td>"
+								+ "<td>--</td>"
+								+ "<td>" 
+								+ newTime[0]+" "+newTime[1]
+								+ "</td>" 
+								+ "</tr>");
+						$("#mytbody").append($str);
+					}
+					for (var i = 0; i < listFile.length; i++) {
+						var type;
+						var filesize;
+						var sizeflag;
+						/* 修改时间格式 */
+						var time = listFile[i].addtime;
+						var newTime = time.split("T");
+						
+						/* 计算文件大小 */
+						if(listFile[i].size/(1024*1024) < 1 ){
+							filesize=(listFile[i].size/1024).toFixed(2);
+							sizeflag="KB";
+						}else
+						{
+							filesize=(listFile[i].size/(1024*1024)).toFixed(2);
+							sizeflag="M";
+						}
+						
+						switch(listFile[i].type){
+							case("zip"):
+								type="/networkdisk/img/ZIP_2.png";
+							break;
+							case("mp4"):
+							case("rmvb"):
+							case("avi"):
+							case("mkv"):	
+							case("wmv"):
+							case("3gp"):	
+							case("mov"):
+								type="/networkdisk/img/video.png";
+							break;
+							case("png"):
+								type="/networkdisk/img/png.png";
+							break;
+							case("jpg"):
+								type="/networkdisk/img/jpg.png";
+							break;
+							case("gif"):
+							case("bmp"):
+							case("psd"):
+							case("ai"):
+							case("svg"):
+								type="/networkdisk/img/picture1.png";
+							break;
+							case("doc"):
+							case("docx"):
+								type="/networkdisk/img/word.png";
+							break;
+							case("txt"):
+								type="/networkdisk/img/text.png";
+							break;
+							case("xls"):
+								type="/networkdisk/img/xls.png";
+							break;
+							case("pdf"):
+								type="/networkdisk/img/pdf.png";
+							break;
+							case("html"):
+								type="/networkdisk/img/html.png";
+							break;
+							case("mp3"):
+							case("wav"):
+							case("mod"):	
+								type="/networkdisk/img/music.png";
+							break;
+							default:
+								type="/networkdisk/img/others.png";
+						}
+						var $str = $("<tr class='showTr'>"
+								+ "<td>"
+								+ "<input type='checkbox' class='chk_2' />"
+								+ "<img src='"
+								+ type
+								+ "'width='28px' style='margin:0 5px 5px 10px;'>"
+								+ "<input id='listFileID' class='reid' type='text' style='display:none' value="
+								+ listFile[i].id
+								+ ">"
+								+ "<input id='listFileID' class='rename' type='text' style='display:none' value="
+								+ listFile[i].name
+								+ ">"
+								+ "<a class='july_fileName'>"
+								+ listFile[i].name
+								+ "</a>"
+								+ "<div class='more'>"
+								+ "<span class='fa fa-share-alt' title='分享'>"
+								+ "</span><span class='fa fa-download' title='下载' >"
+								+ "</span>"
+								+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+								+ "</span>"
+								+ "<span class='menu' style='width: 96px;'>"
+								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelefile' id='"+listFile[i].id+"' >删除</a>"
+								+ "</span></div></td>" 
+								+ "<td>"
+								+ filesize + sizeflag
+								+ "</td>" 
+								+ "<td>"
+								+ newTime[0]+" "+newTime[1]
+								+ "</td>"
+								+ "</tr>")
+						$("#mytbody").append($str);
+						
+					}
+				},
+				error : function() {
+					alert("查询失败")
+				}						
+			});
+		}
+
+		/*删除当前文件*/
+		$('#mytbody').on('click','.delelefile',function(){
+			var fileid=$(this).attr("id");
+			layFileRecyle(fileid);
 		});
+		
+		/*删除当前文件夹*/
+		$('#mytbody').on('click','.delelecate',function(){
+			var cateid=$(this).attr("id");
+			layCateRecyle(cateid);
+		});
+		/*删除当前文件*/
+		function layFileRecyle(fileID){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/layFileRecyle?file_id="+fileID,
+				dataType : 'json',
+				success : function(data) {
+					/* alert(data); */
+				},
+				error : function() {
+					alert("文件放入回收站失败！");
+				}
+			});
+			showchild(categorie,recycle);
+		}
+		/*删除当前文件夹*/
+		function layCateRecyle(cateID){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/layCateRecycle?categorieID="+cateID,
+				dataType : 'json',
+				success : function(data) {
+					/* alert(data); */
+				},
+				error : function() {
+					alert("文件夹放入回收站失败！");
+				}
+			});
+			showchild(categorie,recycle);
+		}
+		
+		/* 显示条形菜单 */
+		$('#july_allFile').on('click','.aa',function(){
+			var caterid=$(this).attr("id");
+			if(caterid =="null"){
+				show(null,recycle);
+			}else{
+			show(caterid,recycle);
+			}
+			$(this).parent('td').nextAll('td').remove();
+		});
+		
+		/*跳下一级*/
+		$('table').on('click','.july_cateName',function(){
+			var cateid =$(this).parent('td').find('.reid').val();
+			var catestate =$(this).parent('td').find('.restate').val();
+			var catename =$(this).parent('td').find('.rename').val();
+			cateName = catename;
+			caterid = cateid;
+			show(cateid,catestate);
+		});
+		
+		
+		/* 文件下载 */
+		
+		 $('table').on('click','.fa-download',function(){
+		   var fileid =$(this).parent().parent('td').find('.reid').val();
+		   var filename =$(this).parent().parent('td').find('.rename').val();
+		  window.location.href="fileDownload?fileFileName="+filename+"&netFileID="+fileid;
+		});
+		
+		/* 显示文件和文件夹 */
+		$(function() {
+			show(null, 0);
+		});
+		
+		
+		/* 文件上传 */
 		$("#upfile").change(function() {
 			var file = this.files[0];
 			july_fileReader(file);
@@ -586,22 +663,22 @@
 		function ajaxFileUpload() {
 			$("#myprogress").width(0);
 			time = window.setInterval(progress, 100);
-			$
-					.ajaxFileUpload({
-						url : '${pageContext.request.contextPath}/fileupload?categorie_id='
-								+ categorie,
+			$.ajaxFileUpload({
+						url : '${pageContext.request.contextPath}/fileupload?categorie_id='+ categorie,
 						secureuri : false,
 						fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
 						dataType : 'multipart/form-data',
 						success : function(data) {
-							alert(data);
-							//刷新页面
-							show(categorie, recycle);
+							$('.up_status').html("上传成功");
+							/* alert(data); */
+							$('.probox').hide();
 							//需要重新绑定事件
 							$("#upfile").change(function() {
 								var file = this.files[0];
 								july_fileReader(file);
 							});
+							//刷新页面
+							showchild(categorie,recycle);
 						}
 
 					})
@@ -620,8 +697,8 @@
 					}
 					if (data.rate == 100) {
 						clearInterval(time);
-						$('.probox').hide();
-						$('.up_status').html("上传成功");
+						/* $('.up_status').html("上传成功");
+						$('.probox').hide(); */
 					}
 				},
 				error : function() {
@@ -632,10 +709,10 @@
 	</script>
 	<script type="text/javascript">
 		$('table').on('click','.fa-ellipsis-h',function(){
-			$(this).parent().parent('td').find('.menu').css('visibility','visible');
+			$(this).parent().parent('td').find('.menu').css('display','block');
 		});
 		$('table').on('mouseleave','.menu',function(){
-			$('.menu').css('visibility','hidden');
+			$('.menu').css('display','none');
 		});
 	</script>
 </body>

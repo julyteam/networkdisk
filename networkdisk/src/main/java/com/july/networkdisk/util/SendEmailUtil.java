@@ -24,12 +24,11 @@ public class SendEmailUtil {
 		// 创建邮件对象
 		MimeMessage mm = new MimeMessage(session);
 		// 设置发件人
-		mm.setFrom(new InternetAddress("18874489985@163.com"));
+		mm.setFrom(new InternetAddress("945076608@qq.com"));
 		// 设置收件人
 		mm.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 		// 设置抄送人
-		mm.setRecipient(Message.RecipientType.CC, new InternetAddress(
-				"18874488896@163.com"));
+		//mm.setRecipient(Message.RecipientType.CC, new InternetAddress("18874488896@163.com"));
 
 		String MailBody = "<p><img alt=\"westlakelogo\" src=\"http://mt1.baidu.com/timg?shitu&quality=100&sharpen=100&er=&imgtype=0&wh_rate=null&size=h120&sec=1506158359&di=b069c1b6064030bf6262630f97677234&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2F%2570%2569%2563%2Fitem%2F279759ee3d6d55fbdbdb823a66224f4a20a4dd89.jpg\" border=\"0\" /></p>"
 				+ "<p> 尊敬的用户,您好！<br />"
@@ -49,10 +48,10 @@ public class SendEmailUtil {
 
 	public static void sendEmail(String email, String code) throws Exception {
 		Properties prop = new Properties();
-		prop.put("mail.host", "smtp.163.com");
+		prop.put("mail.host", "smtp.qq.com");
 		prop.put("mail.transport.protocol", "smtp");
 		prop.put("mail.smtp.auth", true);
-		prop.put("mail.smtp.port", "25");
+		prop.put("mail.smtp.port", "587");
 		// 使用java发送邮件5步骤
 		// 1.创建sesssion
 		Session session = Session.getInstance(prop);
@@ -62,7 +61,7 @@ public class SendEmailUtil {
 		// 2.通过session获取Transport对象（发送邮件的核心API）
 		Transport ts = session.getTransport();
 		// 3.通过邮件用户名密码链接
-		ts.connect("18874489985@163.com", "julyteam777");
+		ts.connect("945076608@qq.com", "uxfwhrrwwjvjbdhj");
 
 		// 4.创建邮件
 
@@ -75,7 +74,7 @@ public class SendEmailUtil {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SendEmailUtil.sendEmail("1655423985@qq.com",
+		SendEmailUtil.sendEmail("1370058053@qq.com",
 				SendEmailUtil.createRandomVcode());
 
 	}

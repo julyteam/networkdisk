@@ -24,7 +24,6 @@ public class CommonUtil {
 	}
 	public static User getSessionUser(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		session.setAttribute("user", test()); //用来测试
 		return (User)session.getAttribute("user");
 	}
 	

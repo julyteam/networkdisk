@@ -21,11 +21,17 @@ public class FileAction extends ActionSupport {
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
 	private String netFileID; // 得到下载文件的ID
+	private String categorie_id;
 
 	private IFileService fileService;
 	private User user = CommonUtil.getSessionUser(); // 获取session中的User
 
-
+	public String getCategorie_id() {
+		return categorie_id;
+	}
+	public void setCategorie_id(String categorie_id) {
+		this.categorie_id = categorie_id;
+	}
 	public void setNetFileID(String netFileID) {
 		this.netFileID = netFileID;
 	}
@@ -85,8 +91,14 @@ public class FileAction extends ActionSupport {
 			jsonString = "上传文件失败！";
 		} else {
 			NetFile netFile = new NetFile();
+			if("null".equals(categorie_id))
+			{
+				
+			}else {
+				netFile.setCatid(categorie_id);				
+			}
 			try {
-
+				
 				fileService.fileUpLoad(netFile, file, fileFileName,
 						fileContentType, user);
 

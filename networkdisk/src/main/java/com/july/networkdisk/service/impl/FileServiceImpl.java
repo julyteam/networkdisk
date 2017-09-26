@@ -40,7 +40,7 @@ public class FileServiceImpl implements IFileService {
 		return fileDao.findAllByUser(map);
 	}
 	/**
-	 * 根据文件夹目录和是否删除 来找文件的ID。用于文件夹的回收和删除
+	 * 根据文件夹目录和是否删除 来找文件的ID。用于文件的回收和删除
 	 */
 	public List<String> findAllByCatId(String cat_id, Integer file_deletesign) {
 		Map<String, Object> map = new HashMap<String, Object>();
