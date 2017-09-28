@@ -43,5 +43,12 @@ public interface ICateService extends IBaseService<Categorie> {
 	 * @param cat_reid
 	 */
 	boolean updateCatereid(String cat_id,String cat_reid);
+	
+	/**
+	 * 显示用户回收站中的文件和文件夹
+	 * @param cat_uid
+	 * @return
+	 */
+	Map<String,Object> showRecycleCate(String cat_uid);
 
 }

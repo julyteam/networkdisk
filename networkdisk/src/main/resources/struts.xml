@@ -21,7 +21,7 @@
 			<result name="error">/login.jsp</result>
 		</action>
 		
-		<!-- 头像 -->
+	<!-- 头像 -->
 		<action name="photoup" class="userAction" method="photoup">
 			<interceptor-ref name="fileUpload">
 				
@@ -33,6 +33,8 @@
 			<result name="input">/per-center.jsp</result>
 		</action>
 		<!-- 显示图片 -->
+
+
 		<action name="showphoto" class="userAction" method="showphoto"></action>
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
@@ -40,30 +42,54 @@
 			<result name="error" type="redirect">/per-center.jsp</result>
 			<result name="input" type="redirect">/per-center.jsp</result>
 		</action>
-		
-		
-		
-		<!-- 个人资料页面跳转 -->
+		<!-- 个人页面跳转 -->
+		<action name="per-center" class="userAction" method="percenter">
+			<result name="success" type="redirect">/per-center.jsp</result>
+</action>
+		<action name="showphoto" class="userAction" method="showphoto"></action>
+
+
+		<action name="showphoto" class="userAction" method="showphoto"></action>
+		<!--用户个人资料修改  -->
+		<action name="userUpdate" class="userAction" method="update">
+			<result name="success" type="redirect">per-center</result>
+			<result name="error" type="redirect">/per-center.jsp</result>
+			<result name="input" type="redirect">/per-center.jsp</result>
+		</action>
+		<!-- 个人页面跳转 -->
+		<action name="per-center" class="userAction" method="percenter">
+			<result name="success" type="redirect">/per-center.jsp</result>
+</action>
+		<action name="showphoto" class="userAction" method="showphoto"></action>
+
+		<!--用户个人资料修改  -->
+		<action name="userUpdate" class="userAction" method="update">
+			<result name="success" type="redirect">per-center</result>
+			<result name="error" type="redirect">/per-center.jsp</result>
+			<result name="input" type="redirect">/per-center.jsp</result>
+		</action>
+		<!-- 页面跳转 -->
 		<action name="per-center" class="userAction" method="percenter">
 			<result name="success" type="redirect">/per-center.jsp</result>
 		</action>
+
 		<!-- 登出 -->
 		<action name="logout" class="userAction" method="logout">
 			<result name="success" type="redirect">/login.jsp</result>
 		</action>
 		<!-- 首页跳转 -->
 		<action name="goindex" class="userAction" method="goindex">
-			<result name="success" type="redirect">/user/share.jsp</result>
+			<result name="success" type="redirect">/index.jsp</result>
 		</action>
 		
 		
 		
 		<!--密码修改  -->
 		<action name="updatePassAction" class="userAction" method="updatePassword">
-			<result name="success" type="redirect">per-center</result>
+			<result type="chain">logout</result>
 			<result name="error" type="redirect">per-center</result>
-			
 		</action>
+
 		<!-- 用户注册 -->
 		<action name="register"  class="userRegister" method="register">
 			<result name="success">/register.jsp</result>
@@ -78,6 +104,12 @@
 			
 		</action>
 		<action name="checkEmail" class="userAction" method="checkEmail">
+			
+		</action>
+		<action name="sendEmail"  class="userAction"  method="sendEmail">
+		
+		</action>
+		<action name="checkVCode"  class="userAction"  method="verCode">
 			
 		</action>
 	</package>
@@ -111,11 +143,54 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
+			
+		<!-- 文件放入回收站 -->
+		<action name="layFileRecyle" class="fileAndCateAction" method="layFileRecyle">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>	
 		
 		<!-- 根据用户id显示文件和文件夹 -->
 		<action name="showFileAndCate" class="fileAndCateAction" method="showFileAndCate">
 			<result name="json" type="json">
 				<param name="root">map</param>
+			</result>
+		</action>
+		
+		
+		<!-- 根据用户id显示回收站中的文件和文件夹 -->
+		<action name="showRecycle" class="fileAndCateAction" method="showRecycle">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
+		
+		<!-- 还原文件 -->
+		<action name="restoreFile" class="fileAndCateAction" method="restoreFile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 还原文件和文件夹 -->
+		<action name="restoreCateandfile" class="fileAndCateAction" method="restoreCateandfile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 删除文件 -->
+		<action name="deleteFile" class="fileAndCateAction" method="deleteFile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 清空回收站 -->
+		<action name="emptyRecycle" class="fileAndCateAction" method="emptyRecycle">
+			<result name="json" type="json">
+				<param name="root">message</param>
 			</result>
 		</action>
 
@@ -150,11 +225,29 @@
 	</package>
 	
 	<!-- 文件夹模块 -->
-	<package name="struts.categories" namespace="/" extends="struts-default">
+	<package name="struts.categories" namespace="/" extends="json-default">
 		<action name="bulidcate" class="cateAction" method="bulidCate">
-		
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
 		</action>
 		
+		<action name="layCateRecycle" class="cateAction" method="layCateRecycle">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
+		</action>
+		
+		<action name="restoreCate" class="cateAction" method="restoreCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
+		</action>
+		<action name="deleteCate" class="cateAction" method="deleteCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
+		</action>
 		
 	</package>
 	
@@ -169,18 +262,36 @@
 		</action>
 	</package>
 	
-	<package name="networkdisk.friend" namespace="/" extends="struts-default">
+	<package name="networkdisk.friend" namespace="/" extends="struts-default,json-default">
 		<!-- 好友列表 -->
 		<action name="findAll" class="friendAction" method="getAll">			
-			<result name="success">share.jsp</result>			
+			<result name="success">share.jsp</result>		
 		</action>
-		<action name="getList" class="friendAction" method="getAll">						
-		</action>		
-		<action name="findOne" class="friendAction" method="findafriend">							
+		<action name="findOne" class="friendAction" method="findafriend">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>			
 		</action>
 		<action name="intertOne" class="friendAction" method="addfriend">
 			<result name="chain">getList</result>							
 		</action>
 	</package>
+	
+	
+	<!-- 消息公告模块 -->
+	<package name="networkdisk.notice" namespace="/" extends="struts-default,json-default">	
+		<!-- 消息查询显示 -->
+		<!-- <action name="noticeList" class="noticeAction" method="getAll">
+			<result name="success">/noticeList.jsp</result>
+		</action> -->
+		<!-- 删除公告 -->
+		<action name="noticeDel" class="noticeAction" method="delete">
+		    <result type="chain">/noticeList.jsp</result>
+		</action>
+		<action name="noticePage" class="noticeAction" method="page">
+		    <result name="success">/noticeList.jsp</result>
+		</action>
+	</package>
+	
 	
 </struts>

@@ -47,8 +47,17 @@ $(document).ready(function(){
 						        equalTo:"#password"
 						      },
 					      code: {
-					        required: true
-					       
+					        required: true,
+					        remote: {
+					            url: "checkVCode",     //后台处理程序
+					            type: "post",               //数据发送方式
+					            dataType: "json",           //接受数据格式   
+					            data: {                     //要传递的数据
+					                name: function() {
+					                    return $("#code").val();
+					                }
+					            }
+					        }
 					       
 					      },
 					      email: {
@@ -89,6 +98,7 @@ $(document).ready(function(){
 						        equalTo:"两次密码不一致"
 						      },
 					      code: {
+					    	    remote: "验证码错误",
 						        required: "请输入验证码",
 						      },
 					      phone:{

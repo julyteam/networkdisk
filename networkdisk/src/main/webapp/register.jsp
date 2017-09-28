@@ -19,6 +19,48 @@
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
 
+<script type="text/javascript">
+var countdown=60; 
+function settime(obj) { 
+	if(countdown == 60){
+			    var email = $("#email").val();
+			    if(email ==""){
+			    	alert("请填写邮箱！")
+			    	return;
+			    }
+		        $.ajax({  
+		            url:"${pageContext.request.contextPath}/sendEmail",  
+		            dataType: 'json',  
+		            data:{"email":email},
+		            success:function(data){ 
+		            	if(data == true)
+		            	alert("发送成功，请到邮箱查看验证码！");
+		            	if(data == false)
+		            	alert("发送失败！");
+		             },  
+		            error:function(){  
+		                alert("发送失败！");  
+		            }  
+				}); 
+	}
+    if (countdown == 0) { 
+        obj.removeAttribute("disabled");    
+        obj.value="获取验证码"; 
+        countdown = 60; 
+        return;
+    } else { 
+        obj.setAttribute("disabled", true); 
+        obj.value="重新发送(" + countdown + ")"; 
+        countdown--; 
+    } 
+setTimeout(function() { 
+    settime(obj)
+    }
+    ,1000) 
+}
+
+</script>
+
 <style>
 
 .error {
@@ -31,8 +73,9 @@ padding-left:15px;
 </head>
 <body>
 	<div id="head">
+	<div style="height:40px"></div>
 		<div id="head-left">
-			<img src="/networkdisk/user/img/logo-2.png"> <span>|&nbsp;&nbsp;注册July账号</span>
+			<img src="/networkdisk/user/img/register_logo .png"> <span>|&nbsp;&nbsp;注册july云盘账号</span>
 		</div>
 		<div id="head-right">
 			<span>我已注册，现在就</span>
@@ -41,9 +84,9 @@ padding-left:15px;
 			</div>
 		</div>
 	</div>
-	<div class="hr">
+	 <div class="hr">
 		<hr />
-	</div>
+	</div>  
 	<div class="reg_content">
 		<!-- <form action="register.action" method="post">
 			<input type="submit" value="submit" />
@@ -54,34 +97,36 @@ padding-left:15px;
 		<form action="${pageContext.request.contextPath}/register" method="post" id="registerForm" class="register_form" >
 			<fieldset>
 				<div class="reg_username">
-					&nbsp;&nbsp;&nbsp;<label>用户名</label><input type="text" name="name"  id="username" value="${user.name }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
+					<span>用户名</span><input type="text" name="name"  id="username" value="${user.name }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div> 
 				<div class="reg_realname">
-					<label>真实姓名</label><input type="text" name="trueName" id="realname" value="${user.trueName }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
+					<span>真实姓名</span><input type="text" name="trueName" id="realname" value="${user.trueName }" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"  />
 				</div>
 				<div class="reg_sex">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>性&nbsp;&nbsp;&nbsp;别</label>  &nbsp; &nbsp;&nbsp;&nbsp; <input type="radio" name="sex" value="1"  id="sex" checked="checked"/>男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex"  /> 女
+					<span>性&nbsp;&nbsp;&nbsp;别</span> <input type="radio" name="sex" value="1"  id="sex" checked="checked"/>男  &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" id="sex"  /> 女
 				</div>
 				<div class="reg_tel">
 
-					&nbsp;&nbsp;&nbsp;<label>手机号</label><input type="text" name="phone" id="telphone" value="${user.phone }" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
+					<span>手机号</span><input type="text" name="phone" id="telphone" value="${user.phone }" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
 				</div>
 				<div class="reg_email">
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>邮&nbsp;&nbsp;&nbsp;箱</label><input type="email" name="email" value="${user.email }"
+					<span>邮&nbsp;&nbsp;&nbsp;箱</span><input type="email" name="email"  value="${user.email }"
 						id="email" />
+					
 						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
-					&nbsp;&nbsp;&nbsp;<label>验证码</label><input type="text" name="code" id="code" />
+					&nbsp;<label>邮箱验证码</label><input type="text" name="code" id="code" />
+						<input type="button" id="btn" value="获取验证码" onclick="settime(this)" /> 
 				</div>
 				<div class="reg_password">
 
-					&nbsp;&nbsp;&nbsp;&nbsp;<label>密&nbsp;&nbsp;&nbsp;码</label><input type="password" name="passWord" value="${user.passWord }"
+						<span>密&nbsp;&nbsp;&nbsp;码</span><input type="password" name="passWord" value="${user.passWord }"
 						id="password" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"/>
 
 				</div>
 				<div class="repassword">
-					<label>确认密码</label><input type="password" name="repassword" id="repassword"  />
+					<span>确认密码</span><input type="password" name="repassword" id="repassword"  />
 				</div>
 				<div class="reg_check">
 					<input type="checkbox" id="agree" name="agree" checked="checked"/><font size="2">阅读并接受<a
@@ -94,6 +139,7 @@ padding-left:15px;
 			
 		</form>
 				<input type="hidden" id="success" value="${massger }" >
+				
 	</div>
 	
 	<script type="text/javascript">

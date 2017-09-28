@@ -3,12 +3,15 @@ package com.july.networkdisk.web;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +19,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.*;
 import com.july.networkdisk.util.CommonUtil;
+import com.july.networkdisk.util.SendEmailUtil;
 import com.july.networkdisk.vo.*;
 import com.july.networkdisk.service.*;
 
@@ -27,9 +31,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     private File file;
     private IUserService iUserService;
     private String message;
+    private String code;
     HttpSession session = CommonUtil.createSession();
+    HttpServletRequest request=ServletActionContext.getRequest();
+    HttpServletResponse response=ServletActionContext.getResponse();
     
-    
+    public void setCode(String code) {
+		this.code = code;
+	}
+    public String getCode() {
+		return code;
+	}
     public String getMessage() {
 		return message;
 	}
@@ -74,15 +86,28 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
    
 	/*  用户登陆*/
     public String login() throws Exception{
-    	System.out.println("~~~~~~~~~~~~~~~~~~");
+    	Cookie cookie=null;
+    	String ck=request.getParameter("check");
+    	
     	String password = CommonUtil.getMD5(this.user.getPassWord());
     	this.user.setPassWord(password);
     	User user = this.iUserService.findOne(this.user);
     	session.setAttribute("user", user);
     	if(user == null){
-    		this.setMessage("用户名或者密码错误！");
+    		this.setMessage("error");
     		return ERROR;
     	}else{
+    		this.setMessage("yes");
+    		if("on".equals(ck))
+			{
+				 cookie=new Cookie("username",user.getName());
+				 cookie.setMaxAge(60*60);
+				 response.addCookie(cookie);
+				 cookie=new Cookie("password",user.getPassWord());
+				 cookie.setMaxAge(60*60);
+				 response.addCookie(cookie);
+				
+			}
         	return SUCCESS;
     	}
     	
@@ -134,7 +159,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     
    /* 头像*/
     public String photoup() throws Exception{
-    	System.out.println(file+"~~~~~~~~~~~~~~~~~~~~~~~~~");
     	InputStream in = new FileInputStream(file);	
     	User u = CommonUtil.getSessionUser();
     	byte[] photo = new byte[in.available()];
@@ -145,12 +169,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 
     	return SUCCESS;
     }
+    /**
+     * 用户头像查找
+     * @return
+     * @throws Exception
+     */
     public String showphoto() throws Exception{
     	User u = CommonUtil.getSessionUser();
 	   User user = iUserService.get(u.getId());
-	   HttpServletResponse response = null;
 	   ServletOutputStream out = null;
-	   response = ServletActionContext.getResponse();
 	   response.setContentType("multipart/form-data");
 	   out = response.getOutputStream();
 	   out.write(user.getPhoto());
@@ -192,7 +219,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
  /*    前台验证用户名注册*/
     public String checkUserName() throws Exception
     {
-    	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		User userName=this.iUserService.selectUserByName(user.getName());
@@ -204,13 +230,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		{
 			out.print(true);
 		}
+		out.close();
 		return null;
 	
     }
       /*  前台验证手机号*/
     public String checkPhone() throws Exception
     {
-    	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
 		User userPhone = null;
 		PrintWriter out = response.getWriter();
@@ -240,12 +266,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 				}
 			}
 		}
+		out.close();
 		return null;
     }
         /*前台验证邮箱*/
     public String checkEmail() throws Exception
     {
-    	HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
 		User userEmail;
 		PrintWriter out = response.getWriter();
@@ -275,8 +301,48 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 				}
 			}
 		}
+		out.close();
 		return null;
     }
+     /**
+     * 发送邮件
+     * @throws Exception
+     */
+    
+    public void sendEmail(){
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			String vcode= SendEmailUtil.createRandomVcode();
+			SendEmailUtil.sendEmail(user.getEmail(), vcode);
+			session.setAttribute("vcode", vcode);
+			out.print(true);
+		}catch(Exception e){
+			out.print(false);
+		}finally{
+			out.flush();
+			out.close();
+		}
+    	
+    }
+    
+    /**
+     *验证邮箱 验证码
+     * @throws Exception 
+     */
+    public void verCode() throws Exception{
+    	String vcodeSession =(String)session.getAttribute("vcode");
+    	response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	if(vcodeSession.equals(code)){
+    		out.print(true);
+    	}else {
+			out.print(false);
+		}
+    }
+    
+    
     /*密码修改*/
     public String updatePassword()throws Exception
     {

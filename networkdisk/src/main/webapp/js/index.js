@@ -38,32 +38,55 @@ $(document).ready(function() {
 			toggle = true;
 		}
 	});
+	/*全选反选*/
 	$(".chk_1").click(function() {
 		if(this.checked) {
 			$("#tw1 .table :checkbox").prop("checked", true);
 			$("#n1").html("已选中" + $("#tw1 .table tr").length + "个文件/文件夹");
 			$('#g_button').css('display', 'none');
 			$('.equip_1').css('display', 'block');
+			$('.Qdh').find('li').nextAll('li').hide();
 		} else {
 			$("#tw1 .table :checkbox").prop("checked", false);
 			$("#n1").html("文件夹");
 			$('#g_button').css('display', 'block');
 			$('.equip_1').css('display', 'none');
+			$('.Qdh').find('li').nextAll('li').show();
 		}
 	});
-	$(".chk_2").click(function() {
-		if(this.checked) {
-			$("#table2 :checkbox").prop("checked", true);
-			$("#n2").html("已选中" + $("#table2 tr").length + "个文件/文件夹");
-			$('#g_button').css('display', 'none');
-			$('.equip_1').css('display', 'block');
-		} else {
-			$("#table2 :checkbox").prop("checked", false);
-			$("#n2").html("文件夹");
-			$('#g_button').css('display', 'block');
-			$('.equip_1').css('display', 'none');
-		}
+	$('table').on('click','.chk_2',function() {
+		 var num=$('#mytbody input:checked').length;
+		 if(num>0&&num<$('#mytbody input:checkbox').length){
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('span').html(msg);
+			 $('#g_button').css('display', 'none');
+			 $('.equip_1').css('display', 'block');
+			 $('.Qdh').find('li').nextAll('li').hide(); 
+		 }else if(num==$('#mytbody input:checkbox').length){
+			 $('.chk_1').prop('checked',true);
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('span').html(msg);					 					 
+		 }else{
+			 $('.chk_1').attr('checked',false);
+			 $('.Qdh').find('span').html('文件夹');
+			 $('.equip_1').css('display', 'none');
+			 $('.Qdh').find('li').nextAll('li').show();
+		 }		
 	});
+	/*删除功能*/
+	$('#f3').click(function() {
+		var btns= [];
+		var i=0;
+		$('#mytbody input:checked').each(function(){ 
+			 btns[i]=$(this).next().next('input').val();
+			 if($(this).next().next('input').hasClass('reid')){	
+				 alert('文件夹id:'+btns[i++]);
+			 }else{
+				 alert('文件id:'+btns[i++]);
+			 }
+			 
+		})
+	})
 	$("#tabs a").click(function() {
 		$(this).tab('show');
 	});
@@ -104,11 +127,11 @@ $(document).ready(function() {
 					$('.donetimeline').css('display', 'none');
 				}
 			});
-			$('table td').mouseenter(function() {
-				$(this).children('#more').css('display', 'inline-block');
+			$('table').on('mouseenter','td',function() {
+				$(this).children('.more').css('display', 'inline-block');
 			});
-			$('table td').mouseleave(function() {
-				$(this).children('#more').css('display', 'none');
+			$('table').on('mouseleave','td',function() {
+				$(this).children('.more').css('display', 'none');
 			});
 			var i = true;
 			$('.fa-window-maximize').click(function() {
@@ -120,34 +143,44 @@ $(document).ready(function() {
 					i = true;
 				}
 			});
+			$('#mydownload').click(function(){
+				$('#msg').show();
+			});
 			$('.fa-times').click(function() {
 				$(this).parent('div').hide();
 			});
 			
 			$("#newonefile").click(function() {
+					
 					//创建tr节点
 					var $tr = $("<tr></tr>");
 					//遍历获取输入的内容
-					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><i class='fa fa-folder'></i><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
+					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
 					//将内容循环添加到创建好的TD中
 					$td.appendTo($tr);
-					$tr.appendTo("#tw1 table");
+					$tr.prependTo("#tw1 .table tbody");
+					$('.nullfile').hide();
 					//执行删除操作
 					$(".dele").click(function() {
 						$(this).parent().parent().remove();
 					});
 					$('.sure').click(function() {
-						$(this).prev().val();
-						$('.filename').css('border', 'none');
-						$('.filename').attr('readonly','true');
-						var d = new Date();
-						var month = d.getMonth() + 1;
-						var day = d.getDate();
-						var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-						var output = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day + ' ' + time;
-						$(this).parent('td').siblings('td:last').append(output);
-						$(this).next('i').remove();
-						$(this).remove();
+					    var name=$(this).prev().val();
+						$(this).parent().parent().remove();
+						/*保存文件夹*/
+						$.ajax({
+							url : "${pageContext.request.contextPath}/bulidcate",
+							dataType : 'json',
+							data:{categorieName:name,categorieReid:categorie},
+							async: false,                   
+							success : function(data) {
+								/*alert(data);*/
+							},
+							error : function() {
+								alert("新建文件夹失败！");
+							}
+						});		
+						showchild(categorie,recycle);
 					});
 				});
 });

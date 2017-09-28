@@ -1,5 +1,6 @@
 package com.july.networkdisk.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.json.JSONWriter;
-import org.springframework.http.server.ServletServerHttpRequest;
 
 import com.july.networkdisk.service.IFriendService;
-import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.vo.Friend;
 import com.july.networkdisk.vo.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -24,22 +22,28 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class FriendAction extends ActionSupport{
-	
 	private Friend friend;
 	private User user;
+	private String name;
 	private IFriendService iFriendService;
-    /**
+	private Map<String, Object> map;  //用来接收查询的数据和返回到前台
+	private String result;
+	
+    public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
+	/**
      * 查找好友信息
      * @return
      * @throws Exception
      */
 	public String getAll()throws Exception{
-		HttpServletRequest request =ServletActionContext.getRequest();
-		String uid=request.getParameter("uid");
-    	List<User> friends = this.iFriendService.getAll(uid);
-    	ActionContext actionContext = ActionContext.getContext();
-    	Map<String, Object> session = actionContext.getSession();
-    	session.put("friends", friends);
+		map = new HashMap<String, Object>();
+		List<User> i = this.iFriendService.getAll(user.getId());
+		map.put("listfriends", i);
     	return SUCCESS;
     }
 	/**
@@ -48,16 +52,11 @@ public class FriendAction extends ActionSupport{
      * @throws Exception
      */
 	
-	public void findafriend() throws Exception{
-		HttpServletRequest request =ServletActionContext.getRequest();
-		HttpServletResponse resp=ServletActionContext.getResponse();
-		String friendname= request.getParameter("friendname");
-		List<User> thefriend = this.iFriendService.findOne(friendname);
-    	ActionContext actionContext = ActionContext.getContext();
-    	Map<String, Object> session = actionContext.getSession();
-    	session.put("thefriend", thefriend);
-    	resp.getWriter().print("true");
-		/*return SUCCESS;		*/
+	public String findafriend() throws Exception{
+		map = new HashMap<String, Object>();	
+		List<User> list = this.iFriendService.findOne(user.getName());
+		map.put("friend", list);	
+		return "json";
 	}
 
 	/**
@@ -66,14 +65,8 @@ public class FriendAction extends ActionSupport{
      * @throws Exception
      */
 	public void addfriend() throws Exception{
-		HttpServletRequest request =ServletActionContext.getRequest();
-		HttpServletResponse resp=ServletActionContext.getResponse();		
-		String friendId= request.getParameter("friendId");
-		String userId=request.getParameter("userId");
-		friend.setUid(userId);
-		friend.setFid(friendId);
-		int i = this.iFriendService.insertfriend(friend);
-    	resp.getWriter().print("true");		
+		
+		int i = this.iFriendService.insertfriend(friend);	
 	}
 	public Friend getFriend() {
 		return friend;
@@ -97,6 +90,18 @@ public class FriendAction extends ActionSupport{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Map<String, Object> getMap() {
+		return map;
+	}
+	public void setMap(Map<String, Object> map) {
+		this.map = map;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

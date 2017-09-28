@@ -270,16 +270,18 @@
 	</div>
 
 
+
 <script type="text/javascript">
-$(document).ready(function() { 
-	
-		
-
-
-
-
-
-</script>
+			function ok() {
+				var pass=$("#u_pwd1").val();
+				var repass=$("#u_pwd2").val();
+				if(pass!="")
+					{
+					alert("修改成功,请重新登录！");
+					
+					}		
+}
+				
 <script>	
 
        /*修改头像*/
@@ -307,7 +309,14 @@ $(document).ready(function() {
 </script>			
 
 	<script>
-		/*两次密码是否相同*/
+		/*退出确认*/
+		function logout()
+		{
+			if(confirm("确认退出？"))
+				{
+				window.location.href="logout";
+				}
+		}
 	
 		/*修改头像*/
 		$('.change-head').hover(function(e) {

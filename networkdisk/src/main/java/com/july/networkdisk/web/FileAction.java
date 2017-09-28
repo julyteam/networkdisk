@@ -3,9 +3,6 @@ package com.july.networkdisk.web;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,9 +20,9 @@ public class FileAction extends ActionSupport {
 	private File file; // 上传的文件，对应表单的file的name属性
 	private String fileFileName; // 文件名，xxxxFileName，xxx对应表单file的name属性
 	private String fileContentType; // 文件类型，xxxContentType，xxx对应表单file的name属性
-	private String categorie_id;	//文件上传在那个目录
 	private String netFileID; // 得到下载文件的ID
-	
+	private String categorie_id;
+
 	private IFileService fileService;
 	private User user = CommonUtil.getSessionUser(); // 获取session中的User
 
@@ -76,6 +73,8 @@ public class FileAction extends ActionSupport {
 		this.fileContentType = fileContentType;
 	}
 
+	
+
 	/**
 	 * 文件上传
 	 * 
@@ -91,33 +90,26 @@ public class FileAction extends ActionSupport {
 		if (file == null) {
 			jsonString = "上传文件失败！";
 		} else {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("file_name", fileFileName);
-			map.put("file_catid",categorie_id );
-			map.put("file_deletesign", 0);
-			List<NetFile> list=fileService.findAllByUser(user.getId(), map);
-			if (list != null && list.size() == 0) {
-				NetFile netFile = new NetFile();
-				if(!"".equals(categorie_id)){
-					netFile.setCatid(categorie_id);
-				}
-				try {
-					
-					fileService.fileUpLoad(netFile, file, fileFileName,fileContentType, user);
-					
-				} catch (Exception e) {
-					jsonString = "上传文件失败！";
-					out.println(jsonString);
-					out.flush();
-					out.close();
-				}
-				jsonString = "上传文件成功！";
+			NetFile netFile = new NetFile();
+			if("null".equals(categorie_id))
+			{
 				
+			}else {
+				netFile.setCatid(categorie_id);				
 			}
-			else {
-				jsonString = "文件夹中已经有相同文件！";
+			try {
+				
+				fileService.fileUpLoad(netFile, file, fileFileName,
+						fileContentType, user);
+
+			} catch (Exception e) {
+				jsonString = "上传文件失败！";
+				out.println(jsonString);
+				out.flush();
+				out.close();
 			}
 
+			jsonString = "上传文件成功！";
 		}
 		out.println(jsonString);
 		out.flush();

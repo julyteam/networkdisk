@@ -1,6 +1,7 @@
 package com.july.networkdisk.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -25,7 +26,6 @@ public class FriendDao extends BaseDao{
 		sqlSession.close();
 		return list;
 	}
-	
 	/**
 	 * @author Administrator
 	 * 根据input框中输入的昵称或者手机号查找好友

@@ -17,18 +17,26 @@ public class NoticeServiceImpl implements INoticeService {
 	public void setNoticeDao(NoticeDao noticeDao) {
 		this.noticeDao = noticeDao;
 	}
-
-	
-	
+	/*插入消息公告*/
 	public void save(Notice notice) {
 		noticeDao.insert(notice);
-
 	}
-	
+	/*查找消息公告*/
+	public List<Notice> getAll(){
+		List<Notice> list = noticeDao.getAll();
+		return list;
+	}
+	/*删除消息公告*/
 	public void delete(int id) {
 		noticeDao.delete(id);
 	}
-
+	public int sum(){
+	   return	noticeDao.sum();
+	}
+    /*分页  */
+	public List<Notice> page(int beginRow,int pageSize){
+		return noticeDao.page(beginRow, pageSize);
+	}
 	public void update(Notice p0) {
 		// TODO Auto-generated method stub
 

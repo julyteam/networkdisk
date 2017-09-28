@@ -70,7 +70,7 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
     	in.close();
     	user.setPhoto(photo);
     	this.iUserService.save(user);
-    	this.setMassger("注册成功！");
+    	this.setMassger("注册成功，请重新登录！");
     	return SUCCESS;
     }
 	

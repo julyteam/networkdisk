@@ -1,33 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>分享界面</title>
-	<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
+		<title>分享界面</title>
+		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
 		<link href="/networkdisk/css/share.css" rel="stylesheet" />
-		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
-		
+		<script src="/networkdisk/manager/js/jquery-3.2.1.min.js"></script>		
 		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
+		<script src="/networkdisk/js/index.js"></script>
 </head>
 <body>
 	<div id="in-nav">
-			<div class="container">
-				<div class="row">
-					<div class="logo">
-						<a id="logo" href="index.html">
-							<img src="img/LOGO.png" />
-							<a class="logotitle" href="">July</a>
-						</a>
-					</div>
+			<div class="logo">
+				<a id="logo" href="/networkdisk/index.jsp">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
+			<div class="container1">
+				<div class="row1">
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
-							<li class="active">
-								<a href="#">网盘</a>
-							</li>
 							<li>
+								<a href="index.jsp">网盘</a>
+							</li>
+							<li class="active">
 								<a href="#">分享</a>
 							</li>
 							<li>
@@ -39,54 +39,87 @@
 						<ul class="right">
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
-									<div class="admin" style="width: 220px; height: 30px;">
-										<img src="img/pic3.png" width="30px" style="border-radius: 30px;" />
-										<a href="#" style="display: inline;">admin12345123124&nbsp;<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" /></a>
-										<em style="display: inline-block;"><img src="img/downchoose.png" class="c"/></em>
+									<div class="admin">
+										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<a href="#" style="display: inline-block;height:50px;">
+											<div class="username">${user.name }</div>
+											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
+										</a>
+										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;"/></em>
 									</div>
 									<div class="user">
-										<span id="triangle-up">								
-									</span>
-										<div class="userpan">
-											<div class="userpan_2">
-												<div class="u1">
-													<a href="#">
-														<img src="img/pic3.png" class="userpic" />
-														<a href="">admin12345123124</a>
-														<img src="img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
-													</a>
-												</div>
+									<span id="triangle-up"> </span>
+									<div class="userpan">
+										<div class="userpan_2">
+											<div class="u1">
+												<a href="#"> 
+												<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+												</a> 
+												<a href="">${user.name }</a> 
+												<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
 											</div>
-											<div class="userpan_3">
-												<span>
-												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
-												<div class="svip">开通超级会员</div>
-											</span>
-											</div>
-											<div class="userpan_4">
-												<p href="">个人资料</p>
-												<p href="">帮助中心</p>
-												<p href="">设置</p>
-												<p href="">退出</p>
-											</div>
+										</div>
+										<div class="userpan_3">
+											<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
+											<div class="svip">开通超级会员</div>
+										</div>
+										<div class="userpan_4">
+											<p>
+												<a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a>
+											</p>
+											<p>
+												<a href=""><span>帮助中心</span></a>
+											</p>
+											<p>
+												<a href=""><span>设置</span></a>
+											</p>
+											<p>
+												<a href="logout"><span>退出</span></a>
+											</p>
 										</div>
 									</div>
 								</div>
-							</li>
-							<li style="width: 100px;">
-								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
-							</li>
-							<li>
-								<a href="#"><img src="img/notice.png" /></a>
-							</li>
-							<li>
-								<a href="#"><img src="img/serve.png" /></a>
-							</li>
-						</ul>
-					</div>
+
+							</div>
+							<div class="user">
+								<span id="triangle-up"> </span>
+								<div class="userpan">
+									<div class="userpan_2">
+										<div class="u1">
+											<img src="/networkdisk/img/pic3.png" class="userpic" /> <a
+												href="">admin</a> <img src="/networkdisk/img/VIP1.png"
+												style="display: inline; margin-bottom: 5px;" />
+										</div>
+									</div>
+									<div class="userpan_3">
+										<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
+										<div class="svip">开通超级会员</div>
+									</div>
+									<div class="userpan_4">
+										<p>
+											<a href=""><span>个人资料</span></a>
+										</p>
+										<p>
+											<a href=""><span>帮助中心</span></a>
+										</p>
+										<p>
+											<a href=""><span>设置</span></a>
+										</p>
+										<p>
+											<a href=""><span>退出</span></a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
+						<li><a href="#"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
+					</ul>
+				</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 		<div class="share_all">
 			<div class="share_content">
 				<div class="share_content_left">
@@ -117,34 +150,18 @@
 								</table>
 						</div>
 						<div class="tab-pane fade" id="user_content">
-							<a href="new_friend.jsp" target="share_iframe">
-								<table class="table_new_friend">
+							<a href="friend_info.jsp" target="share_iframe"></a>
+							<table class="user_table" align="left">
+   									<c:forEach items="${map.listfriends }" var="friend">							
 									<tr>
-										<td rowspan="2" class="friend_user"><img src="/networkdisk/img/new_user.png" /></td>
-										<td class="friend_new">新好友</td>
-										<td class="friend_time"><font size="1">09-16 10:47</font></td>
+										<td><img src="${pageContext.request.contextPath}/showphoto?id=${friend.id}" width="50px" /></td>
+										<td>${friend.name}</td>
 									</tr>
-									<tr>
-										<td class="new_friend_name"><font size="1">慕名玉兰加你为好友</font></td>
-										<td></td>
-									</tr>
-								</table>
-							</a>
-
-							<a href="friend_info.jsp" target="share_iframe">
-								<table class="user_table">
-									<tr>
-										<td class="session_user" rowspan="2"><img src="img/pic3.png" /></td>
-										<td rowspan="2" class="user_name">慕名玉兰</td>
-									</tr>
-								</table>
-							</a>
-
-							
+									
+								</c:forEach>
+							</table>							
 						</div>
-
 					</div>
-
 					<div class="session_bottom">
 						<ul>
 							<li><a href="#">创建群组</a></li>
@@ -161,15 +178,18 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
 									</button>
-									<h4 class="modal-title" id="myModalLabel">
+									<h5 class="modal-title" id="myModalLabel">
 										添加好友
-									</h4>
+									</h5>
 								</div>
 								<div class="modal-body">
 									<div class="modal-body_item">
-										<p><span>根据百度账号添加好友</span></p>
-										<input type="text" placeholder="用户名/邮箱" />
-										<button>搜索</button>
+										<p><span>根据July账号添加好友</span></p>
+										<form>
+										<input type="text" placeholder="  用户名/邮箱" 
+										onfocus="this.placeholder=''" onblur="this.placeholder='  用户名/邮箱'" name="name" class="b1" style="width:410px;border-radius:0px;height:30px"/>
+										<a class="bn">搜索</a>
+										</form>
 									</div>
 									<div class="search_result" style="display: none;">
 										<span>搜索结果：</span>
@@ -178,22 +198,14 @@
 										</div>
 									</div>
 								</div>
+								<div class="friends">
+								</div>
 								<div class="modal-footer">
-
-									<button type="button" data-dismiss="modal" class="btn_add">
-										加好友
-									</button>
-
+									<a class="bn1">加为好友</a>								
 								</div>
 							</div>
 						</div>
 					</div>
-					<script>
-						$(function() {
-							$('#myModal').modal('hide')
-						});
-					</script>
-
 				</div>
 				<div class="share_content_right">
 					<iframe name="share_iframe" src="share_default.jsp" scrolling="auto" height="590px" width="710" border="0" frameborder="no"></iframe>
@@ -202,57 +214,35 @@
 		</div>
 	</body>
 	<script>
-		$(document).ready(function() {
-			//子导航展开收缩
-			$(".admin").mouseenter(function() {
-				$(this).find(".c").removeClass("lbaxztop2").addClass("lbaxztop");
-				$(this).next(".user").toggle().parents(".sev").siblings().find(".user").hide();
-			});
-			/*鼠标离开下拉框关闭*/
-			$(".sev").mouseleave(function() {
-				$(".user").hide();
-				$(this).children(".admin").find(".c").addClass("lbaxztop2");
-			});
-			$(".file").mouseenter(function() {
-				$(this).next(".upload").toggle().parents(".upfile").siblings().find(".upload").hide();
-			});
-			$(".upfile").mouseleave(function() {
-				$(".upload").hide();
-			});
-			$("#g_button").mouseenter(function() {
-				$(this).next(".equi").toggle().parents(".equip").siblings().find(".equi").hide();
-			});
-			$(".equip").mouseleave(function() {
-				$(".equi").hide();
-			});
-			$(".list").mouseenter(function() {
-				$(this).next(".listpal").toggle().parents(".ch").siblings().find(".listpal").hide();
-			});
-			$(".lp").mouseleave(function() {
-				$(".listpal").hide();
-			});
-			$('.listpal li').click(function() {
-				$(this).siblings().find('.active').removeClass();
-				$(this).children('img').addClass("active");
-			});
-			var toggle = true;
-			$(".large").click(function() {
-				if (toggle) {
-					$(this).children("img").attr("src", "img/row.png");
-					toggle = false;
-				} else {
-					$(this).children("img").attr("src", "img/other.png");
-					toggle = true;
-				}
-			});
+		$(".bn").click(function(){
+			var name = $(".b1").val();		
+		  	$.ajax({
+				type : "POST", //设置请求发送的方式  
+				url : "findOne", //提交的地址  		   
+				data : {'user.name':name},
+				dataType: 'json',
+				beforeSend: function(){}, 
+				success: function(data) {//提交成功的时候执行的函数  
+					$(".friends").show();
+					$('.friends').append("<img src='${pageContext.request.contextPath}/showphoto?id="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据						        				       					  	
+			}  
+		});	
 		});
+	 	$(function(){
+			$('#myModal').modal('hide')
+		}); 
+	 	$('.close').click(function(){
+	 		$(".friends").html("");
+	 		$(".b1").val("");
+	 		$(".friends").hide();
+	 	})
+		function logout()
+		{
+			if(confirm("确定退出？"))
+				{
+				  window.location.href="logout";
+				}
+		}
 	</script>
-
 </body>
-<<<<<<< HEAD
-
 </html>
-=======
-
-</html>
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git

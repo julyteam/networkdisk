@@ -78,7 +78,18 @@ public class CategorieDao extends BaseDao {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * 显示回收站中的目录
+	 * @param cat_uid
+	 * @return
+	 */
+	public List<Categorie> showRecycleCate(String cat_uid){
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<Categorie> list = sqlSession.selectList("cateSpace.showRecycleCate",cat_uid);
+		sqlSession.close();
+		return list;
+	}
 
 	
 	/**

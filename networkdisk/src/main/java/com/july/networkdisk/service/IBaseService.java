@@ -1,6 +1,6 @@
 package com.july.networkdisk.service;
 
-
+import java.util.*;
 
 public interface IBaseService<T>
 {

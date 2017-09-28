@@ -1,5 +1,8 @@
 package com.july.networkdisk.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -31,5 +34,13 @@ public class TestCateService {
 	@Test
 	public void testDeleteCate(){
 		cateService.deleteCate("1");
+	}
+	
+	
+	@Test
+	public void showReclydeCate(){
+	   String str="c18dd34e-ff8d-4da4-af12-4229a466c6a5";
+		Map<String, Object> map = cateService.showRecycleCate(str);
+		System.out.println(map.size());
 	}
 }

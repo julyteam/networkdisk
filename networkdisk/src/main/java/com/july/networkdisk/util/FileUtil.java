@@ -26,11 +26,11 @@ public class FileUtil {
 		netFile.setUid(user.getId());
 		netFile.setName(fileName); // 截取文件名
 	
-		String[] str = fileName.split("\\.");
-		if(str[1] == null){
+		String str = fileName.substring(fileName.lastIndexOf(".")+1);
+		if(str == null){
 			netFile.setType((fileContentType.split("/"))[0]); // 截取文件类型
 		}
-		netFile.setType(str[1]);
+		netFile.setType(str);
 		netFile.setSize(file.length());
 		OutputStream os = null;
 		InputStream is = null;

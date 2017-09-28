@@ -58,6 +58,7 @@
 				and file_deletesign =#{file_deletesign}
 			</if>
 		</where>
+			ORDER BY file_addtime DESC
 	</select>
 	
 	<!-- 根据文件夹ID查找文件ID -->
@@ -74,6 +75,13 @@
 				and file_deletesign =#{file_deletesign}
 			</if>
 		</where>
+	</select>
+	
+	<!-- 查找已经在回收站的文件-->
+	<select id="showRecycleFile" parameterType="String" resultMap="fileMap">
+		select * from
+		file where file_uid = #{file_uid}
+		and file_deletesign = 1
 	</select>
 	
 	<!-- 查找一个文件所有信息 区分是否已经回收-->

@@ -1,6 +1,7 @@
 package com.july.networkdisk.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.july.networkdisk.dao.FriendDao;
 import com.july.networkdisk.service.IFriendService;
@@ -38,6 +39,7 @@ public class FriendServiceImpl implements IFriendService{
 	/*好友列表*/
 	public List<User> getAll(String uid) {
 		// TODO Auto-generated method stub
+		
 		return friendDao.findAll(uid);
 	}
 	/*查询好友*/
@@ -57,7 +59,4 @@ public class FriendServiceImpl implements IFriendService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-
 }
