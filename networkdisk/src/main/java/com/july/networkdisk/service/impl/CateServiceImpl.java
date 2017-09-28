@@ -1,5 +1,6 @@
 package com.july.networkdisk.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import com.july.networkdisk.dao.CategorieDao;
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.vo.Categorie;
+import com.july.networkdisk.vo.NetFile;
 
 
 public class CateServiceImpl implements ICateService{
@@ -118,6 +120,43 @@ public class CateServiceImpl implements ICateService{
 		}
 		cateDao.deleteOne(cat_id);
 		return true;
+	}
+	
+	/**
+	 * 显示用户回收站中的文件和文件夹
+	 * @param cat_uid
+	 * @return
+	 */
+	public Map<String, Object> showRecycleCate(String cat_uid) {
+		List<Categorie> listCategories = new ArrayList<Categorie>();
+		List<Categorie> listCate= cateDao.showRecycleCate(cat_uid);
+		for (Categorie categorie : listCate) {
+			if(categorie.getReid() == null){
+				listCategories.add(categorie);
+			}else {
+				Categorie cate =cateDao.get(categorie.getReid(),0);
+				if(cate!=null){
+					listCategories.add(categorie);
+				}
+			}
+		}
+		
+		List<NetFile> listFiles = new ArrayList<NetFile>();
+		List<NetFile> list =iFileService.showRecycleFile(cat_uid);
+		for (NetFile file : list) {
+			if(file.getCatid() == null){
+				listFiles.add(file);
+			}else {
+				Categorie cate =cateDao.get(file.getCatid(),0);
+				if(cate != null){
+					listFiles.add(file);
+				}
+			}
+		}
+		HashMap<String, Object> recylceMap = new HashMap<String, Object>();
+		recylceMap.put("listCategories", listCategories);
+		recylceMap.put("listFiles", listFiles);
+		return recylceMap;
 	}
 	
 	public Categorie get(String p0) {

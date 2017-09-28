@@ -2,8 +2,6 @@ package com.july.networkdisk.service.impl;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +118,14 @@ public class FileServiceImpl implements IFileService {
 		fileDao.deleteBatch(netFile_ids);
 		return true;
 	}
-
+	/**
+	 * 显示在回收站中的文件
+	 */
+	public List<NetFile> showRecycleFile(String file_uid) {
+		List<NetFile> listFiles = fileDao.showRecycleFile(file_uid);
+		return listFiles;
+	}
+	
 	/**
 	 * 移动文件
 	 */

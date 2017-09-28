@@ -150,6 +150,42 @@
 				<param name="root">map</param>
 			</result>
 		</action>
+		
+		
+		<!-- 根据用户id显示回收站中的文件和文件夹 -->
+		<action name="showRecycle" class="fileAndCateAction" method="showRecycle">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
+		
+		<!-- 还原文件 -->
+		<action name="restoreFile" class="fileAndCateAction" method="restoreFile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 还原文件和文件夹 -->
+		<action name="restoreCateandfile" class="fileAndCateAction" method="restoreCateandfile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 删除文件 -->
+		<action name="deleteFile" class="fileAndCateAction" method="deleteFile">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 清空回收站 -->
+		<action name="emptyRecycle" class="fileAndCateAction" method="emptyRecycle">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 
 	</package>
 	
@@ -163,6 +199,17 @@
 		</action>
 		
 		<action name="layCateRecycle" class="cateAction" method="layCateRecycle">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
+		</action>
+		
+		<action name="restoreCate" class="cateAction" method="restoreCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>	
+		</action>
+		<action name="deleteCate" class="cateAction" method="deleteCate">
 			<result name="json" type="json">
 				<param name="root">message</param>
 			</result>	

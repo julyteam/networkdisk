@@ -34,6 +34,13 @@
 				and cat_state =#{cat_state}
 			</if>
 		</where>
+		ORDER BY cat_addtime DESC
+	</select>
+	
+	<!-- 显示回收站的文件夹 -->
+	<select id="showRecycleCate" parameterType="string" resultMap="categorieMap">
+		select * from
+		categorie where cat_uid = #{cat_uid} and cat_state = 1;
 	</select>
 	
 	<!-- 根据父级文件夹的id查找子级文件夹id -->

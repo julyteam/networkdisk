@@ -31,7 +31,7 @@ public class FileDao extends BaseDao {
 	}
 	
 	/**
-	 * 根据文件id查询所有文件的id
+	 * 根据文件夹id查询所有文件的id
 	 * 
 	 * @return
 	 */
@@ -41,6 +41,19 @@ public class FileDao extends BaseDao {
 		sqlSession.close();
 		return list;
 	}
+	
+	/**
+	 * 显示回收站中的文件
+	 * 
+	 * @return
+	 */
+	public List<NetFile> showRecycleFile(String file_uid) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<NetFile> list = sqlSession.selectList("fileSpace.showRecycleFile",file_uid);
+		sqlSession.close();
+		return list;
+	}
+	
 	/**
 	 * 根据ID查询一个文件，区分是否有deleteSign ，0 ，1；
 	 * @return

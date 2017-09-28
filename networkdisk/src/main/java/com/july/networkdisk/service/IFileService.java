@@ -44,4 +44,10 @@ public interface IFileService extends IBaseService<NetFile> {
 	 * @return
 	 */
 	boolean moveFile(String netFile_id,String cat_id);
+	/**
+	 * 显示在回收张中的文件
+	 * @param file_uid
+	 * @return
+	 */
+	List<NetFile> showRecycleFile(String file_uid);
 }

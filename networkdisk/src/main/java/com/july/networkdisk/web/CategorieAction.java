@@ -62,6 +62,10 @@ public class CategorieAction extends ActionSupport {
 		return "json";
 	}
 	
+	/**
+	 * 把文件夹放入回收站
+	 * @return
+	 */
 	public String layCateRecycle(){
 		if(categorieID != null){
 			iCateService.recyleCate(categorieID, 0);
@@ -69,6 +73,27 @@ public class CategorieAction extends ActionSupport {
 		message="文件夹成功放入回收站";
 		return "json";
 	}
+	/**
+	 * 还原文件夹
+	 * @return
+	 */
+	public String restoreCate(){
+		if(categorieID != null){
+			iCateService.recyleCate(categorieID, 1);
+		}
+		message="文件夹成功放入回收站";
+		return "json";
+	}
 	
-	
+	/**
+	 * 删除文件夹
+	 * @return
+	 */
+	public String deleteCate(){
+		if(categorieID != null){
+			iCateService.deleteCate(categorieID);
+		}
+		message="文件夹成功删除";
+		return "json";
+	}
 }

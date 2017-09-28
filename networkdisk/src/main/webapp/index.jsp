@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
 <link href="/networkdisk/css/style.css" rel="stylesheet" />
+<link href="/networkdisk/css/component.css" rel="stylesheet" />
 <link href="/networkdisk/css/context.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -175,7 +176,7 @@
 								<a class="g_button" id="newonefile"><img
 									src="/networkdisk/img/newfile.png" style="margin-bottom: 3px;" />&nbsp;新建文件夹</a>
 								<a class="g_button" id="mydownload">
-								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的下载</a>
+								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的上传</a>
 								<div class="equip"
 									style="width: 105px; display: inline-block; position: relative;">
 									<a class="g_button g_1" id="g_button"><img
@@ -188,8 +189,8 @@
 								<div class="equip_1">
 									<ul class="equi_1">
 										<li id="f1"><img src="/networkdisk/img/share.png" style="margin-bottom:3px"/>分享</li>
-										<li><img src="/networkdisk/img/delete.png" style="margin-bottom:3px"/>删除</li>
-										<li>复制到</li>
+										<li id='f3'><img src="/networkdisk/img/delete.png" style="margin-bottom:3px"/>删除</li>
+										<li id='f4'>复制到</li>
 										<li id="f2">移动到</li>
 									</ul>
 								</div>
@@ -328,13 +329,36 @@
 				</div>
 			</div>
 		</div>
+		<div class="md-modal md-effect-10" id="modal-10" >
+    		<div class="md-content" style="height:310px;">
+     			<div class="dialog-header dialog-drag">
+					<span class="dialog-header-title">复制到 </span>
+				</div>
+      			<div class="dialog-tree">
+        			<div id="menuTree" class="menuTree"></div>        			
+      			</div>
+      			<div class="dialog-footer g-clearfix">
+      				<a class="g-button g-button-large cancel" href="javascript:void(0);" style="float: right;">
+      				<span class="g-button-right" style="padding-right: 50px;">
+      				<span class="text" style="width: auto;">取消</span>
+      				</span>
+      				</a>
+      				<a class="g-button g-button-blue-large" href="javascript:void(0);" style="float: right;">
+      				<span class="g-button-right" style="padding-right: 50px;">
+      				<span class="text" style="width: auto;">确定</span>
+      				</span>
+      				</a>
+      				<a class="g-button g-button-large" href="javascript:void(0);" style="float: left;">
+      				<span class="g-button-right"><em class="fa fa-plus-square-o" title="新建文件夹"></em>
+      				<span class="text" style="width: auto;">新建文件夹</span>
+      				</span>
+      				</a>
+      			</div>
+    		</div>
+  		</div>
 		<div id="msg">
-			<span style="float: left; font-size: 16px; padding-left: 10px;">上传完成</span>
+			<span style="float: left; font-size: 16px; padding-left: 10px;">我的上传</span>
 			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
-			<div class="warn">
-				有一个文件上传成功 <span class="fa fa-remove"
-					style="float: right; font-size: 16px; color: #F5F5F5; line-height: 40px; cursor: pointer;"></span>
-			</div>
 			<div class="upmagbox">
 				<div class="upload_header">
 					<div class="file_name">文件（夹）名</div>
@@ -390,7 +414,7 @@
 			$.ajax({
 				type : "post",
 				dataType : "json",
-				url : "${pageContext.request.contextPath}/showFileAndCate?Time="+new Date().getSeconds(),
+				url : "${pageContext.request.contextPath}/showFileAndCate?Time="+new Date().getTime(),
 				data : {
 					categorie_id : categorie_id,
 					recycleflag : recycleflag
@@ -432,9 +456,9 @@
 								+ "</span>"
 								+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
 								+ "<span class='menu' style='width: 96px;'>"
-								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
-								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
-								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
 								+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelecate' id='"+listCate[i].id+"' >删除</a>"
 								+ "</span></div></td>"
 								+ "<td>--</td>"
@@ -518,7 +542,7 @@
 								+ "<img src='"
 								+ type
 								+ "'width='28px' style='margin:0 5px 5px 10px;'>"
-								+ "<input id='listFileID' class='reid' type='text' style='display:none' value="
+								+ "<input id='listFileID' class='refileid' type='text' style='display:none' value="
 								+ listFile[i].id
 								+ ">"
 								+ "<input id='listFileID' class='rename' type='text' style='display:none' value="
@@ -534,9 +558,9 @@
 								+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
 								+ "</span>"
 								+ "<span class='menu' style='width: 96px;'>"
-								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu' href='javascript:void(0);'>重命名</a>"
-								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu' href='javascript:void(0);'>复制到</a>"
-								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu' href='javascript:void(0);'>移动到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
+								+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
 								+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelefile' id='"+listFile[i].id+"' >删除</a>"
 								+ "</span></div></td>" 
 								+ "<td>"
@@ -567,7 +591,7 @@
 			var cateid=$(this).attr("id");
 			layCateRecyle(cateid);
 		});
-		/*删除当前文件*/
+		/*删除当前文件到回收站*/
 		function layFileRecyle(fileID){
 			$.ajax({
 				url : "${pageContext.request.contextPath}/layFileRecyle?file_id="+fileID,
@@ -621,8 +645,8 @@
 		/* 文件下载 */
 		
 		 $('table').on('click','.fa-download',function(){
-		   var fileid =$(this).parent().parent('td').find('.reid').val();
-		   var filename =$(this).parent().parent('td').find('.rename').val();
+		  var fileid =$(this).parent().parent('td').find('.refileid').val();
+		  var filename =$(this).parent().parent('td').find('.rename').val();
 		  window.location.href="fileDownload?fileFileName="+filename+"&netFileID="+fileid;
 		});
 		
@@ -662,23 +686,29 @@
 		var time = 0;
 		function ajaxFileUpload() {
 			$("#myprogress").width(0);
+			$('#msg').css('bottom', '0px');
 			time = window.setInterval(progress, 100);
+			$('.up_status').html("上传中···");
 			$.ajaxFileUpload({
 						url : '${pageContext.request.contextPath}/fileupload?categorie_id='+ categorie,
 						secureuri : false,
-						fileElementId : 'upfile',//fileToUpload是input file 标签的id值  
+						fileElementId : 'upfile',//upfile是input file 标签的id值  
 						dataType : 'multipart/form-data',
 						success : function(data) {
-							$('.up_status').html("上传成功");
-							/* alert(data); */
-							$('.probox').hide();
 							//需要重新绑定事件
 							$("#upfile").change(function() {
 								var file = this.files[0];
 								july_fileReader(file);
 							});
 							//刷新页面
+							$('.up_status').html("上传成功");
+							 $('.probox').hide();
+							 $('#msg').css('bottom', '-300px');
 							showchild(categorie,recycle);
+						},
+						error : function() {
+							$('.up_status').html("上传失败");
+							 $('.probox').hide();
 						}
 
 					})
@@ -690,15 +720,10 @@
 				url : "${pageContext.request.contextPath}/progress",
 				dataType : 'json',
 				success : function(data) {
+					$('.probox').show();
 					$("#myprogress").width(data.rate + "%");
-					if(data.rate>0){
-						$('.probox').show();
-						$('.up_status').html("上传中···");
-					}
 					if (data.rate == 100) {
 						clearInterval(time);
-						/* $('.up_status').html("上传成功");
-						$('.probox').hide(); */
 					}
 				},
 				error : function() {
@@ -714,6 +739,141 @@
 		$('table').on('mouseleave','.menu',function(){
 			$('.menu').css('display','none');
 		});
+		$('table').on('click','.md-copy',function() {
+			$('.md-effect-10').addClass('md-show');
+		});
+		$('.cancel').click(function(){
+			$('.md-effect-10').removeClass('md-show');
+		});
+		/* 重命名 */
+		/* $('table').on('click','.md-ren',function() {
+			var zz="<i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i>";
+			$(this).parents('tr').find('td').nextAll().hide();
+			$(this).parents('tr').find('a').hide();		
+			$(this).parents('tr').find('.rename').show();
+			$(this).parents('tr').find('.rename').after(zz);
+			$(this).parents('.more').remove();
+			$(".dele").click(function() {
+				$(this).parents('tr').find('.rename').hide();
+				$(this).parents('tr').find('i').remove();
+				$(this).parents('tr').find('a').show();				
+			});
+			$('.sure').click(function() {
+				var newname=$(this).prev().val();
+				alert($(this).parents('tr').children("a:eq(0)").prev().val());
+				alert($(this).parents('tr').find('.rename').val());
+				$(this).parents('tr').find('.rename').hide();
+				$(this).parents('tr').children("a:eq(0)").html(newname).show();
+				$('.rename').css('border', 'none');
+				$('.rename').attr('readonly','true');
+				$(this).parents('tr').find('i').remove();
+			});
+		}); */
+
 	</script>
+	
+	<!-- 复制model的树形结构 -->
+	<script type="text/javascript">
+	var json = [
+    	{
+        "name": "1",
+        "userLevel":"全部文件",
+        "list": [
+            {
+            	//显示名称
+                "name": "2",
+                //跳转名称
+                "url" :"url_herf",
+                //用户等级
+                "userLevel":"二级",
+                //下级
+                "list": [
+                    {
+                        "name": "3",
+                        "userLevel":"三级",
+                        "list": [
+                                   {
+                                       "name": "4",
+                                       "userLevel":"四级"
+                                   }
+                                 ]
+                    }
+                ]
+            },
+            {
+            	//显示名称
+                "name": "2",
+                //跳转名称
+                "url" :"url_herf",
+                //用户等级
+                "userLevel":"二级",
+                //下级
+                "list": [
+                    {
+                        "name": "3",
+                        "userLevel":"三级",
+                        "list": [
+                                   {
+                                       "name": "4",
+                                       "userLevel":"四级"
+                                   }
+                                 ]
+                    }
+                ]
+            }
+        ]
+    }
+]
+/*递归实现获取无级树数据并生成DOM结构*/
+	var str = "";
+	var forTree = function(o){
+	 	for(var i=0;i<o.length;i++){
+	   		 var urlstr = "";
+			 try{
+	 				if(typeof o[i]["url"] == "undefined"){
+			   	   		urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["userLevel"]+"</span><input value='"+ o[i]["name"] +"' type='text' style='display:none'><ul>";
+	 				}else{
+	 					urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["userLevel"]+"</span><input value='"+ o[i]["name"] +"' type='text' style='display:none'><ul>"; 
+	 				}
+	 			str += urlstr;
+	 			if(o[i]["list"] != null){
+	 				forTree(o[i]["list"]);
+	 			}
+	   		 str += "</ul></div>";
+	 		}catch(e){}
+	 }
+	 return str;
+	}
+	/*添加无级树*/
+	document.getElementById("menuTree").innerHTML = forTree(json);
+
+	$(".treename").click(function(){
+		alert($(this).next('input[type=text]').val());
+	})
+	/*树形菜单*/
+	var menuTree = function(){
+	 //给有子对象的元素加
+		 $("#menuTree ul").each(function(index, element) {
+	 		var ulContent = $(element).html();
+	 		var spanContent = $(element).siblings("span").html();
+	 		if(ulContent){
+				 $(element).siblings("span").html(spanContent) 
+	 		}
+		 });
+
+		 $("#menuTree").find("div span").click(function(){
+		 	 var ul = $(this).siblings("ul");
+			 var spanStr = $(this).html();
+		 	 var spanContent = spanStr.substr(3,spanStr.length);
+			 if(ul.find("div").html() != null){
+				 if(ul.css("display") == "none"){
+					 ul.show(300);
+		 		 }else{
+		 			 ul.hide(300);
+		 		 }
+		 	}
+		 })
+	}()	
+</script>
 </body>
 </html>

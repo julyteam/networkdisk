@@ -17,6 +17,10 @@ body {
 	margin: 0px;
 	height: 100%;
 	overflow: hidden;
+	-webkit-user-select:none; 
+	-moz-user-select:none; 
+	-ms-user-select:none; 
+	user-select:none;
 }
 
 body p {
@@ -817,6 +821,11 @@ img.userpic {
 .sharebox div:hover{
 	background: #F5F5F5;
 }
+.listshare a{
+	cursor:pointer;
+	text-decoration: none;
+	color:#777;
+}
 .chk { 
     display: none; 
 } 
@@ -845,19 +854,39 @@ img.userpic {
 	width: 45%;
 }
 .fufH{
-	width: 9%;
-	margin-left:-10px;
-
+	width: 15%;
 }
 .fufHs{
 	width:19%;
-	margin-left:-10px;
 }
 .listshare{
 	padding-left: 10px;
 }
 .listshare:hover{
 	background: #F5F5F5;
+}
+.listshare i{
+	display:none;
+	position:relative;
+	font-size:18px;
+	color:#0080ff;
+	margin:13px 5px 0 5px;
+	float:right;
+}	
+.name .recbtn{
+	display:none;
+	height:30px;
+	width:70px;
+	border: 1px solid #c0d9fe;
+    border-radius: 4px;
+    color: #3b8cff;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    cursor:pointer;
+}
+.name .recbtn i{
+	margin-right:5px;
 }
 #tw1 tr i{
 	color: #A9A9A9;
@@ -1024,6 +1053,36 @@ img.userpic {
 .dropdown-menu li a:hover{
 	background: #269ABC;
 	color: #FFFFFF;
+}
+.recyclebin-empty {
+	display:none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -175px 0 0 -176px;
+}
+.recyclebin-empty .img {
+    display: inline-block;
+    background: url(/networkdisk/img/emptypic.png) center no-repeat;
+    margin-left:100px;
+    width: 130px;
+    height: 160px;
+}
+.recyclebin-empty .empty-word {
+    color: #424e67;
+    text-align: center;
+    font-size: 14px;
+}
+.recyclebin-empty .text {
+    font-size: 14px;
+    line-height: 25px;
+    margin-top: 30px;
+    color: #8e99b3;
+    text-align: center;
+}
+.recyclebin-empty .text a {
+    cursor: pointer;
+    color: #3b8cff;
 }
 
 /*接收文件界面*/

@@ -38,32 +38,55 @@ $(document).ready(function() {
 			toggle = true;
 		}
 	});
+	/*全选反选*/
 	$(".chk_1").click(function() {
 		if(this.checked) {
 			$("#tw1 .table :checkbox").prop("checked", true);
 			$("#n1").html("已选中" + $("#tw1 .table tr").length + "个文件/文件夹");
 			$('#g_button').css('display', 'none');
 			$('.equip_1').css('display', 'block');
+			$('.Qdh').find('li').nextAll('li').hide();
 		} else {
 			$("#tw1 .table :checkbox").prop("checked", false);
 			$("#n1").html("文件夹");
 			$('#g_button').css('display', 'block');
 			$('.equip_1').css('display', 'none');
+			$('.Qdh').find('li').nextAll('li').show();
 		}
 	});
-	$(".chk_2").click(function() {
-		if(this.checked) {
-			$("#table2 :checkbox").prop("checked", true);
-			$("#n2").html("已选中" + $("#table2 tr").length + "个文件/文件夹");
-			$('#g_button').css('display', 'none');
-			$('.equip_1').css('display', 'block');
-		} else {
-			$("#table2 :checkbox").prop("checked", false);
-			$("#n2").html("文件夹");
-			$('#g_button').css('display', 'block');
-			$('.equip_1').css('display', 'none');
-		}
+	$('table').on('click','.chk_2',function() {
+		 var num=$('#mytbody input:checked').length;
+		 if(num>0&&num<$('#mytbody input:checkbox').length){
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('span').html(msg);
+			 $('#g_button').css('display', 'none');
+			 $('.equip_1').css('display', 'block');
+			 $('.Qdh').find('li').nextAll('li').hide(); 
+		 }else if(num==$('#mytbody input:checkbox').length){
+			 $('.chk_1').prop('checked',true);
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('span').html(msg);					 					 
+		 }else{
+			 $('.chk_1').attr('checked',false);
+			 $('.Qdh').find('span').html('文件夹');
+			 $('.equip_1').css('display', 'none');
+			 $('.Qdh').find('li').nextAll('li').show();
+		 }		
 	});
+	/*删除功能*/
+	$('#f3').click(function() {
+		var btns= [];
+		var i=0;
+		$('#mytbody input:checked').each(function(){ 
+			 btns[i]=$(this).next().next('input').val();
+			 if($(this).next().next('input').hasClass('reid')){	
+				 alert('文件夹id:'+btns[i++]);
+			 }else{
+				 alert('文件id:'+btns[i++]);
+			 }
+			 
+		})
+	})
 	$("#tabs a").click(function() {
 		$(this).tab('show');
 	});
