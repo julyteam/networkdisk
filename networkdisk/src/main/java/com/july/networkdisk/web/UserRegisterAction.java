@@ -1,6 +1,9 @@
 package com.july.networkdisk.web;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Map;
@@ -57,12 +60,15 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
 	/*用户注册*/
 	public String register() throws Exception{
     	String id = CommonUtil.createUUID();
-    	System.out.println(user.getName());
     	String password = CommonUtil.getMD5(user.getPassWord());
-    	System.out.println("pqssWord"+password+"~~~~~~~~~~~~~~~~~~~~~~~");
     	user.setPassWord(password);
     	user.setId(id);
-    	user.setPhoto(new byte[1]);
+    	File file = new File("C:/Users/ZZN-msi/Desktop/photo/default.jpg");
+    	InputStream in = new FileInputStream(file);	
+    	byte[] photo = new byte[in.available()];
+    	in.read(photo);
+    	in.close();
+    	user.setPhoto(photo);
     	this.iUserService.save(user);
     	this.setMassger("注册成功！");
     	return SUCCESS;

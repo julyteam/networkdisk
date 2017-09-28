@@ -91,6 +91,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String percenter() throws Exception{
     	return SUCCESS;
     }
+    public String goindex() throws Exception{
+    	return SUCCESS;
+    }
     /*用户个人资料修改*/
     public String update() throws Exception{
     	User u = CommonUtil.getSessionUser();
@@ -131,6 +134,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     
    /* 头像*/
     public String photoup() throws Exception{
+    	System.out.println(file+"~~~~~~~~~~~~~~~~~~~~~~~~~");
     	InputStream in = new FileInputStream(file);	
     	User u = CommonUtil.getSessionUser();
     	byte[] photo = new byte[in.available()];
@@ -144,7 +148,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String showphoto() throws Exception{
     	User u = CommonUtil.getSessionUser();
 	   User user = iUserService.get(u.getId());
-	   System.out.println(user.getPhoto()+"~~~~~~~~~~~~~~~~~~~~~~");
 	   HttpServletResponse response = null;
 	   ServletOutputStream out = null;
 	   response = ServletActionContext.getResponse();

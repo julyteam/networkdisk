@@ -32,7 +32,7 @@ padding-left:15px;
 <body>
 	<div id="head">
 		<div id="head-left">
-			<img src="/networkdisk/user/img/logo-2.png"> <span>|&nbsp;&nbsp;注册百度账号</span>
+			<img src="/networkdisk/user/img/logo-2.png"> <span>|&nbsp;&nbsp;注册July账号</span>
 		</div>
 		<div id="head-right">
 			<span>我已注册，现在就</span>
@@ -94,7 +94,6 @@ padding-left:15px;
 			
 		</form>
 				<input type="hidden" id="success" value="${massger }" >
-				
 	</div>
 	
 	<script type="text/javascript">

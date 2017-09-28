@@ -15,7 +15,7 @@
 	
 	<!-- 增加文件夹 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
-		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_status) values(#{id},#{name},#{reid},#{uid},#{state})
+		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_state) values(#{id},#{name},#{reid},#{uid},#{state})
 	</insert>
 	<!-- 根据条件查找文件夹 -->
 	<select id="findAllCateByUser" parameterType="map" resultMap="categorieMap">
@@ -94,4 +94,17 @@
 		where cat_id = #{cat_id}
 	</update>
 	
+	<!-- 根据id查找文件夹-->
+	<select id="findbyid" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_id=#{fileandcateid}
+	</select>
+	<!-- 根据id查找文件夹的下层文件夹-->
+	<select id="getcatenext" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_reid=#{cateid}
+	</select>
+	<!-- 根据uid查找根文件夹 -->
+	<select id="getlistbyuid" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_uid=#{id} and cat_reid is null
+	</select>
+
 </mapper>

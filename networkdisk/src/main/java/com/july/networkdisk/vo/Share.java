@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Share {
 	private String id;
 	private String uid;
-	private String url;
+	private String magid;
 	private String pwd;
 	private Timestamp startTime;
 	private Integer retain;
@@ -30,12 +30,12 @@ public class Share {
 		this.uid = uid;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getMagid() {
+		return magid;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setMagid(String magid) {
+		this.magid = magid;
 	}
 
 	public String getPwd() {

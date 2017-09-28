@@ -341,17 +341,7 @@ $(document).ready(function() {
 								$(".user").hide();
 								$(this).children(".admin").find(".c").addClass(
 										"lbaxztop2");
-							});
-					/* 当没有头像时，为默认头像*/
-					if ($('img').attr("src") == "") {
-						$('img').attr("src",
-								"/networkdisk/user/img/person-bhead.png");
-					}
-					
-					var str = document.getElementsByName("radiobutton");
-					for (var i = 0; i < str.length; i++) {
-						str[i].style.margin = '10px';
-					}
+					});
 
 				});
 		$("#change").change(function(){   
@@ -367,7 +357,7 @@ $(document).ready(function() {
 			});
 		
 		
-
+		
 		//密码修改验证	
 		$("#updatePassForm").validate({
 			rules:{
