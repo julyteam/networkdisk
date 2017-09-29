@@ -136,7 +136,7 @@
 			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
-						<li class="active"><a href="/networkdisk/index.jsp#tw1"
+						<li class="active"><a href="/networkdisk/index.jsp"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
 						<li><a href="/networkdisk/index.jsp#tw2"><i
 								class="batch stream"></i><br>图片</a></li>
@@ -448,7 +448,7 @@
 								+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
 								+ listCate[i].name
 								+ ">"
-								+ "<a id='showFile' class='july_cateName' >"
+								+ "<a class='july_cateName' >"
 								+ listCate[i].name
 								+ "</a>"
 								+ "<div class='more'>"
@@ -739,36 +739,115 @@
 		$('table').on('mouseleave','.menu',function(){
 			$('.menu').css('display','none');
 		});
+		
+		
 		$('table').on('click','.md-copy',function() {
+			alert("123");
 			$('.md-effect-10').addClass('md-show');
 		});
 		$('.cancel').click(function(){
 			$('.md-effect-10').removeClass('md-show');
 		});
 		/* 重命名 */
-		/* $('table').on('click','.md-ren',function() {
-			var zz="<i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i>";
-			$(this).parents('tr').find('td').nextAll().hide();
-			$(this).parents('tr').find('a').hide();		
-			$(this).parents('tr').find('.rename').show();
-			$(this).parents('tr').find('.rename').after(zz);
-			$(this).parents('.more').remove();
-			$(".dele").click(function() {
-				$(this).parents('tr').find('.rename').hide();
-				$(this).parents('tr').find('i').remove();
-				$(this).parents('tr').find('a').show();				
-			});
-			$('.sure').click(function() {
-				var newname=$(this).prev().val();
-				alert($(this).parents('tr').children("a:eq(0)").prev().val());
-				alert($(this).parents('tr').find('.rename').val());
-				$(this).parents('tr').find('.rename').hide();
-				$(this).parents('tr').children("a:eq(0)").html(newname).show();
-				$('.rename').css('border', 'none');
-				$('.rename').attr('readonly','true');
-				$(this).parents('tr').find('i').remove();
-			});
-		}); */
+		$('table').on('click','.md-ren',function() {
+			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
+			$(this).parents('tr').css('background','#F0F8FD');
+			$(this).parents('tr').after(zz);
+			var id=$(this).parents('tr').find('input[type=text]').val();			
+			$('.GodName').val($(this).parents('tr').find('a:eq(0)').text());
+			$('.GodName').select();
+			$('.tw1_body').css('overflow-y','hidden');
+			/* 关闭tr触发事件 */
+			$('table').off('mouseenter','tr');
+			$('table').off('mouseleave','tr');
+			$('table').off('click','.july_cateName');
+			$('.sure').click(function(){
+				var newname=$(this).prev('input').val();
+				if($(this).parent('div').prev('tr').find('.reid').length!=0){
+					
+					var cateid=id; 
+				 	var flag = 0;
+					$(".july_cateName").each(function() {
+						
+						if ($(this).text() == newname) {
+							flag = 1;
+						}
+					})
+				   if(flag == 1){
+						alert("文件夹中名字不能相同")
+						return ;
+					}
+				
+				}else{
+				var fileid=id;
+				
+				var flag = 0;
+				$(".july_fileName").each(function() {
+					
+					if ($(this).text() == newname) {
+						flag = 1;
+					}
+				})
+			   if(flag == 1){
+					alert("文件中名字不能相同")
+					return ;
+				}
+				}
+				
+		        $.ajax({
+					url : "${pageContext.request.contextPath}/rename?refileid="+fileid+"&recategorieid="+cateid+"&rename="+newname,
+					dataType : 'json',
+					success : function(data) {
+						$('tr').css('background','none');
+						$('.tw1_body').css('overflow-y','scroll');
+						$('.reName').remove();
+						$('table').on('mouseenter','tr',function() {
+							$(this).css('background','rgba(220, 200, 200, 0.4)');
+							$(this).children().find('.more').css('display', 'inline-block');					
+						});
+						$('table').on('mouseleave','tr',function() {
+							$(this).css('background','none');
+							$(this).children().find('.more').css('display', 'none');
+						});
+						$('table').on('click','.july_cateName',function(){
+							var cateid =$(this).parent('td').find('.reid').val();
+							var catestate =$(this).parent('td').find('.restate').val();
+							var catename =$(this).parent('td').find('.rename').val();
+							cateName = catename;
+							caterid = cateid;
+							show(cateid,catestate);
+						});
+						
+					},
+					error : function() {
+						alert("重命名失败失败！");
+					}
+				});
+				showchild(categorie,recycle);
+			})
+			$('.dele').click(function(){
+				$('tr').css('background','none');
+				$('.tw1_body').css('overflow-y','scroll');
+				$('.reName').remove();
+				$('table').on('mouseenter','tr',function() {
+					$(this).css('background','rgba(220, 200, 200, 0.4)');
+					$(this).children().find('.more').css('display', 'inline-block');					
+				});
+				$('table').on('mouseleave','tr',function() {
+					$(this).css('background','none');
+					$(this).children().find('.more').css('display', 'none');
+				});
+				$('table').on('click','.july_cateName',function(){
+					var cateid =$(this).parent('td').find('.reid').val();
+					var catestate =$(this).parent('td').find('.restate').val();
+					var catename =$(this).parent('td').find('.rename').val();
+					cateName = catename;
+					caterid = cateid;
+					show(cateid,catestate);
+				});
+			})
+		});
+
 
 	</script>
 	

@@ -11,6 +11,7 @@ import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.util.FileUtil;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
+import com.sun.xml.internal.ws.api.pipe.Tube;
 
 public class FileServiceImpl implements IFileService {
 	private FileDao fileDao;
@@ -28,6 +29,15 @@ public class FileServiceImpl implements IFileService {
 	 */
 	public void save(NetFile file) {
 		fileDao.save(file);
+	}
+	
+	/**
+	 * 重命名文件
+	 */
+	public boolean rename(String fileid,String refilename) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_name", refilename);
+		return  fileDao.updateFile(fileid, map);
 	}
 
 	/**

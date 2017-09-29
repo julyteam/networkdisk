@@ -50,5 +50,12 @@ public interface ICateService extends IBaseService<Categorie> {
 	 * @return
 	 */
 	Map<String,Object> showRecycleCate(String cat_uid);
+	/**
+	 * 重命名文件夹
+	 * @param cateid
+	 * @param catename
+	 * @return
+	 */
+	boolean reName(String cateid,String catename);
 
 }

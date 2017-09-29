@@ -50,4 +50,11 @@ public interface IFileService extends IBaseService<NetFile> {
 	 * @return
 	 */
 	List<NetFile> showRecycleFile(String file_uid);
+	/**
+	 * 重命名文件
+	 * @param fileid
+	 * @param refilename
+	 * @return
+	 */
+	boolean rename(String fileid,String refilename);
 }

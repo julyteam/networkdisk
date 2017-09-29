@@ -40,13 +40,20 @@ public class CateServiceImpl implements ICateService{
 	}
 
 	/**
-	 * 重命名 文件夹
+	 * 废弃的方法
 	 */
 	public void update(Categorie cate) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cat_name", cate.getName());
-		cateDao.updateCate(cate.getId(), map);
+		
 	}
+	/**
+	 * 重命名 文件夹
+	 */
+	public boolean reName(String cateid,String catename){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cat_name",catename);
+		return cateDao.updateCate(cateid, map);
+	}
+	
 	
 	/**
 	 * 移动文件夹

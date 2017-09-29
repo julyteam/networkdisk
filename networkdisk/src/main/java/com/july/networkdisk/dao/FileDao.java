@@ -102,7 +102,7 @@ public class FileDao extends BaseDao {
 	
 	
 	/**
-	 * 根据文件file_id 修改file_name或者file_catid或者file_downum或者file_deletesign
+	 * 根据文件file_id 修改file_name或者file_downum或者file_deletesign
 	 * @param map
 	 * @return
 	 */

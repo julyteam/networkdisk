@@ -1,12 +1,10 @@
 package com.july.networkdisk.web;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
@@ -29,7 +27,19 @@ public class FileAndCateAction extends ActionSupport {
 	private String message; // 返回消息
 	private String filelist;  //文件id数组
 	private String catelist;	//文件夹id数组
+	private String rename;		//重命名
+	private String refileid;   //重命名文件id
+	private String recategorieid; //重命名文件夹id
 	
+	public void setRefileid(String refileid) {
+		this.refileid = refileid;
+	}
+	public void setRecategorieid(String recategorieid) {
+		this.recategorieid = recategorieid;
+	}
+	public void setRename(String rename) {
+		this.rename = rename;
+	}
 	public void setFilelist(String filelist) {
 		this.filelist = filelist;
 	}
@@ -181,6 +191,26 @@ public class FileAndCateAction extends ActionSupport {
 	}
 	
 	/**
+	 * 批量把文件和文件夹放入回收站
+	 * @return
+	 */
+	public String batchdeletefileandcate(){
+		if(!"".equals(filelist)){
+			String[] fileids= filelist.split(",");
+			List<String> files = Arrays.asList(fileids);
+			iFileService.layBatchRecyle(files, 1);
+		}
+		if(!"".equals(catelist)){
+			String[] cateids = catelist.split(",");
+			for (String cateid : cateids) {
+				iCateService.recyleCate(cateid, 0);
+		    }
+		}
+		message = "放入回收站成功！";
+		return "json";
+	}
+	
+	/**
 	 * 清空回收站
 	 * @return
 	 */
@@ -197,6 +227,23 @@ public class FileAndCateAction extends ActionSupport {
 		    }
 		}
 		message = "清空回收站成功！";
+		return "json";
+	}
+	
+	/**
+	 * 重新命名
+	 * @return
+	 */
+	public String reName(){
+		if(!"undefined".equals(refileid) && !"".equals(refileid)){
+			iFileService.rename(refileid, rename);
+			
+		}
+		if(!"".equals(recategorieid) && !"undefined".equals(recategorieid)){
+			iCateService.reName(recategorieid, rename);
+			
+		}
+		message = "重命名成功！";
 		return "json";
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page language="java" import="java.util.*,java.net.*" %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,7 +25,7 @@
 	  {
 		  if("username".equals(ck.getName()))
 		  {
-			  un=ck.getValue();
+			  un=URLDecoder.decode(ck.getValue(), "utf-8");
 		  }
 		  if("password".equals(ck.getName()))
 		  {
@@ -122,7 +123,7 @@
 				
 				<div class="form_check">
 					<input type="checkbox"  name="check"/>
-					<span>下次自动登录</span>
+					<span>记住密码</span>
 				</div>
 				<div class="form_login">
 				 
