@@ -928,7 +928,7 @@
 		}
 	</script>
 	<script type="text/javascript">
-<<<<<<< HEAD
+
 		$('table').on('click','.fa-ellipsis-h',function(){
 			$(this).parent().parent('td').find('.menu').css('display','block');
 		});
@@ -984,9 +984,7 @@
 			$('.create').show();
 			$('.createlink').hide();
 		})
-=======
-		
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
+
 		/* 重命名 */
 		$('table').on('click','.md-ren',function() {
 			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
