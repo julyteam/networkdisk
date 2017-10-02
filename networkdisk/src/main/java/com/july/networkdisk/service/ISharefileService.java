@@ -6,6 +6,7 @@ import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.Share;
 import com.july.networkdisk.vo.Sharefile;
+import com.july.networkdisk.vo.User;
 
 public interface ISharefileService extends IBaseService<Sharefile>{
 
@@ -31,6 +32,11 @@ public interface ISharefileService extends IBaseService<Sharefile>{
 
 	int checkcate(String[] cidlist, String[] cnamelist, int cateflag, String id);
 
+	Share getsharebyid(String magid);
+
+	User findOne(User user);
+
+	User getuserbyid(String uid);
 
 
 

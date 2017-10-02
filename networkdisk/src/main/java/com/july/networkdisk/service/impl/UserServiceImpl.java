@@ -65,4 +65,25 @@ public class UserServiceImpl implements IUserService
 		 this.userDao.updatePassword(user);
 		
 	}
+
+	public List<Share> getmyshare(String uid) {
+		return this.userDao.getmyshare(uid);
+	}
+
+	public List<Sharefile> getsharefile(String magid) {
+		return this.userDao.getsharefile(magid);
+	}
+
+	public Categorie getcate(String fileandcateid) {
+		return this.userDao.getcate(fileandcateid);
+	}
+
+	public NetFile getfile(String fileandcateid) {
+		return this.userDao.getfile(fileandcateid);
+	}
+
+	public void cancelshare(Sharefile sharefile) {
+		this.userDao.cancelshare(sharefile);
+		
+	}
 }

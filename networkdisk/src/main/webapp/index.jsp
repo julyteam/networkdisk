@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.july.networkdisk.util.CommonUtil" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +51,7 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<img src="showphoto?uid=${user.id }" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
 										<a href="#" style="display: inline-block;height:50px;">
 											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
@@ -68,7 +65,7 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="${pageContext.request.contextPath}/showphoto"  width="30px"  class="userpic" />
+														<img src="showphoto?uid=${user.id }"  width="30px"  class="userpic" />
 														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
@@ -115,7 +112,7 @@
 								class="batch calendar"></i><br>视频</a></li>
 						<li><a href="/networkdisk/index.jsp#tw7"><i
 								class="batch settings"></i><br>其他</a></li>
-						<li><a href="/networkdisk/myshare.jsp"><i
+						<li><a href="gomyshare"><i
 								class="batch share"></i><br>我的分享</a></li>
 						<li><a href="/networkdisk/recycle.jsp"><i
 								class="batch barbage"></i><br>回收站</a></li>
@@ -124,6 +121,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="page">
 		<div class="page-container">
 			<div class="container">
@@ -157,7 +155,9 @@
 								</div>
 								<div class="equip_1">
 									<ul class="equi_1">
-										<li id="f1"><img src="/networkdisk/img/share.png" style="margin-bottom:3px"/>分享</li>
+										<li id="f1" class="sharefile">
+										<a href="javascript:;" class="md-trigger" data-modal="modal-4">
+										<img src="/networkdisk/img/share.png" style="margin-bottom: 3px" />分享</a></li>
 										<li id='f3'><img src="/networkdisk/img/delete.png" style="margin-bottom:3px"/>删除</li>
 										<li id='f4'>复制到</li>
 										<li id="f2">移动到</li>
@@ -325,6 +325,165 @@
       			</div>
     		</div>
   		</div>
+  		<div class="md-modal md-effect-4" id="modal-4">
+			<div class="md-content">
+				<div class="dialog-header dialog-drag">
+					<span class="dialog-header-title">
+						分享文件(夹):151209124312-1.jpg </span>
+				</div>
+				<div class="dialog-body">
+					<div class="share-dialog">
+						<div class="content" id="_disk_id_1">
+							<ul class="tab">
+								<li class="share-link current" _idx="0"><em
+									class="fa fa-link"></em>链接分享</li>
+								<li class="share-friend" _idx="1"><em class="fa fa-users"></em>发给好友</li>
+								<li class="share-mail" _idx="2"><em class="fa fa-envelope"></em>发到邮箱</li>
+							</ul>
+							<div class="cb"></div>
+							<div class="tips-placeholder">
+								<div class="tips" style="display: none;">
+									<em class="icon"></em><span></span><em class="close icon"></em>
+								</div>
+							</div>
+							<ul class="content" style="width: 520px; margin-left: -25px;">
+								<li class="share-link" style="display: block;">
+									<div class="create-link">
+										<table class="validity-section">
+											<tbody>
+												<tr>
+													<td class="first-child">分享形式</td>
+													<td>
+														<div class="share-method-line">
+															<input type="radio" id="share-method-private" name="share-method" value="private" checked="true"style="margin-bottom:3px;">
+															<b style="color: rgb(66, 78, 103);">加密</b><span>仅限拥有密码者可查看，更加隐私安全</span>
+														</div>
+														<div class="share-method-line share-public-panel" style="color: rgb(139, 144, 158);">
+															<input type="radio" id="share-method-public" name="share-method" value="public" style="margin-bottom:3px;"> 
+																<b>公开</b><span>任何人可查看或下载，同时出现在您的
+																<a class="share-home-href" href="" target="_blank" style="color: rgb(59, 140, 255);">个人主页</a>
+															</span> <span class="share-public-tip" style="display: none;"></span>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td class="first-child">有效期</td>
+													<td class="choose-panel">
+														<button class="g-button g-button-large-gray choose-value">
+															<span class="text" id="datetype">永久有效</span> <em
+																class="fa fa-sort-desc"></em>
+														</button>
+														<ul class="choose-list" style="display: none;">
+															<li class="choose-checked" value="0"><em>永久有效</em><span
+																class="fa fa-check"></span></li>
+															<li value="7"><em>7天</em><span class="fa fa-check"></span></li>
+															<li value="1"><em>1天</em><span class="fa fa-check"></span></li>
+														</ul>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="createlink" style="display: none">
+											<div class="create-success" style="padding-bottom: 10px;">
+												<span class="public" style="display: none;"> <em
+													class="fa fa-check-circle"></em> 成功创建公开链接
+												</span> <span class="private"> <em
+													class="fa fa-check-circle"></em> 成功创建私密链接
+												</span>
+											</div>
+											<div class="link-info">
+												<div class="copy-button-section">
+													<a class="copy-button" id="copyShare"> 
+														<span class="g-button-right"> 
+														<span class="text public" style="display: none">复制链接</span>
+														<span class="text private" onclick="myCopy()">复制链接及密码</span>
+														</span>
+													</a>
+													<div class="copy-tips" id="copy-tips">复制链接成功</div>
+												</div>
+												
+												<div class="url">
+													<input type="text" spellingcheck="false" readonly="readonly" class="share-url" id="share-url" value="">
+													<span class="share-validity-tip">链接永久有效</span>
+												</div>
+												<div class="password">
+													<a>提取密码</a> 
+													<input type="text" class="share-password" id="share-password" spellingcheck="false" readonly="readonly" value="">
+												</div>
+												<div class="description">
+													<span class="private">可以将链接发送给你的QQ等好友 </span>
+													<span class="public" style="display:none"> 
+														1.生成文件下载链接 <br>
+														2.把链接通过QQ、微博、人人网、QQ空间等方式分享给好友
+													</span>
+												</div>
+												<input type="text" class="sharelink" id="sharelink" spellingcheck="false" readonly="readonly" value="" style="opacity:0;">
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<div class="footer">
+								<a class="md-close close" id="end">关闭</a><a href="javascript:;"
+									class="create"> <span class="g-button-right"> <span
+										class="text" id="create">创建链接</span>
+								</span>
+								</a>
+								<!-- <a href="javascript:;" class="create share" style="display:none"> <span class="g-button-right"> <span
+										class="text" id="create">确认分享</span>
+								</span>
+								</a> -->
+							</div>
+							<%String uuid = CommonUtil.createUUID(); String pwd = CommonUtil.getUUID(4);%>
+							<script type="text/javascript">
+								$("#end").click(function(){
+									/* location.href="index.jsp"; */
+								});
+								$("#create").click(function(){
+									$("#share-url").attr("value","http://localhost:8080/networkdisk/shareurl?url=<%=uuid%>");
+									$("#share-password").attr("value","<%=pwd%>");
+									
+									var btns = new Array();
+									var cateid = new Array();
+									var uuid = $("#share-url").val();
+									var time = $("#datetype").text();
+									var method = $('input[name="share-method"]:checked').val();
+									if(method == "private"){
+										var pwd = $("#share-password").val();
+									}else{
+										var pwd = "";
+									}
+									$("input[name='filebox']:checked").each(function(key,value){
+									    btns[key] = $(this).val();
+									});
+									$("input[name='catebox']:checked").each(function(key,value){
+									    cateid[key] = $(this).val();
+									});
+									
+									
+									 if(btns == "" && cateid == ""){
+										alert("请选择文件或文件夹进行分享！");
+									}else{
+										$.ajax({  
+								            url:"share?fidlist="+btns+"&cateid="+cateid+"&uuid="+uuid+"&pretime="+time+"&sharepwd="+pwd,
+								            dataType: 'json',
+								            async: false,
+								            success:function(data){  
+								               
+								            },  
+								            error:function(){  
+								                alert("分享失败！");  
+								            }  
+								        });  
+									}	
+									
+								});
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="msg">
 			<span style="float: left; font-size: 16px; padding-left: 10px;">我的上传</span>
 			<span class="fa fa-times"></span> <span class="fa fa-window-maximize"></span>
@@ -358,6 +517,8 @@
 			</div>
 		</div>
 	</div>
+	<script src="js/classie.js"></script>
+	<script src="js/modalEffects.js"></script>
 	<script type="text/javascript">
 		var categorie =null;
 		var recycle =null;
@@ -406,7 +567,7 @@
 						
 						var $str = $("<tr class='showTr'>"
 								+ "<td>"
-								+ "<input type='checkbox' class='chk_2'/>"
+								+ "<input type='checkbox' name='catebox' value='"+listCate[i].id+"' class='chk_2'/>"
 								+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
 								+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
 								+ listCate[i].id
@@ -507,7 +668,7 @@
 						}
 						var $str = $("<tr class='showTr'>"
 								+ "<td>"
-								+ "<input type='checkbox' class='chk_2' />"
+								+ "<input type='checkbox' name='filebox' value='"+listFile[i].id+"' class='chk_2' />"
 								+ "<img src='"
 								+ type
 								+ "'width='28px' style='margin:0 5px 5px 10px;'>"
@@ -714,6 +875,49 @@
 		$('.cancel').click(function(){
 			$('.md-effect-10').removeClass('md-show');
 		});
+		/* 判断私密还是公开 */
+		$("input[type=radio]").click(function(){
+			$("input[name='share-method']:checked").each(function() {
+				if ($(this).val() == 'public') {
+					$('.share-public-panel').css('color','red');
+				} else {
+					$('.share-public-panel').css('color','rgb(139, 144, 158)');
+				}
+			});
+		});
+		/* 创建链接样式 */
+		$('.create').click(function() {
+			$("input[name='share-method']:checked").each(function() {
+				if ($(this).val() == 'private') {
+					$('.validity-section').hide();
+					$('.create').hide();
+					$('.share').show();
+					$('.createlink').show();
+				} else {
+					$('.validity-section').hide();
+					$('.create').hide();
+					$('.share').show();
+					$('.createlink').show();
+					$('.create-success .private').hide();
+					$('.create-success .public').show();
+					$('.password').hide();
+					$('.description .private').hide();
+					$('.description .public').show();
+					$('#copyShare .private').hide();
+					$('#copyShare .public').show();
+				}
+			});
+		});
+		/* 鼠标滑过选中input-url */
+		$('.share-url').mouseover(function(){
+			this.select();
+		})
+		/* 关闭分享 */
+		$('.close').click(function() {
+			$('.validity-section').show();
+			$('.create').show();
+			$('.createlink').hide();
+		})
 		/* 重命名 */
 		/* $('table').on('click','.md-ren',function() {
 			var zz="<i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i>";
@@ -740,7 +944,19 @@
 		}); */
 
 	</script>
-	
+	<script type="text/javascript">
+	function myCopy(){
+		var url = document.getElementById("share-url");
+		var password=document.getElementById("share-password");				
+		var link="链接："+url.value+" 密码："+password.value;
+		document.getElementById('sharelink').value = link;
+		var share=document.getElementById('sharelink');
+		alert(share.value);
+		share.select();
+		document.execCommand("Copy");
+		document.getElementById("copy-tips").style.display ="block"; 
+	}
+	</script>
 	<!-- 复制model的树形结构 -->
 	<script type="text/javascript">
 	var json = [

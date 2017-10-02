@@ -64,7 +64,7 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
+										<img src="showphoto?uid=${user.id }" width="30px" style="border-radius: 30px;margin-bottom: 22px;" />
 										<a href="#" style="display: inline-block;">
 											<div class="username">${user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:22px ;" />
@@ -78,7 +78,7 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+														<img src="showphoto?uid=${user.id }" width="30px" class="userpic" />
 														<a href="">${user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
@@ -120,7 +120,7 @@
 						<ol>
 							<li><a class="change-head"   data-toggle="modal"
 								data-target="#edittouxiang" ><div class="change-h">
-										<img src="${pageContext.request.contextPath}/showphoto" class="img-head" />
+										<img src="showphoto?uid=${user.id }" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
@@ -246,7 +246,7 @@
             <form action="photoup" method="post" enctype="multipart/form-data">
 	            <div class="modal-body">
 	            <div class="modal_body_left">
-	            <img alt="" src="${pageContext.request.contextPath}/showphoto" class="img-head" id="img" />
+	            <img alt="" src="showphoto?uid=${user.id }" class="img-head" id="img" />
 	            
 	            </div>
 										<div class="modal_body_right">

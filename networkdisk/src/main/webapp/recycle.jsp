@@ -51,7 +51,7 @@
 						<li class="chos" style="width: 220px;">
 							<div class="sev">
 								<div class="admin">
-									<img src="${pageContext.request.contextPath}/showphoto"
+									<img src="${pageContext.request.contextPath}/showphoto?uid=${user.id }"
 										width="30px"
 										style="border-radius: 30px; position: absolute; top: 10px;" />
 									<a href="#" style="display: inline-block; height: 50px;">
@@ -68,7 +68,7 @@
 										<div class="userpan_2">
 											<div class="u1">
 												<a href="#"> <img
-													src="${pageContext.request.contextPath}/showphoto"
+													src="${pageContext.request.contextPath}/showphoto?uid=${user.id }"
 													width="30px" class="userpic" />
 												</a> <a href="">${user.name }</a> <img
 													src="/networkdisk/img/VIP1.png"
@@ -210,7 +210,7 @@
 								}else{
 									$('.recyclebin-empty').hide();
 								}
-									for (var i = 0; i < listCate.length; i++) {
+								for (var i = 0; i < listCate.length; i++) {
 									/* 修改时间格式 */
 									var time = listCate[i].addtime;
 									var newTime = time.split("T");

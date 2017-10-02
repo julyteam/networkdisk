@@ -27,6 +27,22 @@ $(document).ready(function() {
 		$(this).siblings().find('.active').removeClass();
 		$(this).children('img').addClass("active");
 	});
+	var j = true;
+	$('.choose-value').click(function(){
+		if(j){
+			$('.choose-list').css('display','block');
+			j=false;
+		}else{
+			$('.choose-list').css('display','none');
+			j = true;
+		}
+		
+	})
+	$('.choose-list li').click(function() {
+		$(this).siblings('.choose-checked').removeClass();
+		$(this).addClass('choose-checked');		
+		$('#datetype').html($(this).text());
+	});
 
 	var toggle = true;
 	$(".large").click(function() {

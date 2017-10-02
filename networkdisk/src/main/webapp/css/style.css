@@ -1179,14 +1179,21 @@ img.userpic {
 .slide-show-other-infos {
     text-align: right;
     margin-top: 5px;
+    height:20px;
+    padding-top:3px;
     position: relative;
     z-index: 40;
 }
 .share-file-info ,.share-valid-check {
+	position: absolute;
+	left:0px;
 	color: #808080;
 	font-size: 13px;
-    float: left;
-    margin-left: 16px;
+	margin-left:10px;
+}
+.share-valid-check{
+	left:165px;
+	bottom:-2px;
 }
 .module-share-file-main{
 	width: 100%;

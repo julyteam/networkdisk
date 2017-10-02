@@ -16,4 +16,16 @@
 	<insert id="share" parameterType="com.july.networkdisk.vo.Share">
 		INSERT INTO share(sh_id,sh_uid,sh_magid,sh_pwd,sh_starttime,sh_retaintime) VALUES(#{id},#{uid},#{magid},#{pwd},#{startTime},#{retain})
 	</insert>
+	<!-- 通过id查找一个分享 -->
+	<select id="getonebyid" parameterType="String" resultMap="shareMap">
+		select * from share where sh_magid=#{magid}
+	</select>
+	<!-- 通过用户id查找分享 -->
+	<select id="getallbyuid" parameterType="String" resultMap="shareMap">
+		select * from share where sh_uid=#{uid}
+	</select>
+	<!-- 取消分享 -->
+	<delete id="cancelshare" parameterType="String">
+		delete from share where sh_magid=#{magid}
+	</delete>
 </mapper>

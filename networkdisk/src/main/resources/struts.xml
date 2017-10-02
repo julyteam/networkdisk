@@ -204,11 +204,23 @@
 		</action>
 		<!-- 分享的内容跳转 -->
 		<action name="shareurl" class="sharefileAction" method="shareurl">
-			<result name="success" type="redirect">/user/preservation.jsp</result>
+			<result name="success" type="redirect">/reception.jsp</result>
+			<result name="havepwd" type="redirect">/re_index.jsp</result>
+			<result name="error" type="redirect">/error.jsp</result>
 		</action>
 		<!-- 分享页面登陆 -->
-		<action name="sharelogin" class="userAction" method="login">
-			<result name="success" type="redirect">/user/preservation.jsp</result>
+		<action name="sharelogin" class="sharefileAction" method="sharelogin">
+			<result name="success" type="redirect">/reception.jsp</result>
+			<result name="error" type="redirect">/error.jsp</result>
+		</action>
+		<!-- 分享页面头像 -->
+		<action name="sharephoto" class="sharefileAction" method="sharephoto">
+			
+		</action>
+		<!-- 密码提取 -->
+		<action name="pwdextract" class="sharefileAction" method="pwdextract">
+			<result name="success" type="redirect" >/reception.jsp</result>
+			<result name="error" type="redirect" >/error.jsp</result>
 		</action>
 		
 		<!-- 保存分享文件和文件夹 -->
@@ -220,6 +232,10 @@
 			<result name="json" type="json">
 				<param name="root">map</param>
 			</result>
+		</action>
+		<!-- 分享登出 -->
+		<action name="sharelogout" class="sharefileAction" method="sharelogout">
+			<result name="success" type="redirect">/reception.jsp</result>
 		</action>
 		
 	</package>
@@ -293,5 +309,21 @@
 		</action>
 	</package>
 	
-	
+	<!-- 我的分享 -->
+	<package name="networkdisk.myshare" namespace="/" extends="struts-default,json-default">	
+		
+		<action name="gomyshare" class="userAction" method="gomyshare">
+			<result name="success" type="redirect">/myshare.jsp</result>
+		</action>
+		<!-- 查看分享 -->
+		<action name="myshare" class="userAction" method="myshare" >
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>	
+		</action>
+		<!-- 取消分享 -->
+		<action name="cancelshare" class="userAction" method="cancelshare" >
+			
+		</action>
+	</package>
 </struts>

@@ -9,6 +9,7 @@ import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.Share;
 import com.july.networkdisk.vo.Sharefile;
+import com.july.networkdisk.vo.User;
 
 public class SharefileServiceImpl implements ISharefileService {
 	private SharefileDao sharefileDao;
@@ -89,6 +90,20 @@ public class SharefileServiceImpl implements ISharefileService {
 	public List<NetFile> getcatenextfile(String cateid) {
 		return this.sharefileDao.getcatenextfile(cateid);
 	}
+
+	public Share getsharebyid(String magid) {
+		return this.sharefileDao.getsharebyid(magid);
+	}
+
+	public User findOne(User user) {
+		return this.sharefileDao.findOne(user);
+	}
+
+	public User getuserbyid(String uid) {
+		return this.sharefileDao.getuserbyid(uid);
+	}
+
+	
 
 
 

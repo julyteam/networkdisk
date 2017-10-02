@@ -1,11 +1,14 @@
 package com.july.networkdisk.web;
 
 import java.io.PrintWriter;
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,6 +33,9 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	private static final long serialVersionUID = 1L;
 	private Sharefile sharefile = new Sharefile();
 	private ISharefileService iSharefileService;
+	private String name;
+	private String passWord;
+	private String uid;
 	private Map<String, Object> map;  //用来接收查询的数据和返回到前台
 	private Categorie categorie;
 	private Share share;
@@ -39,9 +45,28 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	private String catename;
 	private String uuid;
 	private String url;
+	private String pretime;
+	private String sharepwd;
 	HttpSession session = CommonUtil.createSession();
+	HttpServletResponse response=ServletActionContext.getResponse();
+	    
 	
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+
 	public Sharefile getSharefile() {
 		return sharefile;
 	}
@@ -134,6 +159,29 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	public void setCatename(String catename) {
 		this.catename = catename;
 	}
+	
+	public String getPretime() {
+		return pretime;
+	}
+
+	public void setPretime(String pretime) {
+		this.pretime = pretime;
+	}
+
+	public String getSharepwd() {
+		return sharepwd;
+	}
+
+	public void setSharepwd(String sharepwd) {
+		this.sharepwd = sharepwd;
+	}
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
 	/*分享*/
 	public String share() throws Exception{
@@ -144,43 +192,39 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 		uuid = uuid.substring(uuid.length()-36);
 		String[] fid = fidlist.split(",");
 		String[] cid = cateid.split(",");
-		System.out.println(fid[0].length()+"~~~~~~");
 		sharefile.setMagid(uuid);
 		User u = CommonUtil.getSessionUser();
 		Share share = new Share();
 		share.setId(CommonUtil.createUUID());
 		share.setUid(u.getId());
 		share.setMagid(sharefile.getMagid());
-		share.setRetain(15);
+		int time = 0;
+		if(pretime.equals("7天")){
+			time = 7;
+		}else if(pretime.equals("1天")){
+			time=1;
+		}
+		System.out.println(sharepwd);
+		share.setPwd(sharepwd);
+		share.setRetain(time);
 		if(fid[0].length() == 0){
 			if(cid[0].length() == 0){
 				out.print("0");
 				
 			}else{
-				for(int i=0;i<cid.length;i++){
-					cid[i] = cid[i].substring(cid[i].length()-4);
-				}
 				sharefile.setIscate(1);
 				this.iSharefileService.sharefile(sharefile,cid);
 				
 			}
 		}else{
 			if(cid[0].length() == 0){
-				for(int i=0;i<fid.length;i++){
-					fid[i] = fid[i].substring(fid[i].length()-37);
-				}
 				sharefile.setIscate(0);
 				this.iSharefileService.sharefile(sharefile,fid);
 				
 			}else{
-				for(int i=0;i<cid.length;i++){
-					cid[i] = cid[i].substring(cid[i].length()-4);
-				}
 				sharefile.setIscate(1);
 				this.iSharefileService.sharefile(sharefile,cid);
-				for(int i=0;i<fid.length;i++){
-					fid[i] = fid[i].substring(fid[i].length()-37);
-				}
+				
 				sharefile.setIscate(0);
 				this.iSharefileService.sharefile(sharefile,fid);
 				
@@ -195,22 +239,79 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	
 	/*分享链接跳转*/
 	public String shareurl() throws Exception{
+		map = new HashMap<String, Object>();
 		sharefile.setMagid(url);
-		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
+		Share share = this.iSharefileService.getsharebyid(url);
+		User u = this.iSharefileService.getuserbyid(share.getUid());
+		long t = System.currentTimeMillis();
 		List<Categorie> catelist = new ArrayList<Categorie>();
 		List<NetFile> filelist = new ArrayList<NetFile>();
-		for(int i=0;i<sflist.size();i++){
-			if(sflist.get(i).getIscate() == 1){
-				Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-				catelist.add(cate);
+		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
+		
+		session.setAttribute("url", share.getMagid());
+		session.setAttribute("user", u);
+		if(share.getRetain() == 0){
+			if(!share.getPwd().equals("")){
+				return "havepwd";
 			}else{
-				NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-				filelist.add(file);
+				for(int i=0;i<sflist.size();i++){
+					if(sflist.get(i).getIscate() == 1){
+						Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
+						catelist.add(cate);
+					}else{
+						NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
+						filelist.add(file);
+					}
+				}
+				
+			}
+		}else if(share.getStartTime().getTime()+share.getRetain()*24*3600*1000<t){
+			return ERROR;
+		}else{
+			if(!share.getPwd().equals("")){
+				return "havepwd";
+			}else{
+				for(int i=0;i<sflist.size();i++){
+					if(sflist.get(i).getIscate() == 1){
+						Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
+						catelist.add(cate);
+					}else{
+						NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
+						filelist.add(file);
+					}
+				}
+				
 			}
 		}
 		session.setAttribute("catelist", catelist);
 		session.setAttribute("filelist", filelist);
-
+		return SUCCESS;
+	}
+	/*密码提取*/
+	public String pwdextract() throws Exception{
+		map = new HashMap<String, Object>();
+		Share share = this.iSharefileService.getsharebyid(url);
+		User u = this.iSharefileService.getuserbyid(share.getUid());
+		this.sharefile.setMagid(url);
+		List<Categorie> catelist = new ArrayList<Categorie>();
+		List<NetFile> filelist = new ArrayList<NetFile>();
+		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
+		if(!share.getPwd().equals(sharepwd)){
+			return ERROR;
+		}else{
+			for(int i=0;i<sflist.size();i++){
+				if(sflist.get(i).getIscate() == 1){
+					Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
+					catelist.add(cate);
+				}else{
+					NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
+					filelist.add(file);
+				}
+			}
+		}
+		session.setAttribute("user", u);
+		session.setAttribute("catelist", catelist);
+		session.setAttribute("filelist", filelist);
 		return SUCCESS;
 	}
 	
@@ -226,15 +327,9 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	
 	/*保存分享的文件和文件夹*/
 	public String preservation() throws Exception{
-		
-		
-		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		User u = CommonUtil.getSessionUser();
-		
-		
 		
 		int fileflag = 1,cateflag = 1;
 		String[] fid = fidlist.split(",");
@@ -246,9 +341,9 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			if(cidlist[0].length() == 0){
 				return null;
 			}else{
-				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,u.getId());
+				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
 				if(cateflag == 1){
-					this.iSharefileService.preservationcate(u.getId(), cidlist);
+					this.iSharefileService.preservationcate(uid, cidlist);
 					out.print(1);
 				}else{
 					out.print(0);
@@ -256,30 +351,30 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			}
 		}else{
 			if(cidlist[0].length() == 0){
-				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,u.getId());
+				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid);
 				if(fileflag == 1){
-					this.iSharefileService.preservation(u.getId(),fid);
+					this.iSharefileService.preservation(uid,fid);
 					out.print(1);
 				}else{
 					out.print(0);
 				}
 			}else{
-				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,u.getId());
-				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,u.getId());
+				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid);
+				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
 				if(fileflag == 1){
 					if(cateflag == 0){
-						this.iSharefileService.preservation(u.getId(),fid);
+						this.iSharefileService.preservation(uid,fid);
 						out.print(1);
 					}else{
-						this.iSharefileService.preservation(u.getId(),fid);
-						this.iSharefileService.preservationcate(u.getId(), cidlist);
+						this.iSharefileService.preservation(uid,fid);
+						this.iSharefileService.preservationcate(uid, cidlist);
 						out.print(1);
 					}
 				}else{
 					if(cateflag == 0){
 						out.print(0);
 					}else{
-						this.iSharefileService.preservationcate(u.getId(), cidlist);
+						this.iSharefileService.preservationcate(uid, cidlist);
 						out.print(1);
 					}
 				}
@@ -289,4 +384,37 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 		out.close();
 		return null;
 	}
+	
+	 /*分享页面登陆*/
+		public String sharelogin() throws Exception{
+		
+			String password = CommonUtil.getMD5(passWord);
+	    	User u = new User();
+	    	u.setName(name);
+	    	u.setPassWord(password);
+	    	User user = this.iSharefileService.findOne(u);
+	    	
+	    	if(user == null){
+	    		return ERROR;
+	    	}else{
+	    		session.setAttribute("u", user);
+	    	}
+			return SUCCESS;
+		}
+		/*头像*/
+	    public String sharephoto() throws Exception{
+	 	   User user = this.iSharefileService.getuserbyid(uid);
+	 	   ServletOutputStream out = null;
+	 	   response.setContentType("multipart/form-data");
+	 	   out = response.getOutputStream();
+	 	   out.write(user.getPhoto());
+	 	   out.flush();
+	 	   out.close();
+	 	   return null;
+	    }
+	/*分享登出*/
+	    public String sharelogout() throws Exception{
+	    	session.setAttribute("u",null);
+	    	return SUCCESS;
+	    }
 }

@@ -9,6 +9,7 @@ import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.Share;
 import com.july.networkdisk.vo.Sharefile;
+import com.july.networkdisk.vo.User;
 
 
 public class SharefileDao extends BaseDao{
@@ -77,6 +78,7 @@ public class SharefileDao extends BaseDao{
 			NetFile f = sqlSession.selectOne("fileSpace.getone", fid[i]);
 			f.setId(CommonUtil.createUUID());
 			f.setUid(uid);
+			f.setCatid(null);
 			sqlSession.insert("fileSpace.save", f);
 		}
 		sqlSession.close();
@@ -89,13 +91,14 @@ public class SharefileDao extends BaseDao{
 			String cateid = cate.getId();
 			cate.setId(CommonUtil.createUUID());
 			cate.setUid(uid);
+			cate.setReid(null);
 			sqlSession.insert("cateSpace.save", cate);
 			String reid = cate.getId();
-			digui(cateid,reid,uid);
+			recursion(cateid,reid,uid);
 		}
 		sqlSession.close();
 	}
-	public void digui(String cateid,String reid,String uid){
+	public void recursion(String cateid,String reid,String uid){
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		List<Categorie> catelist = sqlSession.selectList("cateSpace.getcatenext",cateid);
 		List<NetFile> filelist = sqlSession.selectList("fileSpace.getcatenextfile",cateid);
@@ -116,8 +119,9 @@ public class SharefileDao extends BaseDao{
 			cate.setReid(reid);
 			String rid = cate.getId();
 			sqlSession.insert("cateSpace.save", cate);
-			digui(cid,rid,uid);
+			recursion(cid,rid,uid);
 		}
+		sqlSession.close();
 	}
 	
 	
@@ -133,6 +137,7 @@ public class SharefileDao extends BaseDao{
 				}
 			}
 		}
+		sqlSession.close();
 		return flag;
 	}
 	
@@ -148,7 +153,26 @@ public class SharefileDao extends BaseDao{
 				}
 			}
 		}
+		sqlSession.close();
 		return cateflag;
+	}
+	public Share getsharebyid(String magid) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		Share share = sqlSession.selectOne("shareSpace.getonebyid", magid);
+		sqlSession.close();
+		return share;
+	}
+	public User findOne(User user) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		User u = sqlSession.selectOne("userSpace.findOne", user);
+		sqlSession.close();
+		return u;
+	}
+	public User getuserbyid(String uid) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		User u = sqlSession.selectOne("userSpace.get",uid);
+		sqlSession.close();
+		return u;
 	}
 	
 	

@@ -20,4 +20,12 @@
 		select * from sharefile where sf_magid=#{magid}
 	</select>
 	
+	<!-- 根据magid查找分享的文件 -->
+	<select id="sharecentbyid" parameterType="String" resultMap="sharefileMap">
+		select * from sharefile where sf_magid=#{magid}
+	</select>
+	<!-- 取消分享 -->
+	<delete id="cancelshare" parameterType="com.july.networkdisk.vo.Sharefile">
+		delete from sharefile where sf_magid=#{magid} and sf_fileandcateid=#{fileandcateid}
+	</delete>
 </mapper>
