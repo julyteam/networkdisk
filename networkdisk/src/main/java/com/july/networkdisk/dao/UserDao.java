@@ -84,7 +84,45 @@ public class UserDao extends BaseDao
 			sqlSession.update("userSpace.updatePassword",user);
 			sqlSession.close();
 		}
-   
+		/*我的分享*/
+		public List<Share> getmyshare(String uid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			List<Share> share = sqlSession.selectList("shareSpace.getallbyuid", uid);
+			sqlSession.close();
+			return share;
+		}
+
+		public List<Sharefile> getsharefile(String magid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			List<Sharefile> sharefilecate = sqlSession.selectList("sharefileSpace.sharecent", magid);
+			sqlSession.close();
+			return sharefilecate;
+		}
+
+		public Categorie getcate(String fileandcateid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			Categorie cate = sqlSession.selectOne("cateSpace.findbyid", fileandcateid);
+			sqlSession.close();
+			return cate;
+		}
+
+		public NetFile getfile(String fid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			NetFile file = sqlSession.selectOne("fileSpace.getone", fid);
+			sqlSession.close();
+			return file;
+		}
+		/*取消分享*/
+		public void cancelshare(Sharefile sharefile) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			sqlSession.delete("sharefileSpace.cancelshare", sharefile);
+			String magid = sharefile.getMagid();
+			List<Sharefile> sf = sqlSession.selectList("sharefileSpace.sharecentbyid", magid);
+			if(sf.size() == 0){
+				sqlSession.delete("shareSpace.cancelshare", magid);
+			}
+			
+		}
 	
 	
 }

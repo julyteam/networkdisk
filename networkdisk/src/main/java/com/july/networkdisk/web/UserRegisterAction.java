@@ -1,7 +1,9 @@
 package com.july.networkdisk.web;
 
 
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,8 +59,13 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
     	String id = CommonUtil.createUUID();
     	String password = CommonUtil.getMD5(user.getPassWord());
     	user.setPassWord(password);
-    	user.setPhoto(null);
     	user.setId(id);
+    	File file = new File("D:/photo/default.jpg");
+    	InputStream in = new FileInputStream(file);	
+    	byte[] photo = new byte[in.available()];
+    	in.read(photo);
+    	in.close();
+    	user.setPhoto(photo);
     	this.iUserService.save(user);
     	this.setMassger("注册成功，请重新登录！");
     	return SUCCESS;

@@ -129,4 +129,17 @@
 		where cat_id = #{cat_id}
 	</update>
 	
+	<!-- 根据id查找文件夹-->
+	<select id="findbyid" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_id=#{fileandcateid}
+	</select>
+	<!-- 根据id查找文件夹的下层文件夹-->
+	<select id="getcatenext" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_reid=#{cateid}
+	</select>
+	<!-- 根据uid查找根文件夹 -->
+	<select id="getlistbyuid" parameterType="String" resultMap="categorieMap">
+		select * from categorie where cat_uid=#{id} and cat_reid is null
+	</select>
+
 </mapper>

@@ -13,5 +13,10 @@ public interface IUserService extends IBaseService<User>
 	User selectUserByEmail(String email);
 	void photoup(User user);
 	void updatePassword(User user);
+	List<Share> getmyshare(String uid);
+	List<Sharefile> getsharefile(String magid);
+	Categorie getcate(String fileandcateid);
+	NetFile getfile(String fileandcateid);
+	void cancelshare(Sharefile sharefile);
 	
 }

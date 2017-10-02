@@ -33,11 +33,18 @@ not_time 		timestamp		    否				发布时间
 字段			类型				    Null		默认		    注释
 sh_id 		varchar(50)		    否				        主键
 sh_uid		varchar(50)		    否				    分享人id(外键)
-sh_url 		varchar(255)		否				    分享链接地址
+sh_magid 	varchar(255)		否				    分享文件标识id
 sh_pwd		varchar(255)		是				      分享密码
 sh_startTime	timestamp 		是				       分享时间
 sh_retain	int(2)			    是		-1（代表永久）  保留时长	
 
+
+			分享文件（sharefile）数据表
+字段			类型				    Null		默认		    注释
+sf_id		varchar(50)			否						主键
+sf_magid	varchar(50)			否						分享文件标识id
+sf_fileid	varchar(50)			是						文件id
+sf_cateid	varchar(50) 		是						文件夹id
 
 
 			文件（file）数据表
@@ -80,14 +87,15 @@ use networkdisk;
 
 #创建用户表
 create table user(
-			user_id        varchar(50) PRIMARY KEY,
+			user_id        varchar(50)  PRIMARY KEY,
 			user_name      varchar(255) NOT NULL UNIQUE,
 			user_password  varchar(255) NOT NULL,
 			user_truename  varchar(255) NOT NULL,	
-			user_email		 varchar(255) NOT NULL UNIQUE,
+			user_email	   varchar(255) NOT NULL UNIQUE,
 			user_phone     varchar(20)	NOT NULL UNIQUE,
-			user_isadmin	 int(1)       NOT NULL DEFAULT 1,
+			user_isadmin   int(1)       NOT NULL DEFAULT 1,
 			user_sex       int(1)       NOT NULL DEFAULT 1,
+			user_photo     mediumblob   NOT NULL,
 			user_about     varchar(255) ,
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
 			user_photo    mediumblob
@@ -152,10 +160,23 @@ create table share
 (
 	sh_id varchar(50) not null,
 	sh_uid varchar(50) not null,
-	sh_url varchar(255) not null,
+	sh_magid varchar(50) not null,
 	sh_pwd varchar(255) not null,
 	sh_starttime timestamp not null default current_timestamp,
 	sh_retaintime int(2) not null default -1,
 	primary key(sh_id),
 	foreign key(sh_uid) references user(user_id)
+
 );
+
+
+#分享文件表
+create table sharefile
+(
+	sf_id varchar(50) not null,
+	sf_magid varchar(50) not null,
+	sf_fileid varchar(50) null,
+	sf_cateid varchar(50) null,
+	primary key(sf_id)
+)
+

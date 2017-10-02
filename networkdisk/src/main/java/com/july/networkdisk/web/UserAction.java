@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -31,8 +34,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     private User user = new User();
     private File file;
     private IUserService iUserService;
+    private Map<String, Object> map;  //用来接收查询的数据和返回到前台
     private String message;
     private String code;
+    private String uid;
+    private String magid;
+    private String filecateid;
     HttpSession session = CommonUtil.createSession();
     HttpServletRequest request=ServletActionContext.getRequest();
     HttpServletResponse response=ServletActionContext.getResponse();
@@ -65,11 +72,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public User getUser() {
         return this.user;
     }
-  public User getModel() {
+    public User getModel() {
 		
 		return user;
 	}
-
+	public Map<String, Object> getMap() {
+		return map;
+	}
+	public void setMap(Map<String, Object> map) {
+		this.map = map;
+	}
 	public String execute() throws Exception {
         this.iUserService.save(this.user);
         return "success";
@@ -80,13 +92,24 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	public void setFile(File file) {
 		this.file = file;
 	}
-
-	
-	
-
-
-   
-
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+	public String getMagid() {
+		return magid;
+	}
+	public void setMagid(String magid) {
+		this.magid = magid;
+	}
+	public String getFilecateid() {
+		return filecateid;
+	}
+	public void setFilecateid(String filecateid) {
+		this.filecateid = filecateid;
+	}
 	/*  用户登陆*/
     public String login() throws Exception{
     	Cookie cookie=null;
@@ -104,7 +127,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     		this.setMessage("yes");
     		if("on".equals(ck))
 			{
-    			String username=URLEncoder.encode(user.getName(),"utf-8");
+				String username=URLEncoder.encode(user.getName(),"utf-8");
 				 cookie=new Cookie("username",username);
 				 cookie.setMaxAge(60*60);
 				 response.addCookie(cookie);
@@ -121,11 +144,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String percenter() throws Exception{
     	return SUCCESS;
     }
-
-
-
-
-
+    public String goindex() throws Exception{
+    	return SUCCESS;
+    }
     /*用户个人资料修改*/
     public String update() throws Exception{
     	User u = CommonUtil.getSessionUser();
@@ -182,8 +203,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
      * @throws Exception
      */
     public String showphoto() throws Exception{
-    	User u = CommonUtil.getSessionUser();
-	   User user = iUserService.get(u.getId());
+	   User user = iUserService.get(uid);
 	   ServletOutputStream out = null;
 	   response.setContentType("multipart/form-data");
 	   out = response.getOutputStream();
@@ -311,7 +331,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		out.close();
 		return null;
     }
-    /**
+     /**
      * 发送邮件
      * @throws Exception
      */
@@ -359,7 +379,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	this.user.setPassWord(password);
     	this.iUserService.updatePassword(user);
     	u.setPassWord(password);
-
+    	
     	
     	return SUCCESS;
     }
@@ -368,5 +388,56 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	session.invalidate();
     	return SUCCESS;
     }
-
+    
+    	/*分享页面跳转*/
+    public String gomyshare(){
+    	return SUCCESS;
+    }
+    
+   /* 我的分享*/
+    public String myshare() throws Exception{
+    	map = new HashMap<String, Object>();
+    	List<Share> sharelist = this.iUserService.getmyshare(uid);
+    	List<NetFile> filelist = new ArrayList<NetFile>();
+    	List<Categorie> catelist = new ArrayList<Categorie>();
+    	for(int i=0;i<sharelist.size();i++){
+    		List<Sharefile> sflist = this.iUserService.getsharefile(sharelist.get(i).getMagid());
+    		for(int j=0;j<sflist.size();j++){
+    			if(sflist.get(j).getIscate() == 1){
+    				Categorie cate = this.iUserService.getcate(sflist.get(j).getFileandcateid());
+    				cate.setAddtime(sharelist.get(i).getStartTime());
+    				cate.setState(sharelist.get(i).getRetain());
+    				cate.setReid(sharelist.get(i).getMagid());
+    				catelist.add(cate);
+    			}else{
+    				NetFile file = this.iUserService.getfile(sflist.get(j).getFileandcateid());
+    				file.setAddtime(sharelist.get(i).getStartTime());
+    				file.setDeletesign(sharelist.get(i).getRetain());
+    				file.setCatid(sharelist.get(i).getMagid());
+    				filelist.add(file);
+    			}
+    		}
+    	}
+    	
+    	map.put("catelist", catelist);
+    	map.put("filelist", filelist);
+    	return "json";
+    }
+    /*取消分享*/
+    public String cancelshare() throws Exception{
+    	HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	Sharefile sharefile = new Sharefile();
+    	String[] magidlist = magid.split(",");
+    	String[] fcidlist = filecateid.split(",");
+    	for(int i=0;i<fcidlist.length;i++){
+    		sharefile.setMagid(magidlist[i]);
+    		sharefile.setFileandcateid(fcidlist[i]);
+    		this.iUserService.cancelshare(sharefile);
+    	}
+    	out.print(1);
+    	return null;
+    }
+   
 }
