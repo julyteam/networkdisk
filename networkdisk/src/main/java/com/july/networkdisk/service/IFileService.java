@@ -50,4 +50,16 @@ public interface IFileService extends IBaseService<NetFile> {
 	 * @return
 	 */
 	List<NetFile> showRecycleFile(String file_uid);
+	/**
+	 * 重命名文件
+	 * @param fileid
+	 * @param refilename
+	 * @return
+	 */
+	boolean rename(String fileid,String refilename);
+	/**
+	 * 判断目标文件夹下有无名字相同的文件
+	 */
+	 boolean judgeFileName(String file_uid, String[] fileids,
+			String aimcatid);
 }

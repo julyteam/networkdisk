@@ -11,6 +11,7 @@ import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.util.FileUtil;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
+import com.sun.xml.internal.ws.api.pipe.Tube;
 
 public class FileServiceImpl implements IFileService {
 	private FileDao fileDao;
@@ -31,12 +32,22 @@ public class FileServiceImpl implements IFileService {
 	}
 
 	/**
+	 * 重命名文件
+	 */
+	public boolean rename(String fileid, String refilename) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_name", refilename);
+		return fileDao.updateFile(fileid, map);
+	}
+
+	/**
 	 * 根据用户查找每个目录下所有文件 区分在不在回收站
 	 */
 	public List<NetFile> findAllByUser(String file_uid, Map<String, Object> map) {
 		map.put("file_uid", file_uid);
 		return fileDao.findAllByUser(map);
 	}
+
 	/**
 	 * 根据文件夹目录和是否删除 来找文件的ID。用于文件的回收和删除
 	 */
@@ -46,7 +57,6 @@ public class FileServiceImpl implements IFileService {
 		map.put("file_deletesign", file_deletesign);
 		return fileDao.findFileIDByCateID(map);
 	}
-
 
 	/**
 	 * 得到在或者不在回收站的一个文件,当flag为空时，就忽略是否在回收站中。
@@ -83,7 +93,7 @@ public class FileServiceImpl implements IFileService {
 	 * @param netFile_id
 	 * @return
 	 */
-	public boolean layRecyle(String netFile_id,Integer file_deletesign) {
+	public boolean layRecyle(String netFile_id, Integer file_deletesign) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("file_deletesign", file_deletesign);
 		fileDao.updateFile(netFile_id, map);
@@ -95,9 +105,10 @@ public class FileServiceImpl implements IFileService {
 	 * 
 	 * 
 	 */
-	public boolean layBatchRecyle(List<String> netFile_ids,Integer file_deletesign) {
+	public boolean layBatchRecyle(List<String> netFile_ids,
+			Integer file_deletesign) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list",netFile_ids );
+		map.put("list", netFile_ids);
 		map.put("file_deletesign", file_deletesign);
 		fileDao.updateDeleteSingBatch(map);
 		return false;
@@ -118,6 +129,7 @@ public class FileServiceImpl implements IFileService {
 		fileDao.deleteBatch(netFile_ids);
 		return true;
 	}
+
 	/**
 	 * 显示在回收站中的文件
 	 */
@@ -125,12 +137,35 @@ public class FileServiceImpl implements IFileService {
 		List<NetFile> listFiles = fileDao.showRecycleFile(file_uid);
 		return listFiles;
 	}
-	
+
 	/**
 	 * 移动文件
 	 */
-	public boolean moveFile(String netFile_id,String file_catid) {
+	public boolean moveFile(String netFile_id, String file_catid) {
 		fileDao.updateFileCate(netFile_id, file_catid);
+		return true;
+	}
+
+	/**
+	 * 判断目标文件夹下有无名字相同的文件
+	 */
+	public boolean judgeFileName(String file_uid, String[] fileids,
+			String aimcatid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("file_catid", aimcatid);
+		map.put("file_deletesign", 0);
+		List<NetFile> listids = findAllByUser(file_uid, map);
+		if (listids != null && listids.size() != 0) {
+			for (NetFile netfile1 : listids) {
+				for (String fileid : fileids) {
+					NetFile netfile2 = get(fileid, 0);
+					if (netfile1.getName().equals(netfile2.getName())) {
+						return false;
+					}
+				}
+			}
+		}
+
 		return true;
 	}
 
@@ -138,12 +173,12 @@ public class FileServiceImpl implements IFileService {
 
 	}
 
+	/**
+	 * 废弃方法
+	 */
 	public NetFile get(String netFile_id) {
 
 		return null;
 	}
-
-
-
 
 }

@@ -89,19 +89,47 @@ $(document).ready(function() {
 			 $('.Qdh').find('li').nextAll('li').show();
 		 }		
 	});
-	/*删除功能*/
+	/*批量把文件和文件夹放入回收站*/
 	$('#f3').click(function() {
 		var btns= [];
+		var cateids=[];
+		var fileids=[];
+		var k=0;
+		var j=0;
 		var i=0;
 		$('#mytbody input:checked').each(function(){ 
 			 btns[i]=$(this).next().next('input').val();
 			 if($(this).next().next('input').hasClass('reid')){	
-				 alert('文件夹id:'+btns[i++]);
+				 cateids[j++]=btns[i++];
 			 }else{
-				 alert('文件id:'+btns[i++]);
+				 fileids[k++] = btns[i++];
 			 }
-			 
 		})
+		 $.ajax({
+				url : "${pageContext.request.contextPath}/batchdeletefileandcate?filelist="+fileids+"&catelist="+cateids,
+				dataType : 'json',
+				success : function(data) {
+					showchild(categorie,recycle);
+					 var num=$('#mytbody input:checked').length;
+					 if(num>0&&num<$('#mytbody input:checkbox').length){
+						 var msg="已选中"+num+"个文件/文件夹";
+						 $('.Qdh').find('span').html(msg);
+						 $('#g_button').css('display', 'none');
+						 $('.equip_1').css('display', 'block');
+						 $('.Qdh').find('li').nextAll('li').hide(); 
+					 }else{
+						 $('.chk_1').attr('checked',false);
+						 $('.Qdh').find('span').html('文件夹');
+						 $('.equip_1').css('display', 'none');
+						 $('.Qdh').find('li').nextAll('li').show();
+					 }
+				},
+				error : function() {
+					alert("删除失败！");
+				}
+			});
+		
+		
 	})
 	$("#tabs a").click(function() {
 		$(this).tab('show');
@@ -143,12 +171,16 @@ $(document).ready(function() {
 					$('.donetimeline').css('display', 'none');
 				}
 			});
-			$('table').on('mouseenter','td',function() {
-				$(this).children('.more').css('display', 'inline-block');
+			$('.table').on('mouseenter','tr',function() {
+				$(this).css('background','rgba(220, 200, 200, 0.4)');
+				$(this).children().find('.more').css('display', 'inline-block');
+				
 			});
-			$('table').on('mouseleave','td',function() {
-				$(this).children('.more').css('display', 'none');
+			$('.table').on('mouseleave','tr',function() {
+				$(this).css('background','none');
+				$(this).children().find('.more').css('display', 'none');
 			});
+
 			var i = true;
 			$('.fa-window-maximize').click(function() {
 				if(i) {
@@ -167,36 +199,52 @@ $(document).ready(function() {
 			});
 			
 			$("#newonefile").click(function() {
-					
-					//创建tr节点
-					var $tr = $("<tr></tr>");
-					//遍历获取输入的内容
-					var $td = $("<td><input type='checkbox' id='checkbox_a1'/><img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i></td><td>-</td><td class='t3'></td>");
-					//将内容循环添加到创建好的TD中
-					$td.appendTo($tr);
-					$tr.prependTo("#tw1 .table tbody");
-					$('.nullfile').hide();
-					//执行删除操作
-					$(".dele").click(function() {
-						$(this).parent().parent().remove();
-					});
-					$('.sure').click(function() {
-					    var name=$(this).prev().val();
-						$(this).parent().parent().remove();
-						/*保存文件夹*/
-						$.ajax({
-							url : "${pageContext.request.contextPath}/bulidcate",
-							dataType : 'json',
-							data:{categorieName:name,categorieReid:categorie},
-							async: false,                   
-							success : function(data) {
-								/*alert(data);*/
-							},
-							error : function() {
-								alert("新建文件夹失败！");
+					if($('.sure').length==0){
+						//创建tr节点
+						var $tr = $("<tr></tr>");
+						//遍历获取输入的内容
+						var $td = $("<td><input type='checkbox' id='checkbox_a1'/><img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'><input type='text' value='新建文件夹' class='filename'><i class='fa fa-check sure'></i><i class='fa fa-times dele'></td><td>-</td><td class='t3'></td>");
+						//将内容循环添加到创建好的TD中
+						$td.appendTo($tr);
+						$tr.prependTo("#tw1 .table tbody");
+						$('.filename').select();
+						$('.nullfile').hide();
+						//执行删除操作
+						$(".dele").click(function() {
+							$(this).parent().parent().remove();
+						});
+						
+						$('.sure').click(function() {
+						    var name=$(this).prev().val();
+						    var flag = 0;
+							$(".july_cateName").each(function() {
+								
+								if ($(this).text() == name) {
+									flag = 1;
+								}
+							})
+						   if(flag == 1){
+								alert("文件夹中名字不能相同")
+								return ;
+							}else{
+								$(this).parent().parent().remove();
+								$.ajax({
+									url : "${pageContext.request.contextPath}/bulidcate",
+									dataType : 'json',
+									data:{categorieName:name,categorieReid:categorie},
+									async: false,                   
+									success : function(data) {
+									},
+									error : function() {
+										alert("新建文件夹失败！");
+									}
+								});		
+								showchild(categorie,recycle);
 							}
-						});		
-						showchild(categorie,recycle);
-					});
+						});
+					}else{
+						alert("请完成当前文件夹的创建！");
+					}
+					
 				});
 });

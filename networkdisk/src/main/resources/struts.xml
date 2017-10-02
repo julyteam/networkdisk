@@ -119,12 +119,10 @@
 	<package name="networkdisk.file" namespace="/" extends="json-default">
 		<!-- 文件上传 -->
 		<action name="fileupload" class="fileAction" method="fileUpLoad">
-			
 			<interceptor-ref name="fileUpload">
 				<param name="maximumSize">2147483647</param>
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack" />
-			
 		</action>
 
 		<!-- 进度条进度 -->
@@ -187,13 +185,32 @@
 			</result>
 		</action>
 		
+		<!-- 批量把文件和文件夹放入回收站 -->
+		<action name="batchdeletefileandcate" class="fileAndCateAction" method="batchdeletefileandcate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		
 		<!-- 清空回收站 -->
 		<action name="emptyRecycle" class="fileAndCateAction" method="emptyRecycle">
 			<result name="json" type="json">
 				<param name="root">message</param>
 			</result>
 		</action>
-
+		
+		<!-- 重命名文件或着文件夹 -->
+		<action name="rename" class="fileAndCateAction" method="reName">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<!-- 复制文件或着文件夹 -->
+		<action name="copyFileAndCate" class="fileAndCateAction" method="copyFileAndCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 分享 -->
@@ -262,6 +279,12 @@
 		<action name="deleteCate" class="cateAction" method="deleteCate">
 			<result name="json" type="json">
 				<param name="root">message</param>
+			</result>	
+		</action>
+		
+		<action name="showAllCate" class="cateAction" method="showAllCate">
+			<result name="json" type="json">
+				<param name="root">list</param>
 			</result>	
 		</action>
 		

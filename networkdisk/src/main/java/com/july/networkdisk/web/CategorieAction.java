@@ -1,7 +1,11 @@
 package com.july.networkdisk.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.util.CommonUtil;
+import com.july.networkdisk.vo.CateTree;
 import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,9 +22,12 @@ public class CategorieAction extends ActionSupport {
 	private String categorieReid;	//文件夹的父级id
 	private String categorieID;   	//文件夹的ID
 	private String message;
+	private List<CateTree> list;   //用户所有的文件
 	
 	
-	
+	public List<CateTree> getList() {
+		return list;
+	}
 	public void setCategorieID(String categorieID) {
 		this.categorieID = categorieID;
 	}
@@ -94,6 +101,20 @@ public class CategorieAction extends ActionSupport {
 			iCateService.deleteCate(categorieID);
 		}
 		message="文件夹成功删除";
+		return "json";
+	}
+	
+	/**
+	 * 显示所有文件夹
+	 * @return
+	 */
+	public String showAllCate(){
+		CateTree cateTree = new CateTree();
+		cateTree.setCateid("null");
+		cateTree.setCatename("全部文件");
+		iCateService.getAllCate(CommonUtil.getSessionUser().getId(), null, cateTree);
+		list = new ArrayList<CateTree>();
+		list.add(cateTree);
 		return "json";
 	}
 }

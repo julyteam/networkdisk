@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +116,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	String ck=request.getParameter("check");
     	
     	String password = CommonUtil.getMD5(this.user.getPassWord());
+    	String pass=user.getPassWord();
     	this.user.setPassWord(password);
     	User user = this.iUserService.findOne(this.user);
     	session.setAttribute("user", user);
@@ -125,10 +127,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     		this.setMessage("yes");
     		if("on".equals(ck))
 			{
-				 cookie=new Cookie("username",user.getName());
+				String username=URLEncoder.encode(user.getName(),"utf-8");
+				 cookie=new Cookie("username",username);
 				 cookie.setMaxAge(60*60);
 				 response.addCookie(cookie);
-				 cookie=new Cookie("password",user.getPassWord());
+				 cookie=new Cookie("password",pass);
 				 cookie.setMaxAge(60*60);
 				 response.addCookie(cookie);
 				

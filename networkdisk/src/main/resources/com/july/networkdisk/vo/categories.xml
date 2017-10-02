@@ -13,6 +13,34 @@
 		<result property="addtime" column="cat_addtime" />
 	</resultMap>
 	
+	
+	<resultMap type="com.july.networkdisk.vo.CateTree" id="catetreeMap">
+		<!-- id标签：映射主键属性 property属性：实体的属性名 column属性：表的字段名 -->
+		<id property="cateid" column="cat_id" />
+		<result property="catename" column="cat_name" />
+	</resultMap>
+	<!-- 根据条件查找文件夹 -->
+	<select id="getAllcate" parameterType="map" resultMap="catetreeMap">
+		select cat_id,cat_name from categorie
+		<where>
+			<if test="cat_uid != null">
+				and cat_uid = #{cat_uid}
+			</if>
+			<if test="cat_reid == null">
+				and cat_reid is null
+			</if>
+			<if test="cat_reid != null">
+				and cat_reid =#{cat_reid}
+			</if>
+			<if test="cat_state != null">
+				and cat_state =#{cat_state}
+			</if>
+		</where>
+		ORDER BY cat_addtime DESC
+	</select>
+	
+	
+	
 	<!-- 增加文件夹 -->
 	<insert id="save" parameterType="com.july.networkdisk.vo.Categorie">
 		insert into categorie(cat_id,cat_name,cat_reid,cat_uid,cat_state) values(#{id},#{name},#{reid},#{uid},#{state})

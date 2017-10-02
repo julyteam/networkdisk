@@ -97,12 +97,8 @@ create table user(
 			user_sex       int(1)       NOT NULL DEFAULT 1,
 			user_photo     mediumblob   NOT NULL,
 			user_about     varchar(255) ,
-<<<<<<< HEAD
-			user_cTime	   timestamp 	DEFAULT CURRENT_TIMESTAMP
-=======
 			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
 			user_photo    mediumblob
->>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 );
 #文件夹表
 create table categorie

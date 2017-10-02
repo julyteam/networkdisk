@@ -102,7 +102,7 @@
 			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
-						<li class="active"><a href="/networkdisk/index.jsp#tw1"
+						<li class="active"><a href="/networkdisk/index.jsp"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
 						<li><a href="/networkdisk/index.jsp#tw2"><i
 								class="batch stream"></i><br>图片</a></li>
@@ -198,8 +198,8 @@
 								
 								<div class="Qdh">
 									<ul>
-										<li style="width: 60%; margin-left: -40px;"><input
-											type="checkbox" class="chk_1" /><span id="n1">文件名</span></li>
+										<li style="width:60%; margin-left: -40px;"><input
+											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span></li>
 										<li>大小</li>
 										<li>修改日期</li>
 									</ul>
@@ -312,7 +312,7 @@
       				<span class="text" style="width: auto;">取消</span>
       				</span>
       				</a>
-      				<a class="g-button g-button-blue-large" href="javascript:void(0);" style="float: right;">
+      				<a class="g-button g-button-blue-large surein" href="javascript:void(0);" style="float: right;">
       				<span class="g-button-right" style="padding-right: 50px;">
       				<span class="text" style="width: auto;">确定</span>
       				</span>
@@ -496,22 +496,6 @@
 				</div>
 				<div class="upload_body">
 					<ul class="container" id="uploaderList">
-						<li class="file-list">
-							<div class="file-name"
-								title="[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4">
-								<span class="fa fa-file-movie-o"
-									style="font-size: 24px; color: purple; position: relative; top: -15px;"></span>
-								<span class="name-text">[东京暗鸦].[DMG][Tokyo.Ravens][03][720P][GB](ED2000.COM).mp4</span>
-							</div>
-							<div class="file_size">263.1M</div>
-							<div class="file_path">
-								<a title="/" class="server_path" href="#list/path=/">我的文件</a>
-							</div>
-							<div class="up_status"></div>
-							<div class="probox" style="width: 100%; height:5px;padding-left:0px;display:none;">
-								<div id="myprogress" style="background-color: hsl(100, 80%, 60%); height: 5px;"></div>
-							</div>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -529,10 +513,10 @@
 			recycle = recycleflag;
 			
 			 if(cateName != null){
-				var $head=$("<td><a id='"+caterid+"' class='aa'  style='cursor:pointer;'> >"+cateName+"</a></td>"); 
+				var $head=$("<td><a id='"+caterid+"' class='aa'  style='cursor:pointer;text-decoration:none'> >"+cateName+"</a></td>"); 
 				$("#july_allFile tr").append($head)
 			}else{
-				var $head=$("<td><a id='null' class='aa' style='cursor:pointer;' >全部文件</a></td>"); 
+				var $head=$("<td><a id='null' class='aa' style='cursor:pointer;color:#333;text-decoration:none ' >全部文件</a></td>"); 
 				$("#july_allFile tr").append($head)
 			} 			 
 			 showchild(categorie_id,recycleflag)
@@ -578,7 +562,7 @@
 								+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
 								+ listCate[i].name
 								+ ">"
-								+ "<a id='showFile' class='july_cateName' >"
+								+ "<a class='july_cateName' >"
 								+ listCate[i].name
 								+ "</a>"
 								+ "<div class='more'>"
@@ -785,13 +769,94 @@
 			show(null, 0);
 		});
 		
-		
 		/* 文件上传 */
 		$("#upfile").change(function() {
 			var file = this.files[0];
 			july_fileReader(file);
 		});
 		function july_fileReader(file) {
+			var upfilename=file.name;
+			var upfileaddress=$('table tr:eq(0)').find('td:last-child').children('a').text();
+			var upfilesize;
+			var upsizeflag;
+			var type=(upfilename.substr(upfilename.lastIndexOf("."))).toLowerCase();
+			if(file.size/(1024*1024) < 1 ){
+				upfilesize=(file.size/1024).toFixed(1);
+				upsizeflag="KB";
+			}else if(file.size/(1024*1024)<1024 && file.size/(1024*1024) > 1){
+				upfilesize=(file.size/(1024*1024)).toFixed(1);
+				upsizeflag="M";
+			}else{
+				upfilesize=(file.size/(1024*1024*1024)).toFixed(1);
+				upsizeflag="G";
+			}
+			switch(type){
+			case(".zip"):
+				type="/networkdisk/img/ZIP_2.png";
+			break;
+			case(".mp4"):
+			case(".rmvb"):
+			case(".avi"):
+			case(".mkv"):	
+			case(".wmv"):
+			case(".3gp"):	
+			case(".mov"):
+				type="/networkdisk/img/video.png";
+			break;
+			case(".png"):
+				type="/networkdisk/img/png.png";
+			break;
+			case(".jpg"):
+				type="/networkdisk/img/jpg.png";
+			break;
+			case(".gif"):
+			case(".bmp"):
+			case(".psd"):
+			case(".ai"):
+			case(".svg"):
+				type="/networkdisk/img/picture1.png";
+			break;
+			case(".doc"):
+			case(".docx"):
+				type="/networkdisk/img/word.png";
+			break;
+			case(".txt"):
+				type="/networkdisk/img/text.png";
+			break;
+			case(".xls"):
+				type="/networkdisk/img/xls.png";
+			break;
+			case(".pdf"):
+				type="/networkdisk/img/pdf.png";
+			break;
+			case(".html"):
+				type="/networkdisk/img/html.png";
+			break;
+			case(".mp3"):
+			case(".wav"):
+			case(".mod"):	
+				type="/networkdisk/img/music.png";
+			break;
+			default:
+				type="/networkdisk/img/others.png";
+		}
+			var $str=$("<li class='file-list'><div class='file-name'title='"
+					+ upfilename
+					+ "'>"
+					+ "<img src='"
+					+ type
+					+ "'width='28px' style='display:inline-block;position:relative;float:left;margin-top:10px;'>"
+					+ "<span class='name-text'>"
+					+ upfilename
+					+ "</span></div>"
+					+ "<div class='file_size'>"
+					+ upfilesize+upsizeflag
+					+ "</div><div class='file_path'><span class='server_path'>"
+					+ upfileaddress
+					+ "</span></div>"
+					+"<div class='up_status'>上传中···</div>"
+					+"<div class='probox' style='width: 100%; height:5px;padding-left:0px;display:none;'>"
+					+"<div id='myprogress' style='background-color: hsl(100, 80%, 60%); height: 5px;'></div></div></li>");
 			var flag = 0;
 			$(".july_fileName").each(function() {
 				if ($(this).text() == file.name) {
@@ -806,13 +871,13 @@
 					reader.onloadend = function(e) {
 						ajaxFileUpload();
 						$('#msg').show();
+						$('#uploaderList').append($str);
 					};
 				}
 			} else {
 				alert("文件夹中已经有相同名字的文件！")
 			}
 		}
-
 		var time = 0;
 		function ajaxFileUpload() {
 			$("#myprogress").width(0);
@@ -832,7 +897,7 @@
 							});
 							//刷新页面
 							$('.up_status').html("上传成功");
-							 $('.probox').hide();
+							 $('.probox').remove();
 							 $('#msg').css('bottom', '-300px');
 							showchild(categorie,recycle);
 						},
@@ -863,6 +928,7 @@
 		}
 	</script>
 	<script type="text/javascript">
+<<<<<<< HEAD
 		$('table').on('click','.fa-ellipsis-h',function(){
 			$(this).parent().parent('td').find('.menu').css('display','block');
 		});
@@ -918,30 +984,109 @@
 			$('.create').show();
 			$('.createlink').hide();
 		})
+=======
+		
+>>>>>>> branch 'master' of https://github.com/julyteam/networkdisk.git
 		/* 重命名 */
-		/* $('table').on('click','.md-ren',function() {
-			var zz="<i class='fa fa-check-square sure'></i><i class='fa fa-times-rectangle dele'></i>";
-			$(this).parents('tr').find('td').nextAll().hide();
-			$(this).parents('tr').find('a').hide();		
-			$(this).parents('tr').find('.rename').show();
-			$(this).parents('tr').find('.rename').after(zz);
-			$(this).parents('.more').remove();
-			$(".dele").click(function() {
-				$(this).parents('tr').find('.rename').hide();
-				$(this).parents('tr').find('i').remove();
-				$(this).parents('tr').find('a').show();				
-			});
-			$('.sure').click(function() {
-				var newname=$(this).prev().val();
-				alert($(this).parents('tr').children("a:eq(0)").prev().val());
-				alert($(this).parents('tr').find('.rename').val());
-				$(this).parents('tr').find('.rename').hide();
-				$(this).parents('tr').children("a:eq(0)").html(newname).show();
-				$('.rename').css('border', 'none');
-				$('.rename').attr('readonly','true');
-				$(this).parents('tr').find('i').remove();
-			});
-		}); */
+		$('table').on('click','.md-ren',function() {
+			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
+			$(this).parents('tr').css('background','#F0F8FD');
+			$(this).parents('tr').after(zz);
+			var id=$(this).parents('tr').find('input[type=text]').val();			
+			$('.GodName').val($(this).parents('tr').find('a:eq(0)').text());
+			$('.GodName').select();
+			$('.tw1_body').css('overflow-y','hidden');
+			/* 关闭tr触发事件 */
+			$('table').off('mouseenter','tr');
+			$('table').off('mouseleave','tr');
+			$('table').off('click','.july_cateName');
+			$('.sure').click(function(){
+				var newname=$(this).prev('input').val();
+				if($(this).parent('div').prev('tr').find('.reid').length!=0){
+					
+					var cateid=id; 
+				 	var flag = 0;
+					$(".july_cateName").each(function() {
+						
+						if ($(this).text() == newname) {
+							flag = 1;
+						}
+					})
+				   if(flag == 1){
+						alert("文件夹中名字不能相同")
+						return ;
+					}
+				
+				}else{
+				var fileid=id;
+				
+				var flag = 0;
+				$(".july_fileName").each(function() {
+					
+					if ($(this).text() == newname) {
+						flag = 1;
+					}
+				})
+			   if(flag == 1){
+					alert("文件中名字不能相同")
+					return ;
+				}
+				}
+				
+		        $.ajax({
+					url : "${pageContext.request.contextPath}/rename?refileid="+fileid+"&recategorieid="+cateid+"&rename="+newname,
+					dataType : 'json',
+					success : function(data) {
+						$('tr').css('background','none');
+						$('.tw1_body').css('overflow-y','scroll');
+						$('.reName').remove();
+						$('table').on('mouseenter','tr',function() {
+							$(this).css('background','rgba(220, 200, 200, 0.4)');
+							$(this).children().find('.more').css('display', 'inline-block');					
+						});
+						$('table').on('mouseleave','tr',function() {
+							$(this).css('background','none');
+							$(this).children().find('.more').css('display', 'none');
+						});
+						$('table').on('click','.july_cateName',function(){
+							var cateid =$(this).parent('td').find('.reid').val();
+							var catestate =$(this).parent('td').find('.restate').val();
+							var catename =$(this).parent('td').find('.rename').val();
+							cateName = catename;
+							caterid = cateid;
+							show(cateid,catestate);
+						});
+						
+					},
+					error : function() {
+						alert("重命名失败失败！");
+					}
+				});
+				showchild(categorie,recycle);
+			})
+			$('.dele').click(function(){
+				$('tr').css('background','none');
+				$('.tw1_body').css('overflow-y','scroll');
+				$('.reName').remove();
+				$('table').on('mouseenter','tr',function() {
+					$(this).css('background','rgba(220, 200, 200, 0.4)');
+					$(this).children().find('.more').css('display', 'inline-block');					
+				});
+				$('.table').on('mouseleave','tr',function() {
+					$(this).css('background','none');
+					$(this).children().find('.more').css('display', 'none');
+				});
+				$('.table').on('click','.july_cateName',function(){
+					var cateid =$(this).parent('td').find('.reid').val();
+					var catestate =$(this).parent('td').find('.restate').val();
+					var catename =$(this).parent('td').find('.rename').val();
+					cateName = catename;
+					caterid = cateid;
+					show(cateid,catestate);
+				});
+			})
+		});
+
 
 	</script>
 	<script type="text/javascript">
@@ -959,66 +1104,58 @@
 	</script>
 	<!-- 复制model的树形结构 -->
 	<script type="text/javascript">
-	var json = [
-    	{
-        "name": "1",
-        "userLevel":"全部文件",
-        "list": [
-            {
-            	//显示名称
-                "name": "2",
-                //跳转名称
-                "url" :"url_herf",
-                //用户等级
-                "userLevel":"二级",
-                //下级
-                "list": [
-                    {
-                        "name": "3",
-                        "userLevel":"三级",
-                        "list": [
-                                   {
-                                       "name": "4",
-                                       "userLevel":"四级"
-                                   }
-                                 ]
-                    }
-                ]
-            },
-            {
-            	//显示名称
-                "name": "2",
-                //跳转名称
-                "url" :"url_herf",
-                //用户等级
-                "userLevel":"二级",
-                //下级
-                "list": [
-                    {
-                        "name": "3",
-                        "userLevel":"三级",
-                        "list": [
-                                   {
-                                       "name": "4",
-                                       "userLevel":"四级"
-                                   }
-                                 ]
-                    }
-                ]
-            }
-        ]
-    }
-]
-/*递归实现获取无级树数据并生成DOM结构*/
-	var str = "";
-	var forTree = function(o){
+	
+	$('.table').on('click','.fa-ellipsis-h',function(){
+		$(this).parent().parent('td').find('.menu').css('display','block');
+	});
+	$('.table').on('mouseleave','.menu',function(){
+		$('.menu').css('display','none');
+	});
+	
+	var a=1;
+	var flag=1;
+	var thecate;
+	var thefile;
+	var ree=[];
+	$('.table').off('click','.md-copy').on('click','.md-copy',function() {
+		a=a+1;	
+		thecate=null;
+		thefile=null;
+		ree=null;
+		if($(this).parents('tr').find('input[type=text]').hasClass('reid')){
+			thecate=$(this).parents('tr').find('.reid').val();
+		}
+		else{
+			thefile=$(this).parents('tr').find('.refileid').val();
+		}
+		btnAjax(cb);
+	});
+	function btnAjax(cb) {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/showAllCate?guid="+new Date().getTime(),
+			dataType : 'json',
+			success : function(data) {
+				var func = callbackFunc(data, cb);
+                func()				
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	}
+	function cb(data) {
+		$('.menuTree').empty();
+		$('.md-effect-10').addClass('md-show');
+    	var json = data;
+		var str = "";
+		var forTree = function(o){
 	 	for(var i=0;i<o.length;i++){
 	   		 var urlstr = "";
 			 try{
 	 				if(typeof o[i]["url"] == "undefined"){
-			   	   		urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["userLevel"]+"</span><input value='"+ o[i]["name"] +"' type='text' style='display:none'><ul>";
+			   	   		urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["catename"]+"</span><input value='"+ o[i]["cateid"] +"' type='text' style='display:none'><ul>";
 	 				}else{
-	 					urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["userLevel"]+"</span><input value='"+ o[i]["name"] +"' type='text' style='display:none'><ul>"; 
+	 					urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["catename"]+"</span><input value='"+ o[i]["cateid"] +"' type='text' style='display:none'><ul>"; 
 	 				}
 	 			str += urlstr;
 	 			if(o[i]["list"] != null){
@@ -1031,10 +1168,6 @@
 	}
 	/*添加无级树*/
 	document.getElementById("menuTree").innerHTML = forTree(json);
-
-	$(".treename").click(function(){
-		alert($(this).next('input[type=text]').val());
-	})
 	/*树形菜单*/
 	var menuTree = function(){
 	 //给有子对象的元素加
@@ -1052,13 +1185,114 @@
 		 	 var spanContent = spanStr.substr(3,spanStr.length);
 			 if(ul.find("div").html() != null){
 				 if(ul.css("display") == "none"){
+					 $(this).parent('div').find('i:eq(0)').attr('class','fa fa-minus-square-o');
+					 		 
 					 ul.show(300);
 		 		 }else{
+		 			$(this).parent('div').find('i:eq(0)').attr('class','fa fa-plus-square-o');
 		 			 ul.hide(300);
 		 		 }
 		 	}
 		 })
 	}()	
+	}
+	 //判断次数，获取返回函数
+    function callbackFunc(data, cb) {
+        flag++;
+        if (a == flag) {
+            return function () {
+                cb(data);
+            }
+        } else {
+            return function () {
+            }
+        }
+    }
+    var insertCate;
+    $('.menuTree').off('click','.treename').on('click','.treename',function(){
+		insertCate='';
+		$(".treename").removeClass("active");  
+        $(this).addClass("active");
+        insertCate=$('.menuTree .active').next('input[type=text]').val();
+	});
+    
+    $('.surein').unbind("click").click(function(){
+    	var file_ids;
+    	var cate_ids;
+    	var aimcateid;
+		if(thecate&&!thefile){			
+			//alert("选择文件夹的id:"+thecate+"复制到文件夹："+insertCate);		
+			cate_ids=thecate;
+			aimcateid=insertCate;
+		}else if(!thecate&&thefile){
+			//alert("选择文件的id:"+thefile+"复制到文件夹："+insertCate);
+			file_ids=thefile;
+			aimcateid=insertCate;
+		}else if(cateids.length>0&&fileids.length==0){
+			//alert("选择文件夹的id:"+cateids+"复制到文件夹："+insertCate);
+			cate_ids=cateids;
+			aimcateid=insertCate;
+		}else if(cateids.length==0&&fileids.length>0){
+			//alert("选择文件的id:"+fileids+"复制到文件夹："+insertCate);
+			file_ids=fileids;
+			aimcateid=insertCate;
+		}else{
+			//alert("选择文件夹的id:"+cateids+"选择文件的id:"+fileids+"复制到文件夹："+insertCate);
+			cate_ids=cateids;
+			file_ids=fileids;
+			aimcateid=insertCate;
+		}
+		copyFileAndCate(file_ids,cate_ids,aimcateid);		
+    });
+    
+	$('.cancel').click(function(){
+		$('.menuTree').empty();
+		$('.md-effect-10').removeClass('md-show');
+	});
+	
+	function copyFileAndCate(fileids,cateids,aimCateid){
+		alert(fileids);
+		alert(cateids);
+		alert(aimCateid);
+		 $.ajax({
+             url: "${pageContext.request.contextPath}/copyFileAndCate?filelist="+fileids+"&catelist="+cateids+"&categorie_id="+aimCateid,
+             dataType: "json",
+             success: function(data){
+            	 alert(data);
+            	 showchild(categorie,recycle);
+             },
+             error : function() {
+ 				alert("复制失败！");
+ 			}
+         });
+		 $('.md-effect-10').removeClass('md-show');
+	}
+	
+</script>
+
+<!-- 多选复制 -->
+<script>
+var cateids=[];
+var fileids=[];
+var btns=[];
+$('.equip_1').off('click','#f4').on('click','#f4',function(){
+	a=a+1;	
+	var j=0;
+	var k=0;
+	var i=0;
+	cateids=[];
+	fileids=[];
+	btns=[];
+	$('.table input:checked').each(function(){ 
+		btns[i]=$(this).next().next('input').val();
+	if($(this).next().next('input').hasClass('reid')){
+		cateids[j++] = btns[i++];
+	}else{
+		fileids[k++] = btns[i++];
+	}
+	});
+	btnAjax(cb);
+});
 </script>
 </body>
 </html>
