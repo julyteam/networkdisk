@@ -1462,3 +1462,11 @@ img.userpic {
 	margin-left:10px;
 	cursor: pointer;
 }
+.menuTree .treename{
+	width:80%;
+	height:20px;
+}
+.menuTree .active{
+	color:#ff0000;
+	background:#e5f0fb;
+}

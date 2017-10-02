@@ -8,6 +8,7 @@ import java.util.Map;
 import com.july.networkdisk.dao.CategorieDao;
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
+import com.july.networkdisk.vo.CateTree;
 import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
 
@@ -77,7 +78,47 @@ public class CateServiceImpl implements ICateService{
 		return cateDao.findAllCateByUser(map);
 	}
 	
-
+	/**
+	 * 显示用户所有的文件夹
+	 * @param cat_uid
+	 * @param cate_reid
+	 * @return
+	 */
+	public void getAllCate(String cat_uid,String cate_reid,CateTree cateTree){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cat_uid", cat_uid);
+		map.put("cat_reid", cate_reid);
+		map.put("cat_state", 0);
+		List<CateTree> list = cateDao.getAllCate(map);
+		if(list!=null && list.size() != 0){
+			for (CateTree catetree : list) {
+				getAllCate(cat_uid, catetree.getCateid(), catetree);	 
+			}
+			cateTree.setList(list);
+		}
+	
+	}
+	
+	/**
+	 * 获取所有的子级目录
+	 * @param cat_uid
+	 * @param cate_reid
+	 * @return
+	 */
+	public void getSublevelCate(String cat_uid,String cate_reid,List<CateTree> listcate){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cat_uid", cat_uid);
+		map.put("cat_reid", cate_reid);
+		map.put("cat_state", 0);
+		List<CateTree> list = cateDao.getAllCate(map);
+		if(list!=null && list.size() != 0){
+			for (CateTree catetree : list) {
+				listcate.add(catetree);
+				getSublevelCate(cat_uid, catetree.getCateid(), listcate);
+			}
+		}
+		
+	}
 	
 	/**
 	 * 把文件夹放入或放出回收站
@@ -166,8 +207,57 @@ public class CateServiceImpl implements ICateService{
 		return recylceMap;
 	}
 	
-	public Categorie get(String p0) {
-		return null;
+	/**
+	 * 判读复制或者移动的文件是否复制或移动到其子目录下。
+	 * @param cateids
+	 * @param aimcateid
+	 * @return
+	 */
+	public boolean judgeCateID(String cat_uid,String[] cateids,String aimcateid){
+		for (String cateid : cateids) {
+			if(cateid.equals(aimcateid)){
+				return false;
+			}else {
+				List<CateTree> listcate = new ArrayList<CateTree>();
+				getSublevelCate(cat_uid, cateid, listcate);
+				for (CateTree cateTree : listcate) {
+					if(cateTree.getCateid().equals(aimcateid)){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 判读同级目录下是否有相同名字的文件夹
+	 * @param cateids
+	 * @param aimcateid
+	 * @return
+	 */
+	public boolean judgeCateName(String cat_uid,String[] cateids,String aimcateid){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cat_reid", aimcateid);
+		map.put("cat_state", 0);
+	    List<Categorie> list =findAllCate(cat_uid, map);
+		for (Categorie aimcategorie : list) {
+			for (String cateid : cateids) {
+				Categorie categorie = get(cateid);
+				if(aimcategorie.getName().equals(categorie.getName())){
+					return false;
+				}
+				
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 拿到单个文件
+	 */
+	public Categorie get(String cateid) {
+		return cateDao.get(cateid, 0);
 	}
 	
 	public boolean delete(String p0) {

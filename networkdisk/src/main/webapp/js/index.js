@@ -155,12 +155,12 @@ $(document).ready(function() {
 					$('.donetimeline').css('display', 'none');
 				}
 			});
-			$('table').on('mouseenter','tr',function() {
+			$('.table').on('mouseenter','tr',function() {
 				$(this).css('background','rgba(220, 200, 200, 0.4)');
 				$(this).children().find('.more').css('display', 'inline-block');
 				
 			});
-			$('table').on('mouseleave','tr',function() {
+			$('.table').on('mouseleave','tr',function() {
 				$(this).css('background','none');
 				$(this).children().find('.more').css('display', 'none');
 			});

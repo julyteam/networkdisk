@@ -198,6 +198,12 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		<!-- 复制文件或着文件夹 -->
+		<action name="copyFileAndCate" class="fileAndCateAction" method="copyFileAndCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 	</package>
 	
 	
@@ -223,6 +229,12 @@
 		<action name="deleteCate" class="cateAction" method="deleteCate">
 			<result name="json" type="json">
 				<param name="root">message</param>
+			</result>	
+		</action>
+		
+		<action name="showAllCate" class="cateAction" method="showAllCate">
+			<result name="json" type="json">
+				<param name="root">list</param>
 			</result>	
 		</action>
 		

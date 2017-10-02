@@ -3,6 +3,7 @@ package com.july.networkdisk.service;
 import java.util.List;
 import java.util.Map;
 
+import com.july.networkdisk.vo.CateTree;
 import com.july.networkdisk.vo.Categorie;
 
 /**
@@ -57,5 +58,33 @@ public interface ICateService extends IBaseService<Categorie> {
 	 * @return
 	 */
 	boolean reName(String cateid,String catename);
-
+	
+	/**
+	 * 显示用户所有的文件夹
+	 * @param cat_uid
+	 * @param cate_reid
+	 * @return
+	 */
+	 void getAllCate(String cat_uid,String cate_reid,CateTree cateTree);
+	 /**
+		 * 获取所有的子级目录
+		 * @param cat_uid
+		 * @param cate_reid
+		 * @return
+		 */
+	 void getSublevelCate(String cat_uid,String cate_reid,List<CateTree> listcate);
+	 /**
+		 * 判读复制或者移动的文件是否复制或移动到其子目录下。
+		 * @param cateids
+		 * @param aimcateid
+		 * @return
+		 */
+	 boolean judgeCateID(String cat_uid,String[] cateids,String aimcateid);
+	    /**
+		 * 判读同级目录下是否有相同名字的文件夹
+		 * @param cateids
+		 * @param aimcateid
+		 * @return
+		 */
+	 boolean judgeCateName(String cat_uid,String[] cateids,String aimcateid);
 }

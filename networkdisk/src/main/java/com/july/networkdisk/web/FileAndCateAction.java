@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.util.CommonUtil;
@@ -25,30 +24,36 @@ public class FileAndCateAction extends ActionSupport {
 	private Integer recycleflag; // 回收站标志
 	private String file_id; // 文件id
 	private String message; // 返回消息
-	private String filelist;  //文件id数组
-	private String catelist;	//文件夹id数组
-	private String rename;		//重命名
-	private String refileid;   //重命名文件id
-	private String recategorieid; //重命名文件夹id
-	
+	private String filelist; // 文件id数组
+	private String catelist; // 文件夹id数组
+	private String rename; // 重命名
+	private String refileid; // 重命名文件id
+	private String recategorieid; // 重命名文件夹id
+
 	public void setRefileid(String refileid) {
 		this.refileid = refileid;
 	}
+
 	public void setRecategorieid(String recategorieid) {
 		this.recategorieid = recategorieid;
 	}
+
 	public void setRename(String rename) {
 		this.rename = rename;
 	}
+
 	public void setFilelist(String filelist) {
 		this.filelist = filelist;
 	}
+
 	public void setCatelist(String catelist) {
 		this.catelist = catelist;
 	}
+
 	public String getMessage() {
 		return message;
 	}
+
 	public void setFile_id(String file_id) {
 		this.file_id = file_id;
 	}
@@ -139,111 +144,151 @@ public class FileAndCateAction extends ActionSupport {
 		map = iCateService.showRecycleCate(user.getId());
 		return "json";
 	}
-	
+
 	/**
 	 * 还原文件
+	 * 
 	 * @return
 	 */
-	public String restoreFile(){
-		boolean flag= iFileService.layRecyle(file_id, 0);
-		if(flag == true){
-			message="还原文件成功！";
-		}
-		else {
-			message="还原文件失败！";
+	public String restoreFile() {
+		boolean flag = iFileService.layRecyle(file_id, 0);
+		if (flag == true) {
+			message = "还原文件成功！";
+		} else {
+			message = "还原文件失败！";
 		}
 		return "json";
 	}
-	
+
 	/**
 	 * 还原文件和文件夹
+	 * 
 	 * @return
 	 */
-	public String restoreCateandfile(){
-		if(!"".equals(filelist)){
-			String[] fileids= filelist.split(",");
+	public String restoreCateandfile() {
+		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
+			String[] fileids = filelist.split(",");
 			List<String> files = Arrays.asList(fileids);
 			iFileService.layBatchRecyle(files, 0);
 		}
-		if(!"".equals(catelist)){
+		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
 			String[] cateids = catelist.split(",");
 			for (String cateid : cateids) {
-			iCateService.recyleCate(cateid, 1);
-		    }
+				iCateService.recyleCate(cateid, 1);
+			}
 		}
 		message = "还原成功！";
 		return "json";
 	}
-	
+
 	/**
 	 * 删除文件
+	 * 
 	 * @return
 	 */
-	public String deleteFile(){
-		boolean flag= iFileService.delete(file_id);
-		if(flag == true){
-			message="删除文件成功！";
-		}
-		else {
-			message="删除文件失败！";
+	public String deleteFile() {
+		boolean flag = iFileService.delete(file_id);
+		if (flag == true) {
+			message = "删除文件成功！";
+		} else {
+			message = "删除文件失败！";
 		}
 		return "json";
 	}
-	
+
 	/**
 	 * 批量把文件和文件夹放入回收站
+	 * 
 	 * @return
 	 */
-	public String batchdeletefileandcate(){
-		if(!"".equals(filelist)){
-			String[] fileids= filelist.split(",");
+	public String batchdeletefileandcate() {
+		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
+			String[] fileids = filelist.split(",");
 			List<String> files = Arrays.asList(fileids);
 			iFileService.layBatchRecyle(files, 1);
 		}
-		if(!"".equals(catelist)){
+		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
 			String[] cateids = catelist.split(",");
 			for (String cateid : cateids) {
 				iCateService.recyleCate(cateid, 0);
-		    }
+			}
 		}
 		message = "放入回收站成功！";
 		return "json";
 	}
-	
+
 	/**
 	 * 清空回收站
+	 * 
 	 * @return
 	 */
-	public String emptyRecycle(){
-		if(!"".equals(filelist)){
-			String[] fileids= filelist.split(",");
+	public String emptyRecycle() {
+		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
+			String[] fileids = filelist.split(",");
 			List<String> files = Arrays.asList(fileids);
 			iFileService.deleteBatch(files);
 		}
-		if(!"".equals(catelist)){
+		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
 			String[] cateids = catelist.split(",");
 			for (String cateid : cateids) {
-			iCateService.deleteCate(cateid);
-		    }
+				iCateService.deleteCate(cateid);
+			}
 		}
 		message = "清空回收站成功！";
 		return "json";
 	}
-	
+
 	/**
 	 * 重新命名
+	 * 
 	 * @return
 	 */
-	public String reName(){
-		if(!"undefined".equals(refileid) && !"".equals(refileid)){
+	public String reName() {
+		if (refileid != null && !"undefined".equals(refileid)&& !"".equals(refileid)) {
 			iFileService.rename(refileid, rename);
-			
+
 		}
-		if(!"".equals(recategorieid) && !"undefined".equals(recategorieid)){
+		if (recategorieid != null && !"".equals(recategorieid)
+				&& !"undefined".equals(recategorieid)) {
 			iCateService.reName(recategorieid, rename);
-			
+
 		}
 		message = "重命名成功！";
 		return "json";
 	}
+
+	/**
+	 * 复制文件和文件夹
+	 * 
+	 * @return
+	 */
+	public String copyFileAndCate() {
+		Boolean flag;
+		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
+			String[] cateids = catelist.split(",");
+			flag = iCateService.judgeCateID(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			if (flag == false) {
+				message = "不能复制到其子文件夹下!";
+				return "json";
+			}
+			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			if (flag == false) {
+				message = "目标文件夹中已经含有相同名字的文件夹!";
+				return "json";
+			}
+
+		}
+		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
+			String[] fileids = filelist.split(",");
+			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id);
+			if (flag == false) {
+				message = "目标文件夹下已经含有相同名字的文件!";
+				return "json";
+			}
+		}
+		
+		message = "复制成功!";
+		return "json";
+	}
+
 }

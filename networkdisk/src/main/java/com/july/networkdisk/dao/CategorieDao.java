@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.july.networkdisk.vo.CateTree;
 import com.july.networkdisk.vo.Categorie;
 
 
@@ -28,6 +29,18 @@ public class CategorieDao extends BaseDao {
 	public List<Categorie> findAllCateByUser(Map<String, Object> map) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		List<Categorie> list = sqlSession.selectList("cateSpace.findAllCateByUser",map);
+		sqlSession.close();
+		return list;
+	}
+	
+	
+	/**
+	 * 得到所有目录
+	 * @return
+	 */
+	public List<CateTree> getAllCate(Map<String, Object> map) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<CateTree> list = sqlSession.selectList("cateSpace.getAllcate",map);
 		sqlSession.close();
 		return list;
 	}
