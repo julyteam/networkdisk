@@ -348,6 +348,11 @@
       				<span class="text" style="width: auto;">确定</span>
       				</span>
       				</a>
+      				<a class="g-button g-button-blue-large suremove" href="javascript:void(0);" style="float: right;display:none">
+      				<span class="g-button-right" style="padding-right: 50px;">
+      				<span class="text" style="width: auto;">移动</span>
+      				</span>
+      				</a>
       				<a class="g-button g-button-large" href="javascript:void(0);" style="float: left;">
       				<span class="g-button-right"><em class="fa fa-plus-square-o" title="新建文件夹"></em>
       				<span class="text" style="width: auto;">新建文件夹</span>
@@ -917,8 +922,23 @@
 	var thecate;
 	var thefile;
 	var ree=[];
+	var pan=0;
 	$('.table').off('click','.md-copy').on('click','.md-copy',function() {
 		a=a+1;	
+		thecate=null;
+		thefile=null;
+		ree=null;
+		if($(this).parents('tr').find('input[type=text]').hasClass('reid')){
+			thecate=$(this).parents('tr').find('.reid').val();
+		}
+		else{
+			thefile=$(this).parents('tr').find('.refileid').val();
+		}
+		btnAjax(cb);
+	});
+	$('.table').off('click','.md-move').on('click','.md-move',function() {
+		a=a+1;	
+		pan=1;
 		thecate=null;
 		thefile=null;
 		ree=null;
@@ -946,6 +966,16 @@
 	function cb(data) {
 		$('.menuTree').empty();
 		$('.md-effect-10').addClass('md-show');
+		if(pan==1){
+			$('.dialog-header-title').html('移动到');
+			$('.surein').hide();
+			$('.suremove').show();
+			pan=0;
+		}else{
+			$('.dialog-header-title').html('复制到');
+			$('.surein').show();
+			$('.suremove').hide();
+		}
     	var json = data;
 		var str = "";
 		var forTree = function(o){
@@ -1044,6 +1074,35 @@
 		}
 		copyFileAndCate(file_ids,cate_ids,aimcateid);		
     });
+    /* 点击移动触发事件 */
+    $('.suremove').unbind("click").click(function(){
+    	var file_ids;
+    	var cate_ids;
+    	var aimcateid;
+		if(thecate&&!thefile){			
+			alert("选择文件夹的id:"+thecate+"复制到文件夹："+insertCate);		
+			/* cate_ids=thecate;
+			aimcateid=insertCate; */
+		}else if(!thecate&&thefile){
+			alert("选择文件的id:"+thefile+"复制到文件夹："+insertCate);
+			/* file_ids=thefile;
+			aimcateid=insertCate; */
+		}else if(cateids.length>0&&fileids.length==0){
+			alert("选择文件夹的id:"+cateids+"复制到文件夹："+insertCate);
+			/* cate_ids=cateids;
+			aimcateid=insertCate; */
+		}else if(cateids.length==0&&fileids.length>0){
+			alert("选择文件的id:"+fileids+"复制到文件夹："+insertCate);
+			/* file_ids=fileids;
+			aimcateid=insertCate; */
+		}else{
+			alert("选择文件夹的id:"+cateids+"选择文件的id:"+fileids+"复制到文件夹："+insertCate);
+			/* cate_ids=cateids;
+			file_ids=fileids;
+			aimcateid=insertCate; */
+		}
+		/* copyFileAndCate(file_ids,cate_ids,aimcateid); */		
+    });
     
 	$('.cancel').click(function(){
 		$('.menuTree').empty();
@@ -1080,6 +1139,25 @@ $('.equip_1').off('click','#f4').on('click','#f4',function(){
 	var j=0;
 	var k=0;
 	var i=0;
+	cateids=[];
+	fileids=[];
+	btns=[];
+	$('.table input:checked').each(function(){ 
+		btns[i]=$(this).next().next('input').val();
+	if($(this).next().next('input').hasClass('reid')){
+		cateids[j++] = btns[i++];
+	}else{
+		fileids[k++] = btns[i++];
+	}
+	});
+	btnAjax(cb);
+});
+$('.equip_1').off('click','#f2').on('click','#f2',function(){
+	a=a+1;	
+	var j=0;
+	var k=0;
+	var i=0;
+	pan=1;
 	cateids=[];
 	fileids=[];
 	btns=[];
