@@ -343,5 +343,9 @@ public class FileAndCateAction extends ActionSupport {
 		message = "移动成功!";
 		return "json";
 	}
-
+	
+	/*回收站页面跳转*/
+	public String gorecycle(){
+		return SUCCESS;
+	}
 }

@@ -48,8 +48,8 @@
 			<div class="row1">
 				<div class="span1" style="display: inline;">
 					<ul class="pull-left">
-						<li class="active"><a href="index.jsp">网盘</a></li>
-						<li><a href="share.jsp">分享</a></li>
+						<li class="active"><a href="goindex">网盘</a></li>
+						<li><a href="goshare">分享</a></li>
 						<li><a href="#">更多</a></li>
 					</ul>
 				</div>
@@ -58,11 +58,11 @@
 						<li class="chos" style="width: 220px;">
 							<div class="sev">
 								<div class="admin">
-									<img src="${pageContext.request.contextPath}/showphoto?uid=${user.id}"
+									<img src="${pageContext.request.contextPath}/showphoto?uid=${sessionScope.user.id}"
 										width="30px"
 										style="border-radius: 30px; position: absolute; top: 10px;" />
 									<a href="#" style="display: inline-block; height: 50px;">
-										<div class="username">${user.name }</div> <img
+										<div class="username">${sessionScope.user.name }</div> <img
 										src="/networkdisk/img/VIP1.png"
 										style="display: inline-block; margin-bottom: 45px;" />
 									</a> <em style="display: inline-block;"><img
@@ -75,10 +75,10 @@
 										<div class="userpan_2">
 											<div class="u1"> 
 												<a href="#"> <img
-													src="${pageContext.request.contextPath}/showphoto?uid=${user.id}"
+													src="${pageContext.request.contextPath}/showphoto?uid=${sessionScope.user.id}"
 													width="30px" class="userpic" />
-													<input type="hidden" value="${user.id }" id="uid" />
-												</a> <a href="">${user.name }</a> <img
+													<input type="hidden" value="${sessionScope.user.id }" id="uid" />
+												</a> <a href="">${sessionScope.user.name }</a> <img
 													src="/networkdisk/img/VIP1.png"
 													style="display: inline; margin-bottom: 5px;" />
 											</div>
@@ -108,7 +108,7 @@
 						</li>
 						<li style="width: 100px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="#"><img src="/networkdisk/img/notice.png"
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
 								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
@@ -124,18 +124,18 @@
 						<ol>
 							<li><a class="change-head"   data-toggle="modal"
 								data-target="#edittouxiang" ><div class="change-h">
-										<img src="showphoto?uid=${user.id }" class="img-head" />
+										<img src="showphoto?uid=${sessionScope.user.id }" class="img-head" />
 										<div class="head-shade">
 											<span class="head-content"><p>更改头像</p></span>
 										</div>
 									</div></a></li>
 							<li class="time"><img
 								src="/networkdisk/user/img/person-time.png"> <span
-								class="time">注册时间:<fmt:formatDate value="${user.addtime}"
+								class="time">注册时间:<fmt:formatDate value="${sessionScope.user.addtime}"
 										pattern="yyyy-MM-dd HH:mm:ss" /></span></li>
 							<li class="real-name"><img
 								src="/networkdisk/user/img/person-relName.png"> <span
-								class="real-name">真实姓名:${user.trueName }</span></li>
+								class="real-name">真实姓名:${sessionScope.user.trueName }</span></li>
 							<li class="re-pwd"><a data-toggle="modal"
 								data-target="#editPwd"><img
 									src="/networkdisk/user/img/person-pwd.png"><span
@@ -147,11 +147,11 @@
 							<form action="">
 								<ol class="right-0l">
 
-									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${user.name }</span></li>
-									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${user.email}</span></li>
-									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${user.phone}</span></li>
-									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${user.sex==1?"男":"女" }</span></li>
-									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${user.about }</span></li>
+									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${sessionScope.user.name }</span></li>
+									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${sessionScope.user.email}</span></li>
+									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${sessionScope.user.phone}</span></li>
+									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${sessionScope.user.sex==1?"男":"女" }</span></li>
+									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${sessionScope.user.about }</span></li>
 									<li><input class="btn btn-default" type="button"
 										value="修 改" data-toggle="modal" data-target="#editInfo"
 										style="font-size: 16px;"></li>
@@ -182,21 +182,21 @@
 					<fieldset>
 						<ol class="right-02">
 							<li><span class="glyphicon glyphicon-user">&nbsp;用户名:</span><input
-								type="text" id="u_name" value="${user.name }"
+								type="text" id="u_name" value="${sessionScope.user.name }"
 								readonly="readonly"></li>
 							<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:</span><input
-								type="text" id="u_email" value="${user.email}" name="email"></li>
+								type="text" id="u_email" value="${sessionScope.user.email}" name="email"></li>
 							<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:</span><input
-								type="text" id="u_phone" value="${user.phone }" name="phone"></li>
+								type="text" id="u_phone" value="${sessionScope.user.phone }" name="phone"></li>
 							<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:</span><input
 								type="radio" name="sex" value="1"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==1}">checked="checked"</c:if>>男<input
+								<c:if test="${sessionScope.user.sex==1}">checked="checked"</c:if>>男<input
 								type="radio" name="sex" value="0"
 								style="width: 14px; height: 14px;"
-								<c:if test="${user.sex==0}">checked="checked"</c:if>>女</li>
+								<c:if test="${sessionScope.user.sex==0}">checked="checked"</c:if>>女</li>
 							<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:</span><input
-								type="text" id="u_about" value="${user.about }" name="about" />
+								type="text" id="u_about" value="${sessionScope.user.about }" name="about" />
 							<li>
 						</ol>
 					</fieldset>
@@ -250,7 +250,7 @@
             <form action="photoup" method="post" enctype="multipart/form-data">
 	            <div class="modal-body">
 	            <div class="modal_body_left">
-	            <img alt="" src="showphoto?uid=${user.id }" class="img-head" id="img" />
+	            <img alt="" src="showphoto?uid=${sessionScope.user.id }" class="img-head" id="img" />
 	            
 	            </div>
 										<div class="modal_body_right">

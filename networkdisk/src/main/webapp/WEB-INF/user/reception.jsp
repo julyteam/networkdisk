@@ -27,17 +27,16 @@
 <script src="/networkdisk/js/jquery.rotate.min.js"></script>
 </head>
 <script type="text/javascript">
-	 $(document).ready(function(){
-		var name = $(".username").text();
-		
-		if(name.length > 0){
-			$(".login").hide();
-		}else{
-			$(".sev").hide();
-		}
-		
-		
-	});
+$(document).ready(function(){
+	var username = $(".username").text();
+	if(username.length > 0){
+		$(".login").hide();
+		$(".sev").show();
+	}else{
+		$(".login").show();
+		$(".sev").hide;
+	}
+})
 </script>
 <body>
 	<div id="in-nav">
@@ -51,21 +50,40 @@
 			<div class="row1">
 				<div class="span1" style="display: inline;float:left;">
 					<ul class="pull-left">
-						<li class="active"><a href="index.jsp">网盘</a></li>
-						<li><a href="share.jsp">分享</a></li>
+						<li class="active"><a id="goindex">网盘</a></li>
+						<li><a id="goshare">分享</a></li>
 						<li><a href="#">更多</a></li>
 					</ul>
 				</div>
+				<script type="text/javascript">
+					$("#goindex").click(function(){
+						var name = $(".username").text();
+						if(name.length < 1){
+							alert("请先登陆！");
+						}else{
+							$("#goindex").attr("href","goindex");
+						}
+					});
+					$("#goshare").click(function(){
+						var name = $(".username").text();
+						if(name.length < 1){
+							alert("请先登陆！");
+						}else{
+							$("#goshare").attr("href","goshare");
+						}
+					})
+				</script>
+				
 				<div class="span2">
 					<ul class="right">
 						<li class="chos" style="width: 220px;" id="admin">
-							<div class="sev" style='display:none'>
+							<div class="sev" style='display:none;'>
 								<div class="admin">
 									
-									<img src="sharephoto?uid=${u.id }" width="30px"
+									<img src="sharephoto?uid=${sessionScope.user.id }" width="30px" class="photo"
 										style="border-radius: 30px; position: absolute; top: 10px;" />
 									<a href="#" style="display: inline-block; height: 50px;">
-										<div class="username">${u.name }</div><input type="hidden" id="uid" value="${u.id }" >  <img
+										<div class="username">${sessionScope.user.name }</div><input type="hidden" id="uid" value="${sessionScope.user.id }" >  <img
 										src="/networkdisk/img/VIP1.png"
 										style="display: inline-block; margin-bottom: 45px;" />
 									</a>
@@ -80,8 +98,8 @@
 									<div class="userpan">
 										<div class="userpan_2">
 											<div class="u1">
-												<a href="#"><img src="sharephoto?uid=${u.id }"
-													width="30px" class="userpic" /> </a> <a href="">${u.name }</a>
+												<a href="#"><img src="sharephoto?uid=${sessionScope.user.id }" class="photo"
+													width="30px" class="userpic" /> </a> <a id="username">${sessionScope.user.name }</a>
 												<img src="/networkdisk/img/VIP1.png"
 													style="display: inline; margin-bottom: 5px;" />
 											</div>
@@ -93,7 +111,7 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<!-- <p><a href=""><span >切换账户</span></a></p> -->
+												<p><a href="per-center"><span>个人资料</span></a></p> 
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
 												<p><a href="sharelogout"><span>退出</span></a></p>
@@ -107,7 +125,7 @@
 						</li>
 						<li style="width: 100px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="#"><img src="/networkdisk/img/notice.png"
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
 								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
@@ -123,8 +141,8 @@
 				<div class="slide-show-left">
 					<h2 class="file-name" title="jdk-8u73-windows-x64.exe">
 						<em class="fa fa-file-zip-o"></em> 
-						<c:forEach items="${catelist }" var="c">${c.name }</c:forEach> 
-						<c:forEach items="${filelist }" var="f">${f.name }</c:forEach>
+						<c:forEach items="${sessionScope.catelist }" var="c">${c.name }</c:forEach> 
+						<c:forEach items="${sessionScope.filelist }" var="f">${f.name }</c:forEach>
 					</h2>
 				</div>
 				<div class="slide-show-right">
@@ -187,7 +205,7 @@
 								success : function(data) {
 									if (data == 1) {
 										alert("保存成功！");
-										location.href="reception.jsp";
+										return ;
 									} else if (data == 0) {
 										alert("文件或文件夹已存在！");
 									}
@@ -217,8 +235,7 @@
 				</div>
 			</div>
 
-			<div class="tw1_body"
-				style="width: 100%; margin: 0px auto; height: 450px; overflow-y: auto; border: none;">
+			<div class="tw1_body" style="width: 100%; margin: 0px auto; height: 410px; overflow-y: auto; border: none;">
 				<div class="Jdh">
 					<table id="july_allFile" style="display: inline">
 						<tr>
@@ -229,18 +246,18 @@
 					<span class="Sdh" style="float: right; display: inline-block;"></span>
 				</div>
 				<div class="Qdh">
-					<ul>
+					<ul class='head'>
 						<li style="width: 50%; margin-left: -40px;"><input
-							type="checkbox" class="" /><span id="n1">文件名</span></li>
+							type="checkbox" class="ck1" /><span id="n1" style='margin-left: 10px;'>文件名</span></li>
 						<li style="width: 25%;">大小</li>
 						<li style="width: 30%;">修改日期</li>
 					</ul>
-					<div  id="qdh">
+					<div id="qdh">
 					<c:forEach items="${catelist }" var="c">
 						<ul>
-							<li style="width: 50%; margin-left: -40px;"><input
-								type="checkbox" class="cateid" name="catebox" value="${c.id }" />
-								<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>
+							<li style="width: 50%; margin-left: -40px;">
+							<input type="checkbox" class="cateid" name="catebox" value="${c.id }" />
+								<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 0px;'>
 								<span id="n1" class="cate">${c.name }</span>
 								<input type="hidden" value="${c.id }" />
 								</li>
@@ -251,9 +268,8 @@
 					</c:forEach>
 					<c:forEach items="${filelist }" var="f">
 						<ul>
-							<li style="width: 50%; margin-left: -40px;"><input
-								type="checkbox" class="filebox" name="filebox" value="${f.id }" />
-								
+							<li style="width: 50%; margin-left: -40px;">
+							<input type="checkbox" class="filebox" name="filebox" value="${f.id }" />								
 								<c:choose>
 								    <c:when test="${f.type == 'zip' }">
 								       <img src='/networkdisk/img/ZIP_2.png' width='28px' style='margin:0 5px 5px 0px;'>
@@ -490,7 +506,7 @@
 		
 	</div>
 	<div class="md-modal md-effect-10" id="modal-10" style="width: 500px;">
-		<form action="sharelogin" method="post">
+
 			<div class="md-content" style="height: 310px;">
 				<div class="dialog-header dialog-drag">
 					<span class="dialog-header-title">登陆 </span>
@@ -498,12 +514,12 @@
 				<div class="dialog-tree" style="border: none;">
 					<div style="width: 400px; margin-top: 30px;">
 						<span style="color: black; font-size: 15px;">username：</span><input
-							type="text" name="name"
+							type="text" id="name"
 							style="width: 200px; margin-left: 30px; border-radius: 3px;" />
 					</div>
 					<div style="width: 400px; margin-top: 30px;">
 						<span style="color: black; font-size: 15px;">password：</span><input
-							type="password" name="passWord"
+							type="password" id="passWord"
 							style="width: 200px; margin-left: 32px; border-radius: 3px;" />
 					</div>
 				</div>
@@ -519,14 +535,40 @@
 						style="float: right; background:none;border:none;"> 
 						
 						<span class="g-button-right"
-						style="padding-right: 5px;"><input type="image" src="/networkdisk/img/sharelogin.png" />
+						style="padding-right: 5px;"><input type="image" id="login" src="/networkdisk/img/sharelogin.png" />
 						<!-- <span class="text" id="sharelogin" style="width: auto;">登陆</span> -->
 						</span>
 					</a>
 				</div>
 			</div>
-		</form>
+
 	</div>
+	
+	
+	<script type="text/javascript">
+		$("#login").click(function(){
+			var name = $("#name").val();
+			var passWord = $("#passWord").val();
+			$.ajax({
+				url : "sharelogin?name=" + name+"&passWord="+passWord,
+				dataType : 'json',
+				async : false,
+				success : function(map) {
+					var user = map.user;
+					$("#modal-10").hide();					
+					$(".login").hide();
+					$(".username").append(user.name);
+					$("#username").append(user.name);
+					$(".photo").attr("src","sharephoto?uid="+user.id);
+					$(".sev").show();
+				},
+				error : function(){
+					alert("登陆失败！");
+				}
+			});
+		});
+	</script>
+	
 </body>
 <script src="js/classie.js"></script>
 <script src="js/modalEffects.js"></script>

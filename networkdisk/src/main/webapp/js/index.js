@@ -90,6 +90,30 @@ $(document).ready(function() {
 			 $('.Qdh').find('li').nextAll('li').show();
 		 }		
 	});
+	/*reception界面全选反选*/
+	$(".ck1").click(function() {
+		if(this.checked) {
+			$("#qdh :checkbox").prop("checked", true);
+			$("#n1").html("已选中" + $('#qdh input:checkbox').length + "个文件/文件夹");
+		} else {
+			$("#qdh :checkbox").prop("checked", false);
+			$("#n1").html("文件夹");
+		}
+	});
+	$('#qdh').on('click','input:checkbox',function() {
+		 var num=$('#qdh input:checked').length;
+		 if(num>0&&num<$('#qdh input:checked').length){
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('#n1').html(msg);
+		 }else if(num==$('#qdh input:checked').length){
+			 $('.chk_1').prop('checked',true);
+			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.Qdh').find('#n1').html(msg);					 					 
+		 }else{
+			 $('.chk_1').attr('checked',false);
+			 $('.Qdh').find('#n1').html('文件夹');
+		 }		
+	});
 	/*批量把文件和文件夹放入回收站*/
 	$('#f3').click(function() {
 		var btns= [];

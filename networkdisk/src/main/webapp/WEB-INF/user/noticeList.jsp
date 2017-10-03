@@ -5,11 +5,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-	<head>
+<head>
 <link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
-<link href="/networkdisk/css/notice2.css" rel="stylesheet" />
+<link href="/networkdisk/css/noticeList.css" rel="stylesheet" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
@@ -18,6 +18,8 @@
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
+<script src="/networkdisk/user/js/messages_zh.js"></script>
+
 	</head>
 
 	<body>
@@ -33,10 +35,10 @@
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
 							<li class="active">
-								<a href="#">网盘</a>
+								<a href="goindex">网盘</a>
 							</li>
 							<li>
-								<a href="#">分享</a>
+								<a href="goshare">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -72,10 +74,10 @@
 											</span>
 										</div>
 										<div class="userpan_4">
-											<p href="">个人资料</p>
+											<p href="per-center">个人资料</p>
 											<p href="">帮助中心</p>
 											<p href="">设置</p>
-											<p href="">退出</p>
+											<p href="logout">退出</p>
 										</div>
 									</div>
 								</div>
@@ -85,7 +87,7 @@
 								<a href="#" style="font-size: 13px;">&nbsp;客户端下载</a>
 							</li>
 							<li>
-								<a href="#"><img src="img/notice.png" /></a>
+								<a href="noticeList"><img src="img/notice.png" /></a>
 							</li>
 							<li>
 								<a href="#"><img src="img/serve.png" /></a>
@@ -94,22 +96,43 @@
 					</div>
 				</div>
 			</div>
+			
 	    	<div class="clean" style="clear: all;height:40px;"></div>
 		      <div class="noticePage">
-		      	<div style="height:50px;"><a href="noticePage" class="goback">返回</a></div>
-		      	<div class="noticeTitle">${param.title}</div>
-		      	<div class="noticeContent">
-		      	  <textarea style="width:700px;height:400px">${param.text}</textarea>	
-		      	</div>
+		      	<div class="clean" style="height:15px;"></div>
+		       <div class="row">
+		       <form action="noticeDel"  method="post">
+		       	<a onclick="return(confirm('確定刪除?'))">
+		       	<span class="rowDelete">
+		       		<i class="fa fa-trash"></i>删除
+		       	</span>
+		       	</a>
+		       	<input type="submit" style="opacity:0;position: relative;font-size: 20px;left: -60px;top: 0px;">
+		       	<a href="noticePage?currentPage=${currentPage+1}" class="nextPage">下一页</a>
+		        <a href="noticePage?currentPage=${currentPage-1}" class="proPage">上一页</a>
+		        <a href="#" class="page">${notice2.nowPage }/${notice2.sumPage}页</a>
+		       </div>		      	
+		      <table>		          
+		      		<tr>
+		      			<th style="width:20%">主题</td>
+		      			<th style="width:70%">内容</td>
+		      			<th style="width:10%">时间  <i class="fa fa-arrow-down" aria-hidden="true"></i></td>
+		      		</tr>
+		      		<c:forEach items="${notice}" var="notice">
+		      		<tr>
+		      			<td style="width:20%"><input type="checkbox" class="checkbox" name="checkbox" value="${notice.id}"> <a href="notice.jsp?title=${notice.title}&text=${notice.text}" class="noticeTitle">${notice.title}</a></td>
+		      			<td style="width:50%"><div class="tdcontent"><a href="notice.jsp?text=${notice.text}&title=${notice.title}">${notice.text}</a></div></td>
+		      			<td style="width:30%"><fmt:formatDate value="${notice.time}"
+									pattern="yyyy-MM-dd " /></td>
+		      		</tr>
+		      		</c:forEach> 
+		      	</table>
 		      </div>
-		  
+		    	  
 		</div>
-
-
-<script>	
-			
-		$(document).ready(function() { 
-			
+	<script>
+	    
+		$(document).ready(function() { 		
 			/* 弹框*/
 			$(function() {
    				 $('#myModal').modal('hide')
@@ -133,12 +156,3 @@
 </script>
 		
 </body>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>

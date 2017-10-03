@@ -35,8 +35,8 @@
 			<div class="row1">
 				<div class="span1" style="display: inline;">
 					<ul class="pull-left">
-						<li class="active"><a href="index.jsp">网盘</a></li>
-						<li><a href="share.jsp">分享</a></li>
+						<li class="active"><a href="goindex">网盘</a></li>
+						<li><a href="goshare">分享</a></li>
 						<li><a href="#">更多</a></li>
 					</ul>
 				</div>
@@ -45,11 +45,11 @@
 						<li class="chos" style="width: 220px;">
 							<div class="sev">
 								<div class="admin">
-									<img src="${pageContext.request.contextPath}/showphoto?uid=${user.id}"
+									<img src="${pageContext.request.contextPath}/showphoto?uid=${sessionScope.user.id}"
 										width="30px"
 										style="border-radius: 30px; position: absolute; top: 10px;" />
 									<a href="#" style="display: inline-block; height: 50px;">
-										<div class="username">${user.name }</div> <img
+										<div class="username">${sessionScope.user.name }</div> <img
 										src="/networkdisk/img/VIP1.png"
 										style="display: inline-block; margin-bottom: 45px;" />
 									</a> <em style="display: inline-block;"><img
@@ -62,10 +62,10 @@
 										<div class="userpan_2">
 											<div class="u1"> 
 												<a href="#"> <img
-													src="${pageContext.request.contextPath}/showphoto?uid=${user.id}"
+													src="${pageContext.request.contextPath}/showphoto?uid=${sessionScope.user.id}"
 													width="30px" class="userpic" />
-													<input type="hidden" value="${user.id }" id="uid" />
-												</a> <a href="">${user.name }</a> <img
+													<input type="hidden" value="${sessionScope.user.id }" id="uid" />
+												</a> <a href="">${sessionScope.user.name }</a> <img
 													src="/networkdisk/img/VIP1.png"
 													style="display: inline; margin-bottom: 5px;" />
 											</div>
@@ -95,7 +95,7 @@
 						</li>
 						<li style="width: 100px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="#"><img src="/networkdisk/img/notice.png"
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
 								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
@@ -110,19 +110,19 @@
 			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
-						<li><a href="/networkdisk/index.jsp#tw1"
+						<li><a href="goindex"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
-						<li><a href="/networkdisk/index.jsp#tw2"><i
+						<li><a href="goindex#tw2"><i
 								class="batch stream"></i><br>图片</a></li>
-						<li><a href="/networkdisk/index.jsp#tw3"><i
+						<li><a href="goindex#tw3"><i
 								class="batch plane"></i><br>文档</a></li>
-						<li><a href="/networkdisk/index.jsp#tw4"><i
+						<li><a href="goindex#tw4"><i
 								class="batch calendar"></i><br>视频</a></li>
-						<li><a href="/networkdisk/index.jsp#tw7"><i
+						<li><a href="goindex#tw7"><i
 								class="batch settings"></i><br>其他</a></li>
-						<li class="active"><a href="/networkdisk/myshare.jsp"><i
+						<li class="active"><a href="gomyshare"><i
 								class="batch share"></i><br>我的分享</a></li>
-						<li><a href="/networkdisk/recycle.jsp"><i
+						<li><a href="gorecycle"><i
 								class="batch barbage"></i><br>回收站</a></li>
 					</ul>
 				</div>
@@ -172,7 +172,7 @@
 					async : false,
 					success : function(data) {
 						alert("取消成功！");
-						 location.href="myshare.jsp"; 
+						 location.href="gomyshare"; 
 					},
 					error : function() {
 						alert("取消失败！");

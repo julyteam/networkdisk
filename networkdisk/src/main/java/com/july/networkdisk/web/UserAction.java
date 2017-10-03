@@ -440,4 +440,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	return null;
     }
    
+    /*分享页面跳转*/
+    public String goshare(){
+    	return SUCCESS;
+    }
+    
+    /*默认分享页面*/
+    public String goshare_default(){
+    	return SUCCESS;
+    }
 }

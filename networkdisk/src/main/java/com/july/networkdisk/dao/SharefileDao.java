@@ -132,7 +132,7 @@ public class SharefileDao extends BaseDao{
 		List<NetFile> f = sqlSession.selectList("fileSpace.getlistbyuid", uid);
 		for(int i=0;i<f.size();i++){
 			for(int j=0;j<fname.length;j++){
-				if(fname[j].equals(f.get(i).getName())){
+				if(fname[j].equals(f.get(i).getName()) && f.get(i).getDeletesign() == 0){
 					flag = 0;
 				}
 			}
@@ -148,7 +148,7 @@ public class SharefileDao extends BaseDao{
 		List<Categorie> cate = sqlSession.selectList("cateSpace.getlistbyuid", id);
 		for(int i=0;i<cate.size();i++){
 			for(int j=0;j<cnamelist.length;j++){
-				if(cnamelist[j].equals(cate.get(i).getName())){
+				if(cnamelist[j].equals(cate.get(i).getName()) && cate.get(i).getState() == 0){
 					cateflag = 0;
 				}
 			}

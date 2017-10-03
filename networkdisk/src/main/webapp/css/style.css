@@ -827,7 +827,10 @@ img.userpic {
 }
 
 /*myshare的样式*/
-
+.reclist{
+	overflow-y:auto;
+	height: 500px; 
+}
 .module_link,.sharebox,.listshare{
 	width: 95%;
 	height: 45px;
@@ -1537,4 +1540,15 @@ img.userpic {
 	display: inline;
 	font-family:"微软雅黑";
 	padding:0px; 
+}
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+    display:none;
+    filter:alpha(opacity=10);
+    background-color: #000;
+    opacity: 0.1;
+    -moz-opacity: 0.1;
 }

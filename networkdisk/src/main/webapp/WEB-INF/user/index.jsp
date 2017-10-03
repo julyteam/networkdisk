@@ -25,6 +25,7 @@
 </head>
 
 <body>
+	<div id="overlay" class="overlay"></div>
 		<div id="in-nav">
 			<div class="logo">
 				<a id="logo" href="/networkdisk/index.jsp">
@@ -36,10 +37,10 @@
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
 							<li class="active">
-								<a href="index.jsp">网盘</a>
+								<a href="goindex">网盘</a>
 							</li>
 							<li>
-								<a href="share.jsp">分享</a>
+								<a href="goshare">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -51,9 +52,9 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="showphoto?uid=${user.id }" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<img src="showphoto?uid=${sessionScope.user.id }" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
 										<a href="#" style="display: inline-block;height:50px;">
-											<div class="username">${user.name }</div>
+											<div class="username">${sessionScope.user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;"/></em>
@@ -65,8 +66,8 @@
 											<div class="userpan_2">
 												<div class="u1">
 													<a href="#">
-														<img src="showphoto?uid=${user.id }"  width="30px"  class="userpic" />
-														<a href="">${user.name }</a>
+														<img src="showphoto?uid=${sessionScope.user.id }"  width="30px"  class="userpic" />
+														<a href="">${sessionScope.user.name }</a>
 														<img src="/networkdisk/img/VIP1.png" style="display: inline;margin-bottom:5px ;" />
 													</a>
 												</div>
@@ -78,7 +79,7 @@
 											</span>
 											</div>
 											<div class="userpan_4">
-												<p><a href="${pageContext.request.contextPath}/per-center"><span>个人资料</span></a></p>
+												<p><a href="per-center"><span>个人资料</span></a></p>
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
 												<p><a href="logout"><span>退出</span></a></p>
@@ -89,7 +90,7 @@
 							
 						</li>
 						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="#"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
 					</ul>
 				</div>
@@ -102,19 +103,19 @@
 			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
-						<li class="active"><a href="/networkdisk/index.jsp"
+						<li class="active"><a href="goindex"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
-						<li><a href="/networkdisk/index.jsp#tw2"><i
+						<li><a href="goindex#tw2"><i
 								class="batch stream"></i><br>图片</a></li>
-						<li><a href="/networkdisk/index.jsp#tw3"><i
+						<li><a href="goindex#tw3"><i
 								class="batch plane"></i><br>文档</a></li>
-						<li><a href="/networkdisk/index.jsp#tw4"><i
+						<li><a href="goindex#tw4"><i
 								class="batch calendar"></i><br>视频</a></li>
-						<li><a href="/networkdisk/index.jsp#tw7"><i
+						<li><a href="goindex#tw7"><i
 								class="batch settings"></i><br>其他</a></li>
 						<li><a href="gomyshare"><i
 								class="batch share"></i><br>我的分享</a></li>
-						<li><a href="/networkdisk/recycle.jsp"><i
+						<li><a href="gorecycle"><i
 								class="batch barbage"></i><br>回收站</a></li>
 					</ul>
 				</div>
@@ -333,8 +334,7 @@
   		<div class="md-modal md-effect-4" id="modal-4">
 			<div class="md-content">
 				<div class="dialog-header dialog-drag">
-					<span class="dialog-header-title">
-						分享文件(夹):151209124312-1.jpg </span>
+					<span class="dialog-header-title"></span>
 				</div>
 				<div class="dialog-body">
 					<div class="share-dialog">
@@ -446,8 +446,7 @@
 								});
 								$("#create").click(function(){
 									$("#share-url").attr("value","http://localhost:8080/networkdisk/shareurl?url=<%=uuid%>");
-									$("#share-password").attr("value","<%=pwd%>");
-									
+									$("#share-password").attr("value","<%=pwd%>");									
 									var btns = new Array();
 									var cateid = new Array();
 									var uuid = $("#share-url").val();
@@ -458,15 +457,21 @@
 									}else{
 										var pwd = "";
 									}
-									$("input[name='filebox']:checked").each(function(key,value){
-									    btns[key] = $(this).val();
-									});
-									$("input[name='catebox']:checked").each(function(key,value){
-									    cateid[key] = $(this).val();
-									});
-									
-									
-									 if(btns == "" && cateid == ""){
+									if($('.table').find('input:checked').length!=0){
+										$("input[name='filebox']:checked").each(function(key,value){
+										    btns[key] = $(this).val();
+										});
+										$("input[name='catebox']:checked").each(function(key,value){
+										    cateid[key] = $(this).val();
+										});
+									}else{
+										if(iscate){
+											cateid[0]=shareid;
+										}else{
+											btns[0]=shareid;	
+										}
+									}																											
+									if(btns == "" && cateid == ""){
 										alert("请选择文件或文件夹进行分享！");
 									}else{
 										$.ajax({  
@@ -946,12 +951,31 @@
 		$('table').on('mouseleave','.menu',function(){
 			$('.menu').css('display','none');
 		});
-		$('table').on('click','.md-copy',function() {
+		$('.md-trigger').click(function() {		
+			$('.md-effect-4').addClass('md-show');
+			$('.dialog-header-title').html("分享多个文件(夹)");
+		});
+		var shareid;
+		var iscate=true;
+		$('table').on('click','.fa-share-alt',function() {
+			shareid=null;
+			if($(this).parents('tr').find('.reid').length!=0){				
+				shareid=$(this).parents('tr').find('.reid').val();
+				iscate=true;
+			}else{
+				shareid=$(this).parents('tr').find('.refileid').val();
+				iscate=false;
+			}			
+			var name=$(this).parents('tr').find('a:eq(0)').text();			
+			$('.md-effect-4').addClass('md-show');
+			$('.dialog-header-title').html("分享文件(夹):"+name);
+		});
+		/* $('table').on('click','.md-copy',function() {
 			$('.md-effect-10').addClass('md-show');
 		});
 		$('.cancel').click(function(){
 			$('.md-effect-10').removeClass('md-show');
-		});
+		}); */
 		/* 判断私密还是公开 */
 		$("input[type=radio]").click(function(){
 			$("input[name='share-method']:checked").each(function() {
@@ -1172,7 +1196,8 @@
 	}
 	function cb(data) {
 		$('.menuTree').empty();
-		$('.md-effect-10').addClass('md-show');
+		showOverlay();
+		$('.md-effect-10').addClass('md-show');		
 		if(pan==1){
 			$('.dialog-header-title').html('移动到');
 			$('.surein').hide();
@@ -1314,6 +1339,7 @@
 	$('.cancel').click(function(){
 		$('.menuTree').empty();
 		$('.md-effect-10').removeClass('md-show');
+		$('.overlay').hide();
 	});
 	
 	function moveFileAndCate(fileids,cateids,aimCateid){
@@ -1329,6 +1355,7 @@
 			}
         });
 		$('.md-effect-10').removeClass('md-show');
+		$('.overlay').hide();
 	}
 	
 	function copyFileAndCate(fileids,cateids,aimCateid){
@@ -1344,6 +1371,7 @@
  			}
          });
 		 $('.md-effect-10').removeClass('md-show');
+		 $('.overlay').hide();
 	}
 	
 </script>
@@ -1354,6 +1382,7 @@ var cateids=[];
 var fileids=[];
 var btns=[];
 $('.equip_1').off('click','#f4').on('click','#f4',function(){
+	showOverlay();
 	a=a+1;	
 	var j=0;
 	var k=0;
@@ -1518,5 +1547,17 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
 	}
 		
     </script>
+    <script type="text/javascript">
+    /**
+     * 显示遮罩层
+     */
+
+     function showOverlay() {
+        // 遮罩层宽高分别为页面内容的宽高
+        $('.overlay').css({'height':$(window).height(),'width':$(window).width()});
+        $('.overlay').show();
+    }
+    </script>
+    
 </body>
 </html>

@@ -119,7 +119,6 @@ public class NoticeAction extends ActionSupport {
 		}
 	   notice2.setNowPage(currentPage);
 	   notice2.setSumPage(i);
-	   System.out.println("------------------"+currentPage);
 	    beginRow = (currentPage-1)*pageSize;
 		List<Notice> notice = iNoticeService.page(beginRow, pageSize);
 		request.setAttribute("notice", notice);

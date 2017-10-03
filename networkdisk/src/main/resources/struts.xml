@@ -30,47 +30,19 @@
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack" />
 			<result name="success" type="chain">per-center</result>
-			<result name="input">/per-center.jsp</result>
+			<result name="input">/WEB-INF/user/per-center.jsp</result>
 		</action>
 		<!-- 显示图片 -->
-
-
 		<action name="showphoto" class="userAction" method="showphoto"></action>
 		<!--用户个人资料修改  -->
 		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">per-center</result>
-			<result name="error" type="redirect">/per-center.jsp</result>
-			<result name="input" type="redirect">/per-center.jsp</result>
+			<result name="success" type="chain">per-center</result>
+			<result name="error">/WEB-INF/user/per-center.jsp</result>
+			<result name="input">/WEB-INF/user/per-center.jsp</result>
 		</action>
 		<!-- 个人页面跳转 -->
 		<action name="per-center" class="userAction" method="percenter">
-			<result name="success" type="redirect">/per-center.jsp</result>
-</action>
-		<action name="showphoto" class="userAction" method="showphoto"></action>
-
-
-		<action name="showphoto" class="userAction" method="showphoto"></action>
-		<!--用户个人资料修改  -->
-		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">per-center</result>
-			<result name="error" type="redirect">/per-center.jsp</result>
-			<result name="input" type="redirect">/per-center.jsp</result>
-		</action>
-		<!-- 个人页面跳转 -->
-		<action name="per-center" class="userAction" method="percenter">
-			<result name="success" type="redirect">/per-center.jsp</result>
-</action>
-		<action name="showphoto" class="userAction" method="showphoto"></action>
-
-		<!--用户个人资料修改  -->
-		<action name="userUpdate" class="userAction" method="update">
-			<result name="success" type="redirect">per-center</result>
-			<result name="error" type="redirect">/per-center.jsp</result>
-			<result name="input" type="redirect">/per-center.jsp</result>
-		</action>
-		<!-- 页面跳转 -->
-		<action name="per-center" class="userAction" method="percenter">
-			<result name="success" type="redirect">/per-center.jsp</result>
+			<result name="success">/WEB-INF/user/per-center.jsp</result>
 		</action>
 
 		<!-- 登出 -->
@@ -79,10 +51,16 @@
 		</action>
 		<!-- 首页跳转 -->
 		<action name="goindex" class="userAction" method="goindex">
-			<result name="success" type="redirect">/index.jsp</result>
+			<result name="success">/WEB-INF/user/index.jsp</result>
 		</action>
-		
-		
+		<!-- 分享页面跳转 -->
+		<action name="goshare" class="userAction" method="goshare">
+			<result name="success">/WEB-INF/user/share.jsp</result>
+		</action>
+		<!-- 默认分享页面 -->
+		<action name="goshare_default" class="userAction" method="goshare_default">
+			<result name="success">/WEB-INF/user/share_default.jsp</result>
+		</action>
 		
 		<!--密码修改  -->
 		<action name="updatePassAction" class="userAction" method="updatePassword">
@@ -141,7 +119,10 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-			
+		<!-- 回收站页面跳转 -->
+		<action name="gorecycle" class="fileAndCateAction" method="gorecycle">
+			<result name="success">/WEB-INF/user/recycle.jsp</result>
+		</action>
 		<!-- 文件放入回收站 -->
 		<action name="layFileRecyle" class="fileAndCateAction" method="layFileRecyle">
 			<result name="json" type="json">
@@ -228,14 +209,15 @@
 		</action>
 		<!-- 分享的内容跳转 -->
 		<action name="shareurl" class="sharefileAction" method="shareurl">
-			<result name="success" type="redirect">/reception.jsp</result>
-			<result name="havepwd" type="redirect">/re_index.jsp</result>
+			<result name="success">/WEB-INF/user/reception.jsp</result>
+			<result name="havepwd">/WEB-INF/user/re_index.jsp</result>
 			<result name="error" type="redirect">/error.jsp</result>
 		</action>
 		<!-- 分享页面登陆 -->
 		<action name="sharelogin" class="sharefileAction" method="sharelogin">
-			<result name="success" type="redirect">/reception.jsp</result>
-			<result name="error" type="redirect">/error.jsp</result>
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
 		</action>
 		<!-- 分享页面头像 -->
 		<action name="sharephoto" class="sharefileAction" method="sharephoto">
@@ -243,7 +225,7 @@
 		</action>
 		<!-- 密码提取 -->
 		<action name="pwdextract" class="sharefileAction" method="pwdextract">
-			<result name="success" type="redirect" >/reception.jsp</result>
+			<result name="success" >/WEB-INF/user/reception.jsp</result>
 			<result name="error" type="redirect" >/error.jsp</result>
 		</action>
 		
@@ -259,7 +241,7 @@
 		</action>
 		<!-- 分享登出 -->
 		<action name="sharelogout" class="sharefileAction" method="sharelogout">
-			<result name="success" type="redirect">/reception.jsp</result>
+			<result name="success" type="redirect">/login.jsp</result>
 		</action>
 		
 	</package>
@@ -327,9 +309,9 @@
 	<!-- 消息公告模块 -->
 	<package name="networkdisk.notice" namespace="/" extends="struts-default,json-default">	
 		<!-- 消息查询显示 -->
-		<!-- <action name="noticeList" class="noticeAction" method="getAll">
-			<result name="success">/noticeList.jsp</result>
-		</action> -->
+		<action name="noticeList" class="noticeAction" method="getAll">
+			<result name="success">/WEB-INF/user/noticeList.jsp</result>
+		</action>
 		<!-- 删除公告 -->
 		<action name="noticeDel" class="noticeAction" method="delete">
 		    <result type="chain">/noticeList.jsp</result>
@@ -343,7 +325,7 @@
 	<package name="networkdisk.myshare" namespace="/" extends="struts-default,json-default">	
 		
 		<action name="gomyshare" class="userAction" method="gomyshare">
-			<result name="success" type="redirect">/myshare.jsp</result>
+			<result name="success">/WEB-INF/user/myshare.jsp</result>
 		</action>
 		<!-- 查看分享 -->
 		<action name="myshare" class="userAction" method="myshare" >

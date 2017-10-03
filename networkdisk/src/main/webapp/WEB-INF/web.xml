@@ -5,10 +5,13 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>struts2</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.html</welcome-file>
+		<welcome-file>login.htm</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
+	
+
+
 	<!-- 告诉Web从哪里去找applicationContext.xml -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

@@ -25,10 +25,10 @@
 					<div class="span1" style="display: inline;">
 						<ul class="pull-left">
 							<li>
-								<a href="index.jsp">网盘</a>
+								<a href="goindex">网盘</a>
 							</li>
 							<li class="active">
-								<a href="#">分享</a>
+								<a href="goshare">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>
@@ -40,9 +40,9 @@
 							<li class="chos" style="width: 220px;">
 								<div class="sev">
 									<div class="admin">
-										<img src="${pageContext.request.contextPath}/showphoto" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
+										<img src="showphoto?uid=${sessionScope.user.id }" width="30px" style="border-radius: 30px;position: absolute;top:10px;" />
 										<a href="#" style="display: inline-block;height:50px;">
-											<div class="username">${user.name }</div>
+											<div class="username">${sessionScope.user.name }</div>
 											<img src="/networkdisk/img/VIP1.png" style="display: inline-block;margin-bottom:45px;" />
 										</a>
 										<em style="display: inline-block;"><img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;"/></em>
@@ -53,9 +53,9 @@
 										<div class="userpan_2">
 											<div class="u1">
 												<a href="#"> 
-												<img src="${pageContext.request.contextPath}/showphoto" width="30px" class="userpic" />
+												<img src="showphoto?uid=${sessionScope.user.id }" width="30px" class="userpic" />
 												</a> 
-												<a href="">${user.name }</a> 
+												<a href="">${sessionScope.user.name }</a> 
 												<img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
 											</div>
 										</div>
@@ -81,36 +81,7 @@
 								</div>
 
 							</div>
-							<div class="user">
-								<span id="triangle-up"> </span>
-								<div class="userpan">
-									<div class="userpan_2">
-										<div class="u1">
-											<img src="/networkdisk/img/pic3.png" class="userpic" /> <a
-												href="">admin</a> <img src="/networkdisk/img/VIP1.png"
-												style="display: inline; margin-bottom: 5px;" />
-										</div>
-									</div>
-									<div class="userpan_3">
-										<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
-										<div class="svip">开通超级会员</div>
-									</div>
-									<div class="userpan_4">
-										<p>
-											<a href=""><span>个人资料</span></a>
-										</p>
-										<p>
-											<a href=""><span>帮助中心</span></a>
-										</p>
-										<p>
-											<a href=""><span>设置</span></a>
-										</p>
-										<p>
-											<a href=""><span>退出</span></a>
-										</p>
-									</div>
-								</div>
-							</div>
+							
 						</li>
 						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="#"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
@@ -152,12 +123,11 @@
 						<div class="tab-pane fade" id="user_content">
 							<a href="friend_info.jsp" target="share_iframe"></a>
 							<table class="user_table" align="left">
-   									<c:forEach items="${map.listfriends }" var="friend">							
+   									<c:forEach items="${sessionScope.map.listfriends }" var="friend">							
 									<tr>
-										<td><img src="${pageContext.request.contextPath}/showphoto?id=${friend.id}" width="50px" /></td>
-										<td>${friend.name}</td>
+										<td><img src="${pageContext.request.contextPath}/showphoto?id=${sessionScope.friend.id}" width="50px" /></td>
+										<td>${sessionScope.friend.name}</td>
 									</tr>
-									
 								</c:forEach>
 							</table>							
 						</div>
@@ -208,7 +178,7 @@
 					</div>
 				</div>
 				<div class="share_content_right">
-					<iframe name="share_iframe" src="share_default.jsp" scrolling="auto" height="590px" width="710" border="0" frameborder="no"></iframe>
+					<iframe name="share_iframe" src="goshare_default" scrolling="auto" height="590px" width="710" border="0" frameborder="no"></iframe>
 				</div>
 			</div>
 		</div>
@@ -224,7 +194,12 @@
 				beforeSend: function(){}, 
 				success: function(data) {//提交成功的时候执行的函数  
 					$(".friends").show();
-					$('.friends').append("<img src='${pageContext.request.contextPath}/showphoto?id="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据						        				       					  	
+				    if(data.friend.length>0){
+				    	$('.friends').append("<img src='${pageContext.request.contextPath}/showphoto?uid="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据	
+				    }else{
+				    	$('.friends').append("<a>好友不存在</a>");//jquery解析map数据	
+				    }
+										        				       					  	
 			}  
 		});	
 		});

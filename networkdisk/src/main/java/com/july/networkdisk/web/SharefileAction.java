@@ -33,6 +33,7 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	private static final long serialVersionUID = 1L;
 	private Sharefile sharefile = new Sharefile();
 	private ISharefileService iSharefileService;
+	private User user;
 	private String name;
 	private String passWord;
 	private String uid;
@@ -47,6 +48,8 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	private String url;
 	private String pretime;
 	private String sharepwd;
+	private List<Categorie> catelist;
+	private List<NetFile> filelist;
 	HttpSession session = CommonUtil.createSession();
 	HttpServletResponse response=ServletActionContext.getResponse();
 	    
@@ -182,6 +185,29 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Categorie> getCatelist() {
+		return catelist;
+	}
+
+	public void setCatelist(List<Categorie> catelist) {
+		this.catelist = catelist;
+	}
+
+	public List<NetFile> getFilelist() {
+		return filelist;
+	}
+
+	public void setFilelist(List<NetFile> filelist) {
+		this.filelist = filelist;
+	}
 
 	/*分享*/
 	public String share() throws Exception{
@@ -240,16 +266,16 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	/*分享链接跳转*/
 	public String shareurl() throws Exception{
 		map = new HashMap<String, Object>();
+		catelist = new ArrayList<Categorie>();
+		filelist = new ArrayList<NetFile>();
 		sharefile.setMagid(url);
 		Share share = this.iSharefileService.getsharebyid(url);
-		User u = this.iSharefileService.getuserbyid(share.getUid());
+		user = this.iSharefileService.getuserbyid(share.getUid());
 		long t = System.currentTimeMillis();
-		List<Categorie> catelist = new ArrayList<Categorie>();
-		List<NetFile> filelist = new ArrayList<NetFile>();
 		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
 		
 		session.setAttribute("url", share.getMagid());
-		session.setAttribute("user", u);
+		
 		if(share.getRetain() == 0){
 			if(!share.getPwd().equals("")){
 				return "havepwd";
@@ -283,18 +309,17 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 				
 			}
 		}
-		session.setAttribute("catelist", catelist);
-		session.setAttribute("filelist", filelist);
+		
 		return SUCCESS;
 	}
 	/*密码提取*/
 	public String pwdextract() throws Exception{
 		map = new HashMap<String, Object>();
 		Share share = this.iSharefileService.getsharebyid(url);
-		User u = this.iSharefileService.getuserbyid(share.getUid());
+		user = this.iSharefileService.getuserbyid(share.getUid());
 		this.sharefile.setMagid(url);
-		List<Categorie> catelist = new ArrayList<Categorie>();
-		List<NetFile> filelist = new ArrayList<NetFile>();
+		catelist = new ArrayList<Categorie>();
+		filelist = new ArrayList<NetFile>();
 		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
 		if(!share.getPwd().equals(sharepwd)){
 			return ERROR;
@@ -309,9 +334,6 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 				}
 			}
 		}
-		session.setAttribute("user", u);
-		session.setAttribute("catelist", catelist);
-		session.setAttribute("filelist", filelist);
 		return SUCCESS;
 	}
 	
@@ -387,7 +409,7 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	
 	 /*分享页面登陆*/
 		public String sharelogin() throws Exception{
-		
+			map = new HashMap<String, Object>();
 			String password = CommonUtil.getMD5(passWord);
 	    	User u = new User();
 	    	u.setName(name);
@@ -397,9 +419,10 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	    	if(user == null){
 	    		return ERROR;
 	    	}else{
-	    		session.setAttribute("u", user);
+	    		session.setAttribute("user", user);
 	    	}
-			return SUCCESS;
+	    	map.put("user", user);
+			return "json";
 		}
 		/*头像*/
 	    public String sharephoto() throws Exception{
