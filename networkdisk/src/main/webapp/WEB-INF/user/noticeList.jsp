@@ -6,6 +6,7 @@
 <html>
 
 <head>
+<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 <link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />

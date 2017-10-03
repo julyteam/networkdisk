@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>July</title>
+<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 <link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />

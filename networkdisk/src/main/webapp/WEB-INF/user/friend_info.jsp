@@ -5,12 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>分享界面</title>
-	<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />
 		<link href="/networkdisk/css/share.css" rel="stylesheet" />
-		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
-		
+		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>	
 		<script src="/networkdisk/user/js/bootstrap.min.js"></script>
 </head>
 

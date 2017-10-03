@@ -10,8 +10,7 @@
 <title></title>
 <link rel="stylesheet" href="/networkdisk/user/css/register.css">
 <link rel="stylesheet" href="/networkdisk/user/css/bootstrap.min.css" />
-<link href="https:/pan.baidu.com/static/images/favicon.ico"
-	rel="shortcut icon" type="images/x-icon" />
+<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 <script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
 <script src="/networkdisk/user/js/register.js"></script>
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
@@ -116,8 +115,10 @@ padding-left:15px;
 						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">
-					&nbsp;<label>邮箱验证码</label><input type="text" name="code" id="code" />
-						<input type="button" id="btn" value="获取验证码" onclick="settime(this)" /> 
+					&nbsp;<label>邮箱验证码</label>
+					<input type="button" id="btn" value="获取验证码" onclick="settime(this)" /> 
+					<input type="text" name="code" id="code" />
+						
 				</div>
 				<div class="reg_password">
 
@@ -130,7 +131,7 @@ padding-left:15px;
 				</div>
 				<div class="reg_check">
 					<input type="checkbox" id="agree" name="agree" checked="checked"/><font size="2">阅读并接受<a
-						href="#">《百度用户协议》</a> 及<a href="#">《百度隐私权保护生命》</a></font>
+						href="#">《july云盘用户协议》</a> 及<a href="#">《july云盘隐私权保护生命》</a></font>
 				</div>
 				<div class="reg_btn">
 					<input type="submit"  value="注册" />

@@ -70,7 +70,7 @@ $(document).ready(function() {
 			$('.Qdh').find('li').nextAll('li').show();
 		}
 	});
-	$('.table').on('click','.chk_2',function() {
+	$('table').on('click','.chk_2',function() {
 		 var num=$('#mytbody input:checked').length;
 		 if(num>0&&num<$('#mytbody input:checkbox').length){
 			 var msg="已选中"+num+"个文件/文件夹";
@@ -81,15 +81,18 @@ $(document).ready(function() {
 		 }else if(num==$('#mytbody input:checkbox').length){
 			 $('.chk_1').prop('checked',true);
 			 var msg="已选中"+num+"个文件/文件夹";
+			 $('#g_button').css('display', 'none');
 			 $('.equip_1').css('display', 'block');
 			 $('.Qdh').find('span').html(msg);					 					 
 		 }else{
 			 $('.chk_1').attr('checked',false);
 			 $('.Qdh').find('span').html('文件夹');
 			 $('.equip_1').css('display', 'none');
+			 $('#g_button').css('display', 'block');
 			 $('.Qdh').find('li').nextAll('li').show();
 		 }		
 	});
+
 	/*reception界面全选反选*/
 	$(".ck1").click(function() {
 		if(this.checked) {

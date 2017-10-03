@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>分享界面</title>
+		<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 		<link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/networkdisk/user/css/bootstrap-theme.min.css" />
 		<link href="/networkdisk/css/style.css" rel="stylesheet" />

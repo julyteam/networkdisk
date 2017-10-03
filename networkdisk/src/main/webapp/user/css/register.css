@@ -1,6 +1,5 @@
 #head {
 	width: 100%;
-	
 }
 
 #head-left {
@@ -55,9 +54,8 @@
 }
 
 .reg_content {
-	width: 100%;
 	clear: both;
-	height: 660px;
+	height: 100%;
 	margin-left: 20px;
 	margin-right: 60px;
 	
@@ -138,22 +136,23 @@
 .reg_code input {
 	margin-top:20px;
 	height: 35px;
-	width: 260px;
-	margin-left:8px;
+	width: 350px;
+	margin-left:5px;
 	border-right:none;
 	border: 1px solid #a9a9a9;
-	margin-right: -13px;
+	margin-right: -3px;
 	
 }
 .reg_code #btn
 {
-	
+	position:absolute;
 	height:35px;
 	width:90px;
+	left:558px;
 	color: white;
 	font: 15px "微软雅黑" bold;
 	background-color: #5d98f9;
-	border: 1px solid #a9a9a9;
+	border:none;
 }
 .reg_password span
 {

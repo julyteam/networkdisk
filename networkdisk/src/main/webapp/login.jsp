@@ -10,7 +10,7 @@
 <title></title>
 		<link rel="stylesheet" href="/networkdisk/user/css/login.css">
 		<link rel="stylesheet" href="/networkdisk/user/css/bootstrap.min.css"/> 
-		<link href="https:/pan.baidu.com/static/images/favicon.ico" rel="shortcut icon" type="images/x-icon"/>
+		<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
 		<script src="/networkdisk/user/js/login.js"></script>
 	    <script src="/networkdisk/user/js/bootstrap.min.js"></script>

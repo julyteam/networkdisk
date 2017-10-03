@@ -34,13 +34,6 @@ import com.july.networkdisk.vo.User;
 		return (User)session.getAttribute("user");
 	}
 	
-	public static User test(){
-		User user = new User();
-		user.setId("1");
-		user.setName("laozhang");
-		return user;
-	}
-	
 	 /*MD5加密密码*/
 	public static String getMD5(String str) throws Exception {
 		 // 生成一个MD5加密计算摘要

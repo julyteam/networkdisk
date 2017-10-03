@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>默认分享界面</title>
-	
-		
+		<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 		<link href="/networkdisk/css/share.css" rel="stylesheet" />
 	
 </head>

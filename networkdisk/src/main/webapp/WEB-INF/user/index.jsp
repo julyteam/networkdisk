@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>July</title>
+<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 <link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
@@ -145,8 +146,7 @@
 									src="/networkdisk/img/newfile.png" style="margin-bottom: 3px;" />&nbsp;新建文件夹</a>
 								<a class="g_button" id="mydownload">
 								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的上传</a>
-								<div class="equip"
-									style="width: 105px; display: inline-block; position: relative;">
+								<div class="equip" style="width: 105px; display: inline-block; position: relative;">
 									<a class="g_button g_1" id="g_button"><img
 										src="/networkdisk/img/iphone.png" style="margin-bottom: 3px;" />&nbsp;我的设备</a>
 									<ul class="equi">
@@ -207,14 +207,10 @@
 								</div>
 								<div class="nullfile eefile">
 									<p class="ggflie">
-										您还没上传过文件哦，点击
-										<span class="mlfile upload-wrapper">上传
-											<form action="javascript:void(0);" style="position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;cursor:pointer;">
-												<input title="点击选择文件" multiple="" accept="*/*" type="file" name="uploader" style="position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;cursor:pointer;">
-											</form>
-										</span>
+										您还没上传过文件哦，点击上传
 									</p>
 								</div>
+								
 								<form action="" method="post">
 									<table class="table">
 										<tbody id="mytbody">

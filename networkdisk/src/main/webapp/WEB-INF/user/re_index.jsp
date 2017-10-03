@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<title>July云盘</title>
 		<link rel="stylesheet" href="/networkdisk/css/re_index.css" /> 
-		<link href="/networkdisk/img/sLogo.png" rel="shortcut icon" type="images/x-icon"/>
+		<link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
 	</head>
 	<body>
 		<div class="frame">
