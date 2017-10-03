@@ -106,7 +106,7 @@ create table categorie
 			cat_name varchar(255) not null ,
 			cat_reid varchar(50),
 			cat_uid varchar(50)not null,
-			cat_addtime timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			cat_addtime timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			cat_state int(1) not null ,
 			primary key(cat_id),
 			foreign key(cat_reid) references categorie(cat_id),
@@ -120,7 +120,7 @@ create table file(
 			file_uid	varchar(50) not null,
 			file_catid	varchar(50) ,
 			file_path	varchar(255) not null,
-			file_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP,
+			file_addtime	timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			file_type	varchar(20) not null,
 			file_size   int(20)  not null,
 			file_downum	int(11)  not null DEFAULT 0,
@@ -150,7 +150,7 @@ create table notice
 	not_id int(10) not null auto_increment,
 	not_title varchar(255) not null,
 	not_content text not null,
-	not_time timestamp not null default current_timestamp,
+	not_time timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	primary key(not_id)
 );
 
@@ -161,7 +161,7 @@ create table share
 	sh_uid varchar(50) not null,
 	sh_magid varchar(50) not null,
 	sh_pwd varchar(255) not null,
-	sh_starttime timestamp not null default current_timestamp,
+	sh_starttime timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	sh_retaintime int(2) not null default -1,
 	primary key(sh_id),
 	foreign key(sh_uid) references user(user_id)
