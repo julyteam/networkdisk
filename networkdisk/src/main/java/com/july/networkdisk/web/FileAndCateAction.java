@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
+import com.july.networkdisk.service.ISharefileService;
 import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
@@ -19,6 +20,7 @@ public class FileAndCateAction extends ActionSupport {
 
 	private IFileService iFileService;
 	private ICateService iCateService;
+	private ISharefileService iSharefileService;
 	private Map<String, Object> map; // 用来接收查询的数据和返回到前台
 	private String categorie_id; // 文件夹id
 	private Integer recycleflag; // 回收站标志
@@ -30,6 +32,12 @@ public class FileAndCateAction extends ActionSupport {
 	private String refileid; // 重命名文件id
 	private String recategorieid; // 重命名文件夹id
 
+	
+	
+	
+	public void setiSharefileService(ISharefileService iSharefileService) {
+		this.iSharefileService = iSharefileService;
+	}
 	public void setRefileid(String refileid) {
 		this.refileid = refileid;
 	}
@@ -71,7 +79,12 @@ public class FileAndCateAction extends ActionSupport {
 	}
 
 	public void setCategorie_id(String categorie_id) {
-		this.categorie_id = categorie_id;
+		if("null".equals(categorie_id)){
+			this.categorie_id=null;
+		}
+		else {
+			this.categorie_id = categorie_id;
+		}
 	}
 
 	public String getCategorie_id() {
@@ -276,7 +289,7 @@ public class FileAndCateAction extends ActionSupport {
 				message = "目标文件夹中已经含有相同名字的文件夹!";
 				return "json";
 			}
-
+			iSharefileService.preservationcate(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
 		}
 		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
 			String[] fileids = filelist.split(",");
@@ -285,9 +298,49 @@ public class FileAndCateAction extends ActionSupport {
 				message = "目标文件夹下已经含有相同名字的文件!";
 				return "json";
 			}
+			iSharefileService.preservation(CommonUtil.getSessionUser().getId(), fileids, categorie_id);
 		}
-		
 		message = "复制成功!";
+		return "json";
+	}
+	
+	/**
+	 * 移动文件和文件夹
+	 * 
+	 * @return
+	 */
+	public String moveFileAndCate() {
+		Boolean flag;
+		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
+			String[] cateids = catelist.split(",");
+			flag = iCateService.judgeCateID(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			if (flag == false) {
+				message = "不能复制到其子文件夹下!";
+				return "json";
+			}
+			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			if (flag == false) {
+				message = "目标文件夹中已经含有相同名字的文件夹!";
+				return "json";
+			}
+			//移动文件夹
+			for (String cateid : cateids) {
+				iCateService.updateCatereid(cateid, categorie_id);
+			}
+		}
+		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
+			String[] fileids = filelist.split(",");
+			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id);
+			if (flag == false) {
+				message = "目标文件夹下已经含有相同名字的文件!";
+				return "json";
+			}
+			//移动文件
+			for (String fileid : fileids) {
+				iFileService.moveFile(fileid, categorie_id);
+			}
+		}
+		message = "移动成功!";
 		return "json";
 	}
 

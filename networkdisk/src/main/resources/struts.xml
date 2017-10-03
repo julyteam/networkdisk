@@ -211,6 +211,13 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		
+		<!-- 移动文件或着文件夹 -->
+		<action name="moveFileAndCate" class="fileAndCateAction" method="moveFileAndCate">
+			<result name="json" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 分享 -->

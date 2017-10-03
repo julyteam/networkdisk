@@ -97,36 +97,6 @@
 								</div>
 
 							</div>
-							<div class="user">
-								<span id="triangle-up"> </span>
-								<div class="userpan">
-									<div class="userpan_2">
-										<div class="u1">
-											<img src="/networkdisk/img/pic3.png" class="userpic" /> <a
-												href="">admin</a> <img src="/networkdisk/img/VIP1.png"
-												style="display: inline; margin-bottom: 5px;" />
-										</div>
-									</div>
-									<div class="userpan_3">
-										<a href="" style="color: #000; font-size: 12px;">超级会员专享特权：</a>
-										<div class="svip">开通超级会员</div>
-									</div>
-									<div class="userpan_4">
-										<p>
-											<a href=""><span>个人资料</span></a>
-										</p>
-										<p>
-											<a href=""><span>帮助中心</span></a>
-										</p>
-										<p>
-											<a href=""><span>设置</span></a>
-										</p>
-										<p>
-											<a href=""><span>退出</span></a>
-										</p>
-									</div>
-								</div>
-							</div>
 						</li>
 						<li style="width: 100px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
@@ -222,7 +192,7 @@
 									+ listCate[i].id
 									+ ">"
 									+"<a class='file-name'>"+listCate[i].name +"</a>"
-								    +"<i class='fa fa-trash'title='删除'></i><i class='fa fa-refresh' title='还原'></i></div>"
+								    +"<i class='fa fa-trash' title='删除'></i><i class='fa fa-refresh' title='还原'></i></div>"
 								    +"<div class='fufH'>"
 									+"<span style='color: #5E5E5E;'>"+ "--"+"</span>"
 								    +"</div>"

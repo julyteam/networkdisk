@@ -20,5 +20,6 @@
 	<bean id="fileAndCateAction" class="com.july.networkdisk.web.FileAndCateAction">
 		<property name="iFileService" ref="fileService"></property>
 		<property name="iCateService" ref="cateService"></property>
+		<property name="iSharefileService" ref="sharefileService"></property>
 	</bean>
 </beans>

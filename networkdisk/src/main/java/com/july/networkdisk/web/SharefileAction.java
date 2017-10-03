@@ -343,7 +343,7 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			}else{
 				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
 				if(cateflag == 1){
-					this.iSharefileService.preservationcate(uid, cidlist);
+					this.iSharefileService.preservationcate(uid, cidlist, null);
 					out.print(1);
 				}else{
 					out.print(0);
@@ -353,7 +353,7 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			if(cidlist[0].length() == 0){
 				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid);
 				if(fileflag == 1){
-					this.iSharefileService.preservation(uid,fid);
+					this.iSharefileService.preservation(uid,fid, null);
 					out.print(1);
 				}else{
 					out.print(0);
@@ -363,18 +363,18 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
 				if(fileflag == 1){
 					if(cateflag == 0){
-						this.iSharefileService.preservation(uid,fid);
+						this.iSharefileService.preservation(uid,fid,null);
 						out.print(1);
 					}else{
-						this.iSharefileService.preservation(uid,fid);
-						this.iSharefileService.preservationcate(uid, cidlist);
+						this.iSharefileService.preservation(uid,fid,null);
+						this.iSharefileService.preservationcate(uid, cidlist, null);
 						out.print(1);
 					}
 				}else{
 					if(cateflag == 0){
 						out.print(0);
 					}else{
-						this.iSharefileService.preservationcate(uid, cidlist);
+						this.iSharefileService.preservationcate(uid, cidlist, null);
 						out.print(1);
 					}
 				}

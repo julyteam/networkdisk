@@ -648,7 +648,16 @@ img.userpic {
 	width: 22%;
 	height:36px;
 	line-height:36px;
+	cursor: pointer;
 }
+.Qdh i{
+	 display: none;
+	 color: #3b8cff;
+	 position: relative;
+	 top: 1px;
+	 margin-left:3px;
+}
+
 
 .Qdh li:hover{
 	background-color: rgba(220, 200, 200, 0.4);
@@ -666,6 +675,15 @@ img.userpic {
 }
 .table td:first-child{
 	width: 575px;
+}
+.table td .july_cateName,.table td .july_fileName{
+	display:inline-block;
+	width:420px;
+	position:relative;
+	top:6px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .table td:last-child{
 	width: 210px;
@@ -857,6 +875,7 @@ img.userpic {
 } 
 .name{
 	width: 45%;
+	height:45px;
 }
 .fufH{
 	width: 15%;
@@ -875,7 +894,7 @@ img.userpic {
 	position:relative;
 	font-size:18px;
 	color:#0080ff;
-	margin:13px 5px 0 5px;
+	margin:6px 5px 0 5px;
 	float:right;
 }	
 .name .recbtn{
@@ -1050,6 +1069,26 @@ img.userpic {
 .table td:first-child:hover{
 	cursor: pointer;
 	color: #31B0D5;
+}
+.file-name{
+	display:inline-block;
+	width:350px;
+	line-height:20px;
+	position:relative;
+	top:5px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#n1{
+	display:inline-block;
+	width:250px;
+	line-height:20px;
+	position:relative;
+	top:5px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .dropdown-menu li{
 	border-bottom:1px solid #F2F6FD;
@@ -1476,4 +1515,26 @@ img.userpic {
 .menuTree .active{
 	color:#ff0000;
 	background:#e5f0fb;
+}
+/* nullfile界面 */
+.no-result-div{
+	display:none;
+	background: url(/networkdisk/img/emptyfile.png) no-repeat scroll center 0 transparent;
+    padding-top: 146px;
+    width: 488px;
+    position: relative;
+    left: 50%;
+    top: 330px;
+    text-align: center;
+    margin: -190px 0 0 -244px;
+    font-size:14px;
+}
+.no-result-div p{
+	color: #424e67;
+    margin: 20px 0;
+    font-weight: 200;
+    font-size: 16px;
+	display: inline;
+	font-family:"微软雅黑";
+	padding:0px; 
 }

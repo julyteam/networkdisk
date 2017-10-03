@@ -31,9 +31,9 @@
 		var name = $(".username").text();
 		
 		if(name.length > 0){
-			$("#shlogin").hide();
+			$(".login").hide();
 		}else{
-			$("#admin").hide();
+			$(".sev").hide();
 		}
 		
 		
@@ -56,13 +56,10 @@
 						<li><a href="#">更多</a></li>
 					</ul>
 				</div>
-				<div class="login" id="shlogin" style="float:left;margin-left:950px; text-align: left; font-size: 14px;">
-						<a href="#" class="load" style="color:white;text-decoration: none;">登录</a> <a href="#" style="color:white;text-decoration: none;">注册</a>
-				</div> 
 				<div class="span2">
 					<ul class="right">
 						<li class="chos" style="width: 220px;" id="admin">
-							<div class="sev">
+							<div class="sev" style='display:none'>
 								<div class="admin">
 									
 									<img src="sharephoto?uid=${u.id }" width="30px"
@@ -104,9 +101,9 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="login" style="text-align: right; font-size: 14px;">
+							<div class="login" style="text-align: right;font-size: 14px;">
 								<a href="#" class="load">登录</a> <a href="#">注册</a>
-							</div> -->
+							</div>
 						</li>
 						<li style="width: 100px;"><a href="#"
 							style="font-size: 13px;">&nbsp;客户端下载</a></li>
@@ -259,41 +256,41 @@
 								
 								<c:choose>
 								    <c:when test="${f.type == 'zip' }">
-								       <img src='/networkdisk/img/ZIP_2.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/ZIP_2.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								    <c:when test="${f.type == 'mp4' || f.type == 'rmvb' || f.type=='avi' || f.type == 'mkv' || f.type=='wmv' || f.type=='wmv' ||  f.type=='mov'}">
-								       <img src='/networkdisk/img/video.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/video.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'png'}">
-								      <img src='/networkdisk/img/png.png' width='28px' style='margin:0 5px 5px 10px;'>
+								      <img src='/networkdisk/img/png.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'jpg'}">
-								       <img src='/networkdisk/img/jpg.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/jpg.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'gif' || f.type == 'bmp' || f.type == 'psd'  || f.type == 'ai' || f.type == 'svg' }">
-								       <img src='/networkdisk/img/picture1.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/picture1.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'docx' || f.type == 'doc' }">
-								       <img src='/networkdisk/img/word.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/word.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								    <c:when test="${f.type == 'txt' }">
-								       <img src='/networkdisk/img/text.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/text.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								    
 								     <c:when test="${f.type == 'xls' }">
-								       <img src='/networkdisk/img/xls.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/xls.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'pdf' }">
-								       <img src='/networkdisk/img/pdf.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/pdf.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								     <c:when test="${f.type == 'html' }">
-										<img src='/networkdisk/img/html.png' width='28px' style='margin:0 5px 5px 10px;'>
+										<img src='/networkdisk/img/html.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								    <c:when test="${f.type == 'mp3' || f.type == 'wav' || f.type == 'mod' }">
-										<img src='/networkdisk/img/music.png' width='28px' style='margin:0 5px 5px 10px;'>
+										<img src='/networkdisk/img/music.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:when>
 								    <c:otherwise>
-								       <img src='/networkdisk/img/others.png' width='28px' style='margin:0 5px 5px 10px;'>
+								       <img src='/networkdisk/img/others.png' width='28px' style='margin:0 5px 5px 0px;'>
 								    </c:otherwise>
 								</c:choose>
 								

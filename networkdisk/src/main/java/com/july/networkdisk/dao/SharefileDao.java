@@ -72,26 +72,26 @@ public class SharefileDao extends BaseDao{
 		return file;
 	}
 	/*保存分享的文件*/
-	public void preservation(String uid, String[] fid) {
+	public void preservation(String uid, String[] fid,String file_catid) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		for(int i=0;i<fid.length;i++){
 			NetFile f = sqlSession.selectOne("fileSpace.getone", fid[i]);
 			f.setId(CommonUtil.createUUID());
 			f.setUid(uid);
-			f.setCatid(null);
+			f.setCatid(file_catid);
 			sqlSession.insert("fileSpace.save", f);
 		}
 		sqlSession.close();
 	}
 	/*保存分享的文件夹*/
-	public void preservationcate(String uid, String[] cidlist) {
+	public void preservationcate(String uid, String[] cidlist,String cate_reid) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		for(int i=0;i<cidlist.length;i++){
 			Categorie cate = sqlSession.selectOne("cateSpace.findbyid", cidlist[i]);
 			String cateid = cate.getId();
 			cate.setId(CommonUtil.createUUID());
 			cate.setUid(uid);
-			cate.setReid(null);
+			cate.setReid(cate_reid);
 			sqlSession.insert("cateSpace.save", cate);
 			String reid = cate.getId();
 			recursion(cateid,reid,uid);

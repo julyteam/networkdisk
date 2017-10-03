@@ -43,8 +43,8 @@ sh_retain	int(2)			    是		-1（代表永久）  保留时长
 字段			类型				    Null		默认		    注释
 sf_id		varchar(50)			否						主键
 sf_magid	varchar(50)			否						分享文件标识id
-sf_fileid	varchar(50)			是						文件id
-sf_cateid	varchar(50) 		是						文件夹id
+sf_fileandcateid	varchar(50) 是						文件和文件夹id
+sf_iscate	int(1) 				是						是否为文件夹
 
 
 			文件（file）数据表
@@ -97,8 +97,7 @@ create table user(
 			user_sex       int(1)       NOT NULL DEFAULT 1,
 			user_photo     mediumblob   NOT NULL,
 			user_about     varchar(255) ,
-			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP,
-			user_photo    mediumblob
+			user_cTime	timestamp 	DEFAULT CURRENT_TIMESTAMP
 );
 #文件夹表
 create table categorie
@@ -175,8 +174,9 @@ create table sharefile
 (
 	sf_id varchar(50) not null,
 	sf_magid varchar(50) not null,
-	sf_fileid varchar(50) null,
-	sf_cateid varchar(50) null,
+	sf_fileandcateid varchar(50) null,
+	sf_iscate int(1) null,
 	primary key(sf_id)
+	
 )
 

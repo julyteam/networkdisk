@@ -70,7 +70,7 @@ $(document).ready(function() {
 			$('.Qdh').find('li').nextAll('li').show();
 		}
 	});
-	$('table').on('click','.chk_2',function() {
+	$('.table').on('click','.chk_2',function() {
 		 var num=$('#mytbody input:checked').length;
 		 if(num>0&&num<$('#mytbody input:checkbox').length){
 			 var msg="已选中"+num+"个文件/文件夹";
@@ -81,6 +81,7 @@ $(document).ready(function() {
 		 }else if(num==$('#mytbody input:checkbox').length){
 			 $('.chk_1').prop('checked',true);
 			 var msg="已选中"+num+"个文件/文件夹";
+			 $('.equip_1').css('display', 'block');
 			 $('.Qdh').find('span').html(msg);					 					 
 		 }else{
 			 $('.chk_1').attr('checked',false);
@@ -110,8 +111,8 @@ $(document).ready(function() {
 				dataType : 'json',
 				success : function(data) {
 					showchild(categorie,recycle);
-					 var num=$('#mytbody input:checked').length;
-					 if(num>0&&num<$('#mytbody input:checkbox').length){
+					var num=$('#mytbody input:checked').length;
+					if(num>0&&num<$('#mytbody input:checkbox').length){
 						 var msg="已选中"+num+"个文件/文件夹";
 						 $('.Qdh').find('span').html(msg);
 						 $('#g_button').css('display', 'none');

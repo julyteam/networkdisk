@@ -54,13 +54,13 @@ public class SharefileServiceImpl implements ISharefileService {
 		return sf;
 	}
 
-	public void preservation(String id, String[] fid) {
-		this.sharefileDao.preservation(id,fid);
+	public void preservation(String id, String[] fid, String file_cateid) {
+		this.sharefileDao.preservation(id,fid, file_cateid);
 		
 	}
 	
-	public void preservationcate(String id, String[] cidlist) {
-		this.sharefileDao.preservationcate(id,cidlist);
+	public void preservationcate(String id, String[] cidlist, String cate_reid) {
+		this.sharefileDao.preservationcate(id,cidlist, cate_reid);
 	}
 	
 	public int checkfile(String[] fid, String[] fname, int flag, String uid) {

@@ -132,7 +132,7 @@
 								<form action="javascript:void(0)" method="post"
 									style="width: 0px; display: block;">
 									<div class="upfile" style="width: 84px; display: block;">
-										<a href="" class="file" title="请选择文件" style="font-size: 15px;">
+										<a class="file" title="请选择文件" style="font-size: 15px;">
 											<img src="/networkdisk/img/upload.png"
 											style="margin-bottom: 3px;" />&nbsp;上传
 											<input type="file" name="file" id="upfile" value="上传" style="cursor:pointer;"/>
@@ -178,9 +178,9 @@
 										<div class="lp">
 											<a class="list"><img src="img/list.png" /></a>
 											<ul class="listpal">
-												<li><img src="/networkdisk/img/OK.png" class="active" />&nbsp;文件名</li>
-												<li><img src="/networkdisk/img/OK.png" />&nbsp;大小</li>
-												<li><img src="/networkdisk/img/OK.png" />&nbsp;修改日期</li>
+												<li class='listname'><img src="/networkdisk/img/OK.png" class="active" />&nbsp;文件名</li>
+												<li class='listsize'><img src="/networkdisk/img/OK.png" />&nbsp;大小</li>
+												<li class='listdate'><img src="/networkdisk/img/OK.png" />&nbsp;修改日期</li>
 											</ul>
 										</div>
 										<a class="large"><img src="/networkdisk/img/other.png" /></a>
@@ -199,9 +199,9 @@
 								<div class="Qdh">
 									<ul>
 										<li style="width:60%; margin-left: -40px;"><input
-											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span></li>
-										<li>大小</li>
-										<li>修改日期</li>
+											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span><i class="fa fa-arrow-down"></i></li>
+										<li>大小<i class="fa fa-arrow-down"></i></li>
+										<li>修改日期<i class="fa fa-arrow-down"></i></li>
 									</ul>
 								</div>
 								<div class="nullfile eefile">
@@ -529,7 +529,13 @@
 		}
 		
 		function showchild(categorie_id,recycleflag){
-			$(".showTr").remove();
+			$(".table tr").remove();
+			$("#tw1 :checkbox").prop("checked", false);
+			$("#n1").html("文件夹");
+			$('#g_button').css('display', 'block');
+			$('.equip_1').css('display', 'none');
+			$('.Qdh').find('li').nextAll('li').show();
+			
 			$.ajax({
 				type : "post",
 				dataType : "json",
@@ -655,7 +661,7 @@
 							default:
 								type="/networkdisk/img/others.png";
 						}
-						var $str = $("<tr class='showTr'>"
+						var $str = $("<tr class='showfileTr'>"
 								+ "<td>"
 								+ "<input type='checkbox' name='filebox' value='"+listFile[i].id+"' class='chk_2' />"
 								+ "<img src='"
@@ -995,8 +1001,9 @@
 			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
 			$(this).parents('tr').css('background','#F0F8FD');
 			$(this).parents('tr').after(zz);
+			var originVal=$(this).parents('tr').find('a:eq(0)').text();
 			var id=$(this).parents('tr').find('input[type=text]').val();			
-			$('.GodName').val($(this).parents('tr').find('a:eq(0)').text());
+			$('.GodName').val(originVal);
 			$('.GodName').select();
 			$('.tw1_body').css('overflow-y','hidden');
 			/* 关闭tr触发事件 */
@@ -1010,9 +1017,10 @@
 					var cateid=id; 
 				 	var flag = 0;
 					$(".july_cateName").each(function() {
-						
-						if ($(this).text() == newname) {
-							flag = 1;
+						if(originVal!=newname){	
+							if ($(this).text() == newname) {
+								flag = 1;
+							}
 						}
 					})
 				   if(flag == 1){
@@ -1025,9 +1033,10 @@
 				
 				var flag = 0;
 				$(".july_fileName").each(function() {
-					
-					if ($(this).text() == newname) {
-						flag = 1;
+					if(originVal!=newname){	
+						if ($(this).text() == newname) {
+							flag = 1;
+						}
 					}
 				})
 			   if(flag == 1){
@@ -1043,15 +1052,15 @@
 						$('tr').css('background','none');
 						$('.tw1_body').css('overflow-y','scroll');
 						$('.reName').remove();
-						$('table').on('mouseenter','tr',function() {
+						$('.table').on('mouseenter','tr',function() {
 							$(this).css('background','rgba(220, 200, 200, 0.4)');
 							$(this).children().find('.more').css('display', 'inline-block');					
 						});
-						$('table').on('mouseleave','tr',function() {
+						$('.table').on('mouseleave','tr',function() {
 							$(this).css('background','none');
 							$(this).children().find('.more').css('display', 'none');
 						});
-						$('table').on('click','.july_cateName',function(){
+						$('.table').on('click','.july_cateName',function(){
 							var cateid =$(this).parent('td').find('.reid').val();
 							var catestate =$(this).parent('td').find('.restate').val();
 							var catename =$(this).parent('td').find('.rename').val();
@@ -1071,7 +1080,7 @@
 				$('tr').css('background','none');
 				$('.tw1_body').css('overflow-y','scroll');
 				$('.reName').remove();
-				$('table').on('mouseenter','tr',function() {
+				$('.table').on('mouseenter','tr',function() {
 					$(this).css('background','rgba(220, 200, 200, 0.4)');
 					$(this).children().find('.more').css('display', 'inline-block');					
 				});
@@ -1278,28 +1287,28 @@
     	var cate_ids;
     	var aimcateid;
 		if(thecate&&!thefile){			
-			alert("选择文件夹的id:"+thecate+"复制到文件夹："+insertCate);		
-			/* cate_ids=thecate;
-			aimcateid=insertCate; */
+			//alert("选择文件夹的id:"+thecate+"复制到文件夹："+insertCate);		
+			cate_ids=thecate;
+			aimcateid=insertCate; 
 		}else if(!thecate&&thefile){
-			alert("选择文件的id:"+thefile+"复制到文件夹："+insertCate);
-			/* file_ids=thefile;
-			aimcateid=insertCate; */
+		//	alert("选择文件的id:"+thefile+"复制到文件夹："+insertCate);
+			 file_ids=thefile;
+			aimcateid=insertCate; 
 		}else if(cateids.length>0&&fileids.length==0){
-			alert("选择文件夹的id:"+cateids+"复制到文件夹："+insertCate);
-			/* cate_ids=cateids;
-			aimcateid=insertCate; */
+			//alert("选择文件夹的id:"+cateids+"复制到文件夹："+insertCate);
+			 cate_ids=cateids;
+			aimcateid=insertCate; 
 		}else if(cateids.length==0&&fileids.length>0){
-			alert("选择文件的id:"+fileids+"复制到文件夹："+insertCate);
-			/* file_ids=fileids;
-			aimcateid=insertCate; */
-		}else{
-			alert("选择文件夹的id:"+cateids+"选择文件的id:"+fileids+"复制到文件夹："+insertCate);
-			/* cate_ids=cateids;
+			//alert("选择文件的id:"+fileids+"复制到文件夹："+insertCate);
 			file_ids=fileids;
-			aimcateid=insertCate; */
+			aimcateid=insertCate; 
+		}else{
+			//alert("选择文件夹的id:"+cateids+"选择文件的id:"+fileids+"复制到文件夹："+insertCate);
+		    cate_ids=cateids;
+			file_ids=fileids;
+			aimcateid=insertCate; 
 		}
-		/* copyFileAndCate(file_ids,cate_ids,aimcateid); */		
+		moveFileAndCate(file_ids,cate_ids,aimcateid);
     });
     
 	$('.cancel').click(function(){
@@ -1307,10 +1316,22 @@
 		$('.md-effect-10').removeClass('md-show');
 	});
 	
+	function moveFileAndCate(fileids,cateids,aimCateid){
+		 $.ajax({
+            url: "${pageContext.request.contextPath}/moveFileAndCate?filelist="+fileids+"&catelist="+cateids+"&categorie_id="+aimCateid,
+            dataType: "json",
+            success: function(data){
+           	 alert(data);
+           	 showchild(categorie,recycle);
+            },
+            error : function() {
+				alert("移动失败！");
+			}
+        });
+		$('.md-effect-10').removeClass('md-show');
+	}
+	
 	function copyFileAndCate(fileids,cateids,aimCateid){
-		alert(fileids);
-		alert(cateids);
-		alert(aimCateid);
 		 $.ajax({
              url: "${pageContext.request.contextPath}/copyFileAndCate?filelist="+fileids+"&catelist="+cateids+"&categorie_id="+aimCateid,
              dataType: "json",
@@ -1370,5 +1391,132 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
 	btnAjax(cb);
 });
 </script>
+<!-- 实现排序功能 -->
+	<script type="text/javascript">  
+	var up=true;
+	$('.listpal .listsize').click(function(){
+		if(up){ 
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(1) i').show();
+			$('.Qdh ul').find('li:eq(1) i').attr('class','fa fa-arrow-up');
+			up=false;
+		}else{
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(1) i').show();
+			$('.Qdh ul').find('li:eq(1) i').attr('class','fa fa-arrow-down');
+			up=true;
+		}
+		sortsize();
+	});
+	$('.Qdh li:eq(1)').click(function(){
+		if(up){ 
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(1) i').show();
+			$('.Qdh ul').find('li:eq(1) i').attr('class','fa fa-arrow-up');
+			up=false;
+		}else{
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(1) i').show();
+			$('.Qdh ul').find('li:eq(1) i').attr('class','fa fa-arrow-down');
+			up=true;
+		}
+		sortsize();
+	});
+	function sortsize(){
+		var $trs = $('.table tbody .showfileTr');
+		$trs.sort(function(a,b){
+		    var valueNumOfa = $(a).find('td:eq(1)').text();
+		    var valueNumOfb = $(b).find('td:eq(1)').text();		
+			var atype=valueNumOfa.split(".");
+		    var atype2=atype[1].substr(2);
+		    var btype=valueNumOfb.split(".");
+		    var btype2=btype[1].substr(2);
+		    if(atype2=='KB'){
+		    	valueNumOfa=parseFloat(valueNumOfa)*1024;
+		    }
+		    if(atype2=='M'){
+		    	valueNumOfa=parseFloat(valueNumOfa)*1024*1024;
+		    }
+		    if(atype2=='G'){
+		    	valueNumOfa=parseFloat(valueNumOfa)*1024*1024*1024;
+		    }
+		    if(btype2=='KB'){
+		    	valueNumOfb=parseFloat(valueNumOfb)*1024;
+		    }
+		    if(btype2=='M'){
+		    	valueNumOfb=parseFloat(valueNumOfb)*1024*1024;
+		    }
+		    if(btype2=='G'){
+		    	valueNumOfb=parseFloat(valueNumOfb)*1024*1024*1024;
+		    }
+		    if(up){		    	 
+			    if(valueNumOfa > valueNumOfb) return -1;
+				else return 1;
+		    }else{
+		    	if(valueNumOfa < valueNumOfb) return -1;
+				else return 1;
+		    }		      
+		});
+		$trs.detach().appendTo('.table tbody');
+	}
+	var date=true;
+	$('.listpal .listdate').click(function(){
+		if(date){ 
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(2) i').show();
+			$('.Qdh ul').find('li:eq(2) i').attr('class','fa fa-arrow-up');
+			date=false;
+		}else{
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(2) i').show();
+			$('.Qdh ul').find('li:eq(2) i').attr('class','fa fa-arrow-down');
+			date=true;
+		}
+		sortdate();
+	})
+	$('.Qdh li:eq(2)').click(function(){
+		if(date){ 
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(2) i').show();
+			$('.Qdh ul').find('li:eq(2) i').attr('class','fa fa-arrow-up');
+			date=false;
+		}else{
+			$('.Qdh ul').find('li i').hide();
+			$('.Qdh ul').find('li:eq(2) i').show();
+			$('.Qdh ul').find('li:eq(2) i').attr('class','fa fa-arrow-down');
+			date=true;
+		}
+		sortdate();
+	});
+	function sortdate(){
+		var $trs = $('.table tbody .showTr');	
+		var $ftrs = $('.table tbody .showfileTr');	
+		$trs.sort(function(a,b){
+			var dateOfa = $(a).find('td:eq(2)').text();
+			var dateOfb = $(b).find('td:eq(2)').text();
+			if(date){
+				if(dateOfa > dateOfb) return -1;
+				else return 1;
+			}else{
+				if(dateOfa < dateOfb) return -1;
+				else return 1;
+			}			
+		});
+		$ftrs.sort(function(a,b){
+			var fdateOfa = $(a).find('td:eq(2)').text();
+			var fdateOfb = $(b).find('td:eq(2)').text();
+			if(date){
+				if(fdateOfa > fdateOfb) return -1;
+				else return 1;
+			}else{
+				if(fdateOfa < fdateOfb) return -1;
+				else return 1;
+			}
+		});		
+		$trs.detach().appendTo('.table tbody');							
+		$ftrs.detach().appendTo('.table tbody');	
+	}
+		
+    </script>
 </body>
 </html>

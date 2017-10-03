@@ -16,9 +16,9 @@ public interface ISharefileService extends IBaseService<Sharefile>{
 
 	List<Sharefile> sharecent(Sharefile sharefile);
 
-	void preservation(String id, String[] fid);
+	void preservation(String id, String[] fid, String file_cateid);
 
-	void preservationcate(String id, String[] cidlist);
+	void preservationcate(String id, String[] cidlist, String cate_reid);
 	
 	int checkfile(String[] fid, String[] fname, int flag, String uid);
 
