@@ -36,7 +36,7 @@ public class FileUtil {
 		InputStream is = null;
 
 		is = new FileInputStream(file);
-		String folderpath = "D:" + File.separatorChar + "networkdiskFile"
+		String folderpath = "/home/julyteam" + File.separatorChar + "networkdiskFile"
 				+ File.separatorChar + user.getName();
 		File newFile = new File(folderpath);// 构造一个存储路径 D：\networkdiskFile\用户名
 

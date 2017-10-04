@@ -123,6 +123,22 @@
 		<action name="gorecycle" class="fileAndCateAction" method="gorecycle">
 			<result name="success">/WEB-INF/user/recycle.jsp</result>
 		</action>
+		<!-- 图片页面跳转 -->
+		<action name="picture" class="fileAndCateAction" method="picture">
+			<result name="success">/WEB-INF/user/picture.jsp</result>
+		</action>
+		<!-- 文档页面跳转 -->
+		<action name="word" class="fileAndCateAction" method="word">
+			<result name="success">/WEB-INF/user/word.jsp</result>
+		</action>
+		<!-- 视频页面跳转 -->
+		<action name="video" class="fileAndCateAction" method="video">
+			<result name="success">/WEB-INF/user/video.jsp</result>
+		</action>
+		<!-- 其他页面跳转 -->
+		<action name="others" class="fileAndCateAction" method="others">
+			<result name="success">/WEB-INF/user/others.jsp</result>
+		</action>
 		<!-- 文件放入回收站 -->
 		<action name="layFileRecyle" class="fileAndCateAction" method="layFileRecyle">
 			<result name="json" type="json">
@@ -239,11 +255,6 @@
 				<param name="root">map</param>
 			</result>
 		</action>
-		<!-- 分享登出 -->
-		<action name="sharelogout" class="sharefileAction" method="sharelogout">
-			<result name="success" type="redirect">/login.jsp</result>
-		</action>
-		
 	</package>
 	
 	<!-- 文件夹模块 -->

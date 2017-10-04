@@ -40,6 +40,7 @@ $(document).ready(function(){
 })
 </script>
 <body>
+	<div id="overlay" class="overlay"></div>
 	<div id="in-nav">
 		<div class="logo">
 			<a id="logo" href="/networkdisk/index.jsp"> <img
@@ -115,13 +116,13 @@ $(document).ready(function(){
 												<p><a href="per-center"><span>个人资料</span></a></p> 
 												<p><a href=""><span>帮助中心</span></a></p>
 												<p><a href=""><span>设置</span></a></p>
-												<p><a href="sharelogout"><span>退出</span></a></p>
+												<p><a href="logout"><span>退出</span></a></p>
 											</div>
 									</div>
 								</div>
 							</div>
-							<div class="login" style="text-align: right;font-size: 14px;">
-								<a href="#" class="load">登录</a> <a href="#">注册</a>
+							<div class="login" style="text-align: right; font-size: 14px;">
+								<a href="#" class="load">登录</a> <a href="#" class='reg'>注册</a>
 							</div>
 						</li>
 						<li style="width: 100px;"><a href="#"
@@ -142,8 +143,8 @@ $(document).ready(function(){
 				<div class="slide-show-left">
 					<h2 class="file-name" title="jdk-8u73-windows-x64.exe">
 						<em class="fa fa-file-zip-o"></em> 
-						<c:forEach items="${sessionScope.catelist }" var="c">${c.name }</c:forEach> 
-						<c:forEach items="${sessionScope.filelist }" var="f">${f.name }</c:forEach>
+						<c:forEach items="${catelist }" var="c">${c.name }</c:forEach> 
+						<c:forEach items="${filelist }" var="f">${f.name }</c:forEach>
 					</h2>
 				</div>
 				<div class="slide-show-right">
@@ -157,7 +158,7 @@ $(document).ready(function(){
 										style="width: auto; margin-left: 5px;" id="pres">保存到网盘</span></span> </a> <a
 									class="g-button" href="javascript:void(0);"><span
 									class="g-button-right"><em class="fa fa-download"
-										title="下载(186.8M)"></em><span class="text"
+										title="下载"></em><span class="text"
 										style="width: auto;">下载</span></span> </a> <a class="g-button"
 									href="javascript:void(0);"><span class="g-button-right"><span
 										class="text" style="width: auto;">举报</span></span> </a>
@@ -223,10 +224,13 @@ $(document).ready(function(){
 				<div class="cb"></div>
 				<div class="slide-show-other-infos">
 					<div class="share-file-info" style="font-size: 14px;">
-						<span class="fa fa-clock-o" style="font-size: 18px;"></span>&nbsp;2017-09-20
-						15:09
+						<span class="fa fa-clock-o" style="font-size: 18px;"></span>&nbsp;<fmt:formatDate value="${share.startTime }" pattern="yyyy-MM-dd  HH:mm:ss" /> 
 					</div>
-					<div class="share-valid-check">失效时间：永久有效</div>
+					<div class="share-valid-check" style='margin-left:30px;color:red;'>失效时间：
+						<c:if test="${share.retain == 0 }">永久有效</c:if>
+						<c:if test="${share.retain == 7 }">七天</c:if>
+						<c:if test="${share.retain == 1 }">一天</c:if>
+					</div>
 					<div class="slide-show-other-cns clearfix">
 						<span class="title-funcs"> <span class="funcs-share-area">
 						</span>
@@ -506,44 +510,35 @@ $(document).ready(function(){
 		</div>
 		
 	</div>
-	<div class="md-modal md-effect-10" id="modal-10" style="width: 500px;">
-
-			<div class="md-content" style="height: 310px;">
-				<div class="dialog-header dialog-drag">
-					<span class="dialog-header-title">登陆 </span>
-				</div>
-				<div class="dialog-tree" style="border: none;">
-					<div style="width: 400px; margin-top: 30px;">
-						<span style="color: black; font-size: 15px;">username：</span><input
-							type="text" id="name"
-							style="width: 200px; margin-left: 30px; border-radius: 3px;" />
-					</div>
-					<div style="width: 400px; margin-top: 30px;">
-						<span style="color: black; font-size: 15px;">password：</span><input
-							type="password" id="passWord"
-							style="width: 200px; margin-left: 32px; border-radius: 3px;" />
-					</div>
-				</div>
-				<div class="dialog-footer g-clearfix">
-					<a class="g-button g-button-large cancel"
-						href="javascript:void(0);" style="float: right;"> <span
-						class="g-button-right" style="padding-right: 50px;"> <span
-							class="text" style="width: auto;">取消</span>
-					</span>
-					</a>
-					
-					<a class="g-button g-button-blue-large" href="javascript:void(0);"
-						style="float: right; background:none;border:none;"> 
-						
-						<span class="g-button-right"
-						style="padding-right: 5px;"><input type="image" id="login" src="/networkdisk/img/sharelogin.png" />
-						<!-- <span class="text" id="sharelogin" style="width: auto;">登陆</span> -->
-						</span>
-					</a>
-				</div>
+	<div class="md-modal md-effect-10" id="modal-10" style="width: 440px;">
+		<div class="md-content" style="height: 310px;">
+			<div class="dialog-header dialog-drag" style="height:40px;line-height:35px; background: #77afff;color:#fff;font-size:20px;padding:5px;">
+				<img src="/networkdisk/img/julyicon.png" width="30px" style="margin-top:-7px;margin-right:5px;"><span class="dialog-header-title" style="display: inline">登录July账号</span>
 			</div>
+			<div class="dialog-tree" style="border: none;height: 245px;overflow: hidden;">
+				<form action="" method="post" id="login_form">
+					<div class="logininput">
+						<input type="text" name="username" class="loginusername" id="name" placeholder="用户名" onblur="this.placeholder='用户名'" onfocus="this.placeholder=''"/> 
+						<input type="password" class="userpassword" id="passWord"placeholder="密码" onBlur="this.placeholder='密码';" onFocus="this.placeholder='';"/>
+					</div>
+					<div class="loginbtn">
+						<div class="loginsubmit fl" id="login">
+							<input type="submit" value="登录" />
+						</div>
+						<div class="quxiao cancel">
+							<span>取消</span>
+						</div>
+						<div class="logcheckbox" style='margin-top:-20px;'>
+							<input id="bcdl" type="checkbox" checked="true" /> 保持登录
+							<a href="#" style="float:right;text-decoration: none;color:#979696;">忘记密码?</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
 	</div>
+
 	
 	
 	<script type="text/javascript">
@@ -583,10 +578,23 @@ $(document).ready(function(){
 		$('.fa-plus').show();
 	});
 	$('body').on('click', '.load', function() {
+		showOverlay();
 		$('.md-effect-10').addClass('md-show');
 	});
 	$('.cancel').click(function() {
+		$('.overlay').hide();
 		$('.md-effect-10').removeClass('md-show');
 	});
 </script>
+<script type="text/javascript">
+    /**
+     * 显示遮罩层
+     */
+
+     function showOverlay() {
+        // 遮罩层宽高分别为页面内容的宽高
+        $('.overlay').css({'height':$(window).height(),'width':$(window).width()});
+        $('.overlay').show();
+    }
+    </script>
 </html>

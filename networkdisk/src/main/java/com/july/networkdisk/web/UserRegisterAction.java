@@ -60,7 +60,7 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
     	String password = CommonUtil.getMD5(user.getPassWord());
     	user.setPassWord(password);
     	user.setId(id);
-    	File file = new File("D:/photo/default.jpg");
+    	File file = new File("/home/julyteam/photo/default.jpg");
     	InputStream in = new FileInputStream(file);	
     	byte[] photo = new byte[in.available()];
     	in.read(photo);

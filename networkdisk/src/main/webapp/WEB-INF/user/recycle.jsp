@@ -500,6 +500,10 @@
 						url : "${pageContext.request.contextPath}/emptyRecycle?filelist="+filelist+"&catelist="+catelist,
 						dataType : 'json',
 						success : function(data) {
+							 $('.chk').attr('checked',false);
+							 $('.sharebox .name').find('span').html('文件夹');
+							 $('.name .recbtn').css('display','none');
+							 $('.sharebox').find('.name').nextAll('div').show();
 							 july_recycle();
 						},
 						error : function() {

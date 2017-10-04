@@ -264,53 +264,58 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	}
 	
 	/*分享链接跳转*/
-	public String shareurl() throws Exception{
-		map = new HashMap<String, Object>();
-		catelist = new ArrayList<Categorie>();
-		filelist = new ArrayList<NetFile>();
-		sharefile.setMagid(url);
-		Share share = this.iSharefileService.getsharebyid(url);
-		user = this.iSharefileService.getuserbyid(share.getUid());
-		long t = System.currentTimeMillis();
-		List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
-		
-		session.setAttribute("url", share.getMagid());
-		
-		if(share.getRetain() == 0){
-			if(!share.getPwd().equals("")){
-				return "havepwd";
-			}else{
-				for(int i=0;i<sflist.size();i++){
-					if(sflist.get(i).getIscate() == 1){
-						Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-						catelist.add(cate);
-					}else{
-						NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-						filelist.add(file);
+	public String shareurl(){
+		try {
+			map = new HashMap<String, Object>();
+			catelist = new ArrayList<Categorie>();
+			filelist = new ArrayList<NetFile>();
+			sharefile.setMagid(url);
+			share = this.iSharefileService.getsharebyid(url);
+			user = this.iSharefileService.getuserbyid(share.getUid());
+			long t = System.currentTimeMillis();
+			List<Sharefile> sflist = this.iSharefileService.sharecent(sharefile);
+			
+			session.setAttribute("url", share.getMagid());
+			
+			if(share.getRetain() == 0){
+				if(!share.getPwd().equals("")){
+					return "havepwd";
+				}else{
+					for(int i=0;i<sflist.size();i++){
+						if(sflist.get(i).getIscate() == 1){
+							Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
+							catelist.add(cate);
+						}else{
+							NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
+							filelist.add(file);
+						}
 					}
+					
 				}
-				
+			}else if(share.getStartTime().getTime()+share.getRetain()*24*3600*1000<t){
+				return ERROR;
+			}else{
+				if(!share.getPwd().equals("")){
+					return "havepwd";
+				}else{
+					for(int i=0;i<sflist.size();i++){
+						if(sflist.get(i).getIscate() == 1){
+							Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
+							catelist.add(cate);
+						}else{
+							NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
+							filelist.add(file);
+						}
+					}
+					
+				}
 			}
-		}else if(share.getStartTime().getTime()+share.getRetain()*24*3600*1000<t){
+			
+			return SUCCESS;
+		} catch (Exception e) {
 			return ERROR;
-		}else{
-			if(!share.getPwd().equals("")){
-				return "havepwd";
-			}else{
-				for(int i=0;i<sflist.size();i++){
-					if(sflist.get(i).getIscate() == 1){
-						Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-						catelist.add(cate);
-					}else{
-						NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-						filelist.add(file);
-					}
-				}
-				
-			}
 		}
 		
-		return SUCCESS;
 	}
 	/*密码提取*/
 	public String pwdextract() throws Exception{
@@ -435,9 +440,5 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	 	   out.close();
 	 	   return null;
 	    }
-	/*分享登出*/
-	    public String sharelogout() throws Exception{
-	    	session.setAttribute("u",null);
-	    	return SUCCESS;
-	    }
+	
 }

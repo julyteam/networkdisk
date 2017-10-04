@@ -348,4 +348,20 @@ public class FileAndCateAction extends ActionSupport {
 	public String gorecycle(){
 		return SUCCESS;
 	}
+	/*图片页面跳转*/
+	public String picture(){
+		return SUCCESS;
+	}
+	/*文档页面跳转*/
+	public String word(){
+		return SUCCESS;
+	}
+	/*视频页面跳转*/
+	public String video(){
+		return SUCCESS;
+	}
+	/*其他页面跳转*/
+	public String others(){
+		return SUCCESS;
+	}
 }

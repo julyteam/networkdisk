@@ -29,7 +29,7 @@
 	<div id="overlay" class="overlay"></div>
 		<div id="in-nav">
 			<div class="logo">
-				<a id="logo" href="goindex">
+				<a id="logo" href="/networkdisk/index.jsp">
 					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
 				</a>
 			</div>
@@ -104,13 +104,13 @@
 			<div class="row2">
 				<div class="span12">
 					<ul style="padding: 0px;" id="tabs">
-						<li class="active"><a href="goindex"
+						<li><a href="goindex"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
 						<li><a href="picture"><i
 								class="batch stream"></i><br>图片</a></li>
 						<li><a href="word"><i
 								class="batch plane"></i><br>文档</a></li>
-						<li><a href="video"><i
+						<li class="active"><a href="video"><i
 								class="batch calendar"></i><br>视频</a></li>
 						<li><a href="others"><i
 								class="batch settings"></i><br>其他</a></li>
@@ -706,9 +706,9 @@
 		});
 		
 		/* 显示文件和文件夹 */
-		$(function() {
+		/* $(function() {
 			show(null, 0);
-		});
+		}); */
 		
 		/* 文件上传 */
 		$("#upfile").change(function() {
