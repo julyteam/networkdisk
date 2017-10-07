@@ -196,9 +196,9 @@
 				success: function(data) {//提交成功的时候执行的函数  
 					$(".friends").show();
 				    if(data.friend.length>0){
-				    	$('.friends').append("<img src='${pageContext.request.contextPath}/showphoto?uid="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据	
+				    	$('.friends').html("<img src='${pageContext.request.contextPath}/showphoto?uid="+data.friend[0].id+"'width='90px'>"+"<a>"+"July账号："+data.friend[0].name+"</a>");//jquery解析map数据	
 				    }else{
-				    	$('.friends').append("<a>好友不存在</a>");//jquery解析map数据	
+				    	$('.friends').html("<a>好友不存在</a>");//jquery解析map数据	
 				    }
 										        				       					  	
 			}  

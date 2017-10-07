@@ -13,14 +13,28 @@ public class UserDao extends BaseDao
         sqlSession.insert("userSpace.save", user);
         sqlSession.close();
     }
-
+    /*用户名登录*/
 	public User findOne(User user) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
         User u = sqlSession.selectOne("userSpace.findOne", user);
         sqlSession.close();
 		return u;
 	}
-
+	/*邮箱登陆*/
+	public User findOneByEm(User user) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+        User u = sqlSession.selectOne("userSpace.findOneByEm", user);
+        sqlSession.close();
+		return u;
+	}
+	/*手机号登录*/
+	public User findOneByPhone(User user) {
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+        User u = sqlSession.selectOne("userSpace.findOneByPhone", user);
+        sqlSession.close();
+		return u;
+	}
+	
 	public List<User> getAll() {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
         List<User> u = sqlSession.selectList("userSpace.getAll");
@@ -123,6 +137,6 @@ public class UserDao extends BaseDao
 			}
 			
 		}
-	
+
 	
 }

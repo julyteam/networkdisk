@@ -3,7 +3,7 @@
 .share_all
 {
 	height:100%;
-	background: #e9ebec url(/networkdisk/img/body-bg.png);
+	background:url(/networkdisk/img/back4.jpg) !important; 
 	font-family: Lato;
 	margin: 0px;
 }

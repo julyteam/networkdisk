@@ -34,7 +34,6 @@ public class UserRegisterAction extends ActionSupport implements ModelDriven<Use
 	}
 
 	public User getModel() {
-		// TODO Auto-generated method stub
 		return user;
 	}
 

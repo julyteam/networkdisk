@@ -122,7 +122,7 @@ $(document).ready(function(){
 								</div>
 							</div>
 							<div class="login" style="text-align: right; font-size: 14px;">
-								<a href="#" class="load">登录</a> <a href="#" class='reg'>注册</a>
+								<a href="#" class="load">登录</a> <a href="register.jsp" class='reg'>注册</a>
 							</div>
 						</li>
 						<li style="width: 100px;"><a href="#"
@@ -141,8 +141,52 @@ $(document).ready(function(){
 		<div class="col-lg-9 col-md-9 page2">
 			<div class="page2_1">
 				<div class="slide-show-left">
-					<h2 class="file-name" title="jdk-8u73-windows-x64.exe">
-						<em class="fa fa-file-zip-o"></em> 
+					<h2>
+						<c:if test="${filelist.size() < 1 }"><img src="/networkdisk/img/category.png" style="margin-left:10px;margin-bottom:5px;" ></c:if>
+						<c:if test="${filelist.size() > 1 && catelist.size() < 1 }"><img src="/networkdisk/img/cates.png"  style="margin-left:10px;margin-bottom:5px;" ></c:if>
+						<c:if test="${filelist.size() >=1 && catelist.size() >=1 }"><img src="/networkdisk/img/cates.png"  style="margin-left:10px;margin-bottom:5px;" ></c:if>
+						
+						<c:if test="${filelist.size() == 1 && catelist.size() < 1 }">
+							<c:choose>
+								    <c:when test="${filelist[0].type == 'zip' }">
+								       <img src='/networkdisk/img/ZIP_2.png'>
+								    </c:when>
+								    <c:when test="${filelist[0].type == 'mp4' || filelist[0].type == 'rmvb' || filelist[0].type=='avi' || filelist[0].type == 'mkv' || filelist[0].type=='wmv' || filelist[0].type=='wmv' ||  filelist[0].type=='mov'}">
+								       <img src='/networkdisk/img/video.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'png'}">
+								      <img src='/networkdisk/img/pic.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'jpg'}">
+								       <img src='/networkdisk/img/pic.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'gif' || filelist[0].type == 'bmp' || filelist[0].type == 'psd'  || filelist[0].type == 'ai' || filelist[0].type == 'svg' }">
+								       <img src='/networkdisk/img/picture1.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'docx' || filelist[0].type == 'doc' }">
+								       <img src='/networkdisk/img/word.png'>
+								    </c:when>
+								    <c:when test="${filelist[0].type == 'txt' }">
+								       <img src='/networkdisk/img/text.png'>
+								    </c:when>
+								    
+								     <c:when test="${filelist[0].type == 'xls' }">
+								       <img src='/networkdisk/img/xls.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'pdf' }">
+								       <img src='/networkdisk/img/pdf.png'>
+								    </c:when>
+								     <c:when test="${filelist[0].type == 'html' }">
+										<img src='/networkdisk/img/html.png'>
+								    </c:when>
+								    <c:when test="${filelist[0].type == 'mp3' || filelist[0].type == 'wav' || filelist[0].type == 'mod' }">
+										<img src='/networkdisk/img/music.png'>
+								    </c:when>
+								    <c:otherwise>
+								       <img src='/networkdisk/img/others.png'>
+								    </c:otherwise>
+								</c:choose>
+						</c:if>
 						<c:forEach items="${catelist }" var="c">${c.name }</c:forEach> 
 						<c:forEach items="${filelist }" var="f">${f.name }</c:forEach>
 					</h2>

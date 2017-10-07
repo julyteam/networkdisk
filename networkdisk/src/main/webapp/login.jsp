@@ -115,7 +115,7 @@
 			  <form action="${pageContext.request.contextPath}/userlogin" method="post" >
 
 				<div class="form_user">
-					<input type="text" placeholder="  用户名" name="name"  value="<%=un%>"/>
+					<input type="text" placeholder="  用户名/手机/邮箱" name="name"  value="<%=un%>"/>
 				</div>
 				<div class="form_password">
 					<input type="password" placeholder="   密 码"  name="passWord" value="<%=up%>"/>

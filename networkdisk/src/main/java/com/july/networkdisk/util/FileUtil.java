@@ -3,6 +3,7 @@ package com.july.networkdisk.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -32,28 +33,18 @@ public class FileUtil {
 		}
 		netFile.setType(str);
 		netFile.setSize(file.length());
-		OutputStream os = null;
-		InputStream is = null;
-
-		is = new FileInputStream(file);
-		String folderpath = "/home/julyteam" + File.separatorChar + "networkdiskFile"
+		
+		String folderpath = "D:" + File.separatorChar + "networkdiskFile"
 				+ File.separatorChar + user.getName();
 		File newFile = new File(folderpath);// 构造一个存储路径 D：\networkdiskFile\用户名
 
 		if (!newFile.exists()) {
 			newFile.mkdirs();
 		}
+		
 		String turePath = folderpath+File.separatorChar+netFile.getId()+"."+netFile.getType(); //真实的文件存储路径
-		os = new FileOutputStream(turePath);
-
-		byte[] buf = new byte[1024];
-		int length = 0;
-		while ((length = is.read(buf)) > 0) {
-			os.write(buf, 0, length);
-		}
-
-		os.close();
-		is.close();
+		
+		write(file.getPath(), turePath);
 		
 		netFile.setPath(turePath);
 		netFile.setDownum(0);
@@ -84,6 +75,41 @@ public class FileUtil {
 		File newFile = new File(file_path);
 		if(newFile.exists()){
 			newFile.delete();
+		}
+	}
+	/**
+	 * 写入文件
+	 * @param inputFile
+	 * @param targetFile
+	 */
+	public static void write(String inputFile, String targetFile) {
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		try {
+			inputStream = new FileInputStream(inputFile);
+			outputStream = new FileOutputStream(targetFile);
+			byte[] buf = new byte[1024];
+			int length = 0;
+			while ((length = inputStream.read(buf)) > 0) {
+				outputStream.write(buf, 0, length);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
 }
