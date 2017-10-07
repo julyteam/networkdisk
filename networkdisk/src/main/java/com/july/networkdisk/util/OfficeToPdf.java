@@ -10,7 +10,7 @@ public class OfficeToPdf{
     private static OfficeToPdf office2PdfUtil = new OfficeToPdf();  
     private static  OfficeManager officeManager;  
     //openOffice安装路径  
-    private static String OPEN_OFFICE_HOME = "C:\\Program Files (x86)\\OpenOffice 4\\";  
+    private static String OPEN_OFFICE_HOME = "/opt/openoffice4/program";  
     //服务端口  
     private static int OPEN_OFFICE_PORT[] = {8100};  
       
