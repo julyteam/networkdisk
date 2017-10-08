@@ -141,5 +141,8 @@
 	<select id="getlistbyuid" parameterType="String" resultMap="categorieMap">
 		select * from categorie where cat_uid=#{id} and cat_reid is null
 	</select>
-
+	<!-- 搜索文件夹 -->
+	<select id="search" parameterType="map" resultMap="categorieMap">
+		select * from categorie where cat_uid=#{uid} and cat_name like #{str}
+	</select>
 </mapper>

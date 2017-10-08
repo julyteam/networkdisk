@@ -111,7 +111,6 @@ padding-left:15px;
 				<div class="reg_email">
 					<span>邮&nbsp;&nbsp;&nbsp;箱</span><input type="email" name="email"  value="${user.email }"
 						id="email" />
-					
 						<label id="false" style="color:red;height:10px;"><s:fielderror></s:fielderror></label>
 				</div>
 				<div class="reg_code">

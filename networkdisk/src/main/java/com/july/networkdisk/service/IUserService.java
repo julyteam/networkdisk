@@ -1,6 +1,7 @@
 package com.july.networkdisk.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.july.networkdisk.vo.*;
 
@@ -18,5 +19,7 @@ public interface IUserService extends IBaseService<User>
 	Categorie getcate(String fileandcateid);
 	NetFile getfile(String fileandcateid);
 	void cancelshare(Sharefile sharefile);
+	List<NetFile> searchfile(Map<String, Object> map);
+	List<Categorie> searchcate(Map<String, Object> map);
 	
 }

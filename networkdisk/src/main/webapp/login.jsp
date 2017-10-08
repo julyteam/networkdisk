@@ -130,7 +130,7 @@
 					<input type="submit" value="登录"  />
 				</div>
 				<div class="form_href" id="question">
-					<a href="#">忘记密码？</a>
+					<a href="goforget">忘记密码？</a>
 				</div>
 				<div class="form_href" id="number">
 					<a href="#">海外手机号</a>

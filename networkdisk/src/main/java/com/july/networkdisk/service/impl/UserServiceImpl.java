@@ -86,4 +86,12 @@ public class UserServiceImpl implements IUserService
 		this.userDao.cancelshare(sharefile);
 		
 	}
+
+	public List<NetFile> searchfile(Map<String, Object> map) {
+		return this.userDao.searchfile(map);
+	}
+
+	public List<Categorie> searchcate(Map<String, Object> map) {
+		return this.userDao.searchcate(map);
+	}
 }

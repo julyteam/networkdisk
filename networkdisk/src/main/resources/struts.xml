@@ -13,7 +13,7 @@
 	<constant name="struts.multipart.maxSize" value="2147483648" />
 	
 	<!-- 用户模块 -->
-	<package name="networkdisk.user" namespace="/" extends="struts-default">
+	<package name="networkdisk.user" namespace="/" extends="struts-default,json-default">
 		
 		<!-- 用户登录 -->
 		<action name="userlogin" class="userAction" method="login">
@@ -21,10 +21,9 @@
 			<result name="error">/login.jsp</result>
 		</action>
 		
-	<!-- 头像 -->
+		<!-- 头像 -->
 		<action name="photoup" class="userAction" method="photoup">
 			<interceptor-ref name="fileUpload">
-				
 				<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg</param>
 				<param name="maximumSize">2097152</param>
 			</interceptor-ref>
@@ -61,19 +60,36 @@
 		<action name="goshare_default" class="userAction" method="goshare_default">
 			<result name="success">/WEB-INF/user/share_default.jsp</result>
 		</action>
-		
+		<!-- 忘记密码页面跳转 -->
+		<action name="goforget" class="userAction" method="goforget">
+			<result name="success">/WEB-INF/user/getpassindex.jsp</result>
+		</action>
 		<!--密码修改  -->
 		<action name="updatePassAction" class="userAction" method="updatePassword">
 			<result type="chain">logout</result>
 			<result name="error" type="redirect">per-center</result>
 		</action>
 
+		<action name="getUserByEm" class="userAction" method="getUserByEm">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
+		<action name="updatepwd" class="userAction" method="updatepwd">
+			
+		</action>
 		<!-- 用户注册 -->
 		<action name="register"  class="userRegister" method="register">
 			<result name="success">/register.jsp</result>
 			<result name="input">/register.jsp</result>
 		</action>
-
+		<action name="search" class="userAction" method="search">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
+		
+		
 	    <!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">
 			
@@ -139,6 +155,7 @@
 		<action name="others" class="fileAndCateAction" method="others">
 			<result name="success">/WEB-INF/user/others.jsp</result>
 		</action>
+		
 		<!-- 文件放入回收站 -->
 		<action name="layFileRecyle" class="fileAndCateAction" method="layFileRecyle">
 			<result name="json" type="json">

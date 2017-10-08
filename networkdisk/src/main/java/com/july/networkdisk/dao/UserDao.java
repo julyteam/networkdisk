@@ -1,6 +1,7 @@
 package com.july.networkdisk.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.july.networkdisk.vo.*;
 
@@ -122,6 +123,20 @@ public class UserDao extends BaseDao
 				sqlSession.delete("shareSpace.cancelshare", magid);
 			}
 			
+		}
+
+		public List<NetFile> searchfile(Map<String, Object> map) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			List<NetFile> filelist = sqlSession.selectList("fileSpace.search", map);
+			sqlSession.close();
+			return filelist;
+		}
+
+		public List<Categorie> searchcate(Map<String, Object> map) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			List<Categorie> catelist = sqlSession.selectList("cateSpace.search", map);
+			sqlSession.close();
+			return catelist;
 		}
 	
 	

@@ -167,14 +167,186 @@
 								<div class="span5">
 									<div class="cs" style="display: inline-block;">
 										<form action="" method="post">
-											<a class="search"> <input type="text" value=""
+											<a class="search"> <input id="search" type="text" value=""
 												placeholder="搜索您的文件" class="search_input"
 												onfocus="this.placeholder=''"
 												onblur="this.placeholder='搜索您的文件'" /> <span
-												class="fa fa-search" id="ser"></span>
+												class="fa fa-search" id="ser" ></span>
 											</a>
 										</form>
 									</div>
+									
+									<script type="text/javascript">
+										$("#ser").click(function(){
+											var str = $("#search").val();
+											$.ajax({  
+											 	url: "search?str="+str,       //后台处理程序
+									            type: "post",               		//数据发送方式
+									            dataType: "json",           		//接受数据格式   
+									            success:function(map){ 
+									            	alert("success");
+									            	$('#mytbody').empty();
+									            	var filelist = map.filelist;
+									            	var catelist = map.catelist;
+									            	if(catelist=="" && filelist==""){
+														$('.nullfile').show();
+													}else{
+														$('.nullfile').hide();
+													}
+												    var sum=parseInt(catelist.length+filelist.length);
+													var $sumhead=$("<span class='j2'>已加载全部,共"+sum+"条</span>");
+													$('.Sdh').html($sumhead);   
+													for (var i = 0; i < catelist.length; i++) {
+														//分割时间字符串
+														var time = catelist[i].addtime;
+														var newTime = time.split("T");
+														
+														var $str = $("<tr class='showTr'>"
+																+ "<td>"
+																+ "<input type='checkbox' name='catebox' value='"+catelist[i].id+"' class='chk_2'/>"
+																+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
+																+ "<input id='listCateID' class='reid' type='text' style='display:none' value="
+																+ catelist[i].id
+																+ ">"
+																+ "<input id='listCateState' class='restate' type='text' style='display:none' value="
+																+ catelist[i].state
+																+ ">"
+																+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
+																+ catelist[i].name
+																+ ">"
+																+ "<a class='july_cateName' >"
+																+ catelist[i].name
+																+ "</a>"
+																+ "<div class='more'>"
+																+ "<span class='fa fa-share-alt' title='分享'>"
+																+ "</span>"
+																+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+																+ "<span class='menu' style='width: 96px;'>"
+																+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelecate' id='"+catelist[i].id+"' >删除</a>"
+																+ "</span></div></td>"
+																+ "<td>--</td>"
+																+ "<td>" 
+																+ newTime[0]+" "+newTime[1]
+																+ "</td>" 																
+																+ "</tr>");
+														$("#mytbody").append($str);
+													}
+													for (var i = 0; i < filelist.length; i++) {
+														var type;
+														var filesize;
+														var sizeflag;
+														/* 修改时间格式 */
+														var time = filelist[i].addtime;
+														var newTime = time.split("T");
+														
+														/* 计算文件大小 */
+														if(filelist[i].size/(1024*1024) < 1 ){
+															filesize=(filelist[i].size/1024).toFixed(2);
+															sizeflag="KB";
+														}else
+														{
+															filesize=(filelist[i].size/(1024*1024)).toFixed(2);
+															sizeflag="M";
+														}
+														
+														switch(filelist[i].type){
+															case("zip"):
+																type="/networkdisk/img/ZIP_2.png";
+															break;
+															case("mp4"):
+															case("rmvb"):
+															case("avi"):
+															case("mkv"):	
+															case("wmv"):
+															case("3gp"):	
+															case("mov"):
+																type="/networkdisk/img/video.png";
+															break;
+															case("png"):
+																type="/networkdisk/img/png.png";
+															break;
+															case("jpg"):
+																type="/networkdisk/img/jpg.png";
+															break;
+															case("gif"):
+															case("bmp"):
+															case("psd"):
+															case("ai"):
+															case("svg"):
+																type="/networkdisk/img/picture1.png";
+															break;
+															case("doc"):
+															case("docx"):
+																type="/networkdisk/img/word.png";
+															break;
+															case("txt"):
+																type="/networkdisk/img/text.png";
+															break;
+															case("xls"):
+																type="/networkdisk/img/xls.png";
+															break;
+															case("pdf"):
+																type="/networkdisk/img/pdf.png";
+															break;
+															case("html"):
+																type="/networkdisk/img/html.png";
+															break;
+															case("mp3"):
+															case("wav"):
+															case("mod"):	
+																type="/networkdisk/img/music.png";
+															break;
+															default:
+																type="/networkdisk/img/others.png";
+														}
+														var $str = $("<tr class='showfileTr'>"
+																+ "<td>"
+																+ "<input type='checkbox' name='filebox' value='"+filelist[i].id+"' class='chk_2' />"
+																+ "<img src='"
+																+ type
+																+ "'width='28px' style='margin:0 5px 5px 10px;'>"
+																+ "<input id='listFileID' class='refileid' type='text' style='display:none' value="
+																+ filelist[i].id
+																+ ">"
+																+ "<input id='listFileID' class='rename' type='text' style='display:none' value="
+																+ filelist[i].name
+																+ ">"
+																+ "<a class='july_fileName'>"
+																+ filelist[i].name
+																+ "</a>"
+																+ "<div class='more'>"
+																+ "<span class='fa fa-share-alt' title='分享'>"
+																+ "</span><span class='fa fa-download' title='下载' >"
+																+ "</span>"
+																+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
+																+ "</span>"
+																+ "<span class='menu' style='width: 96px;'>"
+																+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
+																+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelefile' id='"+filelist[i].id+"' >删除</a>"
+																+ "</span></div></td>" 
+																+ "<td>"
+																+ filesize + sizeflag
+																+ "</td>" 
+																+ "<td>"
+																+ newTime[0]+" "+newTime[1]
+																+ "</td>"
+																+ "</tr>")
+														$("#mytbody").append($str);
+														
+													}
+												},
+												error : function() {
+													alert("查询失败")
+												}						
+											});
+										})									       
+									</script>
+									
 									<div class="ch">
 										<div class="lp">
 											<a class="list"><img src="img/list.png" /></a>
@@ -482,9 +654,9 @@
 					}else{
 						$('.nullfile').hide();
 					}
-			    var sum=parseInt(listCate.length+listFile.length);
-				var $sumhead=$("<span class='j2'>已加载全部,共"+sum+"条</span>");
-				$('.Sdh').html($sumhead);   
+				    var sum=parseInt(listCate.length+listFile.length);
+					var $sumhead=$("<span class='j2'>已加载全部,共"+sum+"条</span>");
+					$('.Sdh').html($sumhead);   
 					for (var i = 0; i < listCate.length; i++) {
 						//分割时间字符串
 						var time = listCate[i].addtime;

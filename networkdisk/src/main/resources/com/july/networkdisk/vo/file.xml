@@ -38,6 +38,10 @@
 		select * from file where file_catid=#{cateid}
 	</select>
 	
+	<select id="search" parameterType="map" resultMap="fileMap">
+		select * from file where file_uid=#{uid} and file_deletesign=0  and file_name like #{str}
+	</select>
+	
 	<!-- 根据条件查找文件 -->
 	<select id="findAllByUser" parameterType="map" resultMap="fileMap">
 		select * from file

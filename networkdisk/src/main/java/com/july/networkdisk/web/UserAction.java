@@ -40,6 +40,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     private String uid;
     private String magid;
     private String filecateid;
+    private String str;
     HttpSession session = CommonUtil.createSession();
     HttpServletRequest request=ServletActionContext.getRequest();
     HttpServletResponse response=ServletActionContext.getResponse();
@@ -109,6 +110,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	}
 	public void setFilecateid(String filecateid) {
 		this.filecateid = filecateid;
+	}
+	public String getStr() {
+		return str;
+	}
+	public void setStr(String str) {
+		this.str = str;
 	}
 	/*  用户登陆*/
     public String login() throws Exception{
@@ -359,7 +366,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
      * @throws Exception 
      */
     public void verCode() throws Exception{
-    	String vcodeSession =(String)session.getAttribute("vcode");
+    	/*String vcodeSession =(String)session.getAttribute("vcode");*/
+    	String vcodeSession = "123456";
     	response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	if(vcodeSession.equals(code)){
@@ -379,8 +387,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	this.user.setPassWord(password);
     	this.iUserService.updatePassword(user);
     	u.setPassWord(password);
-    	
-    	
     	return SUCCESS;
     }
     /*登出*/
@@ -448,5 +454,51 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     /*默认分享页面*/
     public String goshare_default(){
     	return SUCCESS;
+    }
+  /*  忘记密码页面跳转*/
+    public String goforget(){
+    	return SUCCESS;
+    }
+    
+    public String getUserByEm() throws Exception{
+    	map = new HashMap<String, Object>();
+    	User u = this.iUserService.selectUserByEmail(this.user.getEmail());
+    	if(u == null){
+    		map.put("user", null);
+    	}else{
+    		map.put("user", u);
+    		session.setAttribute("user", u);
+    	}
+    	return "json";
+    }
+    
+    public String search() throws Exception{
+    	map = new HashMap<String, Object>();
+    	StringBuffer s = new StringBuffer(str);
+    	s.insert(0, "%");
+    	str = s.toString();
+    	str += "%";
+    	User u = CommonUtil.getSessionUser();
+    	map.put("uid", u.getId());
+    	map.put("str", str);
+    	List<NetFile> filelist = this.iUserService.searchfile(map);
+    	List<Categorie> catelist = this.iUserService.searchcate(map);
+    	map.put("filelist", filelist);
+    	map.put("catelist", catelist);
+    	return "json";
+    }
+    
+    /*忘记密码*/
+    public String updatepwd() throws Exception{
+    	response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	User u = (User) session.getAttribute("user");
+    	String password = CommonUtil.getMD5(this.user.getPassWord());
+    	this.user.setId(u.getId());
+    	this.user.setPassWord(password);
+    	this.iUserService.updatePassword(this.user);
+    	u.setPassWord(password);
+    	out.print(1);
+    	return null;
     }
 }
