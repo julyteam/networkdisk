@@ -232,6 +232,13 @@
 				<param name="root">message</param>
 			</result>
 		</action>
+		
+		<!-- office文件预览 -->
+		<action name="officeView" class="fileAction" method="officeView">
+			<result name="json" type="json">
+				<param name="root">swfFilePath</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 分享 -->

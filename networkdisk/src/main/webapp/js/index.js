@@ -222,7 +222,7 @@ $(document).ready(function() {
 			$('#mydownload').click(function(){
 				$('#msg').show();
 			});
-			$('.fa-times').click(function() {
+			$('#msg .fa-times').click(function() {
 				$(this).parent('div').hide();
 			});
 			

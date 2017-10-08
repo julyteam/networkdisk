@@ -42,7 +42,12 @@ public class UserServiceImpl implements IUserService
 	public User findOne(User user) {
 		return this.userDao.findOne(user);
 	}
-
+	public User findOneByEm(User user) {
+		return this.userDao.findOneByEm(user);
+	}
+	public User findOneByPhone(User user) {
+		return this.userDao.findOneByPhone(user);
+	}
 	public User selectUserByName(String name) {
 		
 		return this.userDao.selectUserByName(name);

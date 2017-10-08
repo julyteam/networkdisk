@@ -9,6 +9,11 @@ import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
 
 public interface IFileService extends IBaseService<NetFile> {
+	
+	/**
+	 * 得到在或者不在回收站的一个文件,当flag为空时，就忽略是否在回收站中。
+	 */
+	public NetFile get(String netFile_id, Integer flag);
 	/**
 	 * 根据用户查找每个目录下所有文件 区分在不在回收站
 	 * 参数为用户id,所属文件夹id,是否删除
@@ -25,16 +30,46 @@ public interface IFileService extends IBaseService<NetFile> {
 	List<String> findAllByCatId(String cat_id,Integer file_deletesign);
 	
 
-
+	/**
+	 * 文件上传
+	 * @param netFile
+	 * @param file
+	 * @param fileFileName
+	 * @param fileContentType
+	 * @param user
+	 * @throws Exception
+	 */
 	void fileUpLoad(NetFile netFile,File file, String fileFileName,
 			String fileContentType, User user) throws Exception;
 	
+	/**
+	 * 文件下载
+	 * @param netFileID
+	 * @return
+	 * @throws Exception
+	 */
 	InputStream fileDownLoad(String netFileID) throws Exception;
 	
+	/**
+	 * 删除一批文件
+	 * @param netFile_ids
+	 * @return
+	 */
 	boolean deleteBatch(List<String> netFile_ids);
-
+	/**
+	 * 移动一个文件到回收站
+	 * @param netFile_id
+	 * @param file_deletesign
+	 * @return
+	 */
 	boolean layRecyle(String netFile_id,Integer file_deletesign);
 	
+	/**
+	 * 移动一批文件到回收站
+	 * @param netFile_ids
+	 * @param file_deletesign
+	 * @return
+	 */
 	boolean layBatchRecyle(List<String> netFile_ids,Integer file_deletesign);
 	
 	/**

@@ -199,7 +199,7 @@
 								
 								<div class="Qdh">
 									<ul>
-										<li style="width:60%; margin-left: -40px;"><input
+										<li style="width:51%; margin-left: -40px;"><input
 											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span><i class="fa fa-arrow-down"></i></li>
 										<li>大小<i class="fa fa-arrow-down"></i></li>
 										<li>修改日期<i class="fa fa-arrow-down"></i></li>
@@ -706,9 +706,10 @@
 		});
 		
 		/* 显示文件和文件夹 */
-		/* $(function() {
-			show(null, 0);
-		}); */
+		 $(function() {
+			$('.nullfile').show();
+			/* show(null, 0); */
+		}); 
 		
 		/* 文件上传 */
 		$("#upfile").change(function() {
@@ -745,10 +746,10 @@
 				type="/networkdisk/img/video.png";
 			break;
 			case(".png"):
-				type="/networkdisk/img/png.png";
+				type="/networkdisk/img/pic.png";
 			break;
 			case(".jpg"):
-				type="/networkdisk/img/jpg.png";
+				type="/networkdisk/img/pic.png";
 			break;
 			case(".gif"):
 			case(".bmp"):

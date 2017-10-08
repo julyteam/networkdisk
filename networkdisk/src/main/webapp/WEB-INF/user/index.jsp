@@ -19,6 +19,8 @@
 <link rel="stylesheet"
 	href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 <script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/networkdisk/js/flexpaper_flash.js"></script>
+<script type="text/javascript" src="/networkdisk/js/flexpaper_flash_debug.js"></script>
 <script type="text/javascript" src="/networkdisk/js/ajaxfileupload.js"></script>
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/js/index.js"></script>
@@ -146,8 +148,8 @@
 									src="/networkdisk/img/newfile.png" style="margin-bottom: 3px;" />&nbsp;新建文件夹</a>
 								<a class="g_button" id="mydownload">
 								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的上传</a>
-								<div class="equip" style="width: 105px; display: inline-block; position: relative;">
-									<a class="g_button g_1" id="g_button"><img
+								<div class="equip" style="margin-left:15px;width:105px;display: inline-block; position: relative;">
+									<a class="g_button g_1" id="g_button"style="margin-left:0px;"><img
 										src="/networkdisk/img/iphone.png" style="margin-bottom: 3px;" />&nbsp;我的设备</a>
 									<ul class="equi">
 										<li title="推送任务列表">推送任务列表</li>
@@ -371,7 +373,7 @@
 								
 								<div class="Qdh">
 									<ul>
-										<li style="width:60%; margin-left: -40px;"><input
+										<li style="width:51%; margin-left: -40px;"><input
 											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span><i class="fa fa-arrow-down"></i></li>
 										<li>大小<i class="fa fa-arrow-down"></i></li>
 										<li>修改日期<i class="fa fa-arrow-down"></i></li>
@@ -420,14 +422,24 @@
       				<span class="text" style="width: auto;">移动</span>
       				</span>
       				</a>
-      				<a class="g-button g-button-large" href="javascript:void(0);" style="float: left;">
-      				<span class="g-button-right"><em class="fa fa-plus-square-o" title="新建文件夹"></em>
-      				<span class="text" style="width: auto;">新建文件夹</span>
-      				</span>
-      				</a>
       			</div>
     		</div>
   		</div>
+  		<div class="md-modal md-effect-13" id="modal-13" style="width: 910px;">
+			<div class="md-content" style="height: 610px;padding:0px;">
+				<div class="dialog-header dialog-drag" style="height: 40px; line-height: 35px; background: #77afff; color: #fff; font-size: 20px; padding: 5px;">
+					<span class="fa fa-times" style="float:right;bottom:3px; margin-right: 5px;"></span>
+				</div>
+				<div class="test_mask" style="width:140px; height:38px;border:1px solid #ccc;dislay:none;position: fixed;top: 40%;left: 40%;padding: 3px 7px">
+					<img alt="" src="/networkdisk/img/loading.gif" style="position: relative;float: left">
+					<span style="color:#ccc;font-size: 18px;position: relative;bottom:-3px;display: inline-block;">数据加载中</span>
+				</div>
+				<div class="dialog-tree" id="officeview" style="overflow: hidden;border: none;width: 910px;height: 570px;margin: 0px;padding:0px;">
+					
+				</div>
+				
+			</div>
+		</div>
   		<div class="md-modal md-effect-4" id="modal-4">
 			<div class="md-content">
 				<div class="dialog-header dialog-drag">
@@ -526,9 +538,10 @@
 								</li>
 							</ul>
 							<div class="footer">
-								<a class="md-close close" id="end">关闭</a><a href="javascript:;"
-									class="create"> <span class="g-button-right"> <span
-										class="text" id="create">创建链接</span>
+								<a class="md-close close" id="end">关闭</a>
+								<a href="javascript:;" class="create"> 
+									<span class="g-button-right"> 
+									<span class="text" id="create">创建链接</span>
 								</span>
 								</a>
 								<!-- <a href="javascript:;" class="create share" style="display:none"> <span class="g-button-right"> <span
@@ -540,15 +553,17 @@
 							<script type="text/javascript">
 								$("#end").click(function(){
 									/* location.href="index.jsp"; */
-								});
-								$("#create").click(function(){
-									$("#share-url").attr("value","http://47.95.213.42:8080/networkdisk/shareurl?url=<%=uuid%>");
-									$("#share-password").attr("value","<%=pwd%>");									
+								});								
+								function shareurl(){
+									var method;
+									$("#share-url").val('http://47.95.213.42:8080/networkdisk/shareurl?url=<%=uuid%>');
+									$("#share-password").val('<%=pwd%>');									
 									var btns = new Array();
 									var cateid = new Array();
 									var uuid = $("#share-url").val();
 									var time = $("#datetype").text();
-									var method = $('input[name="share-method"]:checked').val();
+									method=null;
+									method = $('input[name="share-method"]:checked').val();
 									if(method == "private"){
 										var pwd = $("#share-password").val();
 									}else{
@@ -584,7 +599,7 @@
 								        });  
 									}	
 									
-								});
+								}
 							</script>
 						</div>
 					</div>
@@ -727,10 +742,8 @@
 								type="/networkdisk/img/video.png";
 							break;
 							case("png"):
-								type="/networkdisk/img/png.png";
-							break;
 							case("jpg"):
-								type="/networkdisk/img/jpg.png";
+								type="/networkdisk/img/pic.png";
 							break;
 							case("gif"):
 							case("bmp"):
@@ -772,7 +785,10 @@
 								+ "<input id='listFileID' class='refileid' type='text' style='display:none' value="
 								+ listFile[i].id
 								+ ">"
-								+ "<input id='listFileID' class='rename' type='text' style='display:none' value="
+								+ "<input id='listFileType' type='text' style='display:none' value="
+								+ listFile[i].type
+								+ ">"
+								+ "<input id='listFileName' class='rename' type='text' style='display:none' value="
 								+ listFile[i].name
 								+ ">"
 								+ "<a class='july_fileName'>"
@@ -868,6 +884,37 @@
 			show(cateid,catestate);
 		});
 		
+		/*office文件预览*/
+		$('table').on('click','.july_fileName',function(){
+			var fileid =$(this).parent('td').find('#listFileID').val();
+			var filetype =$(this).parent('td').find('#listFileType').val();
+			var $office=$("<div id='viewerPlaceHolder' style='margin:0px; width: 910px;height: 570px;'></div>");
+			if(filetype == "pdf" ||filetype == "word" || filetype == "txt" ||filetype == "docx" || filetype == "doc" || filetype == "ppt"  )
+			{
+				showOverlay();
+				$('.md-effect-13').addClass('md-show');
+				$('#officeview').empty();
+				$('.test_mask').show(300);
+				$.ajax({
+					url : "${pageContext.request.contextPath}/officeView?netFileID="+fileid,
+					dataType : 'json',
+					success : function(data) {	
+						$('.test_mask').hide();
+						$('#officeview').append($office);
+						officeviewfun(data); 
+					},
+					error : function() {
+						alert("文件预览失败！");
+					}
+				});
+				
+			}
+			
+		});
+		$('#modal-13 .fa-times').click(function() {
+			$('.overlay').hide();
+			$('.md-effect-13').removeClass('md-show');
+		});
 		
 		/* 文件下载 */
 		
@@ -917,10 +964,8 @@
 				type="/networkdisk/img/video.png";
 			break;
 			case(".png"):
-				type="/networkdisk/img/png.png";
-			break;
 			case(".jpg"):
-				type="/networkdisk/img/jpg.png";
+				type="/networkdisk/img/pic.png";
 			break;
 			case(".gif"):
 			case(".bmp"):
@@ -953,7 +998,7 @@
 			default:
 				type="/networkdisk/img/others.png";
 		}
-			var $str=$("<li class='file-list'><div class='file-name'title='"
+			var $str=$("<li class='file-list'><div class='file_name'title='"
 					+ upfilename
 					+ "'>"
 					+ "<img src='"
@@ -1049,8 +1094,24 @@
 			$('.menu').css('display','none');
 		});
 		$('.md-trigger').click(function() {		
+			showOverlay();
 			$('.md-effect-4').addClass('md-show');
-			$('.dialog-header-title').html("分享多个文件(夹)");
+			var che=$('.table').find('input:checked');
+			if(che.length>1){
+				$('.dialog-header-title').html("分享多个文件(夹)");
+			}else{
+				shareid=null;				
+				if(che.parents('tr').find('.reid').length!=0){				
+					shareid=che.parents('tr').find('.reid').val();
+					iscate=true;
+				}else{
+					shareid=che.parents('tr').find('.refileid').val();
+					iscate=false;
+				}			
+				var name=che.parents('tr').find('a:eq(0)').text();
+				$('.dialog-header-title').html("分享文件(夹):"+name);
+			}
+			
 		});
 		var shareid;
 		var iscate=true;
@@ -1063,7 +1124,8 @@
 				shareid=$(this).parents('tr').find('.refileid').val();
 				iscate=false;
 			}			
-			var name=$(this).parents('tr').find('a:eq(0)').text();			
+			var name=$(this).parents('tr').find('a:eq(0)').text();	
+			showOverlay();
 			$('.md-effect-4').addClass('md-show');
 			$('.dialog-header-title').html("分享文件(夹):"+name);
 		});
@@ -1085,12 +1147,19 @@
 		});
 		/* 创建链接样式 */
 		$('.create').click(function() {
-			$("input[name='share-method']:checked").each(function() {
-				if ($(this).val() == 'private') {
+				var pp=$("input[name='share-method']:checked").val();
+				if (pp == 'private') {
 					$('.validity-section').hide();
 					$('.create').hide();
 					$('.share').show();
 					$('.createlink').show();
+					$('.create-success .private').show();
+					$('.create-success .public').hide();
+					$('.password').show();
+					$('.description .private').show();
+					$('.description .public').hide();
+					$('#copyShare .private').show();
+					$('#copyShare .public').hide();
 				} else {
 					$('.validity-section').hide();
 					$('.create').hide();
@@ -1104,8 +1173,8 @@
 					$('#copyShare .private').hide();
 					$('#copyShare .public').show();
 				}
+				shareurl();
 			});
-		});
 		/* 鼠标滑过选中input-url */
 		$('.share-url').mouseover(function(){
 			this.select();
@@ -1114,6 +1183,7 @@
 		$('.close').click(function() {
 			$('.validity-section').show();
 			$('.create').show();
+			$('.overlay').hide();
 			$('.createlink').hide();
 		})
 
@@ -1121,7 +1191,7 @@
 		$('table').on('click','.md-ren',function() {
 			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
 			$(this).parents('tr').css('background','#F0F8FD');
-			$(this).parents('tr').after(zz);
+			$(this).parents('tr').find('a:eq(0)').after(zz);
 			var originVal=$(this).parents('tr').find('a:eq(0)').text();
 			var id=$(this).parents('tr').find('input[type=text]').val();			
 			$('.GodName').val(originVal);
@@ -1229,7 +1299,6 @@
 		var link="链接："+url.value+" 密码："+password.value;
 		document.getElementById('sharelink').value = link;
 		var share=document.getElementById('sharelink');
-		alert(share.value);
 		share.select();
 		document.execCommand("Copy");
 		document.getElementById("copy-tips").style.display ="block"; 
@@ -1239,7 +1308,6 @@
 		var link=url.value;
 		document.getElementById('sharelink').value = link;
 		var share=document.getElementById('sharelink');
-		alert(share.value);
 		share.select();
 		document.execCommand("Copy");
 		document.getElementById("copy-tips").style.display ="block"; 
@@ -1652,7 +1720,32 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
 		$trs.detach().appendTo('.table tbody');							
 		$ftrs.detach().appendTo('.table tbody');	
 	}
-		
+		function officeviewfun(data){
+			var fp = new FlexPaperViewer('FlexPaperViewer', /* 对应FlexPaperViewer.swf文件*/
+					'viewerPlaceHolder', {
+						config : {
+							SwfFile : data,
+							Scale : 0.6,
+							ZoomTransition : 'easeOut',
+							ZoomTime : 0.5,
+							ZoomInterval : 0.2,
+							FitPageOnLoad : true,
+							FitWidthOnLoad : true,
+							FullScreenAsMaxWindow : false,
+							ProgressiveLoading : false,
+							MinZoomSize : 0.2,
+							MaxZoomSize : 5,
+							SearchMatchAll : false,
+							InitViewMode : 'Portrait',
+							ViewModeToolsVisible : true,
+							ZoomToolsVisible : true,
+							NavToolsVisible : true,
+							CursorToolsVisible : true,
+							SearchToolsVisible : true,
+							localeChain : 'zh_CN'
+						}
+					});
+		}
     </script>
     <script type="text/javascript">
     /**

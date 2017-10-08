@@ -9,10 +9,36 @@
 <link href="/networkdisk/user/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/networkdisk/user/css/bootstrap-theme.min.css" />
-<link href="/networkdisk/css/style.css" rel="stylesheet" />
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
+<style type="text/css">
+body{
+	background: #fff
+}
+.recyclebin-empty {
+	display:none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -175px 0 0 -176px;
+}
+.recyclebin-empty .img {
+    display: inline-block;
+    background: url(/networkdisk/img/emptypic.png) center no-repeat;
+    margin-left:100px;
+    width: 130px;
+    height: 160px;
+}
+.recyclebin-empty .text {
+    font-size: 14px;
+    line-height: 25px;
+    margin-top: 30px;
+    color: #8e99b3;
+    text-align: center;
+    margin-left: -60px;
+}
+</style>
 </head>
-<body style="background: #fff;">
+<body>
 		<div class="recyclebin-empty" style="display: block">
 			<p class="img records records-17"></p>
 			<p class="text">

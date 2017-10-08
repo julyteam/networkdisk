@@ -125,9 +125,21 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	String password = CommonUtil.getMD5(this.user.getPassWord());
     	String pass=user.getPassWord();
     	this.user.setPassWord(password);
-    	User user = this.iUserService.findOne(this.user);
-    	session.setAttribute("user", user);
-    	if(user == null){
+    	User u = new User();
+    	String em = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";  
+        String ph = "^[1][34578]\\d{9}$";
+        String str = this.user.getName();
+        if(str.matches(em)){
+        	this.user.setEmail(str);
+        	u = this.iUserService.findOneByEm(this.user);
+        }else if(str.matches(ph)){
+        	this.user.setPhone(str);
+        	u = this.iUserService.findOneByPhone(this.user);
+        }else{
+        	u = this.iUserService.findOne(this.user);
+        }
+    	session.setAttribute("user", u);
+    	if(u == null){
     		this.setMessage("error");
     		return ERROR;
     	}else{
