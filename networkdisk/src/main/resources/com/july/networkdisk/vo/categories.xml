@@ -143,6 +143,10 @@
 	</select>
 	<!-- 搜索文件夹 -->
 	<select id="search" parameterType="map" resultMap="categorieMap">
-		select * from categorie where cat_uid=#{uid} and cat_name like #{str}
+		select * from categorie where cat_uid=#{uid} and cat_state=0 and cat_name like #{str}
+	</select>
+	<!-- 根据id查找文件名 -->
+	<select id="getcatename" parameterType="String" resultType="string">
+		select cat_name from categorie where cat_id=#{cateid}
 	</select>
 </mapper>

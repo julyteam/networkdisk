@@ -83,12 +83,18 @@
 			<result name="success">/register.jsp</result>
 			<result name="input">/register.jsp</result>
 		</action>
+		<!-- 搜索 -->
 		<action name="search" class="userAction" method="search">
 			<result name="json" type="json">
 				<param name="root">map</param>
 			</result>
 		</action>
-		
+		<!-- 父级目录 -->
+		<action name="showparents" class="userAction" method="showparents">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
 		
 	    <!--ajax验证 -->
 		<action name="checkUserName" class="userAction" method="checkUserName">

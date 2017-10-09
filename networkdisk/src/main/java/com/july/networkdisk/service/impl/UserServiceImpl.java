@@ -99,4 +99,12 @@ public class UserServiceImpl implements IUserService
 	public List<Categorie> searchcate(Map<String, Object> map) {
 		return this.userDao.searchcate(map);
 	}
+
+	public String getrecatename(String catid) {
+		return this.userDao.getrecatename(catid);
+	}
+
+	public List<Categorie> showparents(String cateid) {
+		return this.userDao.showparents(cateid);
+	}
 }

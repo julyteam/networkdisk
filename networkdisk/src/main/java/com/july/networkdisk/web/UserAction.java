@@ -378,8 +378,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
      * @throws Exception 
      */
     public void verCode() throws Exception{
-    	/*String vcodeSession =(String)session.getAttribute("vcode");*/
-    	String vcodeSession = "123456";
+    	String vcodeSession =(String)session.getAttribute("vcode");
     	response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	if(vcodeSession.equals(code)){
@@ -483,7 +482,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	}
     	return "json";
     }
-    
+   /* 搜索*/
     public String search() throws Exception{
     	map = new HashMap<String, Object>();
     	StringBuffer s = new StringBuffer(str);
@@ -494,7 +493,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	map.put("uid", u.getId());
     	map.put("str", str);
     	List<NetFile> filelist = this.iUserService.searchfile(map);
+    	for(int i=0;i<filelist.size();i++){
+    		String rename = this.iUserService.getrecatename(filelist.get(i).getCatid());
+    		filelist.get(i).setUid(rename);
+    	}
     	List<Categorie> catelist = this.iUserService.searchcate(map);
+    	for(int i=0;i<catelist.size();i++){
+    		String rename = this.iUserService.getrecatename(catelist.get(i).getReid());
+    		catelist.get(i).setUid(rename);
+    	}
     	map.put("filelist", filelist);
     	map.put("catelist", catelist);
     	return "json";
@@ -512,5 +519,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	u.setPassWord(password);
     	out.print(1);
     	return null;
+    }
+    
+    public String showparents() throws Exception{
+    	map = new HashMap<String, Object>();
+    	List<Categorie> catelist = this.iUserService.showparents(filecateid);
+    	map.put("catelist", catelist);
+    	return "json";
     }
 }

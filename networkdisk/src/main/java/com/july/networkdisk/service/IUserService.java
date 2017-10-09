@@ -23,5 +23,7 @@ public interface IUserService extends IBaseService<User>
 	void cancelshare(Sharefile sharefile);
 	List<NetFile> searchfile(Map<String, Object> map);
 	List<Categorie> searchcate(Map<String, Object> map);
+	String getrecatename(String catid);
+	List<Categorie> showparents(String filecateid);
 	
 }

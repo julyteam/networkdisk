@@ -663,7 +663,7 @@ img.userpic {
 	list-style:none;
 	text-align:left;
 	display:inline;
-	width: 24%;
+	width: 14%;
 	height:36px;
 	line-height:36px;
 	cursor: pointer;
@@ -692,19 +692,28 @@ img.userpic {
 	color:#0080ff;
 }
 .table td:first-child{
-	width: 575px;
+	width: 50%;
 }
 .table td .july_cateName,.table td .july_fileName{
 	display:inline-block;
-	width:420px;
 	position:relative;
 	top:6px;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.table td:last-child{
-	width: 320px;
+.table td:nth-child(2){
+	width: 13%;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left:0px;
+}
+.table td:nth-child(3){
+	padding-left:10px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .table tr{
 	width:100%;

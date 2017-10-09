@@ -1,5 +1,6 @@
 package com.july.networkdisk.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -152,6 +153,32 @@ public class UserDao extends BaseDao
 			sqlSession.close();
 			return catelist;
 		}
-	
+		public String getrecatename(String cateid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			String rename = sqlSession.selectOne("cateSpace.getcatename", cateid);
+			sqlSession.close();
+			return rename;
+		}
+		
+		public List<Categorie> showparents(String cateid) {
+			List<Categorie> catelist = new ArrayList<Categorie>();
+			int flag = 1;
+			while(flag == 1){
+				Categorie c =getcate(cateid);
+				catelist.add(c);
+				if(c.getReid() == null){
+					flag = 0;
+				}else{
+					cateid = c.getReid();
+				}
+			}
+			return catelist;
+		}
+		/*public Categorie getparents(String cateid){
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			Categorie cate = sqlSession.selectOne("cateSpace.findbyid", cateid);
+			sqlSession.close();
+			return cate;
+		}*/
 	
 }

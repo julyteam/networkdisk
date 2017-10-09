@@ -37,7 +37,7 @@
 	<select id="getcatenextfile" parameterType="String" resultMap="fileMap">
 		select * from file where file_catid=#{cateid}
 	</select>
-	
+	<!-- 搜索 -->
 	<select id="search" parameterType="map" resultMap="fileMap">
 		select * from file where file_uid=#{uid} and file_deletesign=0  and file_name like #{str}
 	</select>
@@ -151,7 +151,6 @@
             #{file_id}    
         </foreach>  
 	</update>
-	
 	
 </mapper>
 

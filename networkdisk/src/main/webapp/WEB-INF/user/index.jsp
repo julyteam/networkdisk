@@ -180,13 +180,16 @@
 									
 									<script type="text/javascript">
 										$("#ser").click(function(){
+											$("#july_allFile tr").empty();
+											var $head=$("<td><a id='null' class='aa' style='cursor:pointer;color:#333;text-decoration:none ' >全部文件</a></td>"); 
+											$("#july_allFile tr").append($head);
+											var $li=$("<li class='addli'>所在目录</li>");
 											var str = $("#search").val();
 											$.ajax({  
 											 	url: "search?str="+str,       //后台处理程序
 									            type: "post",               		//数据发送方式
 									            dataType: "json",           		//接受数据格式   
 									            success:function(map){ 
-									            	alert("success");
 									            	$('#mytbody').empty();
 									            	var filelist = map.filelist;
 									            	var catelist = map.catelist;
@@ -197,12 +200,23 @@
 													}
 												    var sum=parseInt(catelist.length+filelist.length);
 													var $sumhead=$("<span class='j2'>已加载全部,共"+sum+"条</span>");
-													$('.Sdh').html($sumhead);   
+													$('.Sdh').html($sumhead); 
+													$('.Qdh li:eq(2)').css('width','17%');
+													if($('.Qdh ul').find('.addli').length>0){
+														$('.Qdh ul').find('.addli').remove();	
+													}													
+													$('.Qdh ul').append($li);
+													
 													for (var i = 0; i < catelist.length; i++) {
 														//分割时间字符串
 														var time = catelist[i].addtime;
 														var newTime = time.split("T");
-														
+														var rename;
+														if(catelist[i].uid == null){
+															rename="全部文件";
+														}else{
+															rename = catelist[i].uid;
+														}
 														var $str = $("<tr class='showTr'>"
 																+ "<td>"
 																+ "<input type='checkbox' name='catebox' value='"+catelist[i].id+"' class='chk_2'/>"
@@ -216,23 +230,22 @@
 																+ "<input id='listCateName' class='rename' type='text' style='display:none' value="
 																+ catelist[i].name
 																+ ">"
-																+ "<a class='july_cateName' >"
+																+ "<a class='getparents'>"
 																+ catelist[i].name
 																+ "</a>"
-																+ "<div class='more'>"
-																+ "<span class='fa fa-share-alt' title='分享'>"
-																+ "</span>"
-																+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-																+ "<span class='menu' style='width: 96px;'>"
-																+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelecate' id='"+catelist[i].id+"' >删除</a>"
-																+ "</span></div></td>"
+																+ "</td>"
 																+ "<td>--</td>"
 																+ "<td>" 
 																+ newTime[0]+" "+newTime[1]
-																+ "</td>" 																
+																+ "</td>" 
+																+ "<td class='addli'>" 
+																+ "<a class='getcateparent'>"
+																+ rename
+																+ "<input id='catereid' class='' type='text' style='display:none' value="
+																+ catelist[i].reid
+																+ ">"
+																+ "</a>"
+																+ "</td>" 
 																+ "</tr>");
 														$("#mytbody").append($str);
 													}
@@ -253,7 +266,12 @@
 															filesize=(filelist[i].size/(1024*1024)).toFixed(2);
 															sizeflag="M";
 														}
-														
+														var rename;
+														if(filelist[i].uid == null){
+															rename="全部文件";
+														}else{
+															rename = filelist[i].uid;
+														}
 														switch(filelist[i].type){
 															case("zip"):
 																type="/networkdisk/img/ZIP_2.png";
@@ -319,28 +337,26 @@
 																+ "<a class='july_fileName'>"
 																+ filelist[i].name
 																+ "</a>"
-																+ "<div class='more'>"
-																+ "<span class='fa fa-share-alt' title='分享'>"
-																+ "</span><span class='fa fa-download' title='下载' >"
-																+ "</span>"
-																+ "<span class='fa fa-ellipsis-h' title='更多'></span>"
-																+ "</span>"
-																+ "<span class='menu' style='width: 96px;'>"
-																+ "<a style='display: block;' data-menu-id='b-menu9' class='g-button-menu md-ren' href='javascript:void(0);'>重命名</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu10' class='g-button-menu md-copy' href='javascript:void(0);'>复制到</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu11' class='g-button-menu md-move' href='javascript:void(0);'>移动到</a>"
-																+ "<a style='display: block;' data-menu-id='b-menu4' class='g-button-menu delelefile' id='"+filelist[i].id+"' >删除</a>"
-																+ "</span></div></td>" 
+																+ "</td>" 
 																+ "<td>"
 																+ filesize + sizeflag
 																+ "</td>" 
 																+ "<td>"
 																+ newTime[0]+" "+newTime[1]
 																+ "</td>"
+																+ "<td class='addli'>" 
+																+ "<a class='getcateparent'>"
+																+ rename
+																+ "<input id='catereid' class='' type='text' style='display:none' value="
+																+ filelist[i].catid
+																+ ">"
+																+ "</a>"
+																+ "</td>"
 																+ "</tr>")
 														$("#mytbody").append($str);
 														
 													}
+													$('.table td:nth-child(3)').css('width','16%');
 												},
 												error : function() {
 													alert("查询失败")
@@ -376,7 +392,7 @@
 										<li style="width:51%; margin-left: -40px;"><input
 											type="checkbox" class="chk_1"/><span id="n1" style='margin-left: 10px;'>文件名</span><i class="fa fa-arrow-down"></i></li>
 										<li>大小<i class="fa fa-arrow-down"></i></li>
-										<li>修改日期<i class="fa fa-arrow-down"></i></li>
+										<li style='width: 36%'>修改日期<i class="fa fa-arrow-down"></i></li>
 									</ul>
 								</div>
 								<div class="nullfile eefile">
@@ -632,8 +648,7 @@
 		var caterid = null;
 		function show(categorie_id, recycleflag ) {
 			categorie = categorie_id;
-			recycle = recycleflag;
-			
+			recycle = recycleflag;			
 			 if(cateName != null){
 				var $head=$("<td><a id='"+caterid+"' class='aa'  style='cursor:pointer;text-decoration:none'> >"+cateName+"</a></td>"); 
 				$("#july_allFile tr").append($head)
@@ -646,6 +661,7 @@
 		}
 		
 		function showchild(categorie_id,recycleflag){
+			$('.addli').remove();
 			$(".table tr").remove();
 			$("#tw1 :checkbox").prop("checked", false);
 			$("#n1").html("文件夹");
@@ -1757,6 +1773,41 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
         $('.overlay').css({'height':$(window).height(),'width':$(window).width()});
         $('.overlay').show();
     }
+    
+     $('table').on('click','.getparents',function(){
+    		var cateid =$(this).parent('td').find('.reid').val();
+    		var catestate =$(this).parent('td').find('.restate').val();
+			showchild(cateid,catestate);
+    		showsearch(cateid);
+	 });
+     $('table').on('click','.getcateparent',function(){
+ 		var cateid =$(this).find('#catereid').val();
+ 		if(cateid=="null"){
+ 			showchild(null,0);
+ 		}else{
+ 			showchild(cateid,0);
+ 			showsearch(cateid);
+ 		}
+ 		
+	 });
+     function showsearch(cateid) {
+    		
+			$.ajax({  
+			 	url: "showparents?filecateid="+cateid,      		//后台处理程序
+	            type: "post",               					//数据发送方式
+	            dataType: "json",           					//接受数据格式   
+	            success:function(map){ 
+	            	var catelist = map.catelist;
+	            	for(var i=catelist.length-1;i>=0;i--){
+	            		 var $head=$("<td><a id='"+catelist[i].id+"' class='aa'  style='cursor:pointer;text-decoration:none'> >"+catelist[i].name+"</a></td>"); 
+	     				 $("#july_allFile tr").append($head);
+	            	} 
+				},
+				error : function() {
+					alert("error");
+				}						
+			});
+	}
     </script>
     
 </body>
