@@ -253,6 +253,7 @@
 		<action name="share" class="sharefileAction" method="share">
 			
 		</action>
+		
 		<!-- 分享的内容跳转 -->
 		<action name="shareurl" class="sharefileAction" method="shareurl">
 			<result name="success">/WEB-INF/user/reception.jsp</result>
@@ -264,10 +265,6 @@
 			<result name="json" type="json">
 				<param name="root">map</param>
 			</result>
-		</action>
-		<!-- 分享页面头像 -->
-		<action name="sharephoto" class="sharefileAction" method="sharephoto">
-			
 		</action>
 		<!-- 密码提取 -->
 		<action name="pwdextract" class="sharefileAction" method="pwdextract">

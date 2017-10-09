@@ -4,7 +4,8 @@ $(document).ready(function(){
 					  rules: {
 					    	name: {
 					        required: true,
-					        maxlength:14,
+					        stringCheck:true,
+					        byteRangeLength:[3,15],
 					        remote: {
 					            url: "checkUserName",     //后台处理程序
 					            type: "post",               //数据发送方式
@@ -19,12 +20,15 @@ $(document).ready(function(){
 					      },
 					      trueName: {
 						        required: true,
-						        rangelength:[2,4]
+						        isChar:true,
+						        stringMaxLength:8,
+						        
 						      },
 					     sex:"required",
 					      phone: {
 						       required: true,
-						       rangelength:[11,11],
+						       isMobile:true,
+						     
 						        remote: {
 						            url: "checkPhone",     
 						            type: "post",              
@@ -39,11 +43,14 @@ $(document).ready(function(){
 						      },
 					      passWord: {
 					        required: true,
-					        rangelength:[6,14]
+					        isPwd:true,
+					        passwordLength:[6,12]
+					       
 					      },
 					      repassword: {
 						        required: true,
-						        rangelength:[6,14],
+						        isPwd:true,
+						        passwordLength:[6,12],
 						        equalTo:"#password"
 						      },
 					      code: {
@@ -53,7 +60,7 @@ $(document).ready(function(){
 					            type: "post",               //数据发送方式
 					            dataType: "json",           //接受数据格式   
 					            data: {                     //要传递的数据
-					                code: function() {
+					                name: function() {
 					                    return $("#code").val();
 					                }
 					            }
@@ -81,7 +88,7 @@ $(document).ready(function(){
 					      name: {
 					    	  remote: "用户名已存在",
 					        required: "请输入用户名",
-					        minlength: "用户名最长为14个英文组成"
+					      
 					        
 					      },
 					      trueName: {
@@ -90,11 +97,10 @@ $(document).ready(function(){
 						      },
 					      passWord: {
 					        required: "请输入密码",
-					        rangelength: "密码长度为6-14个字符"
+					       
 					      },
 					      repassword: {
 						        required: "请输入密码",
-						        rangelength:"密码长度为6-14个字符",
 						        equalTo:"两次密码不一致"
 						      },
 					      code: {
@@ -104,7 +110,7 @@ $(document).ready(function(){
 					      phone:{
 					    	remote: "手机号已注册",
 					        required: "请输入手机号",
-					       rangelength: "电话号码为11位数"
+					      
   
 					      },
 					     

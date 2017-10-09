@@ -443,16 +443,17 @@
   		</div>
   		<div class="md-modal md-effect-13" id="modal-13" style="width: 910px;">
 			<div class="md-content" style="height: 610px;padding:0px;">
-				<div class="dialog-header dialog-drag" style="height: 40px; line-height: 35px; background: #77afff; color: #fff; font-size: 20px; padding: 5px;">
-					<span class="fa fa-times" style="float:right;bottom:3px; margin-right: 5px;"></span>
+				<div class="dialog-header dialog-drag" id='header-drag' style="height: 40px; line-height: 35px; background: rgb(99,135,133); color: #fff; font-size: 20px; padding: 5px;text-align: center">
+					<span class="fname"></span>
+					<span class="fa fa-times" style="float:right;top:6px; margin-right: 5px;position: relative;"></span>
 				</div>
 				<div class="test_mask" style="width:140px; height:38px;border:1px solid #ccc;dislay:none;position: fixed;top: 40%;left: 40%;padding: 3px 7px">
 					<img alt="" src="/networkdisk/img/loading.gif" style="position: relative;float: left">
 					<span style="color:#ccc;font-size: 18px;position: relative;bottom:-3px;display: inline-block;">数据加载中</span>
 				</div>
-				<div class="dialog-tree" id="officeview" style="overflow: hidden;border: none;width: 910px;height: 570px;margin: 0px;padding:0px;">
-					
+				<div class="dialog-tree officeview" id="officeview" style="overflow: hidden;border: none;width: 910px;height: 570px;margin: 0px;padding:0px;">					
 				</div>
+				
 				
 			</div>
 		</div>
@@ -892,6 +893,9 @@
 		
 		/*跳下一级*/
 		$('table').on('click','.july_cateName',function(){
+			if($(this).hasClass('off')){ // 判断当前元素是否有off的类，如果有则不继续向下执行
+		        return;
+		    }
 			var cateid =$(this).parent('td').find('.reid').val();
 			var catestate =$(this).parent('td').find('.restate').val();
 			var catename =$(this).parent('td').find('.rename').val();
@@ -902,13 +906,31 @@
 		
 		/*office文件预览*/
 		$('table').on('click','.july_fileName',function(){
+			if($(this).hasClass('off')){ // 判断当前元素是否有off的类，如果有则不继续向下执行
+		        return;
+		    }
 			var fileid =$(this).parent('td').find('#listFileID').val();
 			var filetype =$(this).parent('td').find('#listFileType').val();
 			var $office=$("<div id='viewerPlaceHolder' style='margin:0px; width: 910px;height: 570px;'></div>");
-			if(filetype == "pdf" ||filetype == "word" || filetype == "txt" ||filetype == "docx" || filetype == "doc" || filetype == "ppt"  )
+			var $video=$("<div id='viewvideo' style='width: 910px; height: 570px; margin: 0 auto;'>"
+						+ "<object width='910' height='570' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'>"
+						+ "<param name='movie' value='' id='videosrc'/>"
+						+ "<embed src='' width='100%' height='100%'class='videoemsrc'type='application/x-shockwave-flash'quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer'></embed>"
+						+ "</object></div>");
+			if(    /* 文件预览 pdf,txt,doc,word,docx,ppt*/
+				filetype == "pdf"  
+				|| filetype == "txt" ||filetype == "docx" 
+				|| filetype == "doc" || filetype == "ppt"
+					/*照片预览、jpg、jpeg、png、gif、bmp*/
+				|| filetype == "jpg" || filetype == "jpeg"
+				|| filetype == "png" || filetype == "gif"
+				|| filetype == "bmp" 
+				)
 			{
 				showOverlay();
 				$('.md-effect-13').addClass('md-show');
+				$('#header-drag').find('.fname').text("");
+				$('.fname').append($(this).text());
 				$('#officeview').empty();
 				$('.test_mask').show(300);
 				$.ajax({
@@ -924,6 +946,35 @@
 					}
 				});
 				
+			}
+				/* 视频预览  wmv9，rm，rmvb，asx，asf，mpg，wmv，3gp，mp4，mov，avi，flv*/
+			if(        filetype == "wmv9"  
+				    || filetype == "rm" ||filetype == "rmvb" 
+					|| filetype == "asx" || filetype == "asf"
+					|| filetype == "mpg" || filetype == "wmv"
+					|| filetype == "3gp" || filetype == "mp4"
+					|| filetype == "mov" || filetype == "avi"
+					|| filetype == "flv" ){
+				showOverlay();
+				$('.md-effect-13').addClass('md-show');
+				$('#header-drag').find('.fname').text("");
+				$('.fname').append($(this).text());
+				$('#officeview').empty();
+				$('.test_mask').show();				
+				$.ajax({
+					url : "${pageContext.request.contextPath}/officeView?netFileID="+fileid,
+					dataType : 'json',
+					success : function(data) {	
+						$('.test_mask').hide();
+						$('#viewvideo').show();
+						$('.officeview').html($video); 
+						$('#viewvideo').find('param').val("flvplayer.swf?file="+data);	
+						$('#viewvideo').find('embed').attr("src","flvplayer.swf?file="+data);
+					},
+					error : function() {
+						alert("视频预览失败！");
+					}
+				});
 			}
 			
 		});
@@ -1217,6 +1268,7 @@
 			$('table').off('mouseenter','tr');
 			$('table').off('mouseleave','tr');
 			$('table').off('click','.july_cateName');
+			$('table').find('.july_fileName').addClass('off');
 			$('.sure').click(function(){
 				var newname=$(this).prev('input').val();
 				if($(this).parent('div').prev('tr').find('.reid').length!=0){
@@ -1275,7 +1327,7 @@
 							caterid = cateid;
 							show(cateid,catestate);
 						});
-						
+						$('table').find('.july_fileName').removeClass('off');						
 					},
 					error : function() {
 						alert("重命名失败失败！");
@@ -1303,6 +1355,7 @@
 					caterid = cateid;
 					show(cateid,catestate);
 				});
+				$('table').find('.july_fileName').removeClass('off');
 			})
 		});
 

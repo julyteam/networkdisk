@@ -1,8 +1,10 @@
 package com.july.networkdisk.util;
 import java.io.File;  
+
 import org.artofsolving.jodconverter.OfficeDocumentConverter;  
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;  
 import org.artofsolving.jodconverter.office.OfficeManager;  
+
   
  
 public class OfficeToPdf{  
@@ -10,7 +12,7 @@ public class OfficeToPdf{
     private static OfficeToPdf office2PdfUtil = new OfficeToPdf();  
     private static  OfficeManager officeManager;  
     //openOffice安装路径  
-    private static String OPEN_OFFICE_HOME = "/opt/openoffice4/program";  
+    private static String OPEN_OFFICE_HOME = "C:\\Program Files (x86)\\OpenOffice 4";   //linux系统为/opt/openoffice4  windows系统为C:\\Program Files (x86)\\OpenOffice 4
     //服务端口  
     private static int OPEN_OFFICE_PORT[] = {8100};  
       
@@ -29,12 +31,14 @@ public class OfficeToPdf{
      */      
     public void office2Pdf(String inputFile,String pdfFilePath) {  
     	if(inputFile.endsWith(".txt")) {  
-            //先保存为.odt  
+            
+    		 //先保存为.odt  
             StringBuffer odtPath = new StringBuffer(inputFile.substring(0 , inputFile.lastIndexOf(".")));  
             odtPath.append(".odt");  
             
             FileUtil.write(inputFile , odtPath.toString());  
-            inputFile = odtPath.toString();  
+            inputFile = odtPath.toString(); 
+             
         }  
         File pdfFile = new File(pdfFilePath);  
         if (pdfFile.exists()) {  
@@ -50,10 +54,10 @@ public class OfficeToPdf{
             //关闭  
             stopService();  
             System.out.println("运行结束");  
-            
             if(inputFile.endsWith(".odt")){
             	new File(inputFile).delete();
             }
+           
         }catch (Exception e) {  
             e.printStackTrace();  
         }  

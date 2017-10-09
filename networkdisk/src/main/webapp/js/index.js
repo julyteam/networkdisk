@@ -227,6 +227,8 @@ $(document).ready(function() {
 			});
 			
 			$("#newonefile").click(function() {
+					$('.table').find('.july_fileName').addClass('off');
+					$('.table').find('.july_cateName').addClass('off');
 					if($('.sure').length==0){
 						//创建tr节点
 						var $tr = $("<tr></tr>");
@@ -239,6 +241,8 @@ $(document).ready(function() {
 						$('.nullfile').hide();
 						//执行删除操作
 						$(".dele").click(function() {
+							$('.table').find('.july_fileName').removeClass('off');
+							$('.table').find('.july_cateName').removeClass('off');
 							$(this).parent().parent().remove();
 						});
 						
@@ -255,6 +259,8 @@ $(document).ready(function() {
 								alert("文件夹中名字不能相同")
 								return ;
 							}else{
+								$('.table').find('.july_fileName').removeClass('off');
+								$('.table').find('.july_cateName').removeClass('off');
 								$(this).parent().parent().remove();
 								$.ajax({
 									url : "${pageContext.request.contextPath}/bulidcate",

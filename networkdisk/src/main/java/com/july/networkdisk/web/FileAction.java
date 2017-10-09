@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.util.DocConverter;
+import com.july.networkdisk.util.JPG2PDFUtil;
 import com.july.networkdisk.vo.NetFile;
 import com.july.networkdisk.vo.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -84,7 +85,7 @@ public class FileAction extends ActionSupport {
 	
 	
 	/**
-	 * office文件预览
+	 * office文件和视频和图片预览
 	 * @return
 	 * @throws Exception
 	 */
@@ -96,7 +97,28 @@ public class FileAction extends ActionSupport {
 			DocConverter docConverter = new DocConverter(officeFile.getPath());
 			docConverter.conver();
 			swfFilePath=docConverter.getswfPath();
-			swfFilePath = swfFilePath.substring(2);
+			swfFilePath = swfFilePath.substring(2); //windows 为 2，linux 为 14；
+			System.out.println(swfFilePath);
+			
+		}else if (type.equals("jpg")||type.equals("jpeg")||type.equals("png")||type.equals("gif")||type.equals("bmp")) {
+			/*jpg、jpeg、png、gif、bmp*/
+			JPG2PDFUtil pt=new JPG2PDFUtil(officeFile.getPath());
+	        pt.imgtopdf();
+	        DocConverter docConverter = new DocConverter(officeFile.getPath());
+	        docConverter.pdf2swf();
+	        swfFilePath=docConverter.getswfPath();
+			swfFilePath = swfFilePath.substring(2); //windows 为 2，linux 为 14；
+			System.out.println(swfFilePath);
+		}else if (type.equals("wmv9")||type.equals("rm")||type.equals("rmvb")
+				||type.equals("asx")||type.equals("asf")
+				||type.equals("mpg")||type.equals("wmv")
+				||type.equals("3gp")||type.equals("mp4")
+				||type.equals("mov")||type.equals("avi")||type.equals("flv")) {
+			/*wmv9，rm，rmvb，asx，asf，mpg，wmv，3gp，mp4，mov，avi，flv*/
+			String path =officeFile.getPath();
+			swfFilePath=path.substring(0,  path.indexOf("."))+".flv";
+			swfFilePath=swfFilePath.replaceAll("\\\\", "/");
+			swfFilePath = swfFilePath.substring(2); //windows 为 2，linux 为 14；
 			System.out.println(swfFilePath);
 		}
 		else {
