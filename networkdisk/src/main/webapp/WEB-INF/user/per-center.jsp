@@ -132,11 +132,11 @@
 									</div></a></li>
 							<li class="time"><img
 								src="/networkdisk/user/img/person-time.png"> <span
-								class="time">注册时间:<fmt:formatDate value="${sessionScope.user.addtime}"
-										pattern="yyyy-MM-dd HH:mm:ss" /></span></li>
+								class="time">注册时间: <font style="font-weight: bold;"><fmt:formatDate value="${sessionScope.user.addtime}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></font></span></li>
 							<li class="real-name"><img
 								src="/networkdisk/user/img/person-relName.png"> <span
-								class="real-name">真实姓名:${sessionScope.user.trueName }</span></li>
+								class="real-name">真实姓名:  <font style="font-weight: bold;">${sessionScope.user.trueName }</font></span></li>
 							<li class="re-pwd"><a data-toggle="modal"
 								data-target="#editPwd"><img
 									src="/networkdisk/user/img/person-pwd.png"><span
@@ -148,11 +148,11 @@
 							<form action="">
 								<ol class="right-0l">
 
-									<li><span class="glyphicon glyphicon-user">&nbsp;用户名:${sessionScope.user.name }</span></li>
-									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱:${sessionScope.user.email}</span></li>
-									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话:${sessionScope.user.phone}</span></li>
-									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别:${sessionScope.user.sex==1?"男":"女" }</span></li>
-									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述:${sessionScope.user.about }</span></li>
+									<li><span class="glyphicon glyphicon-user">&nbsp;用户名: <font style="font-weight: bold;">${sessionScope.user.name }</font></span></li>
+									<li><span class="glyphicon glyphicon-envelope">&nbsp;邮&nbsp;箱: <font style="font-weight: bold;">${sessionScope.user.email}</font></span></li>
+									<li><span class="glyphicon glyphicon-earphone">&nbsp;电&nbsp;话: <font style="font-weight: bold;">${sessionScope.user.phone}</font></span></li>
+									<li><span class="glyphicon glyphicon-sunglasses">&nbsp;性&nbsp;别: <font style="font-weight: bold;">${sessionScope.user.sex==1?"男":"女" }</font></span></li>
+									<li><span class="glyphicon glyphicon-pencil">&nbsp;描&nbsp;述: <font style="font-weight: bold;">${sessionScope.user.about }</font></span></li>
 									<li><input class="btn btn-default" type="button"
 										value="修 改" data-toggle="modal" data-target="#editInfo"
 										style="font-size: 16px;"></li>

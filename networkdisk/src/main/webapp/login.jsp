@@ -156,16 +156,13 @@
 <script type="text/javascript">
      
               /*   登录验证 */
-		
-              
-              
 		$(document).ready(function(){
 			var successmassge = $("#success").val();
-		
-			if(successmassge=="yes"){
-				window.location.href="index.jsp";	
+			if(successmassge=="false"){
+				alert("您还没登录，请先登录！");
+				location.href="login.jsp";
 			}
-			else if(successmassge=="error"){
+		    if(successmassge=="error"){
 				alert("用户名或密码错误！");
 				location.href="login.jsp";
 			}

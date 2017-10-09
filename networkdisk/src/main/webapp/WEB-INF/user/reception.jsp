@@ -82,7 +82,7 @@ $(document).ready(function(){
 							<div class="sev" style='display:none;'>
 								<div class="admin">
 									
-									<img src="sharephoto?uid=${sessionScope.user.id }" width="30px" class="photo"
+									<img src="showphoto?uid=${sessionScope.user.id }" width="30px" class="photo"
 										style="border-radius: 30px; position: absolute; top: 10px;" />
 									<a href="#" style="display: inline-block; height: 50px;">
 										<div class="username">${sessionScope.user.name }</div><input type="hidden" id="uid" value="${sessionScope.user.id }" >  <img
@@ -100,7 +100,7 @@ $(document).ready(function(){
 									<div class="userpan">
 										<div class="userpan_2">
 											<div class="u1">
-												<a href="#"><img src="sharephoto?uid=${sessionScope.user.id }" class="photo"
+												<a href="#"><img src="showphoto?uid=${sessionScope.user.id }" class="photo"
 													width="30px" class="userpic" /> </a> <a id="username">${sessionScope.user.name }</a>
 												<img src="/networkdisk/img/VIP1.png"
 													style="display: inline; margin-bottom: 5px;" />
@@ -599,7 +599,7 @@ $(document).ready(function(){
 					$(".login").hide();
 					$(".username").append(user.name);
 					$("#username").append(user.name);
-					$(".photo").attr("src","sharephoto?uid="+user.id);
+					$(".photo").attr("src","showphoto?uid="+user.id);
 					$(".sev").show();
 				},
 				error : function(){

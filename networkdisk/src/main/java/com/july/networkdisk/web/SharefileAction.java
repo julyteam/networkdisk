@@ -429,16 +429,5 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	    	map.put("user", user);
 			return "json";
 		}
-		/*头像*/
-	    public String sharephoto() throws Exception{
-	 	   User user = this.iSharefileService.getuserbyid(uid);
-	 	   ServletOutputStream out = null;
-	 	   response.setContentType("multipart/form-data");
-	 	   out = response.getOutputStream();
-	 	   out.write(user.getPhoto());
-	 	   out.flush();
-	 	   out.close();
-	 	   return null;
-	    }
 	
 }

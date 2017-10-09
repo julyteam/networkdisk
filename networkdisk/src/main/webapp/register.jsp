@@ -17,6 +17,7 @@
 <script src="/networkdisk/user/js/jquery.validate.js"></script>
 <script src="/networkdisk/user/js/jquery.validate.min.js"></script>
 <script src="/networkdisk/user/js/messages_zh.js"></script>
+<script src="/networkdisk/user/js/jquery.validate.addMethod.js"></script>
 
 <script type="text/javascript">
 var countdown=60; 
