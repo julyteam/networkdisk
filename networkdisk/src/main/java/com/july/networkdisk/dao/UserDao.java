@@ -174,11 +174,6 @@ public class UserDao extends BaseDao
 			}
 			return catelist;
 		}
-		/*public Categorie getparents(String cateid){
-			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-			Categorie cate = sqlSession.selectOne("cateSpace.findbyid", cateid);
-			sqlSession.close();
-			return cate;
-		}*/
+		
 	
 }
