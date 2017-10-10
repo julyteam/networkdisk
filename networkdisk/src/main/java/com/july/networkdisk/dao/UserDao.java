@@ -174,6 +174,12 @@ public class UserDao extends BaseDao
 			}
 			return catelist;
 		}
+		public User getphoto(String uid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			User u = sqlSession.selectOne("userSpace.getphoto", uid);
+			sqlSession.close();
+			return u;
+		}
 		
 	
 }

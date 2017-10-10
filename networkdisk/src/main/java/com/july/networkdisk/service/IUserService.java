@@ -25,5 +25,6 @@ public interface IUserService extends IBaseService<User>
 	List<Categorie> searchcate(Map<String, Object> map);
 	String getrecatename(String catid);
 	List<Categorie> showparents(String filecateid);
+	User getphoto(String uid);
 	
 }

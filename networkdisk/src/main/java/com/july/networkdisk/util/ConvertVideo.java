@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;  
 import java.util.List;  
   
-public class ConvertVideo {
+public class ConvertVideo extends Thread {
      private  static String InputPath ;  
      private  static String flvOutputPath;
      private  static String path;
@@ -156,6 +156,10 @@ public class ConvertVideo {
                 return false;  
             }  
         }  
+        @Override
+        public void run() {
+        	process();
+        }
         
         public static void main(String[] args) {  
         	String strpath = "D:/networkdiskFile/QQ.mp4";

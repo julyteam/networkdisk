@@ -122,7 +122,8 @@ $(document).ready(function(){
 								</div>
 							</div>
 							<div class="login" style="text-align: right; font-size: 14px;">
-								<a href="#" class="load">登录</a> <a href="register.jsp" class='reg'>注册</a>
+								<a href="#" class="load">登录</a> 
+								<a href="register.jsp" class='reg'>注册</a>
 							</div>
 						</li>
 						<li style="width: 100px;"><a href="#"
@@ -194,18 +195,13 @@ $(document).ready(function(){
 				<div class="slide-show-right">
 					<div class="module-share-top-bar g-clearfix">
 						<div class="bar" style="white-space: nowrap; position: relative;">
-							<div class="button-box"
-								style="position: absolute; top: 0px; padding-top: 0px; line-height: normal;">
-								<a class="g-button g-button-blue" href="javascript:void(0);"><span
-									class="g-button-right"><em class="fa fa-save"
-										title="保存到网盘"></em><span class="text"
-										style="width: auto; margin-left: 5px;" id="pres">保存到网盘</span></span> </a> <a
-									class="g-button" href="javascript:void(0);"><span
-									class="g-button-right"><em class="fa fa-download"
-										title="下载"></em><span class="text"
-										style="width: auto;">下载</span></span> </a> <a class="g-button"
-									href="javascript:void(0);"><span class="g-button-right"><span
-										class="text" style="width: auto;">举报</span></span> </a>
+							<div class="button-box" style="position: absolute; top: 0px; padding-top: 0px; line-height: normal;right:10px;">
+								<a class="g-button g-button-blue" href="javascript:void(0);">
+									<span class="g-button-right">
+									<em class="fa fa-save" title="保存到网盘"></em>
+									<span class="text" style="width: auto; margin-left: 5px;" id="pres">保存到网盘</span>
+									</span> 
+								</a>
 							</div>
 						</div>
 					</div>
@@ -288,7 +284,7 @@ $(document).ready(function(){
 				<div class="Jdh">
 					<table id="july_allFile" style="display: inline">
 						<tr>
-							<td><a id='null' class='aa'
+							 <td><a id='null' class='frist'
 								style='cursor: pointer; color: #333; text-decoration: none'>全部文件</a></td>
 						</tr>
 					</table>
@@ -307,7 +303,7 @@ $(document).ready(function(){
 							<li style="width: 50%; margin-left: -40px;">
 							<input type="checkbox" class="cateid" name="catebox" value="${c.id }" />
 								<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 0px;'>
-								<span id="n1" class="cate">${c.name }</span>
+								<span id="" class="cate">${c.name }</span>
 								<input type="hidden" value="${c.id }" />
 								</li>
 							<li style="width: 25%;">---</li>
@@ -317,7 +313,7 @@ $(document).ready(function(){
 					</c:forEach>
 					<c:forEach items="${filelist }" var="f">
 						<ul>
-							<li style="width: 50%; margin-left: -40px;">
+							<li style="width: 50%; margin-left: -40px;" class="downhover">
 							<input type="checkbox" class="filebox" name="filebox" value="${f.id }" />								
 								<c:choose>
 								    <c:when test="${f.type == 'zip' }">
@@ -359,7 +355,7 @@ $(document).ready(function(){
 								    </c:otherwise>
 								</c:choose>
 								
-								<span id="n1">${f.name }</span></li>
+								<span id="n1">${f.name }</span><span class='fa fa-download' title='下载' ></span></li>
 							<li style="width: 25%;"><span><c:if test="${f.size/1024 < 1}">${f.size }B</c:if>
 								<c:if test="${f.size/1024 >=1 && (f.size/1024)/1024 < 1}">
 									<f:formatNumber type="number" value="${f.size/1024 }"
@@ -379,12 +375,17 @@ $(document).ready(function(){
 		<script type="text/javascript">
 			$(".cate").click(function(){
 				var cateid = $(this).next().attr("value");
+				var catename = $(this).text();
 				$("input[name='catebox']").removeAttr("checked");
 				$("input[name='filebox']").removeAttr("checked");
+				$("#july_allFile tr").empty();
+				var $head=$("<td><a id='null' class='frist'  style='cursor: pointer; color: #333; text-decoration: none'> 全部文件</a></td><td><a id='"+cateid+"' class='aa'  style='cursor:pointer;text-decoration:none'> >"+catename+"</a></td>"); 
+				$("#july_allFile tr").append($head);
 				shownext(cateid); 
 				$("#qdh").hide();
 			});
 			function shownext(cateid){
+				
 				$(".showcate").remove();
 				$.ajax({
 					url : "shownext?cateid=" + cateid,
@@ -395,27 +396,24 @@ $(document).ready(function(){
 						$(".showTr").remove();
 						var listFile = map.filelist;
 						var listCate = map.catelist;
-						
 						for(var i=0;i<listCate.length;i++){
 							
 							var time = listCate[i].addtime;
 							var newTime = time.split("T");
 							var $str = ("<ul class='showcate'>"
 									+ "<li style='width: 50%; margin-left: -40px;'>"
-									+ "<input type='checkbox' name='catebox' class='' value='"
+									+ "<input type='checkbox' name='catebox' class='cateid' value='"
 									+ listCate[i].id
 									+ "' />"
 									+ "<img src='/networkdisk/img/category.png' width='28px' style='margin:0 5px 5px 10px;'>"
-									+ "<span id='n1' class='cate' onclick='shownext("
-									+ listCate[i].id
-									+ ")'>"
+									+ "<span id='n1' class='n2' >"
 									+ listCate[i].name
 									+ "</span></li>"
 									+ "<li style='width: 25%;'>---</li>"
 									+ "<li  style='width: 30%;'>"
 									+ newTime[0]+" "+newTime[1]
 									+ "</li></ul>"
-							)
+							);
 							$("#str").append($str);
 						}
 						for(var i=0;i<listFile.length;i++){
@@ -488,7 +486,7 @@ $(document).ready(function(){
 						}
 							
 							var $str = ("<ul class='showcate'>"
-									+ "<li style='width: 50%; margin-left: -40px;'>"
+									+ "<li style='width: 50%; margin-left: -40px;padding-top:5px' class='downhover'>"
 									+ "<input type='checkbox' name='filebox' class='filebox' value='"
 									+ listFile[i].id
 									+ "' />"
@@ -499,7 +497,7 @@ $(document).ready(function(){
 									+ listFile[i].id
 									+ ")'>"
 									+ listFile[i].name
-									+ "</span></li>"
+									+ "</span><span class='fa fa-download' title='下载'></span></li>"
 									+ "<li style='width: 25%;'><span>"
 									+ filesize + sizeflag
 									+ "</span></li>"
@@ -515,6 +513,28 @@ $(document).ready(function(){
 					}
 				});
 			}
+			
+			
+			$('#str').on('click','.n2',function(){
+				var cateid = $(this).parent('li').find('.cateid').val();
+				var catename = $(this).text();
+				 var $head=$("<td><a id='"+cateid+"' class='aa'  style='cursor:pointer;text-decoration:none'> >"+catename+"</a></td>"); 
+ 				 $("#july_allFile tr").append($head);
+				shownext(cateid);
+			});
+			$('.tw1_body').on('click','.frist',function(){
+				 $("#july_allFile tr").find('.aa').empty();
+				$(".showcate").remove();
+				$("#qdh").show();
+			});
+			$('.tw1_body').on('click','.aa',function(){
+				var cateid=$(this).attr("id");
+				var catename = $(this).text();
+				var $head=$("<td><a id='"+cateid+"' class='aa'  style='cursor:pointer;text-decoration:none'>"+catename+"</a></td>"); 
+ 				$("#july_allFile tr").append($head);
+				shownext(cateid);
+ 				$(this).parent('td').nextAll('td').remove();
+			});
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -560,7 +580,7 @@ $(document).ready(function(){
 				<img src="/networkdisk/img/julyicon.png" width="30px" style="margin-top:-7px;margin-right:5px;"><span class="dialog-header-title" style="display: inline">登录July账号</span>
 			</div>
 			<div class="dialog-tree" style="border: none;height: 245px;overflow: hidden;">
-				<form action="" method="post" id="login_form">
+				
 					<div class="logininput">
 						<input type="text" name="username" class="loginusername" id="name" placeholder="用户名" onblur="this.placeholder='用户名'" onfocus="this.placeholder=''"/> 
 						<input type="password" class="userpassword" id="passWord"placeholder="密码" onBlur="this.placeholder='密码';" onFocus="this.placeholder='';"/>
@@ -577,7 +597,7 @@ $(document).ready(function(){
 							<a href="#" style="float:right;text-decoration: none;color:#979696;">忘记密码?</a>
 						</div>
 					</div>
-				</form>
+				
 			</div>
 		</div>
 
@@ -601,6 +621,7 @@ $(document).ready(function(){
 					$("#username").append(user.name);
 					$(".photo").attr("src","showphoto?uid="+user.id);
 					$(".sev").show();
+					$('.overlay').hide();
 				},
 				error : function(){
 					alert("登陆失败！");
@@ -629,6 +650,17 @@ $(document).ready(function(){
 		$('.overlay').hide();
 		$('.md-effect-10').removeClass('md-show');
 	});
+	$('.receivepage').on('mouseenter','ul li.downhover',function(){
+		$(this).children('.fa-download').show();
+	})
+	$('.receivepage').on('mouseleave','ul li.downhover',function(){
+		$(this).children('.fa-download').hide();
+	})
+	$('.receivepage').on('click','ul li.downhover .fa-download',function(){
+		var Tfileid=$(this).parent('li').find('.filebox').val();
+		var Tfilename=$(this).parent('li').find('#n1').text();
+		window.location.href="fileDownload?fileFileName="+Tfilename+"&netFileID="+Tfileid;
+	})
 </script>
 <script type="text/javascript">
     /**

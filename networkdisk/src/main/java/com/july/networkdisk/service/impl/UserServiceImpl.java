@@ -107,4 +107,8 @@ public class UserServiceImpl implements IUserService
 	public List<Categorie> showparents(String cateid) {
 		return this.userDao.showparents(cateid);
 	}
+
+	public User getphoto(String uid) {
+		return this.userDao.getphoto(uid);
+	}
 }

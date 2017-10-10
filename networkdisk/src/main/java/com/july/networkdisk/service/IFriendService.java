@@ -14,6 +14,12 @@ import com.july.networkdisk.vo.User;
 public interface IFriendService{
 	
 	List<User> getAll(String uid);
-	List<User> findOne(String friendname);
-	int insertfriend(Friend friend);
+	User findOne(String friendname);
+	void insertfriend(Friend friend);
+	List<User> getfriAll(String id);
+	List<Friend> getFriList(String id);
+	User getUser(String fid);
+	Friend findfrione(Friend friend);
+	void deleteOne(Friend friend);
+	void addOne(Friend friend);
 }

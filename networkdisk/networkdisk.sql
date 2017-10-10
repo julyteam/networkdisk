@@ -135,10 +135,11 @@ create table file(
 #好友表
 create table friend
 (
-	fri_id int(15) not null,
+	fri_id int(15) not null auto_increment,
 	fri_uid varchar(50) not null,
 	fri_fid varchar(50) not null,
 	fri_addtime timestamp not null default current_timestamp,
+	fri_static int(1) not null,
 	primary key(fri_id),
 	foreign key(fri_uid) references user(user_id),
 	foreign key(fri_fid) references user(user_id)

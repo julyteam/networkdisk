@@ -1,7 +1,6 @@
 package com.july.networkdisk.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import com.july.networkdisk.dao.FriendDao;
 import com.july.networkdisk.service.IFriendService;
@@ -43,7 +42,7 @@ public class FriendServiceImpl implements IFriendService{
 		return friendDao.findAll(uid);
 	}
 	/*查询好友*/
-	public List<User> findOne(String friendname) {
+	public User findOne(String friendname) {
 		// TODO Auto-generated method stub
 		return friendDao.findOne(friendname);
 	}
@@ -55,8 +54,48 @@ public class FriendServiceImpl implements IFriendService{
 		this.friendDao = friendDao;
 	}
 
-	public int insertfriend(Friend friend) {
+	public void insertfriend(Friend friend) {
 		// TODO Auto-generated method stub
-		return 0;
+		this.friendDao.addfriend(friend);
 	}
+
+	public List<User> getfriAll(String uid) {
+		// TODO Auto-generated method stub
+		return friendDao.findfriAll(uid);
+	}
+
+	public List<Friend> getFriList(String id) {
+		return this.friendDao.getFriList(id);
+	}
+
+	public void save(User p0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(User p0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public User getUser(String fid) {
+		return this.friendDao.getUser(fid);
+	}
+
+	public Friend findfrione(Friend friend) {
+		// TODO Auto-generated method stub
+		return this.friendDao.getfirone(friend);
+	}
+
+	public void deleteOne(Friend friend) {
+		// TODO Auto-generated method stub
+		this.friendDao.deleteOne(friend);
+	}
+
+	public void addOne(Friend friend) {
+		// TODO Auto-generated method stub
+		this.friendDao.addOne(friend);
+	}
+
+	
 }

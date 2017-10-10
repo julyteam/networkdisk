@@ -34,8 +34,9 @@ public class LoginFilter implements Filter{
 				||"/register".equals(targetURL)||"/checkUserName".equals(targetURL)||"/checkPhone".equals(targetURL)
 				||"/checkEmail".equals(targetURL)||"/sendEmail".equals(targetURL)||"/checkVCode".equals(targetURL)
 				||"/showphoto".equals(targetURL)||"/shareurl".equals(targetURL)||"//progress".equals(targetURL)
-				||"/sharelogin".equals(targetURL)||"/".equals(targetURL)
-				
+				||"/sharelogin".equals(targetURL)||"/".equals(targetURL)||"/shownext".equals(targetURL)
+				||"/goforget".equals(targetURL)||"/getUserByEm".equals(targetURL)||"/updatepwd".equals(targetURL)
+				||"/pwdextract".equals(targetURL)
 		){
 			System.out.println("不需要拦截");
 		}else{
@@ -43,6 +44,7 @@ public class LoginFilter implements Filter{
 			HttpSession session = request.getSession(false);  
 			if(session == null || session.getAttribute("user") == null)
 			{
+				System.out.println("已经拦截");
 				request.setAttribute("message", "false");
 				request.getRequestDispatcher("/login.jsp").forward(request, response);
 				return;

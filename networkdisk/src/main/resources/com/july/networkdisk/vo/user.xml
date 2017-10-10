@@ -25,7 +25,7 @@
 	</insert>
 	<!-- 通过用户名密码查找一个用户信息 -->
 	<select id="findOne" parameterType="com.july.networkdisk.vo.User" resultMap="userMap">
-		select * from `user` where user_name=#{name} and user_password=#{passWord}
+		select user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_cTime from `user` where user_name=#{name} and user_password=#{passWord}
 	</select>
 	<!-- 通过邮箱密码查找一个用户信息 -->
 	<select id="findOneByEm" parameterType="com.july.networkdisk.vo.User" resultMap="userMap">
@@ -38,6 +38,10 @@
 	
 	<!-- 通过id查找用户信息 -->
 	<select id="get" parameterType="String" resultMap="userMap">
+		select user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_cTime from `user` where user_id=#{id}
+	</select>
+	<!--查找头像 -->
+	<select id="getphoto" parameterType="String" resultMap="userMap">
 		select * from `user` where user_id=#{id}
 	</select>
 	<!-- 查找所有用户信息 -->
@@ -76,12 +80,15 @@
 	</select>
 	<!--此处为好友信息-->
 	<!-- 查找所有好友信息 -->
-	<select id="getAllfriend" parameterType="map" resultMap="userMap">
-		select * from user where user_id in (select fri_fid from friend where fri_uid=#{user_id})
-	</select>
-	
+	<select id="getAllfriend" parameterType="String" resultMap="userMap">
+		select user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_cTime from user where user_id in (select fri_fid from friend where fri_uid=#{user_id} and fri_static=1)
+	</select>	
 	<select id="getOnefriend" resultMap="userMap">
-		select * from user where user_name=#{0} or user_phone=#{0}
+		select user_id,user_name,user_password,user_truename,user_email,user_phone,user_isadmin,user_sex,user_about,user_cTime from user where user_name=#{0} or user_phone=#{0}
+	</select>
+	<!-- 查找添加自己为好友的信息 -->
+	<select id="getfriAll" resultMap="userMap">
+		select distinct user_id,user_name,user_photo,fri_addtime from user,friend where user_id in (select fri_fid from friend where fri_uid = #{uid} and fri_static=0)
 	</select>
 </mapper>
 

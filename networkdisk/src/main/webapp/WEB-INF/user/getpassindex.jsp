@@ -87,6 +87,7 @@
 							       		   $("#em").append(user.email);
 							       		   $("#uname").append("您正在找回的帐号是："+user.name);
 							       		   $("#email").val(user.email);
+							       		   $("#uid").val(user.id);
 							       		   email = user.email;
 						               }
 						            },  
@@ -203,7 +204,7 @@
 					}
 				</script>
 				
-				
+				<input type="hidden" id="uid" value=""  >
 				<div class="mod-step-detail" id='step3' style="display: none; position: relative;">
 					<p class="step-form-tip m_l80" id="uname"></p>
 						<div class="pass-input-container clearfix">
@@ -228,13 +229,14 @@
 		<script type="text/javascript">
 			$("#submit3").click(function(){
 				var pwd = $("#password").val();
+				var uid = $("#uid").val();
 				$.ajax({  
-				 	url: "updatepwd?passWord="+pwd,       //后台处理程序
+				 	url: "updatepwd?passWord="+pwd+"&uid="+uid,       //后台处理程序
 		            type: "post",               		//数据发送方式
 		            dataType: "json",           		//接受数据格式   
 		            success:function(data){ 
 		            	alert("修改成功，返回登陆！");
-		            	location.href="logout";
+		            	location.href="login.jsp";
 		             },  
 		            error:function(){  
 		                alert("error");  

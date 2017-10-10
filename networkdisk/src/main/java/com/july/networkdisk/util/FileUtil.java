@@ -68,10 +68,7 @@ public class FileUtil {
 				|| netFile.getType().equals("flv"))
 		{
 			ConvertVideo convertVideo = new ConvertVideo(turePath);
-			if (convertVideo.process()) { // 执行转码任务
-				System.out.println("视频转换ok");
-			}
-
+			convertVideo.start();//开启另外一个线程；
 		}
 
 		return netFile;

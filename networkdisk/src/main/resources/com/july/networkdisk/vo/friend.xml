@@ -11,19 +11,26 @@
 		<result property="addtime" column="fri_addtime" />
 	</resultMap>
 	
-	<!-- 增加员工 -->
+	<!-- 添加好友 -->
 	<insert id="addfriend" parameterType="com.july.networkdisk.vo.Friend">
-		insert into friend(fri_id,fri_uid,fri_fid)values(#{id},#{uid},#{rid})
+		insert into friend(fri_uid,fri_fid,fri_static)values(#{uid},#{fid},1),(#{fid},#{uid},0)
 	</insert>
-	<!-- 查找一个用户信息 -->
-	<select id="findOne" resultMap="friendMap">
-		select * from user where user_name=#{name} or user_phone=#{name}
+	<!-- 添加好友 -->
+	<update id="addOne" parameterType="com.july.networkdisk.vo.Friend">
+		update friend set fri_static=1 ,fri_addtime =sysdate() where fri_uid=#{uid} and fri_fid=#{fid}
+	</update>
+	<!-- 添加好友之前先查找好友是否存在 -->
+	<select id="getfrione" resultMap="friendMap">
+		select * from friend where fri_fid = #{fid} and fri_uid=#{uid} and fri_static=1
 	</select>
-	<!-- 查找所有好友信息 -->
-	<select id="getAll" resultMap="friendMap">
-		select * from user where user_id in (select fri_fid from friend where fri_uid=#{0})
+	<!-- 查询添加自己的好友 -->
+	<select id="getfrilist" parameterType="String" resultMap="friendMap">
+		select * from friend where fri_uid = #{id} and fri_static = 0
 	</select>
-	
+	<!-- 删除好友 ,改变状态为0-->
+	<update id="deleteOne" parameterType="com.july.networkdisk.vo.Friend">
+		update friend set fri_static=0 ,fri_addtime =sysdate() where fri_uid=#{uid} and fri_fid=#{fid}
+	</update>
 </mapper>
 
 

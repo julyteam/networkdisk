@@ -36,7 +36,7 @@
 								<a href="goindex">网盘</a>
 							</li>
 							<li>
-								<a href="goshare">分享</a>
+								<a href="findAll">分享</a>
 							</li>
 							<li>
 								<a href="#">更多</a>

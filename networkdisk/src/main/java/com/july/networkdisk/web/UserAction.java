@@ -222,7 +222,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
      * @throws Exception
      */
     public String showphoto() throws Exception{
-	   User user = iUserService.get(uid);
+	   User user = iUserService.getphoto(uid);
 	   ServletOutputStream out = null;
 	   response.setContentType("multipart/form-data");
 	   out = response.getOutputStream();
@@ -478,7 +478,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     		map.put("user", null);
     	}else{
     		map.put("user", u);
-    		session.setAttribute("user", u);
     	}
     	return "json";
     }
@@ -511,12 +510,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     public String updatepwd() throws Exception{
     	response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-    	User u = (User) session.getAttribute("user");
+    	
     	String password = CommonUtil.getMD5(this.user.getPassWord());
-    	this.user.setId(u.getId());
+    	this.user.setId(uid);
     	this.user.setPassWord(password);
     	this.iUserService.updatePassword(this.user);
-    	u.setPassWord(password);
     	out.print(1);
     	return null;
     }

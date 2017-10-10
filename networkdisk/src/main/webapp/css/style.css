@@ -1672,3 +1672,8 @@ img.userpic {
 	font-family:'微软雅黑';
 	cursor: pointer;
 }
+.downhover .fa-download{
+	color:rgb(59, 140, 255);
+	display:none;
+	cursor: pointer;
+}
