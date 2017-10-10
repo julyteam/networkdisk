@@ -51,6 +51,30 @@ public class TestDao {
 	}
 	
 	@Test
+	public void testfindAllByType() throws Exception {
+		List<String> list = new ArrayList<String>();
+		list.add("ppt");
+		list.add("docx");
+		list.add("doc");
+		list.add("xlsx");
+		list.add("pdf");
+		list.add("txt");
+		String uid ="94376d5c-56ac-42da-84e1-b0480a990f72";
+		List<NetFile> files = fileDao.findAllByType(uid,list);
+		System.out.println(files);
+	}
+	@Test
+	public void testfindTime() throws Exception {
+		List<String> list = new ArrayList<String>();
+		list.add("png");
+		list.add("jpeg");
+		list.add("jpg");
+		String uid ="94376d5c-56ac-42da-84e1-b0480a990f72";
+		List<String> listtimeString = fileDao.findTime(uid, list);
+		System.out.println(listtimeString);
+	}
+	
+	@Test
 	public void testUpdataFile() throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("file_id", "17e2102a-e38f-4dcb-aecf-cc71dd18f379");

@@ -245,6 +245,13 @@
 				<param name="root">swfFilePath</param>
 			</result>
 		</action>
+		
+		<!-- 按种类显示文件 -->
+		<action name="showFileByType" class="fileAction" method="showFileByType">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 分享 -->
@@ -367,6 +374,9 @@
 		</action>
 		<action name="noticePage" class="noticeAction" method="page">
 		    <result name="success">/noticeList.jsp</result>
+		</action>
+		<action name="more" class="noticeAction" method="more">
+		     <result name="success">/WEB-INF/user/more.jsp</result>
 		</action>
 	</package>
 	

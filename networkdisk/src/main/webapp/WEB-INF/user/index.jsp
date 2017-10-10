@@ -46,7 +46,7 @@
 								<a href="findAll">分享</a>
 							</li>
 							<li>
-								<a href="#">更多</a>
+								<a href="more">更多</a>
 							</li>
 						</ul>
 					</div>
@@ -980,6 +980,7 @@
 		});
 		$('#modal-13 .fa-times').click(function() {
 			$('.overlay').hide();
+			$('#officeview').empty();
 			$('.md-effect-13').removeClass('md-show');
 		});
 		
@@ -1259,6 +1260,7 @@
 			var zz="<div class='reName'><input class='GodName' type='text' value=''><i class='fa fa-check sure'></i><i class='fa fa-times dele'></i></div>";
 			$(this).parents('tr').css('background','#F0F8FD');
 			$(this).parents('tr').find('a:eq(0)').after(zz);
+			var idVal=$(this).parents('tr').find('.reid').length;
 			var originVal=$(this).parents('tr').find('a:eq(0)').text();
 			var id=$(this).parents('tr').find('input[type=text]').val();			
 			$('.GodName').val(originVal);
@@ -1271,7 +1273,7 @@
 			$('table').find('.july_fileName').addClass('off');
 			$('.sure').click(function(){
 				var newname=$(this).prev('input').val();
-				if($(this).parent('div').prev('tr').find('.reid').length!=0){
+				if(idVal!=0){
 					
 					var cateid=id; 
 				 	var flag = 0;

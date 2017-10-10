@@ -31,6 +31,35 @@ public class FileDao extends BaseDao {
 	}
 	
 	/**
+	 * 根据用户id，文件类别来查询文件的信息
+	 * 
+	 * @return
+	 */
+	public List<NetFile> findAllByType(String uid,List<String> list) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("file_uid", uid);
+		map.put("list", list);
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<NetFile> Filelist = sqlSession.selectList("fileSpace.findAllByType",map);
+		sqlSession.close();
+		return Filelist;
+	}
+	
+	/**
+	 * 查找时间
+	 * @return
+	 */
+	public List<String> findTime(String uid,List<String> list) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("file_uid", uid);
+		map.put("list", list);
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<String> listtime = sqlSession.selectList("fileSpace.findTime",map);
+		sqlSession.close();
+		return listtime;
+	}
+	
+	/**
 	 * 根据文件夹id查询所有文件的id
 	 * 
 	 * @return

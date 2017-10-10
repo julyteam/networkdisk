@@ -133,4 +133,8 @@ public class NoticeAction extends ActionSupport {
 	public void setMap(Map<String, Object> map) {
 		this.map = map;
 	}
+	public String more(){
+		return "success";
+	}
 }
+

@@ -139,66 +139,62 @@ a, button, input {
 	<div class="page">
 		<div class="page-container">
 			<div class="row" style="width: 95%; float: left;">
-				<div class="moudle">
-					<ul id='mou_1' class="tab">
-						<li class="active"><a href="#tb1">最近上传</a></li>
-						<li><a href="#tb2">时光轴</a></li>
-					</ul>
-				</div>
-				<div class="donetimeline">
-					<span style="float: left; display: block;"> <input
-						type="checkbox" style="position: relative; top: 2px;" /> <span
-						id="c1"></span>
-					</span>
-					<div class="equip_2" style="display: inline-block;">
-						<ul class="equi_2">
-							<li id="f1"><img src="/networkdisk/img/share.png" />分享</li>
-							<li><img src="/networkdisk/img/download.png" />下载</li>
-							<li><img src="/networkdisk/img/delete.png" />删除</li>
-							<li>复制到</li>
-							<li id="f2">移动到</li>
-						</ul>
-					</div>
-				</div>
 				<div class="tab-pane fade in active" id="tb1">
-					<div class="timeline">
-						<span class="timeline_day1">2017年9月16号</span> <span
-							class="fa fa-chevron-down" id="down"></span> <span
-							class="timeline_day3">3张</span> <span style="float: right;"><input
-							type="checkbox" id="chall" style="position: relative; top: 2px;" />全选</span>
-					</div>
-					<div class="timelin_content">
-						<span><i class="fa fa-check-square-o"></i></span><img
-							src="img/v7.jpg" /> <span><i class="fa fa-check-square-o"></i></span><img
-							src="img/v8.jpg" /> <span><i class="fa fa-check-square-o"></i></span><img
-							src="img/v9.jpg" />
-					</div>
-					<div class="timeline">
-						<span class="timeline_day1">2017年8月16号</span> <span
-							class="fa fa-chevron-down" id="down_1"></span> <span
-							class="timeline_day3">3张</span>
-						<div class="equip_1">
-							<ul class="equi_1">
-								<li id="f1"><img src="/networkdisk/img/share.png" />分享</li>
-								<li><img src="/networkdisk/img/download.png" />下载</li>
-								<li><img src="/networkdisk/img/delete.png" />删除</li>
-								<li>复制到</li>
-								<li id="f2">移动到</li>
-							</ul>
-						</div>
-						<span style="float: right;"><input type="checkbox"
-							style="position: relative; top: 2px;" />全选</span>
-					</div>
-					<div class="timelin_content_1">
-						<span><i class="fa fa-check-square-o"></i></span><img
-							src="/networkdisk/img/v7.jpg" /> <span><i
-							class="fa fa-check-square-o"></i></span><img
-							src="/networkdisk/img/v8.jpg" /> <span><i
-							class="fa fa-check-square-o"></i></span><img
-							src="/networkdisk/img/v9.jpg" />
-					</div>
+				
+					
+					<!-- <div class="timelin_content" >
+						<span><i class="fa fa-check-square-o"></i>
+						</span><img src="img/v7.jpg" /> <span>
+						<i class="fa fa-check-square-o"></i>
+						</span><img src="img/v8.jpg" /> <span>
+						<i class="fa fa-check-square-o"></i></span><img src="img/v9.jpg" />
+					</div> -->
+					<script type="text/javascript">
+					$(function(){
+						/*jpg、jpeg、png、gif、bmp*/
+						var list = new Array();
+						list[0]="jpg";
+						list[1]="jpeg";
+						list[2]="png";
+						list[3]="gif";
+						list[4]="bmp";
+						showPicture(list);
+					})
+					
+					function showPicture(list){
+						
+						$.ajax({
+							url : "${pageContext.request.contextPath}/showFileByType?fileType="+list,
+							dataType : 'json',
+							success : function(data) {
+								var listtime = data.listtime;
+								var picture = data.files;
+								
+								for(var i = 0; i< listtime.length;i++){
+									var $str=$("<div class='timeline'><span class='timeline_day1'>"+listtime[i]
+											+"</span> <span class='fa fa-chevron-down' id='down'> </span> <span class='timeline_day3' id ='num'>"  
+											+"</span></div><div class='timelin_content' id='showPictureID_"+i+"'></div>");
+									$("#tb1").append($str);
+									for(var j = 0; j< picture.length;j++){
+										var atime = picture[j].addtime;
+										var anewTime = atime.split("T");
+										if(anewTime[0] == listtime[i]){
+											var truepath = picture[j].path.substring(18,picture[j].path.length);
+											 var $pic=$("<img src=/networkdiskFile"+truepath+" />");
+											$("#showPictureID_"+i).append($pic); 
+										}
+									}
+								}
+							},
+							error : function() {
+								alert("图片显示失败！");
+							}
+						});
+						
+					}
+						
+                    </script>
 				</div>
-				<div class="tab-pane fade" id="tb2"></div>
 			</div>
 		</div>
 		<div class="recyclebin-empty">

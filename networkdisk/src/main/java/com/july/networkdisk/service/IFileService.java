@@ -20,6 +20,18 @@ public interface IFileService extends IBaseService<NetFile> {
 	 */
 	List<NetFile> findAllByUser(String file_uid,Map<String, Object> map);
 	
+	/**
+	 * 根据用户和文件的种类来查找文件
+	 */
+	List<NetFile> findAllByType(String file_uid,List<String> list);
+	
+	/**
+	 * 根据条件对日期分组
+	 * @param file_uid
+	 * @param list
+	 * @return
+	 */
+	List<String> findTime(String file_uid, List<String> list);
 	
 	/**
 	 * 根据文件夹id和是否回收来找所有的文件

@@ -34,7 +34,7 @@ public class FileUtil {
 		netFile.setType(str);
 		netFile.setSize(file.length());
 
-		// linux 为/home/julyteam windows 为 D：
+		// linux 为/home/julyteam    windows 为 D：
 		String folderpath = "D:" + File.separatorChar + "networkdiskFile"
 				+ File.separatorChar + user.getId();
 		File newFile = new File(folderpath);// 构造一个存储路径 D：\networkdiskFile\用户id
@@ -68,9 +68,13 @@ public class FileUtil {
 				|| netFile.getType().equals("flv"))
 		{
 			ConvertVideo convertVideo = new ConvertVideo(turePath);
-			convertVideo.start();//开启另外一个线程；
+			convertVideo.start();//开启另外一个线程，进行视频转码；
 		}
-
+		
+		/**
+		 * 开启线程备份到hadoop上
+		 */
+		
 		return netFile;
 	}
 

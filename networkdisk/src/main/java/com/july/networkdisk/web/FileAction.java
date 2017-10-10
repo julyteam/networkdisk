@@ -3,8 +3,10 @@ package com.july.networkdisk.web;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,12 +29,22 @@ public class FileAction extends ActionSupport {
 	private String netFileID; // 得到下载文件的ID或要预览office文件的id
 	private String categorie_id; //上传文件夹的id
 	private String swfFilePath; //得到swf文件的地址
-
+	private Map<String, Object> map;//返回前台map;
+	private String fileType;        //接受前台传过来的种类；
 	
 	private IFileService fileService;
 	private User user = CommonUtil.getSessionUser(); // 获取session中的User
 
 	
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+	public String getFileType() {
+		return fileType;
+	}
+	public Map<String, Object> getMap() {
+		return map;
+	}
 	public String getSwfFilePath() {
 		return swfFilePath;
 	}
@@ -126,6 +138,17 @@ public class FileAction extends ActionSupport {
 		}
 		return "json";
 	}
+	
+	public String showFileByType(){
+		map = new HashMap<String, Object>();
+		String[] typestr= fileType.split(",");
+		List<String> list = Arrays.asList(typestr);
+		List<String> listtime= fileService.findTime(user.getId(), list);
+		List<NetFile> files = fileService.findAllByType(user.getId(), list);
+		map.put("listtime", listtime);
+		map.put("files",files );
+		return "json";
+	}
 
 	/**
 	 * 文件上传
@@ -193,6 +216,5 @@ public class FileAction extends ActionSupport {
 	/* 文件名称乱码 */
 	public String getFileName() throws Exception {
 		return new String(fileFileName.getBytes("GBK"), "Iso8859-1");
-
 	}
 }

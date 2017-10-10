@@ -16,7 +16,7 @@ fri_id 		int(15)			否		主键（自增）
 fri_uid 	varchar(50)		否		用户id（外键）
 fri_fid 	varchar(50)		是		好友id（外键）
 addtime 	timestamp 		否		添加时间
-	
+fri_static   int(1)         否      好友状态
 
 
 			消息公告（notice）

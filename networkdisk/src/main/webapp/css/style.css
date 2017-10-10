@@ -1677,3 +1677,77 @@ img.userpic {
 	display:none;
 	cursor: pointer;
 }
+/* video界面 */
+.open-enable {
+    width: 120px;
+    height: 127px;
+    float: left;
+    margin: 4px 0 0 6px;
+    text-align: center;
+    border: 1px solid #fff;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.open-enable .active{
+	background-color:rgba(241, 245, 250,0.5);
+	border:1px solid #90c3fd;
+}
+.open-video{
+    position: relative;
+    margin: 9px auto 0;
+    width: 84px;
+    height: 84px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.video-img{
+	left: -45px;
+    top: 8px;
+    visibility: visible;
+    position: absolute;
+}
+.open-video .v-bl {
+    display: none;
+    background: url(/networkdisk/img/video_gridview_arrow.png) no-repeat;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 25px;
+    top: 26px;
+}
+.open-enable .file-name {
+    display: block;
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 6px 9px;
+}
+.open-enable .file-name a {
+    cursor: pointer;
+}
+.open-enable .file-name a, 
+.open-enable .file-name a:hover, 
+.open-enable .file-name a:active {
+    color: #424e67;
+    text-decoration: none;
+}
+.open-enable .video-check {
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    height: 21px;
+    text-align:center;
+    width: 100px;
+    display: none;
+    z-index:2;
+    cursor: pointer;
+}
+.open-enable .video-check i {
+    font-size: 16px;
+    color: rgb(59, 140, 255);
+    position: relative;
+    left: 3px;
+    margin-left:1px;
+}

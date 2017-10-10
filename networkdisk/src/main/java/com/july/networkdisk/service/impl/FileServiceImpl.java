@@ -47,7 +47,23 @@ public class FileServiceImpl implements IFileService {
 		map.put("file_uid", file_uid);
 		return fileDao.findAllByUser(map);
 	}
-
+	
+	/**
+	 * 根据用户和文件种类来查找文件
+	 */
+	public List<NetFile> findAllByType(String file_uid, List<String> list) {
+		return fileDao.findAllByType(file_uid, list);
+	}
+	
+	/**
+	 * 根据条件对日期分组
+	 * @param file_uid
+	 * @param list
+	 * @return
+	 */
+	public List<String> findTime(String file_uid, List<String> list){
+		return fileDao.findTime(file_uid, list);
+	}
 	/**
 	 * 根据文件夹目录和是否删除 来找文件的ID。用于文件的回收和删除
 	 */
@@ -168,7 +184,10 @@ public class FileServiceImpl implements IFileService {
 
 		return true;
 	}
-
+	
+	/**
+	 * 废弃方法
+	 */
 	public void update(NetFile file) {
 
 	}
