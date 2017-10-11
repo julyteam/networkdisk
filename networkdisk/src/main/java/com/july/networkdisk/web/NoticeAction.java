@@ -104,6 +104,19 @@ public class NoticeAction extends ActionSupport {
 		request.setAttribute("notice", notice);
 		return "success";
 	}
+	
+	/*消息公告详情 */
+	public String noticeDetail() {
+		return "success";
+	}
+	/*公告数量*/
+	public String sum(){
+		map = new HashMap<String, Object>();
+		int notice = iNoticeService.sum();
+		map.put("allNotice", notice);
+    	return "json";
+		
+	}
    /*分页*/
    public String page(){
 	   HttpServletRequest request = ServletActionContext.getRequest();

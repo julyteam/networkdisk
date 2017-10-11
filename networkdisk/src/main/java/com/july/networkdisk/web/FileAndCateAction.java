@@ -31,10 +31,13 @@ public class FileAndCateAction extends ActionSupport {
 	private String rename; // 重命名
 	private String refileid; // 重命名文件id
 	private String recategorieid; // 重命名文件夹id
-
-	
-	
-	
+	private String userid;
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public void setiSharefileService(ISharefileService iSharefileService) {
 		this.iSharefileService = iSharefileService;
 	}
@@ -131,6 +134,31 @@ public class FileAndCateAction extends ActionSupport {
 		map.put("listCategories", listCategories);
 		return "json";
 	}
+	
+	/**
+	 * 后台显示用户文件和文件夹
+	 * 
+	 * @return
+	 */
+	public String adminShowFileAndCate() {
+		map = new HashMap<String, Object>();
+		if (!"".equals(categorie_id)) {
+			map.put("file_catid", categorie_id); // 判断所在的目录
+			map.put("cat_reid", categorie_id);
+		} else {
+			map.put("file_catid", null); // 判断所在的目录
+			map.put("cat_reid", null);
+		}
+		map.put("file_deletesign", recycleflag); // 判断是否在回收站；
+		map.put("cat_state", recycleflag);
+		List<NetFile> listFiles = iFileService.findAllByUser(userid, map);
+		List<Categorie> listCategories = iCateService.findAllCate(userid,
+				map);
+		map.put("listFiles", listFiles);
+		map.put("listCategories", listCategories);
+		return "json";
+	}
+
 
 	/**
 	 * 把文件放入回收站
@@ -155,6 +183,16 @@ public class FileAndCateAction extends ActionSupport {
 	public String showRecycle() {
 		User user = CommonUtil.getSessionUser();
 		map = iCateService.showRecycleCate(user.getId());
+		return "json";
+	}
+	/**
+	 * 后台显示回收站中的文件和文件夹
+	 * 
+	 * @return
+	 */
+	public String adminShowRecycle() {
+		
+		map = iCateService.showRecycleCate(userid);
 		return "json";
 	}
 

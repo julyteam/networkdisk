@@ -46,7 +46,8 @@
 	</select>
 	<!-- 查找所有用户信息 -->
 	<select id="getAll" resultMap="userMap">
-		select * from `user`
+		select * from `user` where user_isadmin=1
+
 	</select>
 
 	<!-- 用户注册 -->

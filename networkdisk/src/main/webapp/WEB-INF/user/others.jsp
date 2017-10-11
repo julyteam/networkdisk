@@ -29,7 +29,7 @@
 	<div id="overlay" class="overlay"></div>
 		<div id="in-nav">
 			<div class="logo">
-				<a id="logo" href="/networkdisk/index.jsp">
+				<a id="logo" href="goindex">
 					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
 				</a>
 			</div>
@@ -90,8 +90,7 @@
 								</div>
 							
 						</li>
-						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="noticeList"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
 					</ul>
 				</div>
@@ -134,6 +133,7 @@
 								<div class="Jdh">
 									<table id="july_allFile" style="display: inline">
 										<tr>
+											<td>全部文件</td>
 										</tr>
 									</table>
 									<span class="Sdh" style="float: right; display: inline-block;"></span>
@@ -141,13 +141,17 @@
 
 								<div class="Qdh">
 									<ul>
-										<li style="width: 51%; margin-left: -40px;"><input
-											type="checkbox" class="chk_1" /><span id="n1"
+										<li style="width: 51%; margin-left: -40px;"><span id="n1"
 											style='margin-left: 10px;'>文件名</span><i
 											class="fa fa-arrow-down"></i></li>
 										<li>大小<i class="fa fa-arrow-down"></i></li>
 										<li>修改日期<i class="fa fa-arrow-down"></i></li>
 									</ul>
+								</div>
+								<div class="nullfile eefile">
+									<p class="ggflie">
+										您还没上传过文件哦，点击上传
+									</p>
 								</div>
 								<div class="nullfile eefile">
 									<p class="ggflie">您还没上传过文件哦，点击上传</p>
@@ -156,7 +160,107 @@
 								<form action="" method="post">
 									<table class="table">
 										<tbody id="mytbody">
-
+												<script type="text/javascript">
+												$(function(){
+													var list = new Array();
+													list[0]="zip";
+													list[1]="html";
+													list[2]="mp3";
+													list[3]="wav";
+													list[4]="mod";
+													list[5]="war";
+													showothers(list);
+												})
+												
+												function showothers(list){
+												$.ajax({
+													url : "${pageContext.request.contextPath}/showFileByType?fileType="+list,
+													dataType : 'json',
+													success : function(data) {
+														var listFile = data.files;
+														if(listFile.length == 0){
+															$(".nullfile").show();
+															return;
+														}
+														var sum=listFile.length;
+														var sumhead="已加载全部,共"+sum+"条";
+														$('.Sdh').html(sumhead);
+														for (var i = 0; i < listFile.length; i++) {
+																var type;
+																var filesize;
+																var sizeflag;
+																/* 修改时间格式 */
+																var time = listFile[i].addtime;
+																var newTime = time.split("T");
+																
+																/* 计算文件大小 */
+																if(listFile[i].size/(1024*1024) < 1 ){
+																	filesize=(listFile[i].size/1024).toFixed(2);
+																	sizeflag="KB";
+																}else if(listFile[i].size/(1024*1024*1024) < 1)
+																{
+																	filesize=(listFile[i].size/(1024*1024)).toFixed(2);
+																	sizeflag="M";
+																}else{
+																	filesize=(listFile[i].size/(1024*1024*1024)).toFixed(2);
+																	sizeflag="G";
+																}
+																
+																switch(listFile[i].type){
+																case("zip"):
+																	type="/networkdisk/img/ZIP_2.png";
+																break;
+																case("html"):
+																	type="/networkdisk/img/html.png";
+																break;
+																case("mp3"):
+																case("wav"):
+																case("mod"):	
+																	type="/networkdisk/img/music.png";
+																break;
+																	default:
+																		type="/networkdisk/img/others.png";
+																}
+																var $str = $("<tr class='showfileTr'>"
+																		+ "<td>"
+																		+ "<img src='"
+																		+ type
+																		+ "'width='28px' style='margin:0 5px 5px 10px;'>"
+																		+ "<input id='listFileID' class='refileid' type='text' style='display:none' value="
+																		+ listFile[i].id
+																		+ ">"
+																		+ "<input id='listFileType' type='text' style='display:none' value="
+																		+ listFile[i].type
+																		+ ">"
+																		+ "<input id='listFileName' class='rename' type='text' style='display:none' value="
+																		+ listFile[i].name
+																		+ ">"
+																		+ "<a class='july_fileName'>"
+																		+ listFile[i].name
+																		+ "</a>"
+																		+ "<div class='more'>"
+																		+ "</span><span class='fa fa-download' title='下载' >"
+																		+ "</span>"
+																		+ "<span class='fa fa-trash' title='删除'></span>"
+																		+ "</span>"
+																		+ "</div></td>" 
+																		+ "<td>"
+																		+ filesize + sizeflag
+																		+ "</td>" 
+																		+ "<td>"
+																		+ newTime[0]+" "+newTime[1]
+																		+ "</td>"
+																		+ "</tr>")
+																$("#mytbody").append($str);
+																
+															}
+														},
+														error : function() {
+															alert("查询失败");
+														}						
+													});
+												}
+                                        </script>
 										</tbody>
 									</table>
 								</form>
@@ -168,4 +272,56 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+/*删除当前文件*/
+$('#mytbody').on('click','.fa-trash',function(){
+	var fileid =$(this).parents('tr').find('#listFileID').val();
+	var msg = "确认删除？";
+	/* 删除文件 */
+	if (confirm(msg) == true) {
+		layFileRecyle(fileid);
+	}	
+});
+/*删除当前文件到回收站*/
+function layFileRecyle(fileID){
+	$.ajax({
+		url : "${pageContext.request.contextPath}/layFileRecyle?file_id="+fileID,
+		dataType : 'json',
+		async : false,
+		success : function(data) {
+			/* alert(data); */
+		},
+		error : function() {
+			alert("文件放入回收站失败！");
+		}
+	});
+	window.location.href="others";
+}
+/* 文件下载 */
+
+$('table').on('click','.fa-download',function(){
+ 	var fileid =$(this).parent().parent('td').find('.refileid').val();
+ 	var filename =$(this).parent().parent('td').find('.rename').val();
+ 	window.location.href="fileDownload?fileFileName="+filename+"&netFileID="+fileid;
+});
+</script>
+<!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
+    </script>
 </html>

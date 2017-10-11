@@ -23,6 +23,8 @@
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/js/index.js"></script>
 <script src="/networkdisk/js/jquery.rotate.min.js"></script>
+<script type="text/javascript" src="/networkdisk/js/images-grid.js"></script>
+<link rel="stylesheet" href="/networkdisk/css/images-grid.css">
 <style type="text/css">
 a, button, input {
 	outline: none;
@@ -30,7 +32,7 @@ a, button, input {
 </style>
 </head>
 
-<body>
+<body>	
 	<div id="in-nav">
 		<div class="logo">
 			<a id="logo" href="/networkdisk/index.jsp"> <img
@@ -100,10 +102,8 @@ a, button, input {
 
 							</div>
 						</li>
-						<li style="width: 100px;"><a href="#"
-							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="noticeList"><img
-								src="/networkdisk/img/notice.png" style="margin-top: 10px;" /></a></li>
+								src="/networkdisk/img/notice.png" style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -139,16 +139,8 @@ a, button, input {
 	<div class="page">
 		<div class="page-container">
 			<div class="row" style="width: 95%; float: left;">
-				<div class="tab-pane fade in active" id="tb1">
-				
-					
-					<!-- <div class="timelin_content" >
-						<span><i class="fa fa-check-square-o"></i>
-						</span><img src="img/v7.jpg" /> <span>
-						<i class="fa fa-check-square-o"></i>
-						</span><img src="img/v8.jpg" /> <span>
-						<i class="fa fa-check-square-o"></i></span><img src="img/v9.jpg" />
-					</div> -->
+				<div class="tab-pane fade in active" id="tb1" >
+					<div class="pictimeline" style="height:570px; overflow:auto;margin-top: 30px;">								
 					<script type="text/javascript">
 					$(function(){
 						/*jpg、jpeg、png、gif、bmp*/
@@ -169,22 +161,38 @@ a, button, input {
 							success : function(data) {
 								var listtime = data.listtime;
 								var picture = data.files;
-								
+								if(picture.length==0){
+									$('.recyclebin-empty').show();
+									return;
+								}
 								for(var i = 0; i< listtime.length;i++){
 									var $str=$("<div class='timeline'><span class='timeline_day1'>"+listtime[i]
-											+"</span> <span class='fa fa-chevron-down' id='down'> </span> <span class='timeline_day3' id ='num'>"  
+											+"</span> <span class='fa fa-chevron-down' id='down'> </span> <span class='timeline_day3' id ='num"
+											+i
+											+"'>"  
 											+"</span></div><div class='timelin_content' id='showPictureID_"+i+"'></div>");
-									$("#tb1").append($str);
+									$(".pictimeline").append($str);	
+									var list =[];
+									var num = 0;								
 									for(var j = 0; j< picture.length;j++){
 										var atime = picture[j].addtime;
 										var anewTime = atime.split("T");
-										if(anewTime[0] == listtime[i]){
-											var truepath = picture[j].path.substring(18,picture[j].path.length);
-											 var $pic=$("<img src=/networkdiskFile"+truepath+" />");
-											$("#showPictureID_"+i).append($pic); 
+										if(anewTime[0] == listtime[i]){									
+											var truepath = picture[j].path.substring(18,picture[j].path.length);											
+											list[num]="/networkdiskFile"+truepath;										
+											num++;											
+										}else{
+											num = 0;
 										}
-									}
+										$("#showPictureID_"+i).imagesGrid({
+							                images: list,
+							                align: true
+							            });										
+									}																		
+									var picnum=$("#showPictureID_"+i).find('img').length;
+									$('#num'+i).html(picnum+"张");
 								}
+								
 							},
 							error : function() {
 								alert("图片显示失败！");
@@ -194,13 +202,50 @@ a, button, input {
 					}
 						
                     </script>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="recyclebin-empty">
 			<p class="img records records-17"></p>
-			<p class="empty-word">您的相册为空噢～</p>
+			<p class="empty-word"style="margin-left:50%">您的相册为空噢～</p>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+var value2 = 180;
+$('.pictimeline').on('click','.timeline',function(){
+	//value2 = 180;
+	$(this).find('.fa-chevron-down').rotate({
+		animateTo: value2
+	});
+	if(value2 == 0) {
+		$(this).next('.timelin_content').show(300);
+		value2 = 180;
+	} else {
+		$(this).next('.timelin_content').hide(300);
+		value2 = 0;
+	}
+	
+})
+</script>
+<!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
+    </script>
 </html>

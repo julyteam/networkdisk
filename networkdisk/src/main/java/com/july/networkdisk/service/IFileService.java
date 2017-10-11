@@ -63,6 +63,14 @@ public interface IFileService extends IBaseService<NetFile> {
 	InputStream fileDownLoad(String netFileID) throws Exception;
 	
 	/**
+	 * 后台文件下载
+	 * @param netFileID
+	 * @return
+	 * @throws Exception
+	 */
+	InputStream adminFileDownLoad(String netFileID) throws Exception;
+	
+	/**
 	 * 删除一批文件
 	 * @param netFile_ids
 	 * @return

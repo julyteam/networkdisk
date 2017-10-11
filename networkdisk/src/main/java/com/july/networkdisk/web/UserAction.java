@@ -235,11 +235,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     
     /*    管理员登陆*/
     public String findOne() throws Exception{
+    	String password = CommonUtil.getMD5(this.user.getPassWord());
+        this.user.setPassWord(password);
     	User user = this.iUserService.findOne(this.user);
     	if(user == null){
     		return ERROR;
     	}
-    	if(user.getIsadmin()==1){
+    	if(user.getIsadmin()==0){
         	session.setAttribute("user", user);
         	return SUCCESS;
     	}else{
@@ -280,6 +282,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 		return null;
 	
     }
+    
+    /*   根据id查找用户*/
+    public String selectUserById()throws Exception
+    {
+    	user=this.iUserService.get(uid);
+    	
+        return "json";
+    	
+    } 
+    
       /*  前台验证手机号*/
     public String checkPhone() throws Exception
     {

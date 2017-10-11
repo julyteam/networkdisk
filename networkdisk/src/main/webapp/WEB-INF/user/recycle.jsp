@@ -33,10 +33,11 @@
 <body>
 	<div id="in-nav">
 		<div class="logo">
-			<a id="logo" href="/networkdisk/index.jsp"> <img
-				src="/networkdisk/img/LOGO.png"
-				style="position: absolute; top: 3px;" />
-			</a>
+			<div class="logo">
+				<a id="logo" href="goindex">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
 		</div>
 		<div class="container1">
 			<div class="row1">
@@ -99,10 +100,8 @@
 
 							</div>
 						</li>
-						<li style="width: 100px;"><a href="#"
-							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a></li>
+								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -118,13 +117,13 @@
 					<ul style="padding: 0px;" id="tabs">
 						<li><a href="goindex"
 							class="act"><i class="batch home"></i><br>全部文件</a></li>
-						<li><a href="goindex#tw2"><i
+						<li><a href="picture"><i
 								class="batch stream"></i><br>图片</a></li>
-						<li><a href="goindex#tw3"><i
+						<li><a href="word"><i
 								class="batch plane"></i><br>文档</a></li>
-						<li><a href="goindex#tw4"><i
+						<li><a href="video"><i
 								class="batch calendar"></i><br>视频</a></li>
-						<li><a href="goindex#tw7"><i
+						<li><a href="others"><i
 								class="batch settings"></i><br>其他</a></li>
 						<li><a href="gomyshare"><i
 								class="batch share"></i><br>我的分享</a></li>
@@ -534,4 +533,23 @@
 		</div>		
 	</div>
 </body>
+<!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
+    </script>
 </html>

@@ -14,6 +14,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.july.networkdisk.service.IFileService;
 import com.july.networkdisk.util.CommonUtil;
+import com.july.networkdisk.util.ConvertVideo;
 import com.july.networkdisk.util.DocConverter;
 import com.july.networkdisk.util.JPG2PDFUtil;
 import com.july.networkdisk.vo.NetFile;
@@ -104,7 +105,7 @@ public class FileAction extends ActionSupport {
 	public String officeView() throws Exception{
 		NetFile officeFile = fileService.get(netFileID, 0);
 		String type = officeFile.getType();
-		if(type.equals("word")||type.equals("pdf")||type.equals("ppt")||type.equals("docx")||type.equals("doc")||type.equals("txt"))
+		if(type.equals("xls")||type.equals("word")||type.equals("pdf")||type.equals("ppt")||type.equals("docx")||type.equals("doc")||type.equals("txt"))
 		{
 			DocConverter docConverter = new DocConverter(officeFile.getPath());
 			docConverter.conver();
@@ -130,6 +131,11 @@ public class FileAction extends ActionSupport {
 			String path =officeFile.getPath();
 			swfFilePath=path.substring(0,  path.indexOf("."))+".flv";
 			swfFilePath=swfFilePath.replaceAll("\\\\", "/");
+			File file = new File(swfFilePath);
+			if(!file.exists()){
+				ConvertVideo convertVideo = new ConvertVideo(path);
+	            convertVideo.process();        //执行转码任务
+			}
 			swfFilePath = swfFilePath.substring(2); //windows 为 2，linux 为 14；
 			System.out.println(swfFilePath);
 		}
@@ -212,6 +218,16 @@ public class FileAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+
+	 /*  回收站文件下载*/
+		public String adminLoadFile()throws Exception
+		{
+			in = fileService.adminFileDownLoad(netFileID);
+			if (in == null) {
+				return ERROR;
+			}
+			return SUCCESS;
+		}
 
 	/* 文件名称乱码 */
 	public String getFileName() throws Exception {

@@ -20,7 +20,7 @@
 					<h1 class="da-error-heading">哎哟喂！页面让狗狗叼走了！</h1>
 					<p>
 						大家可以到狗狗没有叼过的地方看看！
-						 <a href="login.jsp">&nbsp;&nbsp;点击登录&nbsp;&nbsp;</a>
+						 <a href="${pageContext.request.contextPath}/login.jsp">&nbsp;&nbsp;点击登录&nbsp;&nbsp;</a>
 					</p>
 				</div>
 			</div>

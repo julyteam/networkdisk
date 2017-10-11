@@ -36,7 +36,7 @@ public class LoginFilter implements Filter{
 				||"/showphoto".equals(targetURL)||"/shareurl".equals(targetURL)||"//progress".equals(targetURL)
 				||"/sharelogin".equals(targetURL)||"/".equals(targetURL)||"/shownext".equals(targetURL)
 				||"/goforget".equals(targetURL)||"/getUserByEm".equals(targetURL)||"/updatepwd".equals(targetURL)
-				||"/pwdextract".equals(targetURL)
+				||"/pwdextract".equals(targetURL) ||"/manager/login.jsp".equals(targetURL)||"/manager/adminlogin".equals(targetURL)
 		){
 			System.out.println("不需要拦截");
 		}else{
@@ -46,7 +46,7 @@ public class LoginFilter implements Filter{
 			{
 				System.out.println("已经拦截");
 				request.setAttribute("message", "false");
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response); 
 				return;
 			}
 		}

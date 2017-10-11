@@ -26,6 +26,7 @@ public class NoticeServiceImpl implements INoticeService {
 		List<Notice> list = noticeDao.getAll();
 		return list;
 	}
+	
 	/*删除消息公告*/
 	public void delete(int id) {
 		noticeDao.delete(id);

@@ -91,9 +91,8 @@
 									</div>
 								</div>
 							
-						</li>
-						<li style="width: 100px;"><a href="#" style="font-size: 13px;">&nbsp;客户端下载</a></li>
-						<li><a href="noticeList"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a></li>
+						</li>						
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png" style="margin-top: 10px;"/></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png" style="margin-top: 10px;"/></a></li>
 					</ul>
 				</div>
@@ -148,14 +147,7 @@
 									src="/networkdisk/img/newfile.png" style="margin-bottom: 3px;" />&nbsp;新建文件夹</a>
 								<a class="g_button" id="mydownload">
 								<img src="/networkdisk/img/download.png" style="margin-bottom: 3px;" />&nbsp;我的上传</a>
-								<div class="equip" style="margin-left:15px;width:105px;display: inline-block; position: relative;">
-									<a class="g_button g_1" id="g_button"style="margin-left:0px;"><img
-										src="/networkdisk/img/iphone.png" style="margin-bottom: 3px;" />&nbsp;我的设备</a>
-									<ul class="equi">
-										<li title="推送任务列表">推送任务列表</li>
-										<li title="添加设备">添加设备</li>
-									</ul>
-								</div>
+								
 								<div class="equip_1">
 									<ul class="equi_1">
 										<li id="f1" class="sharefile">
@@ -739,10 +731,13 @@
 						if(listFile[i].size/(1024*1024) < 1 ){
 							filesize=(listFile[i].size/1024).toFixed(2);
 							sizeflag="KB";
-						}else
+						}else if(listFile[i].size/(1024*1024*1024) < 1)
 						{
 							filesize=(listFile[i].size/(1024*1024)).toFixed(2);
 							sizeflag="M";
+						}else{
+							filesize=(listFile[i].size/(1024*1024*1024)).toFixed(2);
+							sizeflag="G";
 						}
 						
 						switch(listFile[i].type){
@@ -918,7 +913,7 @@
 						+ "<embed src='' width='100%' height='100%'class='videoemsrc'type='application/x-shockwave-flash'quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer'></embed>"
 						+ "</object></div>");
 			if(    /* 文件预览 pdf,txt,doc,word,docx,ppt*/
-				filetype == "pdf"  
+				filetype == "pdf"|| filetype == "xls" 
 				|| filetype == "txt" ||filetype == "docx" 
 				|| filetype == "doc" || filetype == "ppt"
 					/*照片预览、jpg、jpeg、png、gif、bmp*/
@@ -1029,6 +1024,7 @@
 			case(".wmv"):
 			case(".3gp"):	
 			case(".mov"):
+			case(".flv"):
 				type="/networkdisk/img/video.png";
 			break;
 			case(".png"):
@@ -1864,6 +1860,26 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
 			});
 	}
     </script>
+    <!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
+    </script>
+    
     
 </body>
 </html>

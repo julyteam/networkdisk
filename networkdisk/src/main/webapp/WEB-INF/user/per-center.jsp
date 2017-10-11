@@ -40,11 +40,10 @@
 <body>
 	<div id="in-nav">
 		<div class="logo">
-			<a id="logo" href="/networkdisk/index.jsp"> <img
-				src="/networkdisk/img/LOGO.png"
-				style="position: absolute; top: 3px;" />
-			</a>
-		</div>
+				<a id="logo" href="goindex">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
 		<div class="container1">
 			<div class="row1">
 				<div class="span1" style="display: inline;">
@@ -107,10 +106,8 @@
 
 							</div>
 						</li>
-						<li style="width: 100px;"><a href="#"
-							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a></li>
+								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -443,7 +440,25 @@
 	 
 		});
 	</script>
-
+<!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
+    </script>
 
 </body>
 </html>

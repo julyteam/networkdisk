@@ -102,6 +102,18 @@ public class FileServiceImpl implements IFileService {
 		fileDao.updateFile(netFile_id, map);
 		return FileUtil.downFile(netfile.getPath());
 	}
+	
+	/**
+	 * 后台文件下载
+	 */
+	public InputStream adminFileDownLoad(String netFile_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		NetFile netfile = get(netFile_id, null);
+		map.put("file_downum", netfile.getDownum() + 1);
+		fileDao.updateFile(netFile_id, map);
+		return FileUtil.downFile(netfile.getPath());
+	}
+
 
 	/**
 	 * 把一个文件放入,或放出回收站

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.july.networkdisk.service.ISharefileService;
 import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.vo.Categorie;
@@ -319,6 +320,9 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 	}
 	/*密码提取*/
 	public String pwdextract() throws Exception{
+		if(sharepwd == null){
+			return "false";
+		}
 		map = new HashMap<String, Object>();
 		Share share = this.iSharefileService.getsharebyid(url);
 		user = this.iSharefileService.getuserbyid(share.getUid());

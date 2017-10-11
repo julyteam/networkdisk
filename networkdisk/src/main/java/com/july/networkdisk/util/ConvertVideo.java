@@ -132,7 +132,7 @@ public class ConvertVideo extends Thread {
             commend.add("-r");  
             commend.add("15");  
             commend.add("-s");  
-            commend.add("600x500");  
+            commend.add("650x500");  
             commend.add(flvOutputPath);  
       
             try {  

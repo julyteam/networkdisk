@@ -22,7 +22,6 @@
 	href="/networkdisk/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/networkdisk/js/jquery-1.11.2.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/networkdisk/user/js/bootstrap.min.js"></script>
 <script src="/networkdisk/js/index.js"></script>
 <script src="/networkdisk/js/jquery.rotate.min.js"></script>
@@ -43,16 +42,15 @@ $(document).ready(function(){
 	<div id="overlay" class="overlay"></div>
 	<div id="in-nav">
 		<div class="logo">
-			<a id="logo" href="/networkdisk/index.jsp"> <img
-				src="/networkdisk/img/LOGO.png"
-				style="position: absolute; top: 3px;" />
-			</a>
-		</div>
+				<a id="logo" href="goindex">
+					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
+				</a>
+			</div>
 		<div class="container1">
 			<div class="row1">
 				<div class="span1" style="display: inline;float:left;">
 					<ul class="pull-left">
-						<li class="active"><a id="goindex">网盘</a></li>
+						<li><a id="goindex">网盘</a></li>
 						<li><a id="goshare">分享</a></li>
 						<li><a href="#">更多</a></li>
 					</ul>
@@ -90,9 +88,9 @@ $(document).ready(function(){
 										style="display: inline-block; margin-bottom: 45px;" />
 									</a>
 									
-									 <em style="display: inline-block;"><img
-												src="/networkdisk/img/downchoose.png" class="c"
-												style="margin-bottom: 40px;" /></em>
+									 <em style="display: inline-block;">
+									 	<img src="/networkdisk/img/downchoose.png" class="c" style="margin-bottom: 40px;" />
+									 </em>
 								</div>
 
 								<div class="user">
@@ -110,7 +108,7 @@ $(document).ready(function(){
 												<span>
 												<a href="" style="color:#000;font-size: 12px;">超级会员专享特权：</a>
 												<div class="svip">开通超级会员</div>
-											</span>
+												</span>
 											</div>
 											<div class="userpan_4">
 												<p><a href="per-center"><span>个人资料</span></a></p> 
@@ -126,10 +124,8 @@ $(document).ready(function(){
 								<a href="register.jsp" class='reg'>注册</a>
 							</div>
 						</li>
-						<li style="width: 100px;"><a href="#"
-							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a></li>
+								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -548,7 +544,7 @@ $(document).ready(function(){
 		</script>
 		<div class="col-lg-3 col-md-3 page3">
 			<div class="module-aside aside" id="layoutAside">
-				<div node-type="module" class="module-share-person-info">
+				<div class="module-share-person-info">
 					<div class="share-person-inner global-clearfix haha">
 						<div class="share-person-avatar">
 							<a href="#" target="_blank" title="去Ta的分享主页" class="person-icon">
@@ -559,8 +555,8 @@ $(document).ready(function(){
 						<div class="share-person-data">
 							<div class="share-person-data-top">
 								<a href="#" target="_blank" title="去Ta的分享主页"
-									class="share-person-username">${user.name }</a> <em
-									class="fa fa-vimeo"></em>
+									class="share-person-username">${user.name }</a> 
+								<em class="fa fa-vimeo"></em>
 							</div>
 							<a href="javascript: void(0)" class="share-follow-btn follow">
 								<span class="fa fa-plus">立即订阅</span> <span class="fa fa-minus"
@@ -583,7 +579,7 @@ $(document).ready(function(){
 				
 					<div class="logininput">
 						<input type="text" name="username" class="loginusername" id="name" placeholder="用户名" onblur="this.placeholder='用户名'" onfocus="this.placeholder=''"/> 
-						<input type="password" class="userpassword" id="passWord"placeholder="密码" onBlur="this.placeholder='密码';" onFocus="this.placeholder='';"/>
+						<input type="password" class="userpassword" id="passWord" placeholder="密码" onBlur="this.placeholder='密码';" onFocus="this.placeholder='';"/>
 					</div>
 					<div class="loginbtn">
 						<div class="loginsubmit fl" id="login">
@@ -618,6 +614,7 @@ $(document).ready(function(){
 					$("#modal-10").hide();					
 					$(".login").hide();
 					$(".username").append(user.name);
+					$('#uid').val(user.id);
 					$("#username").append(user.name);
 					$(".photo").attr("src","showphoto?uid="+user.id);
 					$(".sev").show();
@@ -672,5 +669,24 @@ $(document).ready(function(){
         $('.overlay').css({'height':$(window).height(),'width':$(window).width()});
         $('.overlay').show();
     }
+    </script>
+    <!-- 网站公告 -->
+    <script type="text/javascript">
+      $(function(){
+    	  $.ajax({
+    		  url:"allNotice",
+    		  dataType: 'json',
+              async: false,
+              success:function(map){
+            	  var i = map.allNotice;
+            	  if(i==0){
+            		  $('.new-notice').hide();
+            	  }
+            	  $('.new-notice').html(i);
+            	  
+              }
+    	  }
+    			  )
+      });
     </script>
 </html>

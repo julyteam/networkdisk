@@ -73,7 +73,7 @@ body h6 {
 	width: 500px;
 	height: 50px;
 	text-align: center;
-	right:80px;
+	right:0px;
 	position:absolute;
 }
 #in-nav .span1 ul li.active {
@@ -761,6 +761,33 @@ img.userpic {
 	background: rgba(220, 200, 200, 0.4);
 	color: #222222;
 }
+.timelin_content .vimg{
+	width:130px;
+	height:130px;
+	display:inline-block;
+	padding:3px;
+	position:relative;
+	margin:10px 20px 10px 0;
+	border:1px solid #fff;	
+	cursor: pointer;
+}
+.timelin_content img{
+	width:120px;
+	height:120px;
+	margin:10px 20px 10px -2px;
+	transition: all 0.6s; 
+}
+.timelin_content img:hover{
+	transform: scale(1.06);
+}
+.timeline_day1{
+	color:#4e94ff;
+	font-size: 14px;
+}
+.timeline_day3 {
+	color:#333;
+	font-size: 13px;
+}
 .donetimeline{
 	width: 95%;
 	height: 45px;
@@ -802,9 +829,9 @@ img.userpic {
 }
 .timelin_content,.timelin_content_1{
 	width: 95%;
-	height: 200px;
+	height: auto;
+	padding:0px;
 	line-height: 200px;
-	padding-left: 10px;
 	margin: 0px auto;
 }
 .timelin_content i,.timelin_content_1 i{
@@ -812,15 +839,6 @@ img.userpic {
 	font-size: 18px;
 	color: #761C19;
 	z-index: 2;
-}
-.timelin_content span,.timelin_content_1 span{
-	display: none;
-	position: absolute;
-	width: 166px;
-	height:166px;
-	margin-top: 10px;
-	border: 1px solid #5E5E5E;	
-	padding: 0;
 }
 .timeline_day1{
 	cursor: pointer;
@@ -1733,7 +1751,7 @@ img.userpic {
     color: #424e67;
     text-decoration: none;
 }
-.open-enable .video-check {
+.open-enable .video-check{
     position: absolute;
     top: 0px;
     left: 5px;
@@ -1744,10 +1762,46 @@ img.userpic {
     z-index:2;
     cursor: pointer;
 }
-.open-enable .video-check i {
+.open-enable .video-check i{
     font-size: 16px;
     color: rgb(59, 140, 255);
     position: relative;
-    left: 3px;
-    margin-left:1px;
+    left: 0px;
+    margin-left:6px;
+}
+.imgs-grid-image .video-check{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 21px;
+    text-align:right;
+    width: 70px;
+    display: none;
+    z-index:666;
+    border:none;
+    cursor: pointer;
+}
+.imgs-grid-image .video-check i{
+    font-size: 16px;
+    color: rgb(69, 94, 91);
+    position: relative;
+    right: 3px;
+    margin-left:7px;
+}
+.imgs-grid-image .video-check i:hover{
+	color: rgb(148, 143, 111);
+}
+.right .new-notice{
+	position: absolute;
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    background: #f13129;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    top: 0;
+    left:-20px;
+    margin-left: 325px;
+    margin-top: 5px;
 }
