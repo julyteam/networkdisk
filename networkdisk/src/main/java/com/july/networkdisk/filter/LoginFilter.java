@@ -37,6 +37,7 @@ public class LoginFilter implements Filter{
 				||"/sharelogin".equals(targetURL)||"/".equals(targetURL)||"/shownext".equals(targetURL)
 				||"/goforget".equals(targetURL)||"/getUserByEm".equals(targetURL)||"/updatepwd".equals(targetURL)
 				||"/pwdextract".equals(targetURL) ||"/manager/login.jsp".equals(targetURL)||"/manager/adminlogin".equals(targetURL)
+				||"/error.jsp".equals(targetURL)||"/exception.jsp".equals(targetURL)
 		){
 			System.out.println("不需要拦截");
 		}else{
