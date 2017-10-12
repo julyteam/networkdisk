@@ -54,6 +54,12 @@ public class FileServiceImpl implements IFileService {
 	public List<NetFile> findAllByType(String file_uid, List<String> list) {
 		return fileDao.findAllByType(file_uid, list);
 	}
+	/**
+	 * 根据用户和文件种类来查找文件
+	 */
+	public List<NetFile> findOtherType(String file_uid, List<String> list) {
+		return fileDao.findOtherType(file_uid, list);
+	}
 	
 	/**
 	 * 根据条件对日期分组
@@ -178,7 +184,7 @@ public class FileServiceImpl implements IFileService {
 	 * 判断目标文件夹下有无名字相同的文件
 	 */
 	public boolean judgeFileName(String file_uid, String[] fileids,
-			String aimcatid) {
+			String aimcatid,int flag) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("file_catid", aimcatid);
 		map.put("file_deletesign", 0);
@@ -186,7 +192,7 @@ public class FileServiceImpl implements IFileService {
 		if (listids != null && listids.size() != 0) {
 			for (NetFile netfile1 : listids) {
 				for (String fileid : fileids) {
-					NetFile netfile2 = get(fileid, 0);
+					NetFile netfile2 = get(fileid, flag);
 					if (netfile1.getName().equals(netfile2.getName())) {
 						return false;
 					}

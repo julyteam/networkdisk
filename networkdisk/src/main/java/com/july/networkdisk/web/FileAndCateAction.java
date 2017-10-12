@@ -202,12 +202,20 @@ public class FileAndCateAction extends ActionSupport {
 	 * @return
 	 */
 	public String restoreFile() {
-		boolean flag = iFileService.layRecyle(file_id, 0);
-		if (flag == true) {
-			message = "还原文件成功！";
-		} else {
-			message = "还原文件失败！";
-		}
+		NetFile netFile = iFileService.get(file_id, 1);
+		 String[] file_ids = new String[]{file_id};
+		 boolean flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), file_ids, netFile.getCatid(),1);
+		 if(!flag){
+			 Categorie re_categorie =iCateService.get(netFile.getCatid());
+			 if(re_categorie == null){
+				 message="主文件夹中已经有相同名字的文件,请修改名字后在还原！";
+			 }else {
+				 message=re_categorie.getName()+"中已经有相同名字的文件,请修改名字后在还原！";
+			}
+			return "json";
+		 }
+		iFileService.layRecyle(file_id, 0);
+		message = "还原文件成功！";
 		return "json";
 	}
 
@@ -220,11 +228,37 @@ public class FileAndCateAction extends ActionSupport {
 		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
 			String[] fileids = filelist.split(",");
 			List<String> files = Arrays.asList(fileids);
+			for (String fid : files) {
+			     NetFile netFile = iFileService.get(fid, 1);
+				 String[] file_ids = new String[]{fid};
+				 boolean flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), file_ids, netFile.getCatid(),1);
+				 if(!flag){
+					 Categorie re_categorie =iCateService.get(netFile.getCatid());
+					 if(re_categorie == null){
+						 message="主文件夹中已经有相同名字的文件,请修改名字后在还原！";
+					 }else {
+						 message=re_categorie.getName()+"中已经有相同名字的文件,请修改名字后在还原！";
+					}
+					return "json";
+				 }
+			}
 			iFileService.layBatchRecyle(files, 0);
 		}
 		if (catelist != null && !"".equals(catelist)&&!"undefined".equals(catelist)) {
-			String[] cateids = catelist.split(",");
-			for (String cateid : cateids) {
+			String[] cate_ids = catelist.split(",");
+			for (String cateid : cate_ids) {
+				 Categorie categorie =iCateService.getRecylceCategorie(cateid);
+				 String[] cateids = new String[]{cateid};
+				 boolean flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie.getReid(),1); 
+				 if(!flag){
+					 Categorie re_categorie =iCateService.get(categorie.getReid());
+					 if(re_categorie == null){
+						 message="主文件夹中已经有相同名字的文件夹,请修改名字后在还原！";
+					 }else {
+						 message=re_categorie.getName()+"中已经有相同名字的文件夹,请修改名字后在还原！";
+					}
+					return "json";
+				 }
 				iCateService.recyleCate(cateid, 1);
 			}
 		}
@@ -322,7 +356,7 @@ public class FileAndCateAction extends ActionSupport {
 				message = "不能复制到其子文件夹下!";
 				return "json";
 			}
-			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id,0);
 			if (flag == false) {
 				message = "目标文件夹中已经含有相同名字的文件夹!";
 				return "json";
@@ -331,7 +365,7 @@ public class FileAndCateAction extends ActionSupport {
 		}
 		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
 			String[] fileids = filelist.split(",");
-			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id);
+			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id,0);
 			if (flag == false) {
 				message = "目标文件夹下已经含有相同名字的文件!";
 				return "json";
@@ -356,7 +390,7 @@ public class FileAndCateAction extends ActionSupport {
 				message = "不能复制到其子文件夹下!";
 				return "json";
 			}
-			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id);
+			flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie_id,0);
 			if (flag == false) {
 				message = "目标文件夹中已经含有相同名字的文件夹!";
 				return "json";
@@ -368,7 +402,7 @@ public class FileAndCateAction extends ActionSupport {
 		}
 		if (filelist != null && !"".equals(filelist)&&!"undefined".equals(filelist)) {
 			String[] fileids = filelist.split(",");
-			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id);
+			flag = iFileService.judgeFileName(CommonUtil.getSessionUser().getId(), fileids, categorie_id,0);
 			if (flag == false) {
 				message = "目标文件夹下已经含有相同名字的文件!";
 				return "json";

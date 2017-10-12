@@ -44,7 +44,21 @@ public class FileDao extends BaseDao {
 		sqlSession.close();
 		return Filelist;
 	}
-	
+
+	/**
+	 * 根据用户id，查询其他文件的信息
+	 * 
+	 * @return
+	 */
+	public List<NetFile> findOtherType(String uid,List<String> list) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("file_uid", uid);
+		map.put("list", list);
+		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		List<NetFile> Filelist = sqlSession.selectList("fileSpace.findOtherType",map);
+		sqlSession.close();
+		return Filelist;
+	}
 	/**
 	 * 查找时间
 	 * @return

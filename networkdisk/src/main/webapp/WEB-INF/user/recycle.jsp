@@ -444,7 +444,7 @@
 						url : "${pageContext.request.contextPath}/restoreFile?file_id="+fileid,
 						dataType : 'json',
 						success : function(data) {
-							/* alert(data); */
+							 alert(data); 
 							 july_recycle();
 						},
 						error : function() {
@@ -459,6 +459,7 @@
 						url : "${pageContext.request.contextPath}/restoreCate?categorieID="+cateid,
 						dataType : 'json',
 						success : function(data) {
+							alert(data);
 							 july_recycle();
 						},
 						error : function() {
@@ -473,6 +474,7 @@
 						url : "${pageContext.request.contextPath}/restoreCateandfile?filelist="+fileids+"&catelist="+cateids,
 						dataType : 'json',
 						success : function(data) {
+							alert(data);
 							 july_recycle();
 							 var num=$('.reclist input:checked').length;
 							 if(num>0&&num<$('.reclist :text').length){

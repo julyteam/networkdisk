@@ -46,8 +46,7 @@ public class LoginFilter implements Filter{
 			if(session == null || session.getAttribute("user") == null)
 			{
 				System.out.println("已经拦截");
-				request.setAttribute("message", "false");
-				request.getRequestDispatcher("login.jsp").forward(request, response); 
+				response.sendRedirect(request.getContextPath()+"/login.jsp");
 				return;
 			}
 		}

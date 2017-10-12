@@ -74,6 +74,16 @@
 			ORDER BY file_addtime DESC
 	</select>
 	
+	
+	<!-- 查找其他类别的文件 -->
+	<select id="findOtherType" parameterType="map" resultMap="fileMap">
+		select * from file where file_deletesign = 0 and file_uid=#{file_uid} and file_type not in
+		<foreach collection="list" index="index" item="file_type" open="(" separator="," close=")" >    
+            #{file_type}    
+        </foreach>
+			ORDER BY file_addtime DESC
+	</select>
+	
 	<!-- 按时间分组 查找-->
 	<select id="findTime" parameterType="map" resultType="String">
 	   select date(file_addtime) a from file where file_deletesign = 0 and file_uid=#{file_uid} and file_type in

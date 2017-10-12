@@ -285,6 +285,11 @@
 				<param name="root">map</param>
 			</result>
 		</action>
+		<action name="showOtherFile" class="fileAction" method="showOtherFile">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
 	</package>
 
 

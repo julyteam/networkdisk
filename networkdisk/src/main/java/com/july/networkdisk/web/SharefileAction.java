@@ -324,7 +324,7 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			return "false";
 		}
 		map = new HashMap<String, Object>();
-		Share share = this.iSharefileService.getsharebyid(url);
+		share = this.iSharefileService.getsharebyid(url);
 		user = this.iSharefileService.getuserbyid(share.getUid());
 		this.sharefile.setMagid(url);
 		catelist = new ArrayList<Categorie>();

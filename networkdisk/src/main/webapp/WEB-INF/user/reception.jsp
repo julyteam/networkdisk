@@ -125,7 +125,7 @@ $(document).ready(function(){
 							</div>
 						</li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
+								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -669,24 +669,5 @@ $(document).ready(function(){
         $('.overlay').css({'height':$(window).height(),'width':$(window).width()});
         $('.overlay').show();
     }
-    </script>
-    <!-- 网站公告 -->
-    <script type="text/javascript">
-      $(function(){
-    	  $.ajax({
-    		  url:"allNotice",
-    		  dataType: 'json',
-              async: false,
-              success:function(map){
-            	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
-              }
-    	  }
-    			  )
-      });
     </script>
 </html>

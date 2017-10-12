@@ -86,9 +86,21 @@ public class CategorieAction extends ActionSupport {
 	 */
 	public String restoreCate(){
 		if(categorieID != null){
+			 Categorie categorie =iCateService.getRecylceCategorie(categorieID);
+			 String[] cateids = new String[]{categorieID};
+			 boolean flag = iCateService.judgeCateName(CommonUtil.getSessionUser().getId(), cateids, categorie.getReid(),1); 
+			 if(!flag){
+				 Categorie re_categorie =iCateService.get(categorie.getReid());
+				 if(re_categorie == null){
+					 message="主文件夹中已经有相同名字的文件夹,请修改名字后在还原！";
+				 }else {
+					 message=re_categorie.getName()+"中已经有相同名字的文件夹,请修改名字后在还原！";
+				}
+				return "json";
+			 }
 			iCateService.recyleCate(categorieID, 1);
 		}
-		message="文件夹成功放入回收站";
+		message="文件夹成功还原！";
 		return "json";
 	}
 	
