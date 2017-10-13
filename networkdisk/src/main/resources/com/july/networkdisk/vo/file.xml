@@ -27,7 +27,7 @@
 	
 	<!-- 根据id查找文件 -->
 	<select id="getone" parameterType="String" resultMap="fileMap">
-		select * from file where file_id=#{fid}
+		select * from file where file_id=#{fid} and file_deletesign = 0
 	</select>
 	<!-- 根据uid查找文件 -->
 	<select id="getlistbyuid" parameterType="com.july.networkdisk.vo.NetFile" resultMap="fileMap">

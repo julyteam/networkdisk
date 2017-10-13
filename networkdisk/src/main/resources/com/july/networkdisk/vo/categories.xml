@@ -131,7 +131,7 @@
 	
 	<!-- 根据id查找文件夹-->
 	<select id="findbyid" parameterType="String" resultMap="categorieMap">
-		select * from categorie where cat_id=#{fileandcateid}
+		select * from categorie where cat_id=#{fileandcateid} and cat_state = 0
 	</select>
 	<!-- 根据id查找文件夹的下层文件夹-->
 	<select id="getcatenext" parameterType="String" resultMap="categorieMap">

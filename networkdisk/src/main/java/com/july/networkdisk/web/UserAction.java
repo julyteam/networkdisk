@@ -441,16 +441,20 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     		for(int j=0;j<sflist.size();j++){
     			if(sflist.get(j).getIscate() == 1){
     				Categorie cate = this.iUserService.getcate(sflist.get(j).getFileandcateid());
-    				cate.setAddtime(sharelist.get(i).getStartTime());
-    				cate.setState(sharelist.get(i).getRetain());
-    				cate.setReid(sharelist.get(i).getMagid());
-    				catelist.add(cate);
+    				if(cate != null){
+    					cate.setAddtime(sharelist.get(i).getStartTime());
+    					cate.setState(sharelist.get(i).getRetain());
+    					cate.setReid(sharelist.get(i).getMagid());
+    					catelist.add(cate);
+    				}
     			}else{
     				NetFile file = this.iUserService.getfile(sflist.get(j).getFileandcateid());
-    				file.setAddtime(sharelist.get(i).getStartTime());
-    				file.setDeletesign(sharelist.get(i).getRetain());
-    				file.setCatid(sharelist.get(i).getMagid());
-    				filelist.add(file);
+    				if(file != null){
+    					file.setAddtime(sharelist.get(i).getStartTime());
+    					file.setDeletesign(sharelist.get(i).getRetain());
+    					file.setCatid(sharelist.get(i).getMagid());
+    					filelist.add(file);
+    				}
     			}
     		}
     	}

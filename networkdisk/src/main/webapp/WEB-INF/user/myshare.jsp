@@ -195,6 +195,7 @@
 								success : function(map) {
 									var listCate = map.catelist;
 									var listFiles = map.filelist;
+									
 									if(listCate=="" && listFiles==""){
 										$('.no-result-div').show();
 									}else{

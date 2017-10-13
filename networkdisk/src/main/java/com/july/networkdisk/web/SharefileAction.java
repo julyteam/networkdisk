@@ -285,13 +285,16 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 					for(int i=0;i<sflist.size();i++){
 						if(sflist.get(i).getIscate() == 1){
 							Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-							catelist.add(cate);
+							if(cate != null){
+								catelist.add(cate);
+							}
 						}else{
 							NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-							filelist.add(file);
+							if(file != null){
+								filelist.add(file);
+							}
 						}
 					}
-					
 				}
 			}else if(share.getStartTime().getTime()+share.getRetain()*24*3600*1000<t){
 				return ERROR;
@@ -302,16 +305,22 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 					for(int i=0;i<sflist.size();i++){
 						if(sflist.get(i).getIscate() == 1){
 							Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-							catelist.add(cate);
+							if(cate != null){
+								catelist.add(cate);
+							}
 						}else{
 							NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-							filelist.add(file);
+							if(file != null){
+								filelist.add(file);
+							}
 						}
 					}
 					
 				}
 			}
-			
+			if(filelist.size() == 0 && catelist.size() == 0){
+				return ERROR;
+			}
 			return SUCCESS;
 		} catch (Exception e) {
 			return ERROR;
@@ -336,12 +345,19 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			for(int i=0;i<sflist.size();i++){
 				if(sflist.get(i).getIscate() == 1){
 					Categorie cate = this.iSharefileService.getcate(sflist.get(i).getFileandcateid());
-					catelist.add(cate);
+					if(cate != null){
+						catelist.add(cate);
+					}
 				}else{
 					NetFile file = this.iSharefileService.getfile(sflist.get(i).getFileandcateid());
-					filelist.add(file);
+					if(file != null){
+						filelist.add(file);
+					}
 				}
 			}
+		}
+		if(filelist.size() == 0 && catelist.size() == 0){
+			return ERROR;
 		}
 		return SUCCESS;
 	}
