@@ -46,7 +46,7 @@ a, button, input {
 					<ul class="pull-left">
 						<li class="active"><a href="goindex">网盘</a></li>
 						<li><a href="findAll">分享</a></li>
-						<li><a href="#">更多</a></li>
+						<li><a href="more">更多</a></li>
 					</ul>
 				</div>
 				<div class="span2">

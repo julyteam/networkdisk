@@ -179,9 +179,7 @@ create table sharefile
 	sf_iscate int(1) null,
 	primary key(sf_id)
 	
-)
-
-
+);
 #聊天表
 create table message
 (

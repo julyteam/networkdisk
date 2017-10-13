@@ -52,7 +52,7 @@ $(document).ready(function(){
 					<ul class="pull-left">
 						<li><a id="goindex">网盘</a></li>
 						<li><a id="goshare">分享</a></li>
-						<li><a href="#">更多</a></li>
+						<li><a href="more">更多</a></li>
 					</ul>
 				</div>
 				<script type="text/javascript">

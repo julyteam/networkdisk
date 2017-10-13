@@ -42,7 +42,7 @@
 								<a href="findAll">分享</a>
 							</li>
 							<li>
-								<a href="#">更多</a>
+								<a href="more">更多</a>
 							</li>
 						</ul>
 					</div>

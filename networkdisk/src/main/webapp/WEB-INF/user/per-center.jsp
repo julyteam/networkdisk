@@ -222,7 +222,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-lock"></span>  修改密码</h4>
             </div>
-            <form action="updatePassAction"  id="updatePassForm" method="post">
+            <form action="updatepassAction"  id="updatePassForm" method="post">
 					<ol  class="right-03">
 						<li class="pwd-li1">密码:</span><input type="password" id="u_pwd1" value="" name="passWord"><span class="msg1"></span></li>
 						<li>确认密码:</span><input type= "password"  id="u_pwd2" value="" name="repassword"><span class="msg2"></span></li>
