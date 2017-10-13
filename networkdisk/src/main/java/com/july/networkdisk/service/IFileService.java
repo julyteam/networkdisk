@@ -26,6 +26,11 @@ public interface IFileService extends IBaseService<NetFile> {
 	List<NetFile> findAllByType(String file_uid,List<String> list);
 	
 	/**
+	 * 根据用户和查找其它类型文件
+	 */
+	List<NetFile> findOtherType(String file_uid,List<String> list);
+	
+	/**
 	 * 根据条件对日期分组
 	 * @param file_uid
 	 * @param list
@@ -116,5 +121,5 @@ public interface IFileService extends IBaseService<NetFile> {
 	 * 判断目标文件夹下有无名字相同的文件
 	 */
 	 boolean judgeFileName(String file_uid, String[] fileids,
-			String aimcatid);
+			String aimcatid,int flag);
 }

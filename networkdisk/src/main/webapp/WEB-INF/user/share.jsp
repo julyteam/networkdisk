@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>分享界面</title>
 <link rel="Shortcut Icon" href="/networkdisk/img/julyicon.png">
@@ -17,12 +19,16 @@
 <script src="/networkdisk/js/jquery.rotate.min.js"></script>
 </head>
 <body>
+
+
+	<div id="backmessage"></div>
 	<div id="in-nav">
 		<div class="logo">
-				<a id="logo" href="goindex">
-					<img src="/networkdisk/img/LOGO.png" style="position: absolute;top:3px;"/>
-				</a>
-			</div>
+			<a id="logo" href="/networkdisk/index.jsp"> <img
+				src="/networkdisk/img/LOGO.png"
+				style="position: absolute; top: 3px;" />
+			</a>
+		</div>
 		<div class="container1">
 			<div class="row1">
 				<div class="span1" style="display: inline;">
@@ -54,9 +60,7 @@
 											<div class="u1">
 												<a href="#"> 
 												<img src="showphoto?uid=${sessionScope.user.id }" width="30px" class="userpic" />
-												</a> <a href="">${sessionScope.user.name }</a> <img
-													src="/networkdisk/img/SVIP.png"
-													style="display: inline; margin-bottom: 5px;" />
+												</a> <a href="">${sessionScope.user.name }</a> <img src="/networkdisk/img/VIP1.png" style="display: inline; margin-bottom: 5px;" />
 											</div>
 										</div>
 										<div class="userpan_3">
@@ -83,8 +87,10 @@
 							</div>
 
 						</li>
+						<li style="width: 100px;"><a href="#"
+							style="font-size: 13px;">&nbsp;客户端下载</a></li>
 						<li><a href="#"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
+								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -103,7 +109,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#user_content" data-toggle="tab">
+							<a href="#user_content" data-toggle="tab"> 
 							<font size="3"><span class="glyphicon glyphicon-comment"></span> 好友</font>
 							</a>
 						</li>
@@ -115,8 +121,16 @@
 						<table class="session_table">
 							<c:forEach items="${map.listfriends }" var="friend">
 								<tr>
-									<td><img src="${pageContext.request.contextPath}/showphoto?uid=${friend.id}" width="45px" /></td>
-									<td class="uname">${friend.name}</td>
+									<td><img
+										src="${pageContext.request.contextPath}/showphoto?uid=${friend.id}"
+										width="45px" /></td>
+									<td class="uname">
+										<p class="user-name service-name-newfriend">${friend.name }</p>
+										<p class="last-time show-time"></p>
+										<p class="new-session show-session"></p>
+										<p class="new-num-session show-num"></p> <input type="hidden"
+										value="${friend.id }" class="fid">
+									</td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -124,21 +138,23 @@
 					<div class="tab-pane fade" id="user_content">
 						<a href="friend_info.jsp" target="share_iframe"></a>
 						<table class="user_table" align="left">
+							<tr>
+								<td><img src='/networkdisk/img/service-icon.png'></td>
+								<td>
+									<p class="user-name service-name-newfriend">新好友</p>
+									<p class="last-time show-time"></p>
+									<p class="new-session show-session">暂时没有新好友喔！</p>
+									<p class="new-num-session show-num"></p>
+								</td>
+							</tr>
+							<c:forEach items="${map.listfriends }" var="friend">
 								<tr>
-									<td><img src='/networkdisk/img/service-icon.png'></td>
-									<td>
-										<p class="user-name service-name-newfriend">新好友</p>
-										<p class="last-time show-time"></p>
-										<p class="new-session show-session">暂时没有新好友喔！</p>
-										<p class="new-num-session show-num"></p>
-									</td>
+									<td><img
+										src="${pageContext.request.contextPath}/showphoto?uid=${friend.id}"
+										width="45px" /></td>
+									<td class="uname">${friend.name}</td>
 								</tr>
-								<c:forEach items="${map.listfriends }" var="friend">
-									<tr>
-										<td><img src="${pageContext.request.contextPath}/showphoto?uid=${friend.id}" width="45px" /></td>
-										<td class="uname">${friend.name}</td>
-									</tr>
-								</c:forEach>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
@@ -157,7 +173,8 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
 								<h5 class="modal-title" id="myModalLabel">添加好友</h5>
 							</div>
 							<div class="modal-body">
@@ -166,9 +183,11 @@
 										<span>根据July账号添加好友</span>
 									</p>
 									<form>
-										<input type="text" placeholder="  用户名/邮箱"onfocus="this.placeholder=''"onblur="this.placeholder='  用户名/邮箱'" name="name" class="b1"
-											style="width: 410px; border-radius: 0px; height: 30px" /> 
-										<a class="bn">搜索</a>
+										<input type="text" placeholder="  用户名/邮箱"
+											onfocus="this.placeholder=''"
+											onblur="this.placeholder='  用户名/邮箱'" name="name" class="b1"
+											style="width: 410px; border-radius: 0px; height: 30px" /> <a
+											class="bn">搜索</a>
 									</form>
 								</div>
 								<div class="search_result" style="display: none;">
@@ -177,141 +196,84 @@
 								</div>
 							</div>
 							<div class="modal-footer" style="display: none">
-								<input type="hidden" value="${sessionScope.user.id }" name="friend.uid" id="user-id" > 
-								<input type="hidden" value="" name="friend.fid" id="friend-id"> 
-								<a class="bn1">加为好友</a>
+								<input type="hidden" value="${sessionScope.user.id }"
+									name="friend.uid" id="user-id"> <input type="hidden"
+									value="" name="friend.fid" id="friend-id"> <a
+									class="bn1">加为好友</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="share_content_right">
-				<div class="all-main-content" style="height: 590px;display: none">
+				<div class="all-main-content" style="height: 590px;">
 					<div class="user-info-content" style="display: none;">
-						<div class="user-info-mainbox" style="width: 100%; margin: 0px; position: static;">
+						<div class="user-info-mainbox"
+							style="width: 100%; margin: 0px; position: static;">
 							<div class="user-list-main friend-recom-list">
 								<div class="list-main-title">新好友通知</div>
-								<div class="list-main-content" style="height: 400px;">	
+								<div class="list-main-content" style="height: 400px;">
 									<c:forEach items="${map.listfriends }" var="friend">
-									<dl class='user-module'>
-										<dt>
-							 				<img src='showphoto?uid=${friend.id}' width='45' height='45'> 
-							 			</dt>
-							 			<dd>
-							 				<p class='user-name'>${friend.name}</p>										
-							 				<p class='user-name user-name-desc'>已添加您为好友</p>
-							 			</dd>
-							 			<dd>
-							 				<a class='shareFile'>分享文件</a>
-							 				<a href="javascript:;" class="addFriend added">已添加</a>
-							 			</dd>
-							 		</dl>
-									</c:forEach>							
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="module-content-all" style="display: none;">
-						<div class="header header-show">
-							<div class="user-name-box">
-								<span class="name" title="聪明***西西">聪明***西西</span>
-							</div>
-						</div>
-						<div class="all-main-content">
-							<div class="main-content">
-								<div class="module-conversation">
-									<div class="all-content">
-										<ul class="personals">
-											<li class="time">
-												<div class="time-content">
-													<span class="date-time">13:49</span>
-												</div>
-											</li>									
-											<li class="list other">
-												<div class="head-arrow">
-													<span class="head">
-														<img src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/aef88a61.jpg">
-													</span>
-													<span class="arrow"> 
-														<em class="left"></em> 														
-													</span>
-												</div>										
-												<div class="content">
-													<div class="text">32131212312312312312321</div>													
-												</div>												
-											</li>
-											<li class="time">
-												<div class="time-content">
-													<span class="date-time">13:50</span>
-												</div>
-											</li>
-											<li class="list me">
-												<div class="head-arrow">
-													<span class="head"><img
-														src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/13829b65.jpg"></span>
-													<span class="arrow"> 													 
-														<em class="right"></em>
-													</span>
-												</div>												
-												<div class="content">
-													<div class="text">你好啊</div>													
-												</div>												
-											</li>
-										</ul>
-									</div>
-									<div class="send-message">
-										<div class="select-file">分享文件</div>
-										<div class="message">
-											<textarea placeholder="输入文字消息" id="messageInput"></textarea>
-											<a href="javascript:void(0)" class="icon-smile"></a> 
-											<span class="send-button">发送</span>
-										</div>
-										<div class="message-text"></div>
-										<div class="message-text-size"></div>
-									</div>
+										<dl class='user-module'>
+											<dt>
+												<img src='showphoto?uid=${friend.id}' width='45' height='45'>
+											</dt>
+											<dd>
+												<p class='user-name'>${friend.name}</p>
+												<p class='user-name user-name-desc'>已添加您为好友</p>
+											</dd>
+											<dd>
+												<a class='shareFile'>分享文件</a> <a href="javascript:;"
+													class="addFriend added">已添加</a>
+											</dd>
+										</dl>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="user-info-content-2" style="display: none;">
-								<div class="user-info-mainbox" style="width: 500px;">
-									<div class="user-info-main">
-										<div class="user-info-summary">
-											<div class="userPhoto">
-												<img id="headphoto" src="" title="" width="100px">
-											</div>
-											<div class="userName"></div>
-										</div>
-										<div class="user-info-detail clearfix">
-											<div class="title">
-												<p>备&nbsp;&nbsp;&nbsp;&nbsp;注：</p>
-												<p>昵&nbsp;&nbsp;&nbsp;&nbsp;称：</p>
-												<p>百度帐号：</p>
-											</div>
-											<div class="text">
-												<p class="noText">
-													<a href="javascript:;" title="点击添加备注">点击添加备注</a>
-												</p>
-												<p class="noText">--</p>
-												<p class="userName"></p>
-												<input type='hidden' value='${sessionScope.user.id }'class='UID'> 
-												<input type='hidden' value='' class='FID'>
-											</div>
-										</div>
-										<div class="user-info-button">
-											<a href="javascript:;" class="select-file" title="分享文件">分享文件</a>
-											<a href="javascript:;" title="删除好友" class='delefri'>删除好友</a>
-											<a href="javascript:;" title="加入黑名单">加入黑名单</a>
-										</div>
-									</div>
+					<div class="user-info-mainbox" style="width: 500px;">
+						<div class="user-info-main">
+							<div class="user-info-summary">
+								<div class="userPhoto">
+									<img id="headphoto" src="" title="" width="100px">
+								</div>
+								<div class="userName"></div>
+							</div>
+							<div class="user-info-detail clearfix">
+								<div class="title">
+									<p>备&nbsp;&nbsp;&nbsp;&nbsp;注：</p>
+									<p>昵&nbsp;&nbsp;&nbsp;&nbsp;称：</p>
+									<p>百度帐号：</p>
+								</div>
+								<div class="text">
+									<p class="noText">
+										<a href="javascript:;" title="点击添加备注">点击添加备注</a>
+									</p>
+									<p class="noText">--</p>
+									<p class="userName"></p>
+									<input type='hidden' value='${sessionScope.user.id }'
+										class='UID'> <input type='hidden' value='' class='FID'>
 								</div>
 							</div>
+							<div class="user-info-button">
+								<a href="javascript:;" class="select-file" title="分享文件">分享文件</a>
+								<a href="javascript:;" title="删除好友" class='delefri'>删除好友</a> <a
+									href="javascript:;" title="加入黑名单">加入黑名单</a>
+							</div>
 						</div>
-						<iframe class="iframe" name="share_iframe" src="goshare_default" scrolling="auto"
-					height="590px" width="710" border="0" frameborder="no"></iframe>				
+					</div>
+				</div>				
+				</div>
+				<iframe class="iframe" name="share_iframe" src="goshare_default"
+					scrolling="auto" height="590px" width="710" border="0"
+					frameborder="no"></iframe>
 			</div>
 		</div>
 	</div>
+
+
 </body>
 <script>
 	/* 搜索好友 */
@@ -396,14 +358,6 @@
 	
 	/* 分享文件 */
 	$('.select-file').click(function(){
-		$('.iframe').hide();
-		$('.all-main-content').show();
-		$('.user-info-content-2').hide();
-		$('.module-content-all').show();
-	})
-	$('.session_table tr').click(function(){
-		$(this).siblings('.active').removeClass();
-		$(this).addClass("active");
 		$('.iframe').hide();
 		$('.all-main-content').show();
 		$('.user-info-content-2').hide();
@@ -544,6 +498,224 @@
         });  
 	})
 </script>
+
+
+
+<script type="text/javascript">
+	var ws = new WebSocket("ws://127.0.0.1:8085"); 
+	var uid = null;
+	var friid = null;
+	var content = null;
+	var fid = new Array();
+	var fidlist = new Array();
+	var n = 0;
+	$(document).ready(function(){
+		$("input[class='fid']").each(function(key,value){
+    		fid[key] = $(this).val();
+		});
+    	fidlist = fid.toString().split(",");
+			 $.ajax({  
+		            url:"getmessage?filecateid="+fid,
+		            dataType: 'json',
+		            async: false,
+		            success:function(map){
+		            	var meslist = map.meslist;
+		            	for(var i=0;i<meslist.length;i++){
+		            		$("input[class='fid']").each(function(){
+			            		if($(this).val() == meslist[i].friendid){
+			            			$(this).prev('.new-num-session').show();
+			            			$(this).prev('.new-num-session').html(meslist[i].id);
+			            		}
+			            	});
+		            	}
+		            },  
+		            error:function(){  
+		                alert("error");  
+		            }  
+		        });  
+		
+		
+		ws.onopen = function(){
+			uid = $('#user-id').val();
+			var str = "{\"userid\":\""+uid+"\",\"type\":\"1\"}";
+			ws.send(str);
+		}/* 当websocket创建成功时，即会触发onopen事件  */
+		
+		
+		
+		ws.onmessage = function(evt)//当客户端收到服务端发来的消息时，会触发onmessage事件，参数evt.data中包含server传输过来的数据
+		{ 
+			
+			if(evt.data == "0"){
+				$.ajax({  
+		            url:"addmessage?uid="+friid+"&str="+content,
+		            dataType: 'json',
+		            async: false,
+		            success:function(){  
+		            	
+		            },  
+		            error:function(){  
+		                alert("error");  
+		            }  
+		    	});
+			
+			}else{
+				n++;
+				var str = evt.data.toString();
+				var s = new Array();
+				s[0] = str.substr(str.length-36);
+				s[1] = str.substr(0,str.length-38);
+				
+				
+				var $leftstr = $("<li class='list other'>"
+						+ "<div class='head-arrow'>"
+						+ "<span class='head'>"
+						+ "<img src='showphoto?uid="
+						+ s[0]
+						+"'></span>"
+						+ "<span class='arrow'>"
+						+ "<em class='left'></em></span></div>"
+						+ "<div class='content'>"
+						+ "<div class='text'>"
+						+ s[1]
+						+"</div>"
+						+ "</div></li>"
+				)
+				$("input[class='fid']").each(function(){
+	            		if($(this).val() == s[0]){
+	            			$(this).prev('.new-num-session').show();
+	            			$(this).prev('.new-num-session').html(n);
+	            		}
+	            });
+				
+				$('.module-content-all').each(function(){
+					if($(this).find('.content-line').val() == s[0]){
+						$(this).find(".personals").append($leftstr);
+					}else{
+						$(this).hide();
+					}
+			});						
+			}
+		}
+		var trnum=$(".session_table tr").length;
+		var ffid=[];
+		$(document).ready(function(){			
+			for(var i=0;i<trnum;i++){
+				ffid[i]=$(".session_table tr:eq("+i+")").find(".fid").val();
+				var $boxstr=$("<div class='module-content-all' style='display: none;'>"
+						+"<div class='header header-show'>"
+						+"<div class='user-name-box'>"	
+						+"<span class='name' title=''></span></div>"
+						+"</div><div class='all-main-content'>"
+						+"<div class='main-content'><div class='module-conversation'><div class='all-content'><ul class='personals p-"				
+						+i
+						+"'>"
+						+"<input type='hidden' class='content-line' value='"
+						+ffid[i]
+						+"'>"
+						+"</ul></div>"
+						+"<div class='send-message'>"
+						+"<div class='select-file'>分享文件</div>"
+						+"<div class='message'>"
+						+"<textarea placeholder='输入文字消息' class='messageInput'></textarea>"
+						+"<a href='javascript:void(0)' class='icon-smile'></a>"	
+						+"<span class='send-button'>发送</span></div>"	 
+						+"<div class='message-text'></div>"	
+						+"<div class='message-text-size'></div></div>");
+				$('.all-main-content').append($boxstr);
+			}	
+		})	
+		var index;
+		$('.session_table tr').click(function(){
+			
+			n=0;
+			index=$('.session_table tr').index(this);
+			friid = $(this).children('.uname').children('input').val();
+			$(this).siblings('.active').removeClass();
+			$(this).addClass("active");
+			$('.iframe').hide();
+			$('.all-main-content').show();			
+			$('.user-info-content-2').hide();
+			$('.name').html($(this).find('.user-name').text());
+			$('.module-content-all').each(function(){
+				if($(this).find('.content-line').val()==friid){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});						
+			$(this).find('.new-num-session').hide();
+			$.ajax({  
+	            url:"getcontent?filecateid="+friid,
+	            dataType: 'json',
+	            async: false,
+	            success:function(map){  
+	            	var meslist = map.meslist;
+	            	for(var i=0;i<meslist.length;i++){
+	            		var $leftstr = $("<li class='list other'>"
+	    						+ "<div class='head-arrow'>"
+	    						+ "<span class='head'>"
+	    						+ "<img src='showphoto?uid="
+	    						+ friid
+	    						+"'></span>"
+	    						+ "<span class='arrow'>"
+	    						+ "<em class='left'></em></span></div>"
+	    						+ "<div class='content'>"
+	    						+ "<div class='text'>"
+	    						+ meslist[i].content
+	    						+"</div>"
+	    						+ "</div></li>"
+	    				)
+	    				$('.module-content-all').each(function(){
+							if($(this).find('.content-line').val()==friid && friid==meslist[i].userid){
+								$(this).show();
+								$(this).find(".personals").append($leftstr);
+							}else{
+								$(this).hide();
+							}
+						});	
+	            	}
+	            	
+	            },  
+	            error:function(){  
+	                alert("error");  
+	            }  
+	        });
+		});
+		
+		$('.all-main-content').on('click','.send-button',function(){
+			n=0;
+			var uid = $('#user-id').val();
+			content = $(this).parents('.message').find('.messageInput').val();
+			if(content != ""){
+				var str = "{\"userid\":\" "+uid+"\",\"friendid\":\" "+friid+" \",\"content\":\" "+content+" \",\"type\":\"0\"}";
+				ws.send(str);
+				$('.messageInput').val("");				
+				var $rightstr = $("<li class='list me'>"
+					+ "<div class='head-arrow'>"
+					+ "<span class='head'>"
+					+ "<img src='showphoto?uid="
+					+ uid
+					+"'></span>"
+					+ "<span class='arrow'>"
+					+ "<em class='right'></em></span></div>"
+					+ "<div class='content'>"
+					+ "<div class='text'>"
+					+ content
+					+"</div>"
+					+ "</div></li>"
+				)
+				$(".p-"+index).append($rightstr);
+			}else{
+				alert("null");
+			}
+			
+		});
+		
+	}); 
+</script>
+
+
 </body>
 <!-- 网站公告 -->
     <script type="text/javascript">
@@ -561,6 +733,8 @@
               }
     	  }
     	)
+		$('.all-main-content').hide();
+		$('.iframe').show();
       });
-    </script>
+      </script>		
 </html>

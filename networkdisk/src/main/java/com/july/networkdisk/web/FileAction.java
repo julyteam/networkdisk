@@ -3,6 +3,7 @@ package com.july.networkdisk.web;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -144,7 +145,10 @@ public class FileAction extends ActionSupport {
 		}
 		return "json";
 	}
-	
+	/**
+	 * 展示文件按文件类型
+	 * @return
+	 */
 	public String showFileByType(){
 		map = new HashMap<String, Object>();
 		String[] typestr= fileType.split(",");
@@ -152,6 +156,21 @@ public class FileAction extends ActionSupport {
 		List<String> listtime= fileService.findTime(user.getId(), list);
 		List<NetFile> files = fileService.findAllByType(user.getId(), list);
 		map.put("listtime", listtime);
+		map.put("files",files );
+		return "json";
+	}
+	
+	/**
+	 * 展示文件按文件类型
+	 * @return
+	 */
+	public String showOtherFile(){
+		map = new HashMap<String, Object>();
+		fileType="docx,ppt,xls,txt,xls,pdf,doc,mp4,rmvb,avi,mkv,wmv,3gp,mov,flv,jpg,jpeg,png,gif,bmp";
+		String[] typestr= fileType.split(",");
+		List<String> list = new ArrayList<String>();
+		list= Arrays.asList(typestr);
+		List<NetFile> files = fileService.findOtherType(user.getId(), list);
 		map.put("files",files );
 		return "json";
 	}

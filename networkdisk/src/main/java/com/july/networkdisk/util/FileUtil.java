@@ -55,7 +55,8 @@ public class FileUtil {
 		/**
 		 * 如果上传的是视频，就进行转码 wmv9，rm，rmvb，asx，asf，mpg，wmv，3gp，mp4，mov，avi，flv等
 		 */
-		if (netFile.getType().equals("wmv9") || netFile.getType().equals("rm")
+		    if(    netFile.getType().equals("wmv9") 
+				|| netFile.getType().equals("rm")
 				|| netFile.getType().equals("rmvb")
 				|| netFile.getType().equals("asx")
 				|| netFile.getType().equals("asf")
@@ -74,6 +75,8 @@ public class FileUtil {
 		/**
 		 * 开启线程备份到hadoop上
 		 */
+		/*FileBak fileBak = new FileBak(turePath);
+		new Thread(fileBak).start();*/
 		
 		return netFile;
 	}
@@ -84,6 +87,11 @@ public class FileUtil {
 	public static InputStream downFile(String file_path) throws Exception {
 		File file = new File(file_path);
 		if (!file.exists()) {
+			/**
+			 * 本地不存在则从备份处下载
+			 */
+			FileBak fileBak = new FileBak(file_path);
+			fileBak.download();
 			return null;
 		}
 		InputStream inputStream = new FileInputStream(file);

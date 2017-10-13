@@ -993,7 +993,7 @@
 		});
 		
 		/* 文件上传 */
-		$("#upfile").change(function() {
+		$("#upfile").bind("change",function() {
 			var file = this.files[0];
 			july_fileReader(file);
 		});
@@ -1112,8 +1112,9 @@
 						fileElementId : 'upfile',//upfile是input file 标签的id值  
 						dataType : 'multipart/form-data',
 						success : function(data) {
+							$("#upfile").off("change");
 							//需要重新绑定事件
-							$("#upfile").change(function() {
+							$("#upfile").bind("change",function() {
 								var file = this.files[0];
 								july_fileReader(file);
 							});

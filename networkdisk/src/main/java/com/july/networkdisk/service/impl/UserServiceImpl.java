@@ -111,4 +111,16 @@ public class UserServiceImpl implements IUserService
 	public User getphoto(String uid) {
 		return this.userDao.getphoto(uid);
 	}
+	
+	public void addmessage(Message mes) {
+		this.userDao.addmessage(mes);
+	}
+
+	public List<Message> getmessage(String id, String[] fid) {
+		return this.userDao.getmessage(id, fid);
+	}
+
+	public List<Message> getcontent(String filecateid,String uid) {
+		return this.userDao.getcontent(filecateid,uid);
+	}
 }

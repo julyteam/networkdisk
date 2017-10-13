@@ -153,28 +153,17 @@
 										您还没上传过文件哦，点击上传
 									</p>
 								</div>
-								<div class="nullfile eefile">
-									<p class="ggflie">您还没上传过文件哦，点击上传</p>
-								</div>
-
 								<form action="" method="post">
 									<table class="table">
 										<tbody id="mytbody">
 												<script type="text/javascript">
 												$(function(){
-													var list = new Array();
-													list[0]="zip";
-													list[1]="html";
-													list[2]="mp3";
-													list[3]="wav";
-													list[4]="mod";
-													list[5]="war";
-													showothers(list);
+													showothers();
 												})
 												
-												function showothers(list){
+												function showothers(){
 												$.ajax({
-													url : "${pageContext.request.contextPath}/showFileByType?fileType="+list,
+													url : "${pageContext.request.contextPath}/showOtherFile",
 													dataType : 'json',
 													success : function(data) {
 														var listFile = data.files;

@@ -1806,3 +1806,7 @@ img.userpic {
     margin-left: 325px;
     margin-top: 5px;
 }
+.getcateparent:hover{
+	cursor: pointer;
+	text-decoration: none;
+}
