@@ -485,4 +485,22 @@
 
 		</action>
 	</package>
+	
+	
+	<!-- 聊天 -->
+	<package name="networkdisk.chat" namespace="/" extends="json-default">
+		<action name="addmessage" class="userAction" method="addmessage">
+			
+		</action>
+		<action name="getmessage" class="userAction" method="getmessage">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>	
+		</action>
+		<action name="getcontent" class="userAction" method="getcontent">
+			<result name="json" type="json">
+				<param name="root">map</param>
+			</result>	
+		</action>
+	</package>
 </struts>

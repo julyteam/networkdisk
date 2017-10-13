@@ -26,5 +26,7 @@ public interface IUserService extends IBaseService<User>
 	String getrecatename(String catid);
 	List<Categorie> showparents(String filecateid);
 	User getphoto(String uid);
-	
+	void addmessage(Message mes);
+	List<Message> getmessage(String id,String[] fid);
+	List<Message> getcontent(String filecateid,String uid);
 }

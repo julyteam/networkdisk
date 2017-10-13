@@ -529,7 +529,7 @@
 .user_table tr.active p{
 	color: #fff;
 }
-.user_table .user-name {
+.user-name {
     float: left;
     line-height:18px;
     color: #000;
@@ -541,7 +541,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.user_table .last-time {
+.last-time {
     float: right;
     color: #999;
     font-size: 12px;
@@ -552,7 +552,7 @@
     margin: 0px;
     margin-right: 10px;
 }
-.user_table .new-session {
+.new-session {
     float: left;
     font-size: 12px;
     width: 188px;
@@ -640,7 +640,7 @@
 .friend-recom-list .addFriend:hover {
     background: #2997f2;
 }
-.user_table .new-num-session {
+.new-num-session {
     position: absolute;
     width: 15px;
     height: 15px;

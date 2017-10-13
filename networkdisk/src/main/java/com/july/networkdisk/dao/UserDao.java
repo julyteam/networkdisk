@@ -1,6 +1,7 @@
 package com.july.networkdisk.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -181,5 +182,44 @@ public class UserDao extends BaseDao
 			return u;
 		}
 		
+		
+		/*将离线消息加入数据库*/
+		public void addmessage(Message mes) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			sqlSession.insert("messageSpace.addmessage", mes);
+			sqlSession.close();
+		}
+		/*获取离线时的消息数量和发送人*/
+		public List<Message> getmessage(String uid,String[] fid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			List<Message> meslist = new ArrayList<Message>();
+			Map<String, String> map = new HashMap<String, String>();
+			
+			map.put("uid", uid);
+			for(int i=0;i<fid.length;i++){
+				Message mes = new Message();
+				map.put("fid", fid[i]);
+				String num = sqlSession.selectOne("messageSpace.getmessage", map);
+				if(num != null){
+					mes.setId(num);
+					mes.setFriendid(fid[i]);
+					meslist.add(mes);
+				}
+			}
+			sqlSession.close();
+			return meslist;
+		}
+		
+		/*获取离线时收到的消息*/
+		public List<Message> getcontent(String fid,String uid) {
+			final SqlSession sqlSession = this.sqlSessionFactory.openSession();
+			Message m = new Message();
+			m.setFriendid(fid);
+			m.setUserid(uid);
+			List<Message> meslist = sqlSession.selectList("messageSpace.getcontent", m);
+			sqlSession.update("messageSpace.upstatic", m);
+			sqlSession.close();
+			return meslist;
+		}
 	
 }
