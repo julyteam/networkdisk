@@ -19,7 +19,7 @@
 	src="/networkdisk/manager/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style='height:600px;overflow: auto'>
 	
 		<div class="head">
 
@@ -37,7 +37,7 @@
 		</div>
 
 <form name="form1" action="">
-		<div class="cont">
+		<div class="cont" style="overflow: auto;max-height:560px">
 
 			<table>
 				<tr class="m-tr">

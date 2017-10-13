@@ -116,6 +116,12 @@ td a{
 td a:hover{
 	text-decoration: none;
 }
+.td1{
+	width:120px;
+    overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
 .tdcontent{
 	width:400px;
     overflow:hidden;
