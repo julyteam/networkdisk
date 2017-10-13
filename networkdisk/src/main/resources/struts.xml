@@ -458,6 +458,9 @@
 				<param name="root">map</param>
 			</result>
 		</action>
+		<action name="more" class="noticeAction" method="more">
+			<result name="success">/WEB-INF/user/more.jsp</result>
+		</action>
 
 		<!-- 查询公告数量 -->
 		<action name="allNotice" class="noticeAction" method="sum">
@@ -465,6 +468,7 @@
 				<param name="root">map</param>
 			</result>
 		</action>
+		
 	</package>
 
 	<!-- 我的分享 -->

@@ -697,6 +697,7 @@ img.userpic {
 .table td .july_cateName,.table td .july_fileName{
 	display:inline-block;
 	position:relative;
+	width:410px;
 	top:6px;
 	overflow: hidden;
     white-space: nowrap;
