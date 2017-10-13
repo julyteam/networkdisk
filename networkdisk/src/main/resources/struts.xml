@@ -444,6 +444,9 @@
 		<action name="noticeList" class="noticeAction" method="page">
 			<result name="success">/WEB-INF/user/noticeList.jsp</result>
 		</action>
+		<action name="noticePage" class="noticeAction" method="page">
+			<result name="success">/WEB-INF/user/noticeList.jsp</result>
+		</action>
 
 		<!-- 消息详情查询显示 -->
 		<action name="noticeDetails" class="noticeAction" method="noticeDetail">

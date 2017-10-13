@@ -128,10 +128,10 @@
 			</tr>
 			<c:forEach items="${notice}" var="notice">
 				<tr>
-					<td style="width: 20%"><input type="checkbox" class="checkbox"
+					<td style="width: 20%"><div class="td1"><input type="checkbox" class="checkbox"
 						name="checkbox" value="${notice.id}"> <a
 						href="noticeDetails?title=${notice.title}&text=${notice.text}"
-						class="noticeTitle">${notice.title}</a></td>
+						class="noticeTitle">${notice.title}</a></div></td>
 					<td style="width: 50%"><div class="tdcontent">
 							<a href="noticeDetails?text=${notice.text}&title=${notice.title}">${notice.text}</a>
 						</div></td>
