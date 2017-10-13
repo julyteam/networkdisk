@@ -181,3 +181,17 @@ create table sharefile
 	
 )
 
+
+#聊天表
+create table message
+(
+	msg_id int(15) not null auto_increment,
+	msg_userid varchar(50) not null,
+	msg_friendid varchar(50) not null,
+	msg_content varchar(255) not null,
+	msg_sendtime timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	msg_static int(1) not null,
+	primary key(msg_id),
+	foreign key(msg_userid) references user(user_id),
+	foreign key(msg_friendid) references user(user_id)
+)

@@ -32,6 +32,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	
     private static final long serialVersionUID = 1L;
     private User user = new User();
+    private Message mes = new Message();
     private File file;
     private IUserService iUserService;
     private Map<String, Object> map;  //用来接收查询的数据和返回到前台
@@ -116,6 +117,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
 	}
 	public void setStr(String str) {
 		this.str = str;
+	}
+	public Message getMes() {
+		return mes;
+	}
+	public void setMes(Message mes) {
+		this.mes = mes;
 	}
 	/*  用户登陆*/
     public String login() throws Exception{
@@ -535,6 +542,39 @@ public class UserAction extends ActionSupport implements ModelDriven<User>
     	map = new HashMap<String, Object>();
     	List<Categorie> catelist = this.iUserService.showparents(filecateid);
     	map.put("catelist", catelist);
+    	return "json";
+    }
+    
+    /*聊天记录
+     * */
+    public String addmessage() throws Exception{
+    	response.setContentType("text/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	User u = CommonUtil.getSessionUser();
+    	mes.setUserid(u.getId());
+    	mes.setContent(str);
+    	mes.setFriendid(uid);
+    	this.iUserService.addmessage(mes);
+    	out.print(1);
+    	return null;
+    }
+    
+   /* 获取未登录时的消息的数量*/
+    public String getmessage(){
+    	map = new HashMap<String, Object>();
+    	String[] fid = filecateid.split(",");
+    	User u = CommonUtil.getSessionUser();
+    	List<Message> meslist = this.iUserService.getmessage(u.getId(),fid);
+    	
+    	map.put("meslist", meslist);
+    	return "json";
+    }
+   /* 获取离线时收到的消息*/
+	public String getcontent(){
+    	map = new HashMap<String, Object>();
+    	User u = CommonUtil.getSessionUser();
+    	List<Message> meslist = this.iUserService.getcontent(filecateid,u.getId());
+    	map.put("meslist", meslist);
     	return "json";
     }
 }

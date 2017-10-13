@@ -8,6 +8,7 @@ import java.util.Map;
 import com.july.networkdisk.dao.CategorieDao;
 import com.july.networkdisk.service.ICateService;
 import com.july.networkdisk.service.IFileService;
+import com.july.networkdisk.util.CommonUtil;
 import com.july.networkdisk.vo.CateTree;
 import com.july.networkdisk.vo.Categorie;
 import com.july.networkdisk.vo.NetFile;
@@ -236,14 +237,19 @@ public class CateServiceImpl implements ICateService{
 	 * @param aimcateid
 	 * @return
 	 */
-	public boolean judgeCateName(String cat_uid,String[] cateids,String aimcateid){
+	public boolean judgeCateName(String cat_uid,String[] cateids,String aimcateid,int flag){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cat_reid", aimcateid);
 		map.put("cat_state", 0);
 	    List<Categorie> list =findAllCate(cat_uid, map);
 		for (Categorie aimcategorie : list) {
 			for (String cateid : cateids) {
-				Categorie categorie = get(cateid);
+				Categorie categorie;
+				if(flag == 0){
+					 categorie = get(cateid);
+				}else {
+					 categorie = getRecylceCategorie(cateid);
+				}
 				if(aimcategorie.getName().equals(categorie.getName())){
 					return false;
 				}
@@ -254,12 +260,17 @@ public class CateServiceImpl implements ICateService{
 	}
 	
 	/**
-	 * 拿到单个文件
+	 * 拿到不在回收站单个文件
 	 */
 	public Categorie get(String cateid) {
 		return cateDao.get(cateid, 0);
 	}
-	
+	/**
+	 * 拿到在回收站单个文件
+	 */
+	public Categorie getRecylceCategorie(String cateid) {
+		return cateDao.get(cateid, 1);
+	}
 	public boolean delete(String p0) {
 		return false;
 	}

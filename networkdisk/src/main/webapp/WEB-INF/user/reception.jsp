@@ -124,10 +124,8 @@ $(document).ready(function(){
 								<a href="register.jsp" class='reg'>注册</a>
 							</div>
 						</li>
-						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a><p class="new-notice"></p>
-								
-								</li>
+						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"style="margin-top: 10px;" /></a>
+						<p class="new-notice"></p></li>																
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>

@@ -14,8 +14,7 @@
 		<script src="/networkdisk/user/js/jquery-1.11.2.min.js"></script>
 		<script src="/networkdisk/user/js/login.js"></script>
 	    <script src="/networkdisk/user/js/bootstrap.min.js"></script>
-	    
-	    <%
+<%
   String un="";
   String up="";
   Cookie cookie[]=request.getCookies();
@@ -90,7 +89,7 @@
 			</div>
 		</div>
 		<div class="item" >
-			<a><img src="/networkdisk/user//img/bg3.jpg" alt="Third slide"></a>
+			<a><img src="/networkdisk/user/img/bg3.jpg" alt="Third slide"></a>
 			<div class="body-content">
 			<p>
 			<span><img src="/networkdisk/user/img/leftquote.png"></span>
@@ -158,10 +157,6 @@
               /*   登录验证 */
 		$(document).ready(function(){
 			var successmassge = $("#success").val();
-			if(successmassge=="false"){
-				alert("您还没登录，请先登录！");
-				location.href="login.jsp";
-			}
 		    if(successmassge=="error"){
 				alert("用户名或密码错误！");
 				location.href="login.jsp";
