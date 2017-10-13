@@ -107,10 +107,7 @@
 		<div class="clean" style="height: 15px;"></div>
 		<div class="row">
 			<form action="noticeDel" method="post">
-				<a onclick="return(confirm('確定刪除?'))"> <span class="rowDelete">
-						<i class="fa fa-trash"></i>删除
-				</span>
-				</a> <input type="submit"
+			  <input type="submit"
 					style="opacity: 0; position: relative; font-size: 20px; left: -60px; top: 0px;">
 				<a href="noticePage?currentPage=${currentPage+1}" class="nextPage">下一页</a>
 				<a href="noticePage?currentPage=${currentPage-1}" class="proPage">上一页</a>

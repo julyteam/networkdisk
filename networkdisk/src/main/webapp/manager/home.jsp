@@ -41,7 +41,7 @@ function logout()
 <body>
 	<div class="head">
 		<div class="logo">
-			<a id="logo" href="/networkdisk/index.jsp">
+			<a id="logo" href="#">
 				<img src="/networkdisk/img/LOGO.png"/>
 			</a>
 		</div>

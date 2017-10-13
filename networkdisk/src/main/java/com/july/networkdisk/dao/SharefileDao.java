@@ -108,22 +108,27 @@ public class SharefileDao extends BaseDao{
 		if(filelist != null){
 			for(int i=0;i<filelist.size();i++){
 				NetFile file = sqlSession.selectOne("fileSpace.getone", filelist.get(i).getId());
-				file.setId(CommonUtil.createUUID());
-				file.setUid(uid);
-				file.setCatid(reid);
-				sqlSession.insert("fileSpace.save", file);
+				if(file != null){
+					file.setId(CommonUtil.createUUID());
+					file.setUid(uid);
+					file.setCatid(reid);
+					sqlSession.insert("fileSpace.save", file);
+				}
 			}
 		}
 		
 			for(int i=0;i<catelist.size();i++){
 				Categorie cate = sqlSession.selectOne("cateSpace.findbyid", catelist.get(i).getId());
-				String cid = cate.getId();
-				cate.setId(CommonUtil.createUUID());
-				cate.setUid(uid);
-				cate.setReid(reid);
-				String rid = cate.getId();
-				sqlSession.insert("cateSpace.save", cate);
-				recursion(cid,rid,uid);
+				if(cate != null){
+					
+					String cid = cate.getId();
+					cate.setId(CommonUtil.createUUID());
+					cate.setUid(uid);
+					cate.setReid(reid);
+					String rid = cate.getId();
+					sqlSession.insert("cateSpace.save", cate);
+					recursion(cid,rid,uid);
+				}
 			}
 		
 		sqlSession.close();
