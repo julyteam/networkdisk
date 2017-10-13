@@ -35,7 +35,7 @@
 					<ul class="pull-left">
 						<li><a href="goindex">网盘</a></li>
 						<li class="active"><a href="findAll">分享</a></li>
-						<li><a href="#">更多</a></li>
+						<li><a href="more">更多</a></li>
 					</ul>
 				</div>
 				<div class="span2">

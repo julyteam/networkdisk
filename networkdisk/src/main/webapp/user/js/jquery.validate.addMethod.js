@@ -26,8 +26,8 @@ $(document).ready(function(){
 		
 		
 		jQuery.validator.addMethod("isPwd", function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
-			}, "只能包括英文字母和数字");
+			return this.optional(element) ||/^(?![^a-zA-Z]+$)(?!\D+$)/.test(value);
+			}, "必须包含英文字母和数字");
 	
 
 	jQuery.validator.addMethod("isMobile", function(value, element) {  

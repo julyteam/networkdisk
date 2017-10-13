@@ -393,24 +393,19 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 				}
 			}else{
 				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid,uuid);
-				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid,uuid);
-				if(fileflag == 1){
-					if(cateflag == 0){
-						this.iSharefileService.preservation(uid,fid,uuid);
-						out.print(1);
-					}else{
-						this.iSharefileService.preservation(uid,fid,uuid);
-						this.iSharefileService.preservationcate(uid, cidlist, uuid);
-						out.print(1);
-					}
-				}else{
-					if(cateflag == 0){
-						out.print(0);
-					}else{
-						this.iSharefileService.preservationcate(uid, cidlist, uuid);
-						out.print(1);
-					}
+				if(fileflag == 0){
+					out.print(0);
+					return null;
 				}
+				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid,uuid);
+				if(cateflag == 0){
+					out.print(0);
+					return null;
+				}
+				
+				this.iSharefileService.preservation(uid,fid,uuid);
+				this.iSharefileService.preservationcate(uid, cidlist, uuid);
+				out.print(1);
 			}
 		}
 		out.flush();
