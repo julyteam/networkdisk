@@ -63,14 +63,14 @@ public class SharefileServiceImpl implements ISharefileService {
 		this.sharefileDao.preservationcate(id,cidlist, cate_reid);
 	}
 	
-	public int checkfile(String[] fid, String[] fname, int flag, String uid) {
-		flag = this.sharefileDao.checkfile(fid,fname,flag,uid);
+	public int checkfile(String[] fid, String[] fname, int flag, String uid ,String recateid) {
+		flag = this.sharefileDao.checkfile(fid,fname,flag,uid,recateid);
 		return flag;
 	}
 
 	public int checkcate(String[] cidlist, String[] cnamelist, int cateflag,
-			String id) {
-		return this.sharefileDao.checkcate(cidlist,cnamelist,cateflag,id);
+			String id ,String recateid) {
+		return this.sharefileDao.checkcate(cidlist,cnamelist,cateflag,id,recateid);
 	}
 	
 	public Categorie getcate(String fileandcateid) {

@@ -1,6 +1,9 @@
 package com.july.networkdisk.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -127,9 +130,17 @@ public class SharefileDao extends BaseDao{
 	
 	
 	/*检查文件是否以存在*/
-	public int checkfile(String[] fid, String[] fname, int flag, String uid) {
+	public int checkfile(String[] fid, String[] fname, int flag, String uid, String recateid) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		List<NetFile> f = sqlSession.selectList("fileSpace.getlistbyuid", uid);
+		NetFile file = new NetFile();
+		file.setCatid(recateid);
+		file.setUid(uid);
+		List<NetFile> f = new ArrayList<NetFile>();
+		if(recateid == null){
+			f = sqlSession.selectList("fileSpace.getlistcateisnull", file);
+		}else{
+			f = sqlSession.selectList("fileSpace.getlistbyuid", file);
+		}
 		for(int i=0;i<f.size();i++){
 			for(int j=0;j<fname.length;j++){
 				if(fname[j].equals(f.get(i).getName()) && f.get(i).getDeletesign() == 0){
@@ -143,9 +154,18 @@ public class SharefileDao extends BaseDao{
 	
 	/*检查文件夹是否以存在*/
 	public int checkcate(String[] cidlist, String[] cnamelist, int cateflag,
-			String id) {
+			String id ,String recateid) {
 		final SqlSession sqlSession = this.sqlSessionFactory.openSession();
-		List<Categorie> cate = sqlSession.selectList("cateSpace.getlistbyuid", id);
+		Categorie c = new Categorie();
+		c.setUid(id);
+		List<Categorie> cate = new ArrayList<Categorie>();
+		if(recateid == null){
+			cate = sqlSession.selectList("cateSpace.getlistcateisnull", c);
+		}else{
+			c.setReid(recateid);
+			cate = sqlSession.selectList("cateSpace.getlistbyuid", c);
+		}
+		
 		for(int i=0;i<cate.size();i++){
 			for(int j=0;j<cnamelist.length;j++){
 				if(cnamelist[j].equals(cate.get(i).getName()) && cate.get(i).getState() == 0){

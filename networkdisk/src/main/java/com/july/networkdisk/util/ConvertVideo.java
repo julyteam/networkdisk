@@ -9,7 +9,7 @@ public class ConvertVideo extends Thread {
      private  static String InputPath ;  
      private  static String flvOutputPath;
      private  static String path;
-     private static String imagePath;
+     private  static String imagePath;
      
      public ConvertVideo(String InputPath) {
     	 this.InputPath = InputPath;
@@ -129,10 +129,14 @@ public class ConvertVideo extends Thread {
             commend.add("22050");  
             commend.add("-qscale");  
             commend.add("8");  
+          /*  commend.add("-vcodec");
+            commend.add("libx264");*/
+            commend.add("-crf");//指定输出视频的质量，默认为23，数字越小输出视频的质量越高
+            commend.add("20");
             commend.add("-r");  
             commend.add("15");  
             commend.add("-s");  
-            commend.add("650x500");  
+            commend.add("858x480");  
             commend.add(flvOutputPath);  
       
             try {  
@@ -142,7 +146,7 @@ public class ConvertVideo extends Thread {
                 String cmd = "";  
                 String cut = " D:\\FFmpeg\\ffmpeg.exe   -i   "  
                         + oldfilepath  
-                        + "   -y   -f   image2   -ss   5   -t   0.001   -s   600x500   "+imagePath;  
+                        + "   -y   -f   image2   -ss   5   -t   0.001   -s   858x480   "+imagePath;  
                 String cutCmd = cmd + cut;  
                 proce = runtime.exec(cutCmd);  
                 //调用线程命令进行转码

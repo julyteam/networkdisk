@@ -107,7 +107,7 @@
 							</div>
 						</li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
+								style="margin-top: 10px;" /></a></li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -449,14 +449,13 @@
               async: false,
               success:function(map){
             	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
+            	  if(i>0){
+                		$('.new-notice').show();
+                		$('.new-notice').html(i);
+                	  } 
               }
     	  }
-    			  )
+    	)
       });
     </script>
 

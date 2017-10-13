@@ -125,7 +125,9 @@ $(document).ready(function(){
 							</div>
 						</li>
 						<li><a href="noticeList"><img src="/networkdisk/img/notice.png"
-								style="margin-top: 10px;" /></a><p class="new-notice"></p></li>
+								style="margin-top: 10px;" /></a><p class="new-notice"></p>
+								
+								</li>
 						<li><a href="#"><img src="/networkdisk/img/serve.png"
 								style="margin-top: 10px;" /></a></li>
 					</ul>
@@ -184,8 +186,14 @@ $(document).ready(function(){
 								    </c:otherwise>
 								</c:choose>
 						</c:if>
-						<c:forEach items="${catelist }" var="c">${c.name }</c:forEach> 
-						<c:forEach items="${filelist }" var="f">${f.name }</c:forEach>
+						<c:forEach items="${catelist }" var="c" varStatus="stat">
+							<c:if test="${!stat.last}">${c.name }、</c:if>
+							<c:if test="${stat.last}">${c.name }</c:if>
+						</c:forEach> 
+						<c:forEach items="${filelist }" var="f"  varStatus="stat">
+							<c:if test="${!stat.last}">${f.name }、</c:if>
+							<c:if test="${stat.last}">${f.name }</c:if>
+						</c:forEach>
 					</h2>
 				</div>
 				<div class="slide-show-right">
@@ -210,6 +218,9 @@ $(document).ready(function(){
 							alert("请先登陆！");
 							return ;
 						}
+						
+						
+						
 						var fid = new Array();
 						var fname = new Array();
 						var cateid = new Array();
@@ -226,32 +237,16 @@ $(document).ready(function(){
 									cateid[key] = $(this).val();
 									catename[key] = $(this).parent().find("span")
 											.text();
-								});
-						/* alert(fid);
-						alert(fname);
-						alert(cateid);
-						alert(catename);  */
-						
+								});				
 						if (fid == "" && cateid == "") {
 							alert("请选择文件进行保存！");
 						} else {
-							$.ajax({
-								url : "preservation?fidlist=" + fid
-										+ "&fnamelist=" + fname+"&cateid="+cateid+"&catename="+catename+"&uid="+uid,
-								dataType : 'json',	
-								async : false,
-								success : function(data) {
-									if (data == 1) {
-										alert("保存成功！");
-										return ;
-									} else if (data == 0) {
-										alert("文件或文件夹已存在！");
-									}
-								},
-								error : function() {
-									alert("保存失败！");
-								}
-							});
+							
+							showOverlay();
+							a=a+1;
+							btnAjax(cb);
+							
+							
 						} 
 					});
 				</script>
@@ -567,9 +562,30 @@ $(document).ready(function(){
 					<div class="share-person-intro" title="">${user.about }</div>
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 	</div>
+	<div class="md-modal md-effect-13" id="modal-13" >
+    		<div class="md-content" style="height:310px;">
+     			<div class="dialog-header dialog-drag">
+					<span class="dialog-header-title">保存到 </span>
+				</div>
+      			<div class="dialog-tree">
+        			<div id="menuTree" class="menuTree"></div>        			
+      			</div>
+      			<div class="dialog-footer g-clearfix">
+      				<a class="g-button g-button-large cancel" href="javascript:void(0);" style="float: right;">
+      				<span class="g-button-right" style="padding-right: 50px;">
+      				<span class="text" style="width: auto;">取消</span>
+      				</span>
+      				</a>
+      				<a class="g-button g-button-blue-large surein" href="javascript:void(0);" style="float: right;">
+      				<span class="g-button-right" style="padding-right: 50px;">
+      				<span class="text" style="width: auto;">确定</span>
+      				</span>
+      				</a>     				
+      			</div>
+    		</div>
+  		</div>
 	<div class="md-modal md-effect-10" id="modal-10" style="width: 440px;">
 		<div class="md-content" style="height: 310px;">
 			<div class="dialog-header dialog-drag" style="height:40px;line-height:35px; background: #77afff;color:#fff;font-size:20px;padding:5px;">
@@ -658,6 +674,161 @@ $(document).ready(function(){
 		var Tfilename=$(this).parent('li').find('#n1').text();
 		window.location.href="fileDownload?fileFileName="+Tfilename+"&netFileID="+Tfileid;
 	})
+	var a=1;
+	var flag=1;
+	var cateids=[];
+	var fileids=[];
+	var btns=[];
+	$('.aaa').click(function(){
+		showOverlay();
+		a=a+1;	
+		var j=0;
+		var k=0;
+		var i=0;
+		cateids=[];
+		fileids=[];
+		btns=[];
+		$('.showcate input:checked').each(function(){ 
+			btns[i]=$(this).val();
+		if($(this).hasClass('cateid')){
+			cateids[j++] = btns[i++];
+		}else{
+			fileids[k++] = btns[i++];
+		}
+		alert(fileids);
+		});
+		btnAjax(cb);
+	})
+	/* 选择保存到文件夹 */
+	//封装ajax事件
+	function btnAjax(cb) {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/showAllCate?guid="+new Date().getTime(),
+			dataType : 'json',
+			success : function(data) {
+				var func = callbackFunc(data, cb);
+                func()				
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	}
+	function cb(data) {
+		$('.menuTree').empty();
+		$('.md-effect-13').addClass('md-show');			
+    	var json = data;
+		var str = "";
+		var forTree = function(o){
+	 	for(var i=0;i<o.length;i++){
+	   		 var urlstr = "";
+			 try{
+	 				if(typeof o[i]["url"] == "undefined"){
+			   	   		urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["catename"]+"</span><input value='"+ o[i]["cateid"] +"' type='text' style='display:none'><ul>";
+	 				}else{
+	 					urlstr = "<div><i class='fa fa-plus-square-o'></i><img src='/networkdisk/img/category.png' width='20px' style='margin:0 5px 5px 10px;'><span class='treename'>"+o[i]["catename"]+"</span><input value='"+ o[i]["cateid"] +"' type='text' style='display:none'><ul>"; 
+	 				}
+	 			str += urlstr;
+	 			if(o[i]["list"] != null){
+	 				forTree(o[i]["list"]);
+	 			}
+	   		 str += "</ul></div>";
+	 		}catch(e){}
+	 }
+	 return str;
+	}
+	/*添加无级树*/
+	document.getElementById("menuTree").innerHTML = forTree(json);
+	/*树形菜单*/
+	var menuTree = function(){
+	 //给有子对象的元素加
+		 $("#menuTree ul").each(function(index, element) {
+	 		var ulContent = $(element).html();
+	 		var spanContent = $(element).siblings("span").html();
+	 		if(ulContent){
+				 $(element).siblings("span").html(spanContent) 
+	 		}
+		 });
+
+		 $("#menuTree").find("div span").click(function(){
+		 	 var ul = $(this).siblings("ul");
+			 var spanStr = $(this).html();
+		 	 var spanContent = spanStr.substr(3,spanStr.length);
+			 if(ul.find("div").html() != null){
+				 if(ul.css("display") == "none"){
+					 $(this).parent('div').find('i:eq(0)').attr('class','fa fa-minus-square-o');					 		 
+					 ul.show(300);
+		 		 }else{
+		 			$(this).parent('div').find('i:eq(0)').attr('class','fa fa-plus-square-o');
+		 			 ul.hide(300);
+		 		 }
+		 	}
+		 })
+	}()	
+	}
+	//判断次数，获取返回函数
+    function callbackFunc(data, cb) {
+        flag++;
+        if (a == flag) {
+            return function () {
+                cb(data);
+            }
+        } else {
+            return function () {
+            }
+        }
+    }
+	/* 取消保存 */
+    $('.cancel').click(function(){
+		$('.menuTree').empty();
+		$('.md-effect-13').removeClass('md-show');
+		$('.overlay').hide();
+	});
+    var insertCate;
+    $('.menuTree').off('click','.treename').on('click','.treename',function(){
+		insertCate='';
+		$(".treename").removeClass("active");  
+        $(this).addClass("active");
+        insertCate=$('.menuTree .active').next('input[type=text]').val();
+	});
+    $('.surein').unbind("click").click(function(){
+    	
+    	var fid = new Array();
+		var fname = new Array();
+		var cateid = new Array();
+		var catename = new Array();
+		var uid = $("#uid").val();
+		$("input[name='filebox']:checked").each(
+				function(key, value) {
+					fid[key] = $(this).val();
+					fname[key] = $(this).parent().find("span")
+							.text();
+				});
+		$("input[name='catebox']:checked").each(
+				function(key, value) {
+					cateid[key] = $(this).val();
+					catename[key] = $(this).parent().find("span")
+							.text();
+				});				
+    	
+	    $.ajax({
+			url : "preservation?fidlist=" + fid
+					+ "&fnamelist=" + fname+"&cateid="+cateid+"&catename="+catename+"&uid="+uid+"&uuid="+insertCate,
+			dataType : 'json',	
+			async : false,
+			success : function(data) {
+				if (data == 1) {
+					alert("保存成功！");
+					return ;
+				} else if (data == 0) {
+					alert("文件或文件夹已存在！");
+				}
+			},
+			error : function() {
+				alert("保存失败！");
+			}
+		}); 	
+    });
 </script>
 <script type="text/javascript">
     /**
@@ -679,14 +850,13 @@ $(document).ready(function(){
               async: false,
               success:function(map){
             	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
+            	  if(i>0){
+              		$('.new-notice').show();
+              		$('.new-notice').html(i);
+              	  }  
               }
     	  }
-    			  )
+    	)
       });
     </script>
 </html>

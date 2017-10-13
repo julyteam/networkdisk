@@ -367,14 +367,16 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 		String[] fname = fnamelist.split(",");
 		String[] cidlist = cateid.split(",");
 		String[] cnamelist = catename.split(",");
-		
+		if(uuid.equals("null")){
+			uuid = null;
+		}
 		if(fid[0].length() == 0){
 			if(cidlist[0].length() == 0){
 				return null;
 			}else{
-				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
+				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid,uuid);
 				if(cateflag == 1){
-					this.iSharefileService.preservationcate(uid, cidlist, null);
+					this.iSharefileService.preservationcate(uid, cidlist, uuid);
 					out.print(1);
 				}else{
 					out.print(0);
@@ -382,30 +384,30 @@ public class SharefileAction extends ActionSupport implements ModelDriven<Sharef
 			}
 		}else{
 			if(cidlist[0].length() == 0){
-				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid);
+				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid,uuid);
 				if(fileflag == 1){
-					this.iSharefileService.preservation(uid,fid, null);
+					this.iSharefileService.preservation(uid,fid, uuid);
 					out.print(1);
 				}else{
 					out.print(0);
 				}
 			}else{
-				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid);
-				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid);
+				fileflag = this.iSharefileService.checkfile(fid,fname,fileflag,uid,uuid);
+				cateflag = this.iSharefileService.checkcate(cidlist,cnamelist,cateflag,uid,uuid);
 				if(fileflag == 1){
 					if(cateflag == 0){
-						this.iSharefileService.preservation(uid,fid,null);
+						this.iSharefileService.preservation(uid,fid,uuid);
 						out.print(1);
 					}else{
-						this.iSharefileService.preservation(uid,fid,null);
-						this.iSharefileService.preservationcate(uid, cidlist, null);
+						this.iSharefileService.preservation(uid,fid,uuid);
+						this.iSharefileService.preservationcate(uid, cidlist, uuid);
 						out.print(1);
 					}
 				}else{
 					if(cateflag == 0){
 						out.print(0);
 					}else{
-						this.iSharefileService.preservationcate(uid, cidlist, null);
+						this.iSharefileService.preservationcate(uid, cidlist, uuid);
 						out.print(1);
 					}
 				}

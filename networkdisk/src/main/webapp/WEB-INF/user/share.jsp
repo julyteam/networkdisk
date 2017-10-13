@@ -129,8 +129,8 @@
 									<td>
 										<p class="user-name service-name-newfriend">新好友</p>
 										<p class="last-time show-time"></p>
-										<p class="new-session show-session"></p>
-										<p class="new-num-session show-num">1</p>
+										<p class="new-session show-session">暂时没有新好友喔！</p>
+										<p class="new-num-session show-num"></p>
 									</td>
 								</tr>
 								<c:forEach items="${map.listfriends }" var="friend">
@@ -191,7 +191,22 @@
 						<div class="user-info-mainbox" style="width: 100%; margin: 0px; position: static;">
 							<div class="user-list-main friend-recom-list">
 								<div class="list-main-title">新好友通知</div>
-								<div class="list-main-content" style="height: 400px;">									
+								<div class="list-main-content" style="height: 400px;">	
+									<c:forEach items="${map.listfriends }" var="friend">
+									<dl class='user-module'>
+										<dt>
+							 				<img src='showphoto?uid=${friend.id}' width='45' height='45'> 
+							 			</dt>
+							 			<dd>
+							 				<p class='user-name'>${friend.name}</p>										
+							 				<p class='user-name user-name-desc'>已添加您为好友</p>
+							 			</dd>
+							 			<dd>
+							 				<a class='shareFile'>分享文件</a>
+							 				<a href="javascript:;" class="addFriend added">已添加</a>
+							 			</dd>
+							 		</dl>
+									</c:forEach>							
 								</div>
 							</div>
 						</div>
@@ -279,9 +294,8 @@
 												</p>
 												<p class="noText">--</p>
 												<p class="userName"></p>
-												<input type='hidden' value='${sessionScope.user.id }'
-													class='UID'> <input type='hidden' value=''
-													class='FID'>
+												<input type='hidden' value='${sessionScope.user.id }'class='UID'> 
+												<input type='hidden' value='' class='FID'>
 											</div>
 										</div>
 										<div class="user-info-button">
@@ -322,7 +336,7 @@
 												+ "<span style='margin-left:10px'>"
 												+ "July账号："
 												+ friend.name
-												+ "</span>");//jquery解析map数据
+												+ "</span><span class='live' style='font-size:12px;color:#da1111'></span>");//jquery解析map数据
 								friendid = friend.id;
 								$('.modal-footer').show();
 								$('#friend-id').val(friendid);
@@ -339,19 +353,23 @@
 	$(".bn1").click(function() {
 		var uid = $("#user-id").val();
 		var fid = $("#friend-id").val();
-			$.ajax({
-					type : "POST", //设置请求发送的方式  
-					url : "insertOne", //提交的地址  		   
-					data : {'friend.uid':uid,'friend.fid':fid},
-					async:false, 
-					success : function(data) {//提交成功的时候执行的函数 
-						if(data=='false'){
-							$('.result').append("<span style='font-size:12px;color:#da1111'>(已存在)</span>")
-						}else{
-							window.location.href='findAll';
-						}
-					}	
-				});
+		if(uid==fid){
+			$('.live').html("(自己)");
+			return;
+		}
+		$.ajax({
+				type : "POST", //设置请求发送的方式  
+				url : "insertOne", //提交的地址  		   
+				data : {'friend.uid':uid,'friend.fid':fid},
+				async:false, 
+				success : function(data) {//提交成功的时候执行的函数 
+					if(data=='false'){
+						$('.live').html("(已存在)")
+					}else{
+						window.location.href='findAll';
+					}
+				}	
+			});
 	});
 	
 	/* 删除好友 */
@@ -440,14 +458,14 @@
 	$('#share_tab li').click(function(){
 		$('.user_table').find('.active').removeClass();
 		$('.iframe').show();
-		$('.list-main-content').empty();
+		$('.list-main-content').hide();
 		$('.all-main-content').hide();
 		$('.module-content-all').hide();
 		$('.user-info-content-2').hide();
 		$('.user-info-content').hide();		
 	})
-	$('#share_tab li:eq(1)').click(function(){
-		$('.list-main-content').empty();
+	$('#share_tab li:eq(1)').click(function(){	
+		$('.list-main-content').show();
 		showfriAdd();
 	})
 	function showfriAdd(){
@@ -496,7 +514,7 @@
 							 + "</dd><dd>"
 							 + "<a class='shareFile'>分享文件</a>"
 							 + "<a class='addFriend'>加为好友</a>"
-							 + "</dd></dl>")
+							 + "</dd></dl>");
 					$('.list-main-content').append($fri);
                }
             },  
@@ -508,7 +526,6 @@
 	$('.list-main-content').on('click','.addFriend',function(){
 		var fid= $(this).parents('.user-module').find('.FID').val();
 		var uid= $(this).parents('.user-module').find('.UID').val();
-		alert(fid+uid);
 		$.ajax({  
             url:"addOne?friend.uid="+uid+"&friend.fid="+fid,
             dataType: 'json',
@@ -537,14 +554,13 @@
               async: false,
               success:function(map){
             	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
+            	  if(i>0){
+              		$('.new-notice').show();
+              		$('.new-notice').html(i);
+              	  } 
               }
     	  }
-    			  )
+    	)
       });
     </script>
 </html>

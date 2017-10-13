@@ -445,18 +445,6 @@
 				}			
 			}
 		});
-		/* $('#submit').click(function(){
-			$('.mod-sub-nav').find('li:eq(0)').removeClass('list1-active');
-			$('.mod-sub-nav').find('li:eq(1)').addClass('list2-active');
-			$('#step1').hide();
-			$('#step2').show();
-		})
-		$('#submit2').click(function(){
-			$('.mod-sub-nav').find('li:eq(1)').removeClass('list2-active');
-			$('.mod-sub-nav').find('li:eq(2)').addClass('list3-active');
-			$('#step2').hide();
-			$('#step3').show();
-		}) */
 	</script>
 	
 	

@@ -16,7 +16,7 @@
   	</div>
   	<div><p>简单操作就可即可与好友轻松分享上百张照片</p></div>
   	<div id="default_a">
-  		<a href="#"><button>给好友分享文件</button></a>
+  		<a><button>给好友分享文件</button></a>
   	</div>
   </center>
 	</body>

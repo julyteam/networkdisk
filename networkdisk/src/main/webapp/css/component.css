@@ -623,6 +623,7 @@ perspective effects (not including the modals and the overlay).
 	height: 32px;
     line-height: 32px;
     padding-right: 10px;	
+    text-align: center;
 }
 .dialog-drag .fa-times{
 	transition: color 0.3s linear;

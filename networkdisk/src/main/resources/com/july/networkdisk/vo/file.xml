@@ -30,8 +30,11 @@
 		select * from file where file_id=#{fid}
 	</select>
 	<!-- 根据uid查找文件 -->
-	<select id="getlistbyuid" parameterType="String" resultMap="fileMap">
-		select * from file where file_uid=#{uid} and file_catid is null
+	<select id="getlistbyuid" parameterType="com.july.networkdisk.vo.NetFile" resultMap="fileMap">
+		select * from file where file_uid=#{uid} and file_catid = #{catid} and file_deletesign = 0
+	</select>
+	<select id="getlistcateisnull" parameterType="com.july.networkdisk.vo.NetFile" resultMap="fileMap">
+		select * from file where file_uid=#{uid} and file_catid is null and file_deletesign = 0
 	</select>
 	<!-- 根据cateid查找文件 -->
 	<select id="getcatenextfile" parameterType="String" resultMap="fileMap">

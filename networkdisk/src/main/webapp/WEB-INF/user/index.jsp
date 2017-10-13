@@ -565,7 +565,7 @@
 								});								
 								function shareurl(){
 									var method;
-									$("#share-url").val('http://47.95.213.42:8080/networkdisk/shareurl?url=<%=uuid%>');
+									$("#share-url").val('http://localhost:8080/networkdisk/shareurl?url=<%=uuid%>');
 									$("#share-password").val('<%=pwd%>');									
 									var btns = new Array();
 									var cateid = new Array();
@@ -1090,10 +1090,10 @@
 					var reader = new FileReader();
 					reader.readAsDataURL(file);
 					//监听文件读取结束后事件    
-					reader.onloadend = function(e) {
-						ajaxFileUpload();
+					reader.onloadend = function(e) {						
 						$('#msg').show();
 						$('#uploaderList').append($str);
+						ajaxFileUpload();
 					};
 				}
 			} else {
@@ -1105,7 +1105,7 @@
 			$("#myprogress").width(0);
 			$('#msg').css('bottom', '0px');
 			time = window.setInterval(progress, 100);
-			$('.up_status').html("上传中···");
+			$('.up_status:last').html("上传中···");
 			$.ajaxFileUpload({
 						url : '${pageContext.request.contextPath}/fileupload?categorie_id='+ categorie,
 						secureuri : false,
@@ -1119,12 +1119,12 @@
 							});
 							//刷新页面
 							$('.up_status').html("上传成功");
-							 $('.probox').remove();
-							 $('#msg').css('bottom', '-300px');
+							$('.probox').remove();
+							$('#msg').css('bottom', '-300px');
 							showchild(categorie,recycle);
 						},
 						error : function() {
-							$('.up_status').html("上传失败");
+							$('.up_status:last').html("上传失败");
 							 $('.probox').hide();
 						}
 
@@ -1869,14 +1869,13 @@ $('.equip_1').off('click','#f2').on('click','#f2',function(){
               async: false,
               success:function(map){
             	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
+            	  if(i>0){
+            		$('.new-notice').show();
+            		$('.new-notice').html(i);
+            	  }           	  	           	  
               }
     	  }
-    			  )
+    	)
       });
     </script>
     

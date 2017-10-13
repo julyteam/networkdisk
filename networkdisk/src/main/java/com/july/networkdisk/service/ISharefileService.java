@@ -20,8 +20,10 @@ public interface ISharefileService extends IBaseService<Sharefile>{
 
 	void preservationcate(String id, String[] cidlist, String cate_reid);
 	
-	int checkfile(String[] fid, String[] fname, int flag, String uid);
+	int checkfile(String[] fid, String[] fname, int flag, String uid, String recateid);
 
+	int checkcate(String[] cidlist, String[] cnamelist, int cateflag, String id, String recateid);
+	
 	Categorie getcate(String fileandcateid);
 
 	NetFile getfile(String fileandcateid);
@@ -29,8 +31,6 @@ public interface ISharefileService extends IBaseService<Sharefile>{
 	List<Categorie> getcatenext(String cateid);
 
 	List<NetFile> getcatenextfile(String cateid);
-
-	int checkcate(String[] cidlist, String[] cnamelist, int cateflag, String id);
 
 	Share getsharebyid(String magid);
 

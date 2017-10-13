@@ -314,11 +314,10 @@ $('table').on('click','.fa-download',function(){
               async: false,
               success:function(map){
             	  var i = map.allNotice;
-            	  if(i==0){
-            		  $('.new-notice').hide();
-            	  }
-            	  $('.new-notice').html(i);
-            	  
+            	  if(i>0){
+              		$('.new-notice').show();
+              		$('.new-notice').html(i);
+              	  }
               }
     	  }
     			  )

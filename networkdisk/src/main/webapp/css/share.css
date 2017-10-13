@@ -640,6 +640,14 @@
 .friend-recom-list .addFriend:hover {
     background: #2997f2;
 }
+.friend-recom-list .added, 
+.friend-recom-list .added:hover, 
+.friend-recom-list .added:active {
+    background: #FAFAFA;
+    cursor: default;
+    border: 0;
+    color: #8C8C8C;
+}
 .user_table .new-num-session {
     position: absolute;
     width: 15px;

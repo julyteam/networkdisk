@@ -138,8 +138,11 @@
 		select * from categorie where cat_reid=#{cateid}
 	</select>
 	<!-- 根据uid查找根文件夹 -->
-	<select id="getlistbyuid" parameterType="String" resultMap="categorieMap">
-		select * from categorie where cat_uid=#{id} and cat_reid is null
+	<select id="getlistbyuid" parameterType="com.july.networkdisk.vo.Categorie" resultMap="categorieMap">
+		select * from categorie where cat_uid=#{uid} and cat_reid = #{reid} and cat_state = 0
+	</select>
+	<select id="getlistcateisnull" parameterType="com.july.networkdisk.vo.Categorie" resultMap="categorieMap">
+		select * from categorie where cat_uid=#{uid} and cat_reid is null and cat_state = 0
 	</select>
 	<!-- 搜索文件夹 -->
 	<select id="search" parameterType="map" resultMap="categorieMap">
